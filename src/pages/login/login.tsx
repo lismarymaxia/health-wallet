@@ -70,11 +70,11 @@ const Login: React.FC = () => {
               size="12"
               className="headingText ion-text-start"
               style={{
-                color: "#0e6251",
+                color: "#293f76",
                 fontSize: "22px",
               }}
             >
-              <h2>Wallet Health</h2>
+              <h2>Health Wallet</h2>
             </IonCol>
           </IonRow>
           <IonRow>
@@ -116,7 +116,7 @@ const Login: React.FC = () => {
         <IonGrid className="ion-no-margin ion-no-padding">
           <Action
             message="No tienes una cuenta?"
-            text="Regístrate"
+            text=" Regístrate"
             link="/registro"
           />
         </IonGrid>

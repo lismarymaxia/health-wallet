@@ -22,14 +22,14 @@ ion-content {
 
 .fondo ion-item {
   margin: 0 auto;
-  background: #17a589;
-  --background: #17a589;
+  background: #0a6fb8;
+  --background: #0a6fb8;
   color: #ffffff;
 }
 
 /*-ACORDION----------------------------------------*/
 .acordion__fondo {
-  background: #17a589;
+  background: #0a6fb8;
 }
 
 .acordion__item__content {
@@ -57,11 +57,21 @@ ion-content {
   color: #444;
   display: inline;
   font-family: arial, sans-serif;
-  font-size: 1em;
+  font-size: 0.8em;
   line-height: 1em;
   margin-right: 8px;
   padding: 0;
   text-decoration: underline;
+  text-transform: initial;
+}
+
+.ion-activatable.ion-focusable ion-label{
+  color: #ffffff;
+}
+
+
+ion-accordion ion-item ion-icon {
+  color: #ffffff;
 }
 
 .d__flex {

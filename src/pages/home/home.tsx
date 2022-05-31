@@ -93,7 +93,7 @@ const Home: React.FC = () => {
                     slot="end"
                     color="secondary"
                   >
-                    <b>{nombre}</b>
+                    {nombre}
                   </div>
                 </div>
                 <div className="acordion__item__content">
@@ -103,7 +103,7 @@ const Home: React.FC = () => {
                     slot="end"
                     color="secondary"
                   >
-                    <b>{cedula}</b>
+                    {cedula}
                   </div>
                 </div>
                 <div className="acordion__item__content">
@@ -113,7 +113,7 @@ const Home: React.FC = () => {
                     slot="end"
                     color="secondary"
                   >
-                    <b>{fechanacimiento}</b>
+                    {fechanacimiento}
                   </div>
                 </div>
                 <div className="acordion__item__content">
@@ -123,7 +123,7 @@ const Home: React.FC = () => {
                     slot="end"
                     color="secondary"
                   >
-                    <b>{sexo}</b>
+                    {sexo}
                   </div>
                 </div>
                 <div className="acordion__item__content">
@@ -133,7 +133,7 @@ const Home: React.FC = () => {
                     slot="end"
                     color="secondary"
                   >
-                    <b>{edad}</b>
+                    {edad}
                   </div>
                 </div>
                 <div className="acordion__item__content">
