@@ -37,11 +37,11 @@ export const Nav: React.FC = () => {
         <IonToolbar>
           <IonTitle
             style={{
-              color: "#0e6251",
-              fontSize: "22px",
+              color: "#293f76",
+              fontSize: "18px",
             }}
           >
-            Wallet Health
+            Health Wallet
           </IonTitle>
         </IonToolbar>
       </IonHeader>

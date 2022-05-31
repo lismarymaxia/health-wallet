@@ -153,7 +153,7 @@ const Home: React.FC = () => {
                 <IonIcon
                   icon={pulseSharp}
                   className="ion-margin-end"
-                  size="outline"
+                  size="small"
                   style={{ color: "#ffff" }}
                 />
                 <IonLabel>Consulta</IonLabel>
@@ -181,7 +181,7 @@ const Home: React.FC = () => {
                   size="small"
                   style={{ color: "#ffff" }}
                 />
-                <IonLabel>Imagenologia</IonLabel>
+                <IonLabel>Imagenología</IonLabel>
               </IonItem>
 
               <IonList slot="content">

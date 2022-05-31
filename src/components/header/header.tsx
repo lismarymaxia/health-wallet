@@ -19,7 +19,7 @@ const Header: React.FC<{
           <IonTitle
             style={{
               color: "#293f76",
-              fontSize: "22px",
+              fontSize: "18px",
             }}
           >
             {title}

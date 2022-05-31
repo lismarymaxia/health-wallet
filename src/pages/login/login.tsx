@@ -71,7 +71,7 @@ const Login: React.FC = () => {
               className="headingText ion-text-start"
               style={{
                 color: "#293f76",
-                fontSize: "22px",
+                fontSize: "18px",
               }}
             >
               <h2>Health Wallet</h2>

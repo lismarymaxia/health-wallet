@@ -1,5 +1,5 @@
 .field:not(:last-child) {
-  margin-bottom: 1rem !important;
+  margin-bottom: 0.6rem !important;
 }
 
 .field ion-label {
@@ -17,12 +17,12 @@
 
 .customInput {
   --background: #ffffff;
-  --padding-bottom: 1rem;
-  --color: white;
-  --padding-top: 1rem;
-  --padding-start: 1rem;
-  --padding-end: 1rem;
-  border-radius: 10px;
+  --color: #333333;
+  --padding-top: 0.4rem;
+  --padding-bottom: 0.4rem;
+  --padding-start: 0.5rem;
+  --padding-end: 0.5rem;
+  border-radius: 0.2rem;
   border: 1px solid #dfe1e5;
   margin-top: 0.25rem;
   transition: all 0.2s linear;

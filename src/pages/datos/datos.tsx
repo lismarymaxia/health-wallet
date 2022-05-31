@@ -88,7 +88,7 @@ const Datos: React.FC = () => {
           <IonTitle
             style={{
               color: "#0e6251",
-              fontSize: "22px",
+              fontSize: "18px",
             }}
           >
             Información General
