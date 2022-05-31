@@ -1,0 +1,65 @@
+ion-content {
+  background: #f6fbf8;
+}
+
+.menu__fondo {
+  background: rgb(3, 33, 27);
+  background: linear-gradient(
+    180deg,
+    rgba(3, 33, 27, 1) 0%,
+    rgba(14, 98, 81, 1) 100%
+  );
+}
+
+.card_custon {
+  margin-bottom: 1.875rem;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  border: 0px solid transparent;
+  border-radius: 0.75rem;
+  box-shadow: 0px 12px 33px 0px rgb(62 73 84 / 20%);
+}
+
+.fondo ion-item {
+  margin: 0 auto;
+  background: #17a589;
+  --background: #17a589;
+  color: #ffffff;
+}
+
+/*-ACORDION----------------------------------------*/
+.acordion__fondo {
+  background: #17a589;
+}
+
+.acordion__item__content {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: solid 1px rgba(59, 57, 57, 0.484);
+}
+/*-ESTILO-BOTONES---------------------------------*/
+.custom-button {
+  --border-radius: 5px !important;
+  --background: #0e6251;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  text-transform: capitalize;
+}
+
+.button__capitalize {
+  text-transform: capitalize;
+}
+
+.botton__link {
+  background: none;
+  border: 0;
+  color: #444;
+  display: inline;
+  font-family: arial, sans-serif;
+  font-size: 1em;
+  line-height: 1em;
+  margin-right: 8px;
+  padding: 0;
+  text-decoration: underline;
+}

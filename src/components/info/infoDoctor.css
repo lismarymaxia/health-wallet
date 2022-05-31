@@ -1,0 +1,56 @@
+.post {
+  border-bottom: 1px solid rgb(219, 219, 219);
+  padding-top: 1rem;
+  padding-bottom: 0.2rem;
+}
+
+.post p {
+  font-size: 0.9rem;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: black;
+}
+
+.post .postText {
+  color: black;
+}
+
+.postAvatar {
+  height: 3.5rem;
+  width: 3.5rem;
+  margin-right: 1rem;
+  border: 3px solid #a3e4d7;
+}
+
+.postInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 1rem;
+  color: rgb(190, 190, 190);
+}
+
+.postReactions {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1rem;
+  margin-top: 0.5rem;
+  color: rgb(107, 112, 97);
+}
+
+.postReactions .postReaction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.postReaction ion-icon {
+  margin-right: 0.5rem;
+}
+
+.postReaction p {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+}

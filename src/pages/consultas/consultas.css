@@ -1,0 +1,28 @@
+.card__consulta {
+  background: rgb(3, 33, 27);
+  background: linear-gradient(
+    180deg,
+    rgba(3, 33, 27, 1) 0%,
+    rgba(14, 98, 81, 1) 100%
+  );
+}
+.swiper-pagination-bullet-active {
+  background: #ffffff;
+}
+
+.swiper-pagination-bullet {
+  background: #2d2727;
+}
+
+.page ion-searchbar {
+  --border-radius: 10px;
+  --background: #0e6251;
+  --color: white;
+  min-height: 5rem;
+  padding: 1rem;
+  padding-top: 0;
+}
+.searchbar-search-icon.sc-ion-searchbar-md {
+  color: white;
+  pointer-events: none;
+}

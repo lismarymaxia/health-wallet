@@ -1,0 +1,50 @@
+.page ion-searchbar {
+  --border-radius: 10px;
+  --background: #0e6251;
+  --color: white;
+  min-height: 5rem;
+  padding: 1rem;
+  padding-top: 0;
+}
+.searchbar-search-icon.sc-ion-searchbar-md {
+  color: white;
+  pointer-events: none;
+}
+
+.mainContent {
+  background-color: #e7edfb;
+  height: 100%;
+  width: 100%;
+  overflow: scroll !important;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+.employeeItem {
+  --border-radius: 10px;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
+  padding: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  min-height: 5rem;
+}
+.employeeItem img {
+  width: 3rem;
+  border-radius: 10px;
+  border: 2px solid #e7edfb;
+}
+
+.employeeItem ion-label {
+  padding-left: 1.2rem;
+}
+.employeeItem h2 {
+  font-weight: 600;
+  letter-spacing: -0.02rem;
+}
+
+.employeeItem p {
+  letter-spacing: -0.03rem;
+}
