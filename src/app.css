@@ -63,3 +63,10 @@ ion-content {
   padding: 0;
   text-decoration: underline;
 }
+
+.d__flex {
+  display: flex;
+}
+.justify__content__between {
+  justify-content: space-between;
+}

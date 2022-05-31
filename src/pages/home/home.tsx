@@ -34,8 +34,9 @@ const Home: React.FC = () => {
     sexo: "",
     fechanacimiento: "",
     edad: "",
+    tiposangre: "",
   });
-  const { nombre, sexo, fechanacimiento, edad } = data;
+  const { nombre, sexo, fechanacimiento, edad, tiposangre } = data;
 
   useIonViewDidEnter(() => {
     servicesWh
@@ -135,9 +136,28 @@ const Home: React.FC = () => {
                     <b>{edad}</b>
                   </div>
                 </div>
-                <section className="full-width">
+                <div className="acordion__item__content">
+                  <div className="acordion__item__label">Tipo de sangre:</div>
+                  <div
+                    className="acordion__item__note"
+                    slot="end"
+                    color="secondary"
+                  >
+                    <b>{tiposangre}</b>
+                  </div>
+                </div>
+
+                <section className="full-width d__flex justify__content__between">
                   <IonButton
-                    expand="full"
+                    fill="clear"
+                    color="dark"
+                    routerLink="/app/datos-editar"
+                    className="button__capitalize botton__link"
+                  >
+                    ver mas
+                  </IonButton>
+
+                  <IonButton
                     fill="clear"
                     color="dark"
                     routerLink="/app/datos-editar"
@@ -232,138 +252,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-/*
-<div className="fondo">
-          <div className="slider">
-            <div
-              className="item__card item__card_opacity__6"
-              style={{ top: 40 }}
-            >
-              <IonButton
-                fill="clear"
-                style={{ background: "#48c9b0", color: "#ffff" }}
-                routerLink="/app/datos"
-              >
-                <IonIcon
-                  icon={personSharp}
-                  className="ion-margin-end"
-                  size="small"
-                />
-                Datos
-              </IonButton>
-            </div>
-            <div
-              className="item__card item__card_opacity__5"
-              style={{ top: 80 }}
-            >
-              <IonButton
-                fill="clear"
-                style={{ background: "#1abc9c", color: "#ffff" }}
-                routerLink="/app/consultas"
-              >
-                <IonIcon
-                  icon={pulseSharp}
-                  className="ion-margin-end"
-                  size="outline"
-                  style={{ color: "dark" }}
-                />
-                Consulta
-              </IonButton>
-            </div>
-            <div
-              className="item__card item__card_opacity__4"
-              style={{ top: 120 }}
-            >
-              <IonButton
-                fill="clear"
-                style={{ background: "#17a589", color: "#ffff" }}
-                routerLink="/app/imagenologia"
-              >
-                <IonIcon
-                  icon={alertCircleSharp}
-                  className="ion-margin-end"
-                  size="small"
-                />
-                Imagenología
-              </IonButton>
-            </div>
-            <div
-              className="item__card item__card_opacity__3"
-              style={{ top: 160 }}
-            >
-              <IonButton
-                fill="clear"
-                style={{ background: "#148f77", color: "#ffff" }}
-                routerLink="/app/laboratorio"
-              >
-                <IonIcon
-                  icon={archiveSharp}
-                  className="ion-margin-end"
-                  size="small"
-                />
-                Laboratorio
-              </IonButton>
-            </div>
-          </div>
-        </div>
-
-*/
-/*<div className="item__card item__card_opacity__2"
-              style={{ top: 200 }}>
-      <IonButton
-                fill="clear"
-                style={{ background: "#117864", color: "#ffff" }}>
-        <IonIcon
-                  icon={heartSharp}
-                  className="ion-margin-end"
-                  size="small"
-                />
-                Registro de Vacunación
-              </IonButton>
-            </div>
-            <div
-              className="item__card item__card_opacity__1"
-              style={{ top: 240 }}
-            >
-              <IonButton
-                fill="clear"
-                style={{ background: "#0e6251", color: "#ffff" }}
-                routerLink="/app/post"
-              >
-                <IonIcon icon={receiptSharp} className="ion-margin-end" />
-                Medicamentos por Tratatamientos
-              </IonButton>
-            </div>
-            <div
-              className="item__card item__card_opacity__2"
-              style={{ top: 280 }}
-            >
-              <IonButton
-                fill="clear"
-                style={{ background: "#17a589", color: "black" }}
-              >
-                {" "}
-                <IonIcon
-                  icon={bagAddSharp}
-                  className="ion-margin-end"
-                  size="small"
-                />
-                Medicamentos
-              </IonButton>
-            </div>
-            <div
-              className="item__card item__card_opacity__1"
-              style={{ top: 320 }}
-            >
-              <IonButton
-                fill="clear"
-                style={{ background: "#16a085", color: "black" }}
-              >
-                <IonIcon
-                  icon={calendarSharp}
-                  className="ion-margin-end"
-                  size="small"
-                />
-                Citas
-              </IonButton>
-  </div>*/

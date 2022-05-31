@@ -9,10 +9,15 @@ import {
   IonList,
   IonNote,
   IonToast,
+  IonInput,
 } from "@ionic/react";
 import { trashSharp } from "ionicons/icons";
 import { useSelector } from "react-redux";
-import { servicesWh, serviciosPaciente } from "../../../servicios/servicios";
+import {
+  servicesWh,
+  serviciosPaciente,
+  getEnfermedad,
+} from "../../../servicios/servicios";
 import { CustomField } from "../../../components";
 
 interface Propiedades {
@@ -126,7 +131,22 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
         console.warn("Error:" + err);
       });
   };
-
+  const handleSearch = (e: any) => {
+    console.log(e);
+    getEnfermedad(e)
+      .then((rsp: any) => {
+        const { data, estatus } = rsp.data;
+        if (estatus === "ok") {
+          if (data) {
+            console.log(data);
+          } else {
+          }
+        }
+      })
+      .catch((e: any) => {
+        console.warn(e);
+      });
+  };
   return (
     <>
       <IonCol size="12">
@@ -135,7 +155,14 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
             <IonLabel>Enfermedades</IonLabel>
           </IonItem>
         </IonCol>
-
+        <IonItem>
+          <IonInput
+            type="text"
+            value={enfermedad}
+            placeholder="Enter Number"
+            onIonChange={(e) => handleSearch(e.detail.value!)}
+          ></IonInput>
+        </IonItem>
         <IonCol size="12">
           <CustomField
             label="Enfermedad Crónica"
