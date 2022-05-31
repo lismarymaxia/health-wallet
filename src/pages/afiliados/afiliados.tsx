@@ -60,7 +60,7 @@ const Movies = () => {
               >
                 <img src={movie.image} alt="employee avatar" />
                 <IonLabel>
-                  <h2>{movie.name}</h2>
+                  {movie.name}
                 </IonLabel>
               </IonItem>
             );

@@ -143,7 +143,7 @@ const Home: React.FC = () => {
                     slot="end"
                     color="secondary"
                   >
-                    <b>{tiposangre}</b>
+                    {tiposangre}
                   </div>
                 </div>
 
@@ -154,7 +154,7 @@ const Home: React.FC = () => {
                     routerLink="/app/datos-editar"
                     className="button__capitalize botton__link"
                   >
-                    ver mas
+                    Ver más
                   </IonButton>
 
                   <IonButton

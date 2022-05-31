@@ -102,8 +102,8 @@ const Consultas: React.FC = () => {
         <IonToolbar>
           <IonTitle
             style={{
-              color: "#0e6251",
-              fontSize: "22px",
+              color: "#293f76",
+              fontSize: "18px",
             }}
           >
             Consultas
@@ -135,22 +135,16 @@ const Consultas: React.FC = () => {
                   <IonCardTitle>{item.tipo}</IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent>
-                  <h2>
-                    <IonLabel style={{ color: "#fff" }}>
-                      Medico:{item.medico}
+                  <div>
+                    <IonLabel>
+                      Medico: {item.medico}
                     </IonLabel>
-                  </h2>
-                  <h3>
-                    <IonLabel style={{ color: "#fff" }}>
-                      Fecha:{item.fecha}
+                  </div>
+                  <div>
+                    <IonLabel>
+                      Fecha: {item.fecha} {item.hora}
                     </IonLabel>
-                    <IonLabel
-                      style={{ color: "#fff" }}
-                      className="ion-margin-start"
-                    >
-                      Hora:{item.hora}
-                    </IonLabel>
-                  </h3>
+                  </div>
                 </IonCardContent>
               </IonCard>
             ))}
