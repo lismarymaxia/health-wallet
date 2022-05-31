@@ -18,7 +18,7 @@ const Header: React.FC<{
         <IonToolbar>
           <IonTitle
             style={{
-              color: "#0e6251",
+              color: "#293f76",
               fontSize: "22px",
             }}
           >

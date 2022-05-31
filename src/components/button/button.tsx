@@ -14,7 +14,7 @@ export const Action: React.FC<ContainerProps> = ({ message, link, text }) => (
         <IonRouterLink
           className="custom-link"
           routerLink={link}
-          style={{ color: "orange" }}
+          style={{ color: "blue" }}
         >
           {" "}
           {text} &rarr;
