@@ -9,10 +9,16 @@ import {
   IonList,
   IonNote,
   IonToast,
+  IonInput,
+  IonText,
 } from "@ionic/react";
 import { trashSharp } from "ionicons/icons";
 import { useSelector } from "react-redux";
-import { servicesWh, serviciosPaciente } from "../../../servicios/servicios";
+import {
+  servicesWh,
+  serviciosPaciente,
+  getEnfermedad,
+} from "../../../servicios/servicios";
 import { CustomField } from "../../../components";
 
 interface Propiedades {
@@ -23,9 +29,15 @@ interface Propiedades {
 const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
   const user = useSelector((state: any) => state.reducerAuth.user);
   const { idpaciente } = user;
-  const [enfermedad, setEnfermedad] = useState("");
+
+  const [search, setSearch] = useState("");
+  const [enfermedad, setEnfermedad] = useState({ label: "", value: "" });
+  const { label, value } = enfermedad;
+
   const [tratamiento, setTratamiento] = useState("");
   const [frecuencia, setFrecuencia] = useState("");
+  const [data, setData] = useState<Array<string>>([]);
+  const [transition, setTransition] = useState<Boolean>(false);
 
   const [notificacion, setNotificacion] = useState({ msg: "", estado: false });
   const { estado, msg } = notificacion;
@@ -57,12 +69,12 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
     setListado(filter);
   };
 
-  const handleAddAlergia = () => {
-    if (enfermedad !== "" && tratamiento !== "" && frecuencia !== "") {
+  const handleEnfermedad = () => {
+    if (value !== "" && tratamiento !== "" && frecuencia !== "") {
       let formDa = new FormData();
       formDa.append("op", "addEnfermedades");
       formDa.append("id", idpaciente);
-      formDa.append("enfermedad", enfermedad);
+      formDa.append("idenfermedad", value);
       formDa.append("tratamiento", tratamiento);
       formDa.append("frecuencia", frecuencia);
       serviciosPaciente(formDa)
@@ -76,7 +88,8 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
               });
               const state: any = {
                 id: data.id,
-                enfermedad: enfermedad,
+                idenfermdad: value,
+                nameenfermedad: label,
                 tratamiento: tratamiento,
                 frecuencia: frecuencia,
               };
@@ -100,9 +113,9 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
     }
   };
 
-  const handleDeletAlergias = (id: any) => {
+  const handleDeletEnfermedad = (id: any) => {
     let formDa = new FormData();
-    formDa.append("op", "deletAlergias");
+    formDa.append("op", "deletEnfermedad");
     formDa.append("id", id);
     serviciosPaciente(formDa)
       .then(function (response: any) {
@@ -127,6 +140,32 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
       });
   };
 
+  const handleSearch = (e: any) => {
+    setEnfermedad({ ...enfermedad, label: e });
+    if (e.length > 3 && transition === false) {
+      getEnfermedad(e)
+        .then((rsp: any) => {
+          const { data, estatus } = rsp.data;
+          if (estatus === "ok") {
+            if (data) {
+              setData(data);
+            }
+          }
+        })
+        .catch((e: any) => {
+          console.warn(e);
+        });
+    } else if (e.length < 3) {
+      setData([]);
+      setTransition(false);
+    }
+  };
+
+  const handleSelect = (value: any, label: string) => {
+    setTransition(true);
+    setData([]);
+    setEnfermedad({ label: label, value: value });
+  };
   return (
     <>
       <IonCol size="12">
@@ -135,15 +174,30 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
             <IonLabel>Enfermedades</IonLabel>
           </IonItem>
         </IonCol>
-
+        <IonItem>
+          <IonInput
+            type="text"
+            value={label}
+            placeholder="Enfermedad"
+            onIonChange={(e) => handleSearch(e.detail.value!)}
+          ></IonInput>
+        </IonItem>
+        <IonList>
+          {data.map((item: any) => (
+            <IonItem
+              key={item.value}
+              button
+              onClick={() => {
+                handleSelect(item.value, item.label);
+              }}
+            >
+              <IonLabel>
+                <IonText color="danger">{item.label}</IonText>
+              </IonLabel>
+            </IonItem>
+          ))}
+        </IonList>
         <IonCol size="12">
-          <CustomField
-            label="Enfermedad Crónica"
-            name={enfermedad}
-            setName={setEnfermedad}
-            placeholder=""
-            tipo="text"
-          />
           <CustomField
             label="Tratamiento Permanente"
             name={tratamiento}
@@ -164,7 +218,7 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
             className="custom-button"
             expand="full"
             onClick={() => {
-              handleAddAlergia();
+              handleEnfermedad();
             }}
           >
             Agregar
@@ -176,13 +230,13 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
             : listado.map((item: any) => (
                 <IonItem key={item.id}>
                   <IonLabel>
-                    {item.enfermedad}/ {item.tratamiento}/{item.frecuencia}
+                    {item.nameenfermedad}/ {item.tratamiento}/{item.frecuencia}
                   </IonLabel>
                   <IonNote slot="end" color="danger">
                     <IonButton
                       color="danger"
                       onClick={() => {
-                        handleDeletAlergias(item.id);
+                        handleDeletEnfermedad(item.id);
                       }}
                     >
                       <IonIcon icon={trashSharp} />
@@ -202,3 +256,19 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
   );
 };
 export default Enfermedades;
+
+/*
+        <input
+          type="text"
+          id="search"
+          list="languages"
+          value={enfermedad}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+        <datalist id="languages">
+          {data.map((item: any) => (
+            <option value={item.value}>{item.label}</option>
+          ))}
+        </datalist>
+
+*/

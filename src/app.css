@@ -85,3 +85,9 @@ ion-button{
 .title-default{
   font-weight: 500;
 }
+.d__flex {
+  display: flex;
+}
+.justify__content__between {
+  justify-content: space-between;
+}

@@ -14,7 +14,7 @@ export const authentication = (form: any) =>
   });
 
 export const getPost = (page: any) =>
-  axio.get("https://maxialatam.com/conectadoss/wp-json/wp/v2/posts?", {
+  servicesWh.get("https://maxialatam.com/conectadoss/wp-json/wp/v2/posts?", {
     headers: {
       Authorization: "Basic cmVkc29jaWFsOk1heGlhMzIxKg==",
       "Content-Type": "application/json",
@@ -23,6 +23,12 @@ export const getPost = (page: any) =>
       page: page,
       per_page: 6,
     },
+    responseType: "json",
+  });
+
+export const getEnfermedad = (valor: string) =>
+  servicesWh.get("/controller/combosback.php", {
+    params: { op: "enfermedadescombo", valor: valor },
     responseType: "json",
   });
 
