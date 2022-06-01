@@ -1,15 +1,28 @@
 .page ion-searchbar {
-  --border-radius: 10px;
-  --background: #0e6251;
-  --color: white;
+  --border-radius: 0.2rem;
+  --border: 1px solid #dfe1e5;
+  --background: #ffffff;
+  --color: #5a5a5a;
+  font-size: 0.9rem;
   min-height: 4rem;
   padding: 1rem;
   padding-top: 0;
 }
-.searchbar-search-icon.sc-ion-searchbar-md {
-  color: white;
-  pointer-events: none;
+.searchbar-input-container.sc-ion-searchbar-md{
+  --box-shadow: none;
 }
+.searchbar-search-icon.sc-ion-searchbar-md {
+  color: #5a5a5a;
+  pointer-events: none;
+  margin-left: -5px;
+}
+
+.searchbar-input.sc-ion-searchbar-md {
+  padding-inline-start: 35px;
+  padding-inline-end: 35px;
+  border: 1px solid #dfe1e5;
+}
+
 
 .mainContent {
   background-color: #e7edfb;

@@ -75,7 +75,18 @@ ion-accordion ion-item ion-icon {
   color: #ffffff;
 }
 
+<<<<<<< HEAD
 ion-button {
+=======
+ion-item{
+  font-size: 0.9rem;
+}
+ion-item ion-label{
+  margin: 4px 0px;
+}
+
+ion-button{
+>>>>>>> bccc5f2bd4e472d5e99d6ef7621ddfa6a4937958
   border-radius: 0.2rem !important;
 }
 
@@ -101,7 +112,15 @@ ion-card-content ion-label {
   justify-content: space-between;
 }
 
+<<<<<<< HEAD
 .searchbar-input.sc-ion-searchbar-ios {
+=======
+.searchContainer{
+  border-bottom: 1px solid #dfe1e5;
+}
+
+.searchbar-input.sc-ion-searchbar-ios{
+>>>>>>> bccc5f2bd4e472d5e99d6ef7621ddfa6a4937958
   border: 1px solid #dfe1e5;
   background: #ffffff;
   color: #5a5a5a;
