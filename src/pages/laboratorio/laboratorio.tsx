@@ -68,33 +68,25 @@ const Laboratorio: React.FC = () => {
               <IonCardTitle>{item.tipo}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              <div className="ion-margin-bottom">
-                <h2>
-                  <IonLabel style={{ color: "#fff" }}>
-                    Centro:{item.centro}
-                  </IonLabel>
-                </h2>
+              <div style={{paddingBottom: "0.2rem"}}>
+                <IonLabel style={{ color: "#333333", fontSize: "0.95rem" }}>
+                  {item.centro}
+                </IonLabel>
               </div>
-              <div className="ion-margin-bottom">
-                <h2>
-                  <IonLabel style={{ color: "#fff" }}>
-                    Doctor:{item.doctor}
-                  </IonLabel>
-                </h2>
+              <div>
+                <IonLabel>
+                  Doctor: {item.doctor}
+                </IonLabel>
               </div>
-              <div className="ion-margin-bottom">
-                <h2 className="margin__botton">
-                  <IonLabel style={{ color: "#fff" }}>
-                    Tipo paciente:{item.tipo_paciente}
-                  </IonLabel>
-                </h2>
+              <div>
+                <IonLabel>
+                  Tipo paciente: {item.tipo_paciente}
+                </IonLabel>
               </div>
-              <div className="ion-margin-bottom">
-                <h3>
-                  <IonLabel style={{ color: "#fff" }}>
-                    Fecha solicitud:{item.fecha_solicitud}
-                  </IonLabel>
-                </h3>
+              <div>
+                <IonLabel>
+                  Fecha solicitud: {item.fecha_solicitud}
+                </IonLabel>
               </div>
             </IonCardContent>
           </IonCard>

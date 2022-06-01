@@ -1,14 +1,17 @@
 ion-content {
   background: #f6fbf8;
+  font-size: 0.9rem;
 }
 
 .menu__fondo {
+  /*
   background: rgb(3, 33, 27);
   background: linear-gradient(
     180deg,
     rgba(3, 33, 27, 1) 0%,
     rgba(14, 98, 81, 1) 100%
   );
+  */
 }
 
 .card_custon {
@@ -16,8 +19,8 @@ ion-content {
   transition: all 0.5s ease-in-out;
   position: relative;
   border: 0px solid transparent;
-  border-radius: 0.75rem;
-  box-shadow: 0px 12px 33px 0px rgb(62 73 84 / 20%);
+  border-radius: 0.4rem;
+  box-shadow: 0px 2px 6px 0px rgb(62 73 84 / 20%);
 }
 
 .fondo ion-item {
@@ -25,6 +28,7 @@ ion-content {
   background: #0a6fb8;
   --background: #0a6fb8;
   color: #ffffff;
+  font-size: 1rem;
 }
 
 /*-ACORDION----------------------------------------*/
@@ -35,15 +39,15 @@ ion-content {
 .acordion__item__content {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  border-bottom: solid 1px rgba(59, 57, 57, 0.484);
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  border-bottom: solid 1px #dfe1e5;
 }
 /*-ESTILO-BOTONES---------------------------------*/
 .custom-button {
-  --border-radius: 5px !important;
-  --background: #0e6251;
-  font-size: 1.2rem;
-  margin-top: 1rem;
+  --border-radius: 0.2rem !important;
+  --background: #293f76;
+  font-size: 0.9rem;
   text-transform: capitalize;
 }
 
@@ -65,18 +69,47 @@ ion-content {
   text-transform: initial;
 }
 
-.ion-activatable.ion-focusable ion-label{
+ion-accordion > ion-item.ion-activatable.ion-focusable > ion-label{
   color: #ffffff;
 }
-
 
 ion-accordion ion-item ion-icon {
   color: #ffffff;
 }
 
+ion-button{
+  border-radius: 0.2rem !important;
+}
+
+ion-card-header{
+  padding: 0.6rem;
+  padding-bottom: 0.2rem !important;
+}
+
+ion-card-content ion-label{
+  color: #5a5a5a;
+}
+
+.item .sc-ion-label-ios-h {
+  font-size: 0.9rem;
+}
+.title-default{
+  font-weight: 500;
+}
 .d__flex {
   display: flex;
 }
 .justify__content__between {
   justify-content: space-between;
+}
+
+.searchbar-input.sc-ion-searchbar-ios{
+  border: 1px solid #dfe1e5;
+  background: #ffffff;
+  color: #5a5a5a;
+  font-size: 0.9rem;
+}
+
+.button-inner {
+  color: #293f76 !important;
 }

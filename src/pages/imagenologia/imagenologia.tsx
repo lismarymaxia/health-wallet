@@ -76,34 +76,29 @@ const Imagenologia: React.FC = () => {
               <IonCardTitle>{item.tipo}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              <div className="ion-margin-bottom">
-                <h2>
-                  <IonLabel style={{ color: "#fff" }}>
-                    Unidad:{item.unidad}
-                  </IonLabel>
-                </h2>
+              <div style={{paddingBottom: "0.2rem"}}>
+                <IonLabel style={{ color: "#333333", fontSize: "0.95rem" }}>
+                  {item.unidad}
+                </IonLabel>
               </div>
-              <div className="ion-margin-bottom">
-                <h2 className="margin__botton">
-                  <IonLabel style={{ color: "#fff" }}>
-                    Estudio:{item.estudio}
+              <div>
+                  <IonLabel>
+                    Estudio: {item.estudio}
                   </IonLabel>
-                </h2>
               </div>
-              <div className="ion-margin-bottom">
-                <h3>
-                  <IonLabel style={{ color: "#fff" }}>
-                    Fecha:{item.fecha}
-                  </IonLabel>
-                </h3>
+              <div>
+               <IonLabel>
+                  Fecha: {item.fecha}
+                </IonLabel>
               </div>
 
               <IonButton
                 expand="full"
                 fill="clear"
-                style={{ color: "#fff" }}
                 target="_blank"
                 href={item.url}
+                size="small"
+                style={{height: "auto"}}
               >
                 ver
                 <IonIcon

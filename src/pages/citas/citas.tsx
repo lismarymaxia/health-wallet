@@ -81,7 +81,7 @@ const Citas: React.FC = () => {
       <IonContent fullscreen>
         <IonCard>
           <IonCardHeader>
-            <IonCardSubtitle>Informacion </IonCardSubtitle>
+            <IonCardSubtitle>Información </IonCardSubtitle>
             <IonCardTitle>{nombre}</IonCardTitle>
           </IonCardHeader>
           {load ? <h1>Cargando</h1> : ""}

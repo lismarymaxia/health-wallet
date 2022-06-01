@@ -37,11 +37,11 @@ export const Nav: React.FC = () => {
         <IonToolbar>
           <IonTitle
             style={{
-              color: "#0e6251",
-              fontSize: "22px",
+              color: "#293f76",
+              fontSize: "18px",
             }}
           >
-            Wallet Health
+            Health Wallet
           </IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -50,11 +50,11 @@ export const Nav: React.FC = () => {
           <IonListHeader
             style={{
               color: "#ffffff",
-              fontSize: "20px",
-              background: "rgb(3, 33, 27)",
+              fontSize: "18px",
+              background: "#293f76",
             }}
           >
-            <IonLabel>Menú Principal</IonLabel>
+            <IonLabel style={{marginTop: "0px"}}>Menú Principal</IonLabel>
           </IonListHeader>
           {/*<IonItem routerLink="/app/datos" onClick={close}>
             <IonIcon color="black" slot="start" icon={personSharp}></IonIcon>

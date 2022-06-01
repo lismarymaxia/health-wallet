@@ -143,7 +143,7 @@ const Home: React.FC = () => {
                     slot="end"
                     color="secondary"
                   >
-                    <b>{tiposangre}</b>
+                    {tiposangre}
                   </div>
                 </div>
 
@@ -154,7 +154,7 @@ const Home: React.FC = () => {
                     routerLink="/app/datos-editar"
                     className="button__capitalize botton__link"
                   >
-                    ver mas
+                    Ver más
                   </IonButton>
 
                   <IonButton
@@ -173,7 +173,7 @@ const Home: React.FC = () => {
                 <IonIcon
                   icon={pulseSharp}
                   className="ion-margin-end"
-                  size="outline"
+                  size="small"
                   style={{ color: "#ffff" }}
                 />
                 <IonLabel>Consulta</IonLabel>
@@ -201,7 +201,7 @@ const Home: React.FC = () => {
                   size="small"
                   style={{ color: "#ffff" }}
                 />
-                <IonLabel>Imagenologia</IonLabel>
+                <IonLabel>Imagenología</IonLabel>
               </IonItem>
 
               <IonList slot="content">

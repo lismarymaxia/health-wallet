@@ -2,7 +2,7 @@
   --border-radius: 10px;
   --background: #0e6251;
   --color: white;
-  min-height: 5rem;
+  min-height: 4rem;
   padding: 1rem;
   padding-top: 0;
 }
@@ -24,12 +24,10 @@
   --border-radius: 10px;
   --padding-start: 1rem;
   --padding-end: 1rem;
-  --padding-top: 1rem;
-  --padding-bottom: 1rem;
-  padding: 1rem;
+  --padding-top: 0.2rem;
+  --padding-bottom: 0.2rem;
   padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  min-height: 5rem;
+  min-height: 3rem;
 }
 .employeeItem img {
   width: 3rem;
@@ -38,7 +36,7 @@
 }
 
 .employeeItem ion-label {
-  padding-left: 1.2rem;
+  padding-left: 0.5rem;
 }
 .employeeItem h2 {
   font-weight: 600;
