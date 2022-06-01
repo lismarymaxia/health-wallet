@@ -110,6 +110,10 @@ ion-card-content ion-label{
   justify-content: space-between;
 }
 
+.searchContainer{
+  border-bottom: 1px solid #dfe1e5;
+}
+
 .searchbar-input.sc-ion-searchbar-ios{
   border: 1px solid #dfe1e5;
   background: #ffffff;

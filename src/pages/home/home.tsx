@@ -176,7 +176,7 @@ const Home: React.FC = () => {
                   size="small"
                   style={{ color: "#ffff" }}
                 />
-                <IonLabel>Consulta</IonLabel>
+                <IonLabel>Consultas</IonLabel>
               </IonItem>
 
               <IonList slot="content">
