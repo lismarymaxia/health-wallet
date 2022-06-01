@@ -256,7 +256,9 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
   );
 };
 export default Enfermedades;
-
+/*
+registromodeloordendeds
+*/
 /*
         <input
           type="text"
@@ -271,4 +273,19 @@ export default Enfermedades;
           ))}
         </datalist>
 
+
+        SELECT
+                    'Consulta' as tipo, r.id,r.idcentroproduccion,r.idpaciente,
+                    CONCAT(m.nombre,' ',m.apellido) AS medico,
+                    date(r.horaingreso) AS fecha, 
+                    time(r.horaingreso) AS hora, 
+					CONCAT(e.codigo,' - ',e.nombre) AS descripcion
+                    FROM consulta r 
+                    LEFT JOIN listdiagnostico ld ON r.id = ld.idconsulta
+                    LEFT JOIN enfermedades e ON ld.idenfermedad = e.id
+                    LEFT JOIN medicos m ON r.idmedico = m.id
+                    WHERE r.cedula = '6-712-727'
+
+                    
+https://toolkit.maxialatam.com/portalcsspp/registro.php?idp=3480&idc=8408&idcentro=16
 */
