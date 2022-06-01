@@ -15,13 +15,14 @@ import {
   IonIcon,
   IonTitle,
   IonToolbar,
+  useIonViewDidEnter,
 } from "@ionic/react";
 import { arrowBackOutline } from "ionicons/icons";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { Header } from "../../components";
-import { services } from "../../servicios/servicios";
-//import doctor from "../../asset/doctor.png";
+import { servicesWh } from "../../servicios/servicios";
+
 import "./consultas.css";
 
 const Consultas: React.FC = () => {
@@ -30,16 +31,14 @@ const Consultas: React.FC = () => {
   const [load, setLoad] = useState<Boolean>(true);
   const [data, setData] = useState<any>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  // Optional parameters to pass to the swiper instance.
-  // See https://swiperjs.com/swiper-api for valid options.
 
-  useEffect(() => {
+  useIonViewDidEnter(() => {
     setLoad(true);
-    services
-      .get("/api.php", {
+    servicesWh
+      .get("/controller/consultasback.php", {
         params: {
           op: "consultas",
-          id: cedula,
+          cedula: cedula,
           imestamp: new Date().getTime(),
         },
         responseType: "json",
@@ -59,37 +58,18 @@ const Consultas: React.FC = () => {
       .catch((e) => {
         console.warn(e);
       });
-  }, [cedula]);
-
-  const search = (e: any) => {
-    const searchTermVal = e.currentTarget.value;
-
-    if (searchTermVal !== "") {
-      const searchTermLower = searchTermVal.toLowerCase();
-      setSearchTerm(searchTermLower);
-      const filtrado = data.filter((item: any) => {
-        return item.medico.toLowerCase().includes(searchTermLower);
-      });
-      setData(filtrado);
-    } else {
-      setSearchTerm("");
-    }
-  };
-
-  const handleClear = () => {
-    setData(data);
-  };
+  });
 
   const pacsearch = useCallback((searc: any) => {
     return function name(params: any) {
-      return params.medico.toUpperCase().includes(searc.toUpperCase());
+      return params?.medico?.toUpperCase().includes(searc.toUpperCase());
     };
   }, []);
 
   if (load) {
     return (
       <IonPage>
-        <Header title="Consulta" isbotton={true} isBuger={false} />
+        <Header title="Consultas" isbotton={true} isBuger={false} />
         <IonContent fullscreen>
           <IonProgressBar type="indeterminate" color="success"></IonProgressBar>
         </IonContent>
@@ -136,15 +116,21 @@ const Consultas: React.FC = () => {
                 </IonCardHeader>
                 <IonCardContent>
                   <div>
-                    <IonLabel>
-                      Medico: {item.medico}
-                    </IonLabel>
+                    <IonLabel>Medico: {item.medico}</IonLabel>
                   </div>
                   <div>
                     <IonLabel>
                       Fecha: {item.fecha} {item.hora}
                     </IonLabel>
                   </div>
+                  <IonButton
+                    slot="start"
+                    routerLink={`/app/consulta/${item.id}/${item.idcentro}`}
+                    fill="clear"
+                    color="dark"
+                  >
+                    Ver
+                  </IonButton>
                 </IonCardContent>
               </IonCard>
             ))}
@@ -156,29 +142,3 @@ const Consultas: React.FC = () => {
 };
 
 export default Consultas;
-
-/*
-data.map((item: any, index: any) => (
-          <div className="post" key={index}>
-            <IonItem lines="none">
-              <IonAvatar className="postAvatar">
-                <img src={doctor} alt="" />
-              </IonAvatar>
-              <IonLabel className="ion-text-wrap">
-                <div className="postInfo">
-                  <p>Medico:{item.medico}</p>
-                </div>
-                <div className="postInfo">
-                  <p>Fecha:{item.fecha}</p>
-                  <p></p>
-                </div>
-
-                <p className="postText"></p>
-                <div className="postReactions">
-                  <div className="postReaction"></div>
-                </div>
-              </IonLabel>
-            </IonItem>
-          </div>
-))
-*/

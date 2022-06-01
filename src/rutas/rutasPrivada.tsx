@@ -13,6 +13,7 @@ import {
   Datos,
   EditDatos,
   Consultas,
+  Consulta,
   Imagenologia,
   ImagenologiaDtls,
   Laboratorio,
@@ -57,6 +58,10 @@ const RutasPrivadas: React.FC = () => {
           <Route exact path="/app/consultas">
             <Consultas />
           </Route>
+          <Route exact path="/app/consulta/:idcnst/:idcntr">
+            <Consulta />
+          </Route>
+
           <Route path="/app/imagenologia">
             <Imagenologia />
           </Route>

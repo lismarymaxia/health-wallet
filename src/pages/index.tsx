@@ -1,7 +1,7 @@
 import { Login } from "./login";
 import { Datos, EditDatos } from "./datos";
 import { Citas } from "./citas";
-import { Consultas } from "./consultas";
+import { Consultas, Consulta } from "./consultas";
 import { Imagenologia, ImagenologiaDtls } from "./imagenologia";
 import { Laboratorio } from "./laboratorio";
 import { Medicamentos } from "./medicamentos";
@@ -10,12 +10,14 @@ import { Vacunas } from "./vacunas";
 import { Home } from "./home";
 import { Registro } from "./registro";
 import { Afiliados } from "./afiliados";
+
 export {
   Login,
   Datos,
   EditDatos,
   Citas,
   Consultas,
+  Consulta,
   Imagenologia,
   ImagenologiaDtls,
   Laboratorio,

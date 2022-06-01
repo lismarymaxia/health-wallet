@@ -19,16 +19,28 @@
   background: #2d2727;
 }
 
-.page ion-searchbar {
-  --border-radius: 10px;
-  --background: #0e6251;
-  --color: white;
-  min-height: 5rem;
-  padding: 1rem;
-  padding-top: 0;
-}
-
 .searchbar-search-icon.sc-ion-searchbar-md {
   color: white;
   pointer-events: none;
+}
+
+.content__frecuencia {
+  display: flex;
+  justify-content: space-between;
+  background: #d1d1d1;
+  border-radius: 4px;
+  padding: 0px;
+  font-weight: bold;
+}
+
+.item__frecuencia {
+  list-style: none;
+  margin-right: 4px;
+}
+
+.active {
+  background: #2bc155;
+  color: #ffffff;
+  padding-left: 2px;
+  padding-right: 2px;
 }

@@ -59,9 +59,7 @@ const Movies = () => {
                 lines="none"
               >
                 <img src={movie.image} alt="employee avatar" />
-                <IonLabel>
-                  {movie.name}
-                </IonLabel>
+                <IonLabel>{movie.name}</IonLabel>
               </IonItem>
             );
           })}
@@ -72,12 +70,3 @@ const Movies = () => {
 };
 
 export default Movies;
-/*
-<IonSearchbar
-            value={searchTerm}
-            onKeyUp={(e) => search(e)}
-            onKeyPress={(e) => search(e)}
-            onIonClear={handleClear}            placeholder="Buscar..."
-            slot="end"
-  />
-*/

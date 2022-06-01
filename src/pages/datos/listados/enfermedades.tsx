@@ -30,7 +30,6 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
   const user = useSelector((state: any) => state.reducerAuth.user);
   const { idpaciente } = user;
 
-  const [search, setSearch] = useState("");
   const [enfermedad, setEnfermedad] = useState({ label: "", value: "" });
   const { label, value } = enfermedad;
 

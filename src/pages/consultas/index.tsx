@@ -1,2 +1,3 @@
 import Consultas from "./consultas";
-export { Consultas };
+import Consulta from "./consulta";
+export { Consultas, Consulta };
