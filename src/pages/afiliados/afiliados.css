@@ -1,10 +1,15 @@
 .page ion-searchbar {
-  --border-radius: 10px;
-  --background: #0e6251;
-  --color: white;
+  --border-radius: 0.2rem;
+  --border: 1px solid #dfe1e5;
+  --background: #ffffff;
+  --color: #333333;
   min-height: 4rem;
   padding: 1rem;
   padding-top: 0;
+}
+.searchbar-input.sc-ion-searchbar-md {
+  padding-inline-start: 35px;
+  padding-inline-end: 35px;
 }
 .searchbar-search-icon.sc-ion-searchbar-md {
   color: white;

@@ -101,7 +101,7 @@ const Registro = () => {
                   tipo="text"
                 />
                 <CustomField
-                  label="Cedula"
+                  label="Cédula"
                   name={cedula}
                   setName={setCedula}
                   placeholder=""
@@ -143,7 +143,7 @@ const Registro = () => {
         <IonGrid className="ion-no-margin ion-no-padding">
           <Action
             message="¿Ya tienes una cuenta?"
-            text="Iniciar sesion"
+            text="Iniciar sesión"
             link="/login"
           />
         </IonGrid>
@@ -151,7 +151,7 @@ const Registro = () => {
       <IonToast
         isOpen={toast}
         onDidDismiss={() => setToast(false)}
-        message="Por favor acepte las conidiciones"
+        message="Por favor acepte las condiciones"
         duration={200}
       />
       <IonToast

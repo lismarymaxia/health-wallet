@@ -77,6 +77,13 @@ ion-accordion ion-item ion-icon {
   color: #ffffff;
 }
 
+ion-item{
+  font-size: 0.9rem;
+}
+ion-item ion-label{
+  margin: 4px 0px;
+}
+
 ion-button{
   border-radius: 0.2rem !important;
 }

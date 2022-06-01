@@ -88,6 +88,6 @@ export default RutasPrivadas;
 
           <IonTabButton tab="tab3" onClick={handelLogout}>
             <IonIcon icon={logOutSharp} />
-            Cerrar sesion
+            Cerrar sesión
           </IonTabButton>
         </IonTabBar> */
