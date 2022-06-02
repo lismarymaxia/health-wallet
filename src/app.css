@@ -122,3 +122,15 @@ ion-card-content ion-label {
 .button-inner {
   color: #293f76 !important;
 }
+
+ion-item.item-interactive{
+  --background: #ffffff;
+  --color: #333333;
+  --padding-top: 0.4rem;
+  --padding-bottom: 0.4rem;
+  --padding-start: 0.5rem;
+  --padding-end: 0.5rem;
+  border-radius: 0.2rem;
+  border: 1px solid #dfe1e5;
+  --height: 30px !important;
+}
