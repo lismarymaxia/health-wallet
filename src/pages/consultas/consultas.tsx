@@ -1,11 +1,6 @@
 import {
   IonContent,
   IonPage,
-  IonLabel,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
   IonProgressBar,
   IonRow,
   IonCol,
@@ -22,7 +17,7 @@ import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { Header } from "../../components";
 import { servicesWh } from "../../servicios/servicios";
-
+import { Card } from "./Card";
 import "./consultas.css";
 
 const Consultas: React.FC = () => {
@@ -76,6 +71,7 @@ const Consultas: React.FC = () => {
       </IonPage>
     );
   }
+  console.log(data);
   return (
     <IonPage className="page">
       <IonHeader className="ion-no-border">
@@ -110,29 +106,7 @@ const Consultas: React.FC = () => {
         <IonRow>
           <IonCol size="12">
             {data.filter(pacsearch(searchTerm)).map((item: any, index: any) => (
-              <IonCard className="card__consulta card_custon" key={index}>
-                <IonCardHeader>
-                  <IonCardTitle>{item.tipo}</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>
-                  <div>
-                    <IonLabel>Medico: {item.medico}</IonLabel>
-                  </div>
-                  <div>
-                    <IonLabel>
-                      Fecha: {item.fecha} {item.hora}
-                    </IonLabel>
-                  </div>
-                  <IonButton
-                    slot="start"
-                    routerLink={`/app/consulta/${item.id}/${item.idcentro}`}
-                    fill="clear"
-                    color="dark"
-                  >
-                    Ver
-                  </IonButton>
-                </IonCardContent>
-              </IonCard>
+              <Card item={item} key={index} />
             ))}
           </IonCol>
         </IonRow>
@@ -142,3 +116,6 @@ const Consultas: React.FC = () => {
 };
 
 export default Consultas;
+/*
+routerLink={`/app/consulta/${item.id}/${item.idcentro}`}
+*/

@@ -101,12 +101,6 @@ ion-card-content ion-label {
 .title-default {
   font-weight: 500;
 }
-.d__flex {
-  display: flex;
-}
-.justify__content__between {
-  justify-content: space-between;
-}
 
 .searchContainer {
   border-bottom: 1px solid #dfe1e5;
@@ -133,4 +127,15 @@ ion-item.item-interactive{
   border-radius: 0.2rem;
   border: 1px solid #dfe1e5;
   --height: 30px !important;
+}
+/*-CUSTOM-CLASS-------------------*/
+.d__flex {
+  display: flex;
+}
+.justify__content__between {
+  justify-content: space-between;
+}
+
+.justify__content__center {
+  justify-content: center;
 }

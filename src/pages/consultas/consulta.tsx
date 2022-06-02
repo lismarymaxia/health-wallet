@@ -21,7 +21,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Header } from "../../components";
 import { servicesWh } from "../../servicios/servicios";
-import { tablaFrecuencia } from "../../helpers";
+//import { tablaFrecuencia } from "../../helpers";
 
 import "./consultas.css";
 
@@ -150,7 +150,7 @@ const Consulta: React.FC = () => {
               </IonCardHeader>
               <IonCardContent>
                 <div className="ion-margin-bottom">
-                  <b>Razón de la cita:</b>
+                  <b>Razón de la consulta:</b>
                   {detail.motivovisita}
                 </div>
                 <div>Lista de afecciones o diagnósticos</div>
@@ -172,8 +172,8 @@ const Consulta: React.FC = () => {
                 </div>
 
                 <div className="ion-margin-top">Tratamientos</div>
-                {tramientos.map((item: any) => (
-                  <div>
+                {tramientos.map((item: any, index: any) => (
+                  <div key={index}>
                     <div>{item.textmedicamento}</div>
                     <div>
                       Desde:{item.fechaini}
