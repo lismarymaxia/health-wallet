@@ -101,12 +101,6 @@ ion-card-content ion-label {
 .title-default {
   font-weight: 500;
 }
-.d__flex {
-  display: flex;
-}
-.justify__content__between {
-  justify-content: space-between;
-}
 
 .searchContainer {
   border-bottom: 1px solid #dfe1e5;
@@ -121,4 +115,16 @@ ion-card-content ion-label {
 
 .button-inner {
   color: #293f76 !important;
+}
+
+/*-CUSTOM-CLASS-------------------*/
+.d__flex {
+  display: flex;
+}
+.justify__content__between {
+  justify-content: space-between;
+}
+
+.justify__content__center {
+  justify-content: center;
 }
