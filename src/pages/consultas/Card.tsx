@@ -18,7 +18,7 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
   return (
     <IonCard className="card__consulta card_custon">
       <IonCardHeader>
-        <IonCardTitle>{item.tipo}</IonCardTitle>
+        <IonCardTitle>{item.centroproduccion}</IonCardTitle>
       </IonCardHeader>
       <IonCardContent>
         <div>

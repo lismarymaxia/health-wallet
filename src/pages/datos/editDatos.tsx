@@ -24,6 +24,7 @@ const EditDatos: React.FC = () => {
   const { id } = user;
 
   const [sangre, setSangre] = useState("");
+  const [telefono, setTelefono] = useState("");
   const [idRegistro, setIdRegistro] = useState("");
 
   const [listadoA, setListadoA] = useState<Array<string>>([]);
@@ -50,6 +51,7 @@ const EditDatos: React.FC = () => {
             setIdRegistro(data.id);
             setListadoA(data.alergias);
             setListadoB(data.enfermedades);
+            setTelefono(data.numeroemergencia);
           }
         }
       })
@@ -69,6 +71,7 @@ const EditDatos: React.FC = () => {
       formDa.append("op", "editPaciente");
       formDa.append("id", idRegistro);
       formDa.append("tiposangre", sangre);
+      formDa.append("telefono", telefono);
       serviciosPaciente(formDa)
         .then(function (response) {
           const { data, status } = response;
@@ -127,6 +130,16 @@ const EditDatos: React.FC = () => {
                 handleSave={handleSubmitTipoSangre}
               />
             </IonCol>
+            <IonCol size="12">
+              <CustomFieldOnblur
+                label="Teléfono"
+                name={telefono}
+                setName={setTelefono}
+                placeholder=""
+                tipo="text"
+                handleSave={handleSubmitTipoSangre}
+              />
+            </IonCol>
             <Enfermedades listado={listadoB} setListado={setListadoB} />
             <Alergias listado={listadoA} setListado={setListadoA} />
           </IonRow>
@@ -142,3 +155,7 @@ const EditDatos: React.FC = () => {
   );
 };
 export default EditDatos;
+
+/*
+ismary no sabes si el aumento del 10% se realizara para esta quincena,porque sabes ayer bogdan me escribio para avisarme sobre el depostio de mi quincena donde me explico que no tenia usdt pero que habia cuadrado para realizarme deposito, pero el cuando me dio el ejemplo de cuanto seria me lo explico con el monto de 240$ y con el aumento seria otro monto,
+*/
