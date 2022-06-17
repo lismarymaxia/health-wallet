@@ -19,6 +19,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import "./app.css";
+import './style/style.css'
 /*-Rutas----------- */
 import RootRutas from "./rutas/rootRutas";
 import { Provider } from "react-redux";
