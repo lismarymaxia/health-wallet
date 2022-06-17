@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  IonGrid, IonRow, IonCol, 
+  IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, 
   IonContent,
   IonPage,
   IonIcon,
@@ -13,7 +13,6 @@ import {
   IonList,
   useIonViewDidEnter,
 } from "@ionic/react";
-import { Row, Col, Card, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBell,
@@ -93,46 +92,49 @@ const Home: React.FC = () => {
         </IonRow>
 
         <IonRow className="bg-info-alt">
-          <IonCol size="12" className="px-3">
-            <Card>
-              <Card.Body className="p-1">
+          <IonCol size="12" className="px-3 mb-2">
+            <IonCard className="m-0">
+              <IonCardContent>
                 <IonImg src={'./images/auxiliar-enfermeria.png'} />
-              </Card.Body>
-            </Card>
+              </IonCardContent>
+            </IonCard>
           </IonCol>
         </IonRow>
 
         <IonRow className="mt-4">
           <IonCol size="12" className="px-3">
             <h5 className="font-w600 fs-16 text-dark">Próximos turnos</h5>
-            <Card style={{width: "12rem", height:"auto"}}>
-              <Card.Body className="pt-2 pb-1 px-3">
+            
+            <IonCard className="m-0" style={{width: "12rem", height:"auto"}}>
+              <IonCardContent>
                 <div className="fs-24 font-w800 d-inline text-info">15 Jun</div>
                 <div className="fs-14 float-right d-inline bg-light py-1 px-2 rounded-sm">17:30</div>
                 <div>
                   <p className="mb-0 fs-16 text-dark">Traumatología</p>
                   <p className="mb-0 text-dark">Dr. Juan Fernando</p>
                 </div>
-              </Card.Body>
-            </Card>
-            <Card style={{width: "12rem", height:"auto"}}>
-              <Card.Body className="pt-2 pb-1 px-3">
+              </IonCardContent>
+            </IonCard>
+
+            <IonCard className="m-0" style={{width: "12rem", height:"auto"}}>
+              <IonCardContent>
                 <div className="fs-24 font-w800 d-inline text-info">20 Jun</div>
                 <div className="fs-14 float-right d-inline bg-light py-1 px-2 rounded-sm">09:30</div>
                 <div>
                   <p className="mb-0 fs-16 text-dark">Odontología</p>
                   <p className="mb-0 text-dark">Dra. Maria Camila</p>
                 </div>
-              </Card.Body>
-            </Card>
+              </IonCardContent>
+            </IonCard>
           </IonCol>
         </IonRow>
 
         <IonRow className="mt-4">
           <IonCol size="12" className="px-3">
             <h5 className="font-w600 fs-16 text-dark">Mis afiliados favoritos</h5>
-            <Card style={{height:"auto"}}>
-              <Card.Body className="py-0">
+
+            <IonCard className="m-0" style={{height:"auto"}}>
+              <IonCardContent>
                 <div className="border-bottom pt-3 pb-4">
                   <IonImg src={'./images/osdl.png'} style={{width:"60px"}} className="float-left mr-2"/>
                   <div className="fs-16 text-info">
@@ -154,8 +156,8 @@ const Home: React.FC = () => {
                     <p className="mb-0">Cll 13a #76-52 - Piso 1</p>
                   </div>
                 </div>
-              </Card.Body>
-            </Card>
+              </IonCardContent>
+            </IonCard>
           </IonCol>
         </IonRow>
       </IonGrid>
