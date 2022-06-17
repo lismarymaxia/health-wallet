@@ -173,30 +173,31 @@ const Enfermedades: React.FC<Propiedades> = ({ listado, setListado }) => {
             <IonLabel>Enfermedades</IonLabel>
           </IonItem>
         </IonCol>
-        <IonItem>
-          <IonInput
-            type="text"
-            value={label}
-            placeholder="Enfermedad"
-            onIonChange={(e) => handleSearch(e.detail.value!)}
-          ></IonInput>
-        </IonItem>
-        <IonList>
-          {data.map((item: any) => (
-            <IonItem
-              key={item.value}
-              button
-              onClick={() => {
-                handleSelect(item.value, item.label);
-              }}
-            >
-              <IonLabel>
-                <IonText color="danger">{item.label}</IonText>
-              </IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
+                
         <IonCol size="12">
+          <IonItem>
+            <IonInput
+              type="text"
+              value={label}
+              placeholder="Enfermedad"
+              onIonChange={(e) => handleSearch(e.detail.value!)}
+            ></IonInput>
+          </IonItem>
+          <IonList>
+            {data.map((item: any) => (
+              <IonItem
+                key={item.value}
+                button
+                onClick={() => {
+                  handleSelect(item.value, item.label);
+                }}
+              >
+                <IonLabel>
+                  <IonText color="danger">{item.label}</IonText>
+                </IonLabel>
+              </IonItem>
+            ))}
+          </IonList>
           <CustomField
             label="Tratamiento Permanente"
             name={tratamiento}

@@ -64,3 +64,7 @@ ion-card-header+.card-content-ios {
 .custom__card {
   border-radius: 10px;
 }
+
+ion-item.item-interactive input.native-input.sc-ion-input-md{
+  padding: 0px;
+}
