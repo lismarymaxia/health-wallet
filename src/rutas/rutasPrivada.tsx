@@ -3,10 +3,19 @@ import { Redirect, Route } from "react-router-dom";
 import {
   IonRouterOutlet,
   IonTabBar,
+  IonTabButton,
+  IonIcon,
   IonTabs,
   setupIonicReact,
 } from "@ionic/react";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faUser,
+  faStethoscope,
+  faClipboardList,
+  faDiagramProject
+} from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
 import {
   Home,
@@ -22,6 +31,7 @@ import {
 import { Nav } from "../components";
 import { logout } from "../store/action/aut";
 import { useDispatch, useSelector } from "react-redux";
+import "../style/tema.css";
 setupIonicReact();
 
 const RutasPrivadas: React.FC = () => {
@@ -78,7 +88,47 @@ const RutasPrivadas: React.FC = () => {
             <Redirect to="/app/home" />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar slot="bottom"></IonTabBar>
+        <IonTabBar slot="bottom" className="bar-menu">
+          <IonTabButton tab="tab1" href="/app/home" className="text-info">
+            <div className="icon-menu active">
+              <FontAwesomeIcon icon={faHome} className="fs-18" />
+              Inicio
+            </div>
+          </IonTabButton>
+
+          <IonTabButton tab="tab1" href="/app/consultas" className="text-info">
+            <div className="icon-menu">
+              <FontAwesomeIcon icon={faStethoscope} className="fs-18" />
+              Consultas
+            </div>
+          </IonTabButton>
+
+          <IonTabButton tab="tab1" href="/app/estudios" className="text-info">
+            <div className="icon-menu">
+              <FontAwesomeIcon icon={faClipboardList} className="fs-18" />
+              Estudios
+            </div>
+          </IonTabButton>
+
+          <IonTabButton tab="tab1" href="/app/afiliados" className="text-info">
+            <div className="icon-menu">
+              <FontAwesomeIcon icon={faDiagramProject} className="fs-18" />
+              Afiliados
+            </div>
+          </IonTabButton>
+
+          <IonTabButton tab="tab1" href="/app/perfil" className="text-info">
+            <div className="icon-menu">
+              <FontAwesomeIcon icon={faUser} className="fs-18" />
+              Perfil
+            </div>
+          </IonTabButton>
+
+          {/*<IonTabButton tab="tab3" onClick={handelLogout}>
+            <FontAwesomeIcon icon={faHeart} className="mr-0 float-right" />
+            Cerrar sesión
+          </IonTabButton>*/}
+        </IonTabBar>
       </IonTabs>
     </>
   );
