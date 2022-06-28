@@ -21,7 +21,7 @@ import { useHistory } from "react-router";
     }
     return (
       <>
-        <div className="border-bottom slide-full" onClick={ ()=>{handelClick()} }>
+        <div className="slide-full" onClick={ ()=>{handelClick()} }>
           {imageTitle !== '' && 
           <IonImg
             src={imageTitle}

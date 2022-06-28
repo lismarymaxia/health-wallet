@@ -91,35 +91,35 @@ const RutasPrivadas: React.FC = () => {
         <IonTabBar slot="bottom" className="bar-menu">
           <IonTabButton tab="tab1" href="/app/home" className="text-info">
             <div className="icon-menu active">
-              <FontAwesomeIcon icon={faHome} className="fs-18" />
+              <FontAwesomeIcon icon={faHome} className="fs-18 w-100" />
               Inicio
             </div>
           </IonTabButton>
 
           <IonTabButton tab="tab1" href="/app/consultas" className="text-info">
             <div className="icon-menu">
-              <FontAwesomeIcon icon={faStethoscope} className="fs-18" />
+              <FontAwesomeIcon icon={faStethoscope} className="fs-18 w-100" />
               Consultas
             </div>
           </IonTabButton>
 
           <IonTabButton tab="tab1" href="/app/estudios" className="text-info">
             <div className="icon-menu">
-              <FontAwesomeIcon icon={faClipboardList} className="fs-18" />
+              <FontAwesomeIcon icon={faClipboardList} className="fs-18 w-100" />
               Estudios
             </div>
           </IonTabButton>
 
           <IonTabButton tab="tab1" href="/app/afiliados" className="text-info">
             <div className="icon-menu">
-              <FontAwesomeIcon icon={faDiagramProject} className="fs-18" />
+              <FontAwesomeIcon icon={faDiagramProject} className="fs-18 w-100" />
               Afiliados
             </div>
           </IonTabButton>
 
           <IonTabButton tab="tab1" href="/app/perfil" className="text-info">
             <div className="icon-menu">
-              <FontAwesomeIcon icon={faUser} className="fs-18" />
+              <FontAwesomeIcon icon={faUser} className="fs-18 w-100" />
               Perfil
             </div>
           </IonTabButton>
