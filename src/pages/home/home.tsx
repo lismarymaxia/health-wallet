@@ -21,6 +21,7 @@ import {
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faAngleRight,
   faBell,
   faHeart,
   faShareNodes,
@@ -103,14 +104,9 @@ const Home: React.FC = () => {
             <IonCol size="12" className="px-3 fs-13">
               Lunes, 13 de junio
               <FontAwesomeIcon icon={faBell} className="mr-0 float-right fs-18" onClick={handelNotificaciones}/>
-            </IonCol>
-            <IonCol size="12" className="px-3">
               <div className="fs-20 font-w600 text-white">¡Hola Usuario!</div>
             </IonCol>
-          </IonRow>
-
-          <IonRow className="bg-info-alt">
-            <IonCol size="12" className="px-3 mb-2">
+            <IonCol size="12" className="px-3 pt-3 mb-2">
               <IonCard className="m-0">
                 <IonCardContent>
                   <IonImg src={"./images/auxiliar-enfermeria.png"} />
@@ -121,7 +117,10 @@ const Home: React.FC = () => {
 
           <IonRow className="mt-4">
             <IonCol size="12" className="px-3">
-              <h5 className="font-w600 fs-16 text-dark">Próximos turnos</h5>
+              <h5 className="font-w600 fs-16 text-dark">
+                  Próximos turnos
+                  <FontAwesomeIcon icon={faAngleRight} className="mr-0 float-right text-info" />
+            </h5>
               <IonSlides pager={false} options={slideOpts}>
                 <IonSlide>
                   <IonCard className="m-0 card-slide slide-mini">
@@ -211,6 +210,7 @@ const Home: React.FC = () => {
             <IonCol size="12" className="px-3">
               <h5 className="font-w600 fs-16 text-dark">
                 Mis afiliados favoritos
+                <FontAwesomeIcon icon={faAngleRight} className="mr-0 float-right text-info" />
               </h5>
 
               <IonCard className="m-0 card-slide" style={{ height: "auto" }}>

@@ -52,8 +52,12 @@
 .icon-menu{
     background: transparent;
 }
+.bg-info-alt {
+    background: rgb(14,56,92);
+    background: linear-gradient(240deg, rgba(14,56,92,1) 0%, rgba(22,111,155,1) 35%, rgba(22,150,178,1) 100%);
+}
 .icon-menu.active{
-    background: linear-gradient(to top, #124470, #6090bb);
+    background: linear-gradient(0deg, rgba(7,57,113,1) 0%, rgba(9,101,138,1) 35%, rgba(25,165,174,1) 100%);
     color: #ffffff;
     border-radius: 0.5rem;
     font-size: 0.7rem;
