@@ -103,7 +103,7 @@ const Home: React.FC = () => {
           <IonRow className="bg-info-alt pt-3 pb-2 text-white">
             <IonCol size="12" className="px-3 fs-13">
               Lunes, 13 de junio
-              <FontAwesomeIcon icon={faBell} className="mr-0 float-right fs-18" onClick={handelNotificaciones}/>
+              <FontAwesomeIcon icon={faBell} className="mr-0 float-right fs-18" onClick={handelNotificaciones} style={{cursor: "pointer"}}/>
               <div className="fs-20 font-w600 text-white">¡Hola Usuario!</div>
             </IonCol>
             <IonCol size="12" className="px-3 pt-3 mb-2">
@@ -215,8 +215,12 @@ const Home: React.FC = () => {
 
               <IonCard className="m-0 card-slide" style={{ height: "auto" }}>
                 <IonCardContent className="card-content-slide">
-                  <Boxfull title="Centro médico OSDE" imageTitle="./images/osdl.png" iconTop={faHeart} fechaTop="" horaTop="" yearTop="" iconTextoUno="" textoUno="Cll 13a #76-52 - Piso 1" />                  
-                  <Boxfull title="Centro médico OSDE" imageTitle="./images/osdl.png" iconTop={faHeart} fechaTop="" horaTop="" yearTop="" iconTextoUno="" textoUno="Cll 13a #76-52 - Piso 2" />
+                  <Boxfull title="Centro médico OSDE" imageTitle="./images/osdl.png" iconTop={faHeart} 
+                    fechaTop="" horaTop="" yearTop="" iconTextoUno="" textoUno="Cll 13a #76-52 - Piso 1" 
+                    iconTextoDos="" textoDos="" linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" />
+                  <Boxfull title="Centro médico OSDE" imageTitle="./images/osdl.png" iconTop={faHeart} 
+                    fechaTop="" horaTop="" yearTop="" iconTextoUno="" textoUno="Cll 13a #76-52 - Piso 2" 
+                    iconTextoDos="" textoDos="" linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" />
                 </IonCardContent>
               </IonCard>
             </IonCol>

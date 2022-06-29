@@ -64,4 +64,25 @@
     font-weight: 100;
     padding: 0.5rem 0.6rem 0.4rem 0.6rem;
 }
+.header-md::after{
+    background: 0px;
+}
+
+.text-info-light{
+    color: #49a8cf;
+}
+.text-info-dark{
+    color: #073f75;
+}
+.text-gray-medium{
+    color: #a0a0a0;
+}
+.underline{
+    text-decoration: underline;
+}
+.shadow-full{
+    box-shadow: 0px 0px 50px 0px rgb(111 154 191 / 50%);
+    -webkit-box-shadow: 0px 0px 50px 0px rgb(111 154 191 / 50%);
+    -moz-box-shadow: 0px 0px 50px 0px rgba(111,154,191,0.5);
+}
 

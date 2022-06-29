@@ -27,6 +27,7 @@ import {
   ImagenologiaDtls,
   Laboratorio,
   Afiliados,
+  Notificaciones,
 } from "../pages";
 import { Nav } from "../components";
 import { logout } from "../store/action/aut";
@@ -83,6 +84,9 @@ const RutasPrivadas: React.FC = () => {
           </Route>
           <Route exact path="/app/afiliados">
             <Afiliados />
+          </Route>
+          <Route exact path="/app/notificaciones">
+            <Notificaciones />
           </Route>
           <Route exact path="/app">
             <Redirect to="/app/home" />
