@@ -1,24 +1,30 @@
 import {
-  IonContent,
-  IonPage,
-  IonProgressBar,
+  IonGrid,
   IonRow,
   IonCol,
+  IonCard,
+  IonCardContent,
+  IonContent,
+  IonPage,
   IonSearchbar,
-  IonButton,
-  IonHeader,
-  IonIcon,
-  IonTitle,
-  IonToolbar,
+  IonProgressBar,
   useIonViewDidEnter,
 } from "@ionic/react";
 import { arrowBackOutline } from "ionicons/icons";
 import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { Header } from "../../components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHospital,
+  faUserDoctor,
+  faSliders
+} from "@fortawesome/free-solid-svg-icons";
+import { Header, Boxfull } from "../../components";
 import { servicesWh } from "../../servicios/servicios";
 import { Card } from "./Card";
-import "./consultas.css";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+import "../../style/tema.css";
 
 const Consultas: React.FC = () => {
   const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
@@ -61,9 +67,10 @@ const Consultas: React.FC = () => {
     };
   }, []);
 
+
   if (load) {
     return (
-      <IonPage>
+      <IonPage className="fondo">
         <Header title="Consultas" isbotton={true} isBuger={false} />
         <IonContent fullscreen>
           <IonProgressBar type="indeterminate" color="success"></IonProgressBar>
@@ -71,51 +78,42 @@ const Consultas: React.FC = () => {
       </IonPage>
     );
   }
-  console.log(data);
+
   return (
-    <IonPage className="page">
-      <IonHeader className="ion-no-border">
-        <IonToolbar>
-          <IonTitle
-            style={{
-              color: "#293f76",
-              fontSize: "18px",
-            }}
-          >
-            Consultas
-          </IonTitle>
-          <IonButton
-            slot="start"
-            routerLink="/app/home"
-            color="light"
-            fill="clear"
-          >
-            <IonIcon icon={arrowBackOutline} style={{ color: "black" }} />
-          </IonButton>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <div className="searchContainer">
-          <IonSearchbar
-            value={searchTerm}
-            onIonChange={(e) => setSearchTerm(e.detail.value!)}
-            placeholder="Buscar..."
-            slot="end"
-          />
-        </div>
-        <IonRow>
-          <IonCol size="12">
-            {data.filter(pacsearch(searchTerm)).map((item: any, index: any) => (
-              <Card item={item} key={index} />
-            ))}
-          </IonCol>
-        </IonRow>
+    <IonPage className="fondo">
+      <Header title="Consultas" isbotton={true} isBuger={false}/>
+
+      <IonContent fullscreen className="bg-light">
+        <IonGrid className="pb-4">
+          <IonRow className="mt-2 px-3">
+            <IonCol size="12" className="pb-3">
+              <div className="searchContainer mt-1 mb-4 d-inline-block" style={{width: "88%"}}>
+                <IonSearchbar
+                  value={searchTerm}
+                  onIonChange={(e) => setSearchTerm(e.detail.value!)}
+                  placeholder="Buscar..."
+                  slot="end"
+                  class="px-0"
+                />
+              </div>
+              <div className="d-inline-block text-right" style={{width: "12%"}}>
+                <Link to="proximas-citas" className="bg-info-alt d-inline-block btn-filter fs-16 btn-shadow">
+                  <FontAwesomeIcon icon={faSliders} className="mr-0 float-right text-white" />
+                </Link>                
+              </div>
+
+              <h5 className="font-w700 fs-15 text-info-dark mb-2">
+                Historial de consultas
+              </h5>
+              {data.filter(pacsearch(searchTerm)).map((item: any, index: any) => (
+                <Card item={item} key={index} />
+              ))}
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );
 };
 
 export default Consultas;
-/*
-routerLink={`/app/consulta/${item.id}/${item.idcentro}`}
-*/

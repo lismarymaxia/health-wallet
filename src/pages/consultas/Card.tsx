@@ -6,6 +6,12 @@ import {
   IonCardContent,
   IonButton,
 } from "@ionic/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHospital,
+  faUserDoctor,
+} from "@fortawesome/free-solid-svg-icons";
+import { Boxfull } from "../../components";
 import React, { useState } from "react";
 import "./consultas.css";
 
@@ -16,21 +22,15 @@ interface ContainerProps {
 export const Card: React.FC<ContainerProps> = ({ item }) => {
   const [transition, setTransition] = useState(false);
   return (
-    <IonCard className="card__consulta card_custon">
-      <IonCardHeader>
-        <IonCardTitle>{item.centroproduccion}</IonCardTitle>
-      </IonCardHeader>
-      <IonCardContent>
-        <div>
-          <IonLabel>
-            <b>Medico</b>: {item.medico}
-          </IonLabel>
-        </div>
-        <div>
-          <IonLabel>
-            <b>Fecha</b>: {item.fecha} {item.hora}
-          </IonLabel>
-        </div>
+    
+    <IonCard className="m-0 mt-2 card-slide shadow-full" style={{ height: "auto" }}>
+      <IonCardContent className="card-content-slide">
+        <Boxfull title={item.centroproduccion} imageTitle="" iconTop="" fechaTop={item.fecha} horaTop={item.hora} 
+          yearTop="" iconTextoUno={faHospital} textoUno="Centro médico OSDE" iconTextoDos={faUserDoctor} 
+          textoDos={item.medico} iconTextoTres="" textoTres="" iconTextoCuatro="" textoCuatro=""  
+          linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" 
+          ir={true} linkIr="detalle-consulta" tipo="" />
+
         <div className="d__flex justify__content__center ">
           <IonButton
             fill="clear"
@@ -40,29 +40,29 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
               setTransition(!transition);
             }}
           >
-            {transition ? "Ocultar" : "Ver mas"}
+            {transition ? "Ocultar" : "ver más"}
           </IonButton>
         </div>
         {transition && (
           <>
             <div>
               <div>
-                <b>Motivo de la visita</b>:{item.motivovisita}
+                <span className="font-w600">Motivo de la visita: </span>{item.motivovisita}
               </div>
               <div>
-                <b>Observaciones del diagnósticos</b>:
+                <span className="font-w600">Observaciones del diagnósticos: </span>
                 {item.observacionesdiagnosticos}
               </div>
             </div>
             <div className="ion-margin-top">
-              <b>Lista de afecciones o diagnósticos:</b>
+              <span className="font-w600">Lista de afecciones o diagnósticos: </span>
             </div>
             {item?.diagnosticos.map((item: any) => (
               <div key={item.id}>
                 <ul className="content__frecuencia">
-                  <li className="item__frecuencia active">Primera vez</li>
-                  <li className="item__frecuencia">Subsecuente</li>
-                  <li className="item__frecuencia">Orient.Diagnóstica</li>
+                  <li className="item__frecuencia fs-13 font-w500 active">Primera vez</li>
+                  <li className="item__frecuencia fs-13 font-w500">Subsecuente</li>
+                  <li className="item__frecuencia fs-13 font-w500">Orient.Diagnóstica</li>
                 </ul>
                 <div>
                   <IonLabel>{item.text}</IonLabel>
@@ -70,17 +70,20 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
               </div>
             ))}
             <div className="ion-margin-top">
-              <b>Tratamientos:</b>
+              <span className="font-w600">Tratamientos:</span>
             </div>
             {item.tratamientos.map((item: any, index: any) => (
               <div key={index}>
                 <div>{item.textmedicamento}</div>
                 <div>
-                  <b>Desde</b>:{item.fechaini} <b>Hasta</b>:{item.fechafin}
+                  <span className="font-w600">Desde: </span>{item.fechaini} 
                 </div>
                 <div>
-                  {item.dosis} <b>cada</b>:{item.cadah}
-                  <b> horas durante:</b>:{item.duracion}
+                  <span className="font-w600">Hasta: </span>{item.fechafin}
+                </div>
+                <div>
+                  {item.dosis} <span className="font-w600">cada </span> {item.cadah}
+                   horas <span className="font-w600">durante </span>{item.duracion}
                 </div>
               </div>
             ))}
@@ -88,5 +91,6 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
         )}
       </IonCardContent>
     </IonCard>
+    
   );
 };

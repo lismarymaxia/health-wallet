@@ -29,7 +29,8 @@ import {
   Afiliados,
   Notificaciones,
   ProximasCitas,
-  DetalleCita
+  DetalleCita,
+  DetalleConsulta
 } from "../pages";
 import { Nav } from "../components";
 import { logout } from "../store/action/aut";
@@ -95,6 +96,9 @@ const RutasPrivadas: React.FC = () => {
           </Route>
           <Route exact path="/app/detalle-cita">
             <DetalleCita />
+          </Route>
+          <Route exact path="/app/detalle-consulta">
+            <DetalleConsulta />
           </Route>
           <Route exact path="/app">
             <Redirect to="/app/home" />

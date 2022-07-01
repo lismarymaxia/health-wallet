@@ -11,9 +11,6 @@ import {
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleRight,
-  faShareNodes,
-  faStethoscope,
   faHospital,
   faUserDoctor,
   faSliders

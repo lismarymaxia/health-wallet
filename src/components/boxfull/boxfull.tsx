@@ -137,7 +137,7 @@ import { Link } from "react-router-dom";
 
           {ir && (
             <div className="mr-0 float-right" style={{marginTop: "-12px"}}>
-              <Link to="detalle-cita">
+              <Link to={linkIr}>
                 <FontAwesomeIcon icon={faAngleRight} className="text-info-dark" />
               </Link>
               </div>
