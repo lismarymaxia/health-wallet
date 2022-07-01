@@ -11,6 +11,8 @@ import { Home } from "./home";
 import { Registro } from "./registro";
 import { Afiliados } from "./afiliados";
 import { Notificaciones } from "./notificaciones";
+import { ProximasCitas } from "./proximasCitas";
+import { DetalleCita } from "./detalleCita";
 
 export {
   Login,
@@ -28,5 +30,7 @@ export {
   Home,
   Registro,
   Afiliados,
-  Notificaciones
+  Notificaciones,
+  ProximasCitas,
+  DetalleCita
 };

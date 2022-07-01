@@ -2,6 +2,9 @@ import {
   IonImg
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleRight
+} from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
   
@@ -16,16 +19,24 @@ import { Link } from "react-router-dom";
     textoUno: string;
     iconTextoDos: any;
     textoDos: string;
+    iconTextoTres: any;
+    textoTres: string;
+    iconTextoCuatro: any;
+    textoCuatro: string;
     linkBottomLeft: string;
     linkBottomRight: string;
     textLinkBottomLeft: string;
     textLinkBottomRight: string;
+    ir: boolean;
+    linkIr: string;
+    tipo: string
 
-  }> = ({ title, imageTitle, iconTop, fechaTop, horaTop, yearTop, iconTextoUno, textoUno, 
-          iconTextoDos, textoDos, linkBottomLeft, linkBottomRight, textLinkBottomLeft, textLinkBottomRight }) => {
+  }> = ({ title, imageTitle, iconTop, fechaTop, horaTop, yearTop, iconTextoUno, textoUno, iconTextoDos, textoDos, 
+          iconTextoTres, textoTres, iconTextoCuatro, textoCuatro, linkBottomLeft, linkBottomRight, 
+          textLinkBottomLeft, textLinkBottomRight, ir, linkIr, tipo }) => {
     const history = useHistory(); 
     const handelClick=()=>{
-      history.push("/app/afiliados");
+      //history.push("/app/afiliados");
     }
     return (
       <>
@@ -46,7 +57,7 @@ import { Link } from "react-router-dom";
               }
 
               {horaTop !== '' && 
-                <span className="mr-0 w-100 float-right text-right">
+                <span className="mr-0 box-grey float-right text-right">
                   {horaTop}
                 </span>
               }
@@ -55,7 +66,7 @@ import { Link } from "react-router-dom";
 
           
 
-         <div className={imageTitle !== '' ? `fs-15 font-w600 text-info mt-1` : `fs-15 font-w600 text-info` }>
+         <div className={imageTitle !== '' ? `fs-15 font-w600 text-info mt-2` : `fs-15 font-w600 text-info` }>
             {title}
             <FontAwesomeIcon
               icon={iconTop}
@@ -63,21 +74,43 @@ import { Link } from "react-router-dom";
             />
           </div>
           <div>
-            <p className="mb-0 mt-1 fs-12">
+            <p className="mb-0 mt-1 fs-12 d-flex">
               {iconTextoUno !== '' && 
-                <FontAwesomeIcon icon={iconTextoUno} className="mr-1 text-info-light" />
+                <FontAwesomeIcon icon={iconTextoUno} className="text-info-light icon-box-details" />
               }
-              {textoUno}
+              <span className="ml-2">{textoUno}</span>
             </p>
           </div>
 
           {textoDos !== '' && 
             <div>
-              <p className="mb-0 mt-2 fs-12">
+              <p className="mb-0 mt-2 fs-12 d-flex">
                 {iconTextoDos !== '' && 
-                  <FontAwesomeIcon icon={iconTextoDos} className="mr-1 text-info-light" />
+                  <FontAwesomeIcon icon={iconTextoDos} className="text-info-light icon-box-details" />
                 }
-                {textoDos}
+                <span className="ml-2">{textoDos}</span>
+              </p>
+            </div>
+          }
+
+          {textoTres !== '' && 
+            <div>
+              <p className="mb-0 mt-2 fs-12 d-flex">
+                {iconTextoTres !== '' && 
+                  <FontAwesomeIcon icon={iconTextoTres} className="text-info-light icon-box-details" />
+                }
+                <span className="ml-2">{textoTres}</span>
+              </p>
+            </div>
+          }
+
+          {textoCuatro !== '' && 
+            <div>
+              <p className="mb-0 mt-2 fs-12 d-flex">
+                {iconTextoCuatro !== '' && 
+                  <FontAwesomeIcon icon={iconTextoCuatro} className="text-info-light icon-box-details" />
+                }
+                <span className="ml-2">{textoCuatro}</span>
               </p>
             </div>
           }
@@ -101,6 +134,20 @@ import { Link } from "react-router-dom";
               </p>
             </div>
           }
+
+          {ir && (
+            <div className="mr-0 float-right" style={{marginTop: "-12px"}}>
+              <Link to="detalle-cita">
+                <FontAwesomeIcon icon={faAngleRight} className="text-info-dark" />
+              </Link>
+              </div>
+          )}
+
+          {tipo && (
+            <p className="mb-0 fs-12 float-right text-info-light">
+              {tipo}
+            </p>
+          )}
           
         </div>
       </>

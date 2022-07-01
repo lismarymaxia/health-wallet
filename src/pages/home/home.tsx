@@ -36,6 +36,7 @@ import { useSelector } from "react-redux";
 import { servicesWh } from "../../servicios/servicios";
 import { Header, Boxfull } from "../../components";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import "./home.css";
 import "../../style/tema.css";
 
@@ -118,8 +119,10 @@ const Home: React.FC = () => {
           <IonRow className="mt-4">
             <IonCol size="12" className="px-3">
               <h5 className="font-w600 fs-16 text-dark">
-                  Próximos turnos
-                  <FontAwesomeIcon icon={faAngleRight} className="mr-0 float-right text-info" />
+                  Próximas citas
+                  <Link to="proximas-citas" className="text-info-light">
+                    <FontAwesomeIcon icon={faAngleRight} className="mr-0 float-right text-info" />
+                  </Link>
             </h5>
               <IonSlides pager={false} options={slideOpts}>
                 <IonSlide>
@@ -217,10 +220,14 @@ const Home: React.FC = () => {
                 <IonCardContent className="card-content-slide">
                   <Boxfull title="Centro médico OSDE" imageTitle="./images/osdl.png" iconTop={faHeart} 
                     fechaTop="" horaTop="" yearTop="" iconTextoUno="" textoUno="Cll 13a #76-52 - Piso 1" 
-                    iconTextoDos="" textoDos="" linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" />
+                    iconTextoDos="" textoDos="" iconTextoTres="" textoTres="" iconTextoCuatro="" textoCuatro="" 
+                    linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" 
+                    ir={false} linkIr="" tipo="" />
                   <Boxfull title="Centro médico OSDE" imageTitle="./images/osdl.png" iconTop={faHeart} 
                     fechaTop="" horaTop="" yearTop="" iconTextoUno="" textoUno="Cll 13a #76-52 - Piso 2" 
-                    iconTextoDos="" textoDos="" linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" />
+                    iconTextoDos="" textoDos="" iconTextoTres="" textoTres="" iconTextoCuatro="" textoCuatro="" 
+                    linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" 
+                    ir={false} linkIr="" tipo="" />
                 </IonCardContent>
               </IonCard>
             </IonCol>

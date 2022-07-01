@@ -11,13 +11,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleRight,
+  faHospital,
   faShareNodes,
   faStethoscope
 } from "@fortawesome/free-solid-svg-icons";
 import { Header, Boxfull } from "../../components";
 import { useHistory } from "react-router";
 import "../../style/tema.css";
-import "./notificaciones.css";
 
 const Notificaciones = () => { 
 
@@ -35,9 +35,10 @@ const Notificaciones = () => {
               <IonCard className="m-0 card-slide shadow-full" style={{ height: "auto" }}>
                 <IonCardContent className="card-content-slide">
                   <Boxfull title="Turno médico" imageTitle="" iconTop="" fechaTop="20 Jun" horaTop="09:00" 
-                    yearTop="" iconTextoUno={faStethoscope} textoUno="Odontología" iconTextoDos={faStethoscope} 
-                    textoDos="CSS - Policlínica Dr. Roberto" linkBottomLeft="" linkBottomRight=""
-                    textLinkBottomLeft="" textLinkBottomRight="" />
+                    yearTop="" iconTextoUno={faStethoscope} textoUno="Odontología" iconTextoDos={faHospital} 
+                    textoDos="CSS - Policlínica Dr. Roberto" iconTextoTres="" textoTres="" iconTextoCuatro="" textoCuatro="" 
+                    linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" 
+                    ir={true} linkIr="#" tipo="" />
                 </IonCardContent>
               </IonCard>
             </IonCol>
@@ -50,8 +51,9 @@ const Notificaciones = () => {
                 <IonCardContent className="card-content-slide">
                   <Boxfull title="Resultado - Imágenes" imageTitle="" iconTop={faShareNodes} fechaTop="" 
                     horaTop="" yearTop="" iconTextoUno="" textoUno="Rx - Torax PA o AP" iconTextoDos="" 
-                    textoDos="Solicitado: 8 Sep 2020" linkBottomLeft="#" linkBottomRight="#"
-                    textLinkBottomLeft="Ver informe" textLinkBottomRight="Visualizar imagen" />
+                    textoDos="Solicitado: 8 Sep 2020" iconTextoTres="" textoTres="" iconTextoCuatro="" textoCuatro="" 
+                    linkBottomLeft="#" linkBottomRight="#" textLinkBottomLeft="Ver informe" textLinkBottomRight="Visualizar imagen" 
+                    ir={false} linkIr="" tipo="" />
                 </IonCardContent>
               </IonCard>
             </IonCol>

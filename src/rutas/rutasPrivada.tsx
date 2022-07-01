@@ -28,6 +28,8 @@ import {
   Laboratorio,
   Afiliados,
   Notificaciones,
+  ProximasCitas,
+  DetalleCita
 } from "../pages";
 import { Nav } from "../components";
 import { logout } from "../store/action/aut";
@@ -88,6 +90,12 @@ const RutasPrivadas: React.FC = () => {
           <Route exact path="/app/notificaciones">
             <Notificaciones />
           </Route>
+          <Route exact path="/app/proximas-citas">
+            <ProximasCitas />
+          </Route>
+          <Route exact path="/app/detalle-cita">
+            <DetalleCita />
+          </Route>
           <Route exact path="/app">
             <Redirect to="/app/home" />
           </Route>
@@ -100,28 +108,28 @@ const RutasPrivadas: React.FC = () => {
             </div>
           </IonTabButton>
 
-          <IonTabButton tab="tab1" href="/app/consultas" className="text-info">
+          <IonTabButton tab="tab2" href="/app/consultas" className="text-info">
             <div className="icon-menu">
               <FontAwesomeIcon icon={faStethoscope} className="fs-18 w-100" />
               Consultas
             </div>
           </IonTabButton>
 
-          <IonTabButton tab="tab1" href="/app/estudios" className="text-info">
+          <IonTabButton tab="tab3" href="/app/estudios" className="text-info">
             <div className="icon-menu">
               <FontAwesomeIcon icon={faClipboardList} className="fs-18 w-100" />
               Estudios
             </div>
           </IonTabButton>
 
-          <IonTabButton tab="tab1" href="/app/afiliados" className="text-info">
+          <IonTabButton tab="tab4" href="/app/afiliados" className="text-info">
             <div className="icon-menu">
               <FontAwesomeIcon icon={faDiagramProject} className="fs-18 w-100" />
               Afiliados
             </div>
           </IonTabButton>
 
-          <IonTabButton tab="tab1" href="/app/perfil" className="text-info">
+          <IonTabButton tab="tab5" href="/app/perfil" className="text-info">
             <div className="icon-menu">
               <FontAwesomeIcon icon={faUser} className="fs-18 w-100" />
               Perfil
@@ -138,15 +146,3 @@ const RutasPrivadas: React.FC = () => {
   );
 };
 export default RutasPrivadas;
-/*
-<IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/app/afiliados">
-            <IonIcon icon={peopleSharp} />
-            Afiliados
-          </IonTabButton>
-
-          <IonTabButton tab="tab3" onClick={handelLogout}>
-            <IonIcon icon={logOutSharp} />
-            Cerrar sesión
-          </IonTabButton>
-        </IonTabBar> */
