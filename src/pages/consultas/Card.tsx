@@ -25,8 +25,8 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
     
     <IonCard className="m-0 mt-2 card-slide shadow-full" style={{ height: "auto" }}>
       <IonCardContent className="card-content-slide">
-        <Boxfull title={item.centroproduccion} imageTitle="" iconTop="" fechaTop={item.fecha} horaTop={item.hora} 
-          yearTop="" iconTextoUno={faHospital} textoUno="Centro médico OSDE" iconTextoDos={faUserDoctor} 
+        <Boxfull title={item.centroproduccion} imageTitle="" iconTop="" fechaTop={item.fecha} horaTop="" 
+          yearTop={item.year} iconTextoUno={faHospital} textoUno="Centro médico OSDE" iconTextoDos={faUserDoctor} 
           textoDos={item.medico} iconTextoTres="" textoTres="" iconTextoCuatro="" textoCuatro=""  
           linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" 
           ir={true} linkIr="detalle-consulta" tipo="" />
@@ -46,47 +46,47 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
         {transition && (
           <>
             <div>
-              <div>
-                <span className="font-w600">Motivo de la visita: </span>{item.motivovisita}
+              <div className="mb-3">
+                <span className="fs-14 font-w600 d-block">Motivo de la visita: </span>{item.motivovisita}
               </div>
-              <div>
-                <span className="font-w600">Observaciones del diagnósticos: </span>
+              <div className="mb-3">
+                <span className="fs-14 font-w600 d-block">Observaciones del diagnósticos: </span>
                 {item.observacionesdiagnosticos}
               </div>
             </div>
-            <div className="ion-margin-top">
-              <span className="font-w600">Lista de afecciones o diagnósticos: </span>
-            </div>
-            {item?.diagnosticos.map((item: any) => (
-              <div key={item.id}>
-                <ul className="content__frecuencia">
-                  <li className="item__frecuencia fs-13 font-w500 active">Primera vez</li>
-                  <li className="item__frecuencia fs-13 font-w500">Subsecuente</li>
-                  <li className="item__frecuencia fs-13 font-w500">Orient.Diagnóstica</li>
-                </ul>
-                <div>
-                  <IonLabel>{item.text}</IonLabel>
+            <div className="mb-3">
+              <span className="fs-14 font-w600 d-block">Lista de afecciones o diagnósticos: </span>
+              {item?.diagnosticos.map((item: any) => (
+                <div key={item.id}>
+                  <ul className="content__frecuencia">
+                    <li className="item__frecuencia fs-13 font-w500 active">Primera vez</li>
+                    <li className="item__frecuencia fs-13 font-w500">Subsecuente</li>
+                    <li className="item__frecuencia fs-13 font-w500">Orient.Diagnóstica</li>
+                  </ul>
+                  <div>
+                    <IonLabel>{item.text}</IonLabel>
+                  </div>
                 </div>
-              </div>
-            ))}
-            <div className="ion-margin-top">
-              <span className="font-w600">Tratamientos:</span>
-            </div>
-            {item.tratamientos.map((item: any, index: any) => (
-              <div key={index}>
-                <div>{item.textmedicamento}</div>
-                <div>
-                  <span className="font-w600">Desde: </span>{item.fechaini} 
+              ))}
+            </div>            
+            <div className="mb-3">
+              <span className="fs-14 font-w600 d-block">Tratamientos:</span>
+              {item.tratamientos.map((item: any, index: any) => (
+                <div key={index}>
+                  <div>{item.textmedicamento}</div>
+                  <div>
+                    <span className="fs-13 font-w600">Desde: </span>{item.fechaini} 
+                  </div>
+                  <div>
+                    <span className="fs-13 font-w600">Hasta: </span>{item.fechafin}
+                  </div>
+                  <div>
+                    {item.dosis} <span className="fs-13 font-w600">cada </span> {item.cadah}
+                    horas <span className="fs-13 font-w600">durante </span>{item.duracion}
+                  </div>
                 </div>
-                <div>
-                  <span className="font-w600">Hasta: </span>{item.fechafin}
-                </div>
-                <div>
-                  {item.dosis} <span className="font-w600">cada </span> {item.cadah}
-                   horas <span className="font-w600">durante </span>{item.duracion}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>            
           </>
         )}
       </IonCardContent>

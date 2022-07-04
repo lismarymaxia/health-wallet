@@ -61,6 +61,12 @@ import { Link } from "react-router-dom";
                   {horaTop}
                 </span>
               }
+
+              {yearTop !== '' && 
+                <span className="mr-0 float-right text-right fs-12">
+                  {yearTop}
+                </span>
+              }
             </p>
           }
 

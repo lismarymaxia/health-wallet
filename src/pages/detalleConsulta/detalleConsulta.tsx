@@ -34,7 +34,7 @@ const DetalleConsulta = () => {
               </h5>
               <IonCard className="m-0 card-slide shadow-full" style={{ height: "auto" }}>
                 <IonCardContent className="card-content-slide">
-                  <Boxfull title="Odontología" imageTitle="" iconTop="" fechaTop="20 Jun" horaTop="09:00" yearTop="" 
+                  <Boxfull title="Odontología" imageTitle="" iconTop="" fechaTop="20 Jun" horaTop="" yearTop="2021" 
                     iconTextoUno={faHospital} textoUno="CSS - Policlínica Dr. Roberto" 
                     iconTextoDos={faUserDoctor} textoDos="Dr. Rolando Pacheco" 
                     iconTextoTres={faLocationDot} textoTres="Edificio The Panamá Clinic, Torre B Piso 22, Consultorio 2200" 
