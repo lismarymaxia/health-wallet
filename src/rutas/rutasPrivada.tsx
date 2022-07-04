@@ -34,7 +34,6 @@ import {
 } from "../pages";
 import { Nav } from "../components";
 import { useSelector } from "react-redux";
-import { rutasActivas } from "../helpers";
 import "../style/tema.css";
 setupIonicReact();
 
@@ -50,6 +49,7 @@ const RutasPrivadas: React.FC = () => {
   }, [history, isAuth]);
   const location = useLocation();
   const { pathname } = location;
+
   const active = (ruta: string) => {
     if (ruta === pathname) {
       return "active";
