@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
 import {
+  IonIcon,
   IonRouterOutlet,
   IonTabBar,
+  IonTabButton,
   IonTabs,
   setupIonicReact,
 } from "@ionic/react";
@@ -22,6 +24,7 @@ import {
 import { Nav } from "../components";
 import { logout } from "../store/action/aut";
 import { useDispatch, useSelector } from "react-redux";
+import { peopleSharp, logOutSharp } from "ionicons/icons";
 setupIonicReact();
 
 const RutasPrivadas: React.FC = () => {
@@ -78,7 +81,17 @@ const RutasPrivadas: React.FC = () => {
             <Redirect to="/app/home" />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar slot="bottom"></IonTabBar>
+        <IonTabBar slot="bottom">
+          <IonTabButton tab="tab1" href="/app/afiliados">
+            <IonIcon icon={peopleSharp} />
+            Afiliados
+          </IonTabButton>
+
+          <IonTabButton tab="tab3" onClick={handelLogout}>
+            <IonIcon icon={logOutSharp} />
+            Cerrar sesión
+          </IonTabButton>
+        </IonTabBar>
       </IonTabs>
     </>
   );
