@@ -4,7 +4,6 @@ import {
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
-  IonIcon,
   IonTabs,
   setupIonicReact,
 } from "@ionic/react";
@@ -14,7 +13,7 @@ import {
   faUser,
   faStethoscope,
   faClipboardList,
-  faDiagramProject
+  faDiagramProject,
 } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
 import {
@@ -30,18 +29,16 @@ import {
   Notificaciones,
   ProximasCitas,
   DetalleCita,
-  DetalleConsulta
+  DetalleConsulta,
 } from "../pages";
 import { Nav } from "../components";
-import { logout } from "../store/action/aut";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "../style/tema.css";
 setupIonicReact();
 
 const RutasPrivadas: React.FC = () => {
   const isAuth: any = useSelector<any>((state) => state.reducerAuth.stdAuth);
 
-  const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
@@ -49,11 +46,6 @@ const RutasPrivadas: React.FC = () => {
       history.replace("/");
     }
   }, [history, isAuth]);
-
-  const handelLogout = (e: any) => {
-    console.log("clic");
-    dispatch(logout());
-  };
 
   return (
     <>
@@ -75,7 +67,6 @@ const RutasPrivadas: React.FC = () => {
           <Route exact path="/app/consulta/:idcnst/:idcntr">
             <Consulta />
           </Route>
-
           <Route path="/app/imagenologia">
             <Imagenologia />
           </Route>
@@ -97,7 +88,7 @@ const RutasPrivadas: React.FC = () => {
           <Route exact path="/app/detalle-cita">
             <DetalleCita />
           </Route>
-          <Route exact path="/app/detalle-consulta">
+          <Route exact path="/app/detalle-consulta/:id">
             <DetalleConsulta />
           </Route>
           <Route exact path="/app">
@@ -128,7 +119,10 @@ const RutasPrivadas: React.FC = () => {
 
           <IonTabButton tab="tab4" href="/app/afiliados" className="text-info">
             <div className="icon-menu">
-              <FontAwesomeIcon icon={faDiagramProject} className="fs-18 w-100" />
+              <FontAwesomeIcon
+                icon={faDiagramProject}
+                className="fs-18 w-100"
+              />
               Afiliados
             </div>
           </IonTabButton>
