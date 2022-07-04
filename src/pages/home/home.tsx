@@ -7,14 +7,7 @@ import {
   IonCardContent,
   IonContent,
   IonPage,
-  IonIcon,
   IonImg,
-  IonButton,
-  IonAccordion,
-  IonAccordionGroup,
-  IonItem,
-  IonLabel,
-  IonList,
   useIonViewDidEnter,
   IonSlide,
   IonSlides,
@@ -24,27 +17,20 @@ import {
   faAngleRight,
   faBell,
   faHeart,
-  faShareNodes,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  personSharp,
-  pulseSharp,
-  alertCircleSharp,
-  archiveSharp,
-} from "ionicons/icons";
 import { useSelector } from "react-redux";
 import { servicesWh } from "../../servicios/servicios";
-import { Header, Boxfull } from "../../components";
+import { Boxfull } from "../../components";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import "./home.css";
 import "../../style/tema.css";
 
 const Home: React.FC = () => {
-  const history = useHistory(); 
-  const handelNotificaciones=()=>{
+  const history = useHistory();
+  const handelNotificaciones = () => {
     history.push("/app/notificaciones");
-  }
+  };
   const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
   const slideOpts = {
     initialSlide: 0,
@@ -66,7 +52,6 @@ const Home: React.FC = () => {
     edad: "",
     tiposangre: "",
   });
-  const { nombre, sexo, fechanacimiento, edad, tiposangre } = data;
 
   useIonViewDidEnter(() => {
     servicesWh
@@ -104,7 +89,12 @@ const Home: React.FC = () => {
           <IonRow className="bg-info-alt pt-3 pb-2 text-white">
             <IonCol size="12" className="px-3 fs-13">
               Lunes, 13 de junio
-              <FontAwesomeIcon icon={faBell} className="mr-0 float-right fs-18" onClick={handelNotificaciones} style={{cursor: "pointer"}}/>
+              <FontAwesomeIcon
+                icon={faBell}
+                className="mr-0 float-right fs-18"
+                onClick={handelNotificaciones}
+                style={{ cursor: "pointer" }}
+              />
               <div className="fs-20 font-w600 text-white">¡Hola Usuario!</div>
             </IonCol>
             <IonCol size="12" className="px-3 pt-3 mb-2">
@@ -119,11 +109,14 @@ const Home: React.FC = () => {
           <IonRow className="mt-4">
             <IonCol size="12" className="px-3">
               <h5 className="font-w600 fs-16 text-dark">
-                  Próximas citas
-                  <Link to="proximas-citas" className="text-info-light">
-                    <FontAwesomeIcon icon={faAngleRight} className="mr-0 float-right text-info" />
-                  </Link>
-            </h5>
+                Próximas citas
+                <Link to="proximas-citas" className="text-info-light">
+                  <FontAwesomeIcon
+                    icon={faAngleRight}
+                    className="mr-0 float-right text-info"
+                  />
+                </Link>
+              </h5>
               <IonSlides pager={false} options={slideOpts}>
                 <IonSlide>
                   <IonCard className="m-0 card-slide slide-mini">
@@ -131,12 +124,14 @@ const Home: React.FC = () => {
                       <div className="fs-23 font-w800 d-inline text-info">
                         15 Jun
                       </div>
-                      <div className="float-right d-inline box-grey">
-                        17:30
-                      </div>
+                      <div className="float-right d-inline box-grey">17:30</div>
                       <div>
-                        <p className="mb-0 fs-15 font-w400 text-dark">Traumatología</p>
-                        <p className="mb-0 fs-12 text-dark">Dr. Juan Fernando</p>
+                        <p className="mb-0 fs-15 font-w400 text-dark">
+                          Traumatología
+                        </p>
+                        <p className="mb-0 fs-12 text-dark">
+                          Dr. Juan Fernando
+                        </p>
                       </div>
                     </IonCardContent>
                   </IonCard>{" "}
@@ -147,12 +142,14 @@ const Home: React.FC = () => {
                       <div className="fs-23 font-w800 d-inline text-info">
                         16 Jun
                       </div>
-                      <div className="float-right d-inline box-grey">
-                        09:30
-                      </div>
+                      <div className="float-right d-inline box-grey">09:30</div>
                       <div>
-                        <p className="mb-0 fs-16 font-w400 text-dark">Odontología</p>
-                        <p className="mb-0 fs-12 text-dark">Dra. Maria Camila</p>
+                        <p className="mb-0 fs-16 font-w400 text-dark">
+                          Odontología
+                        </p>
+                        <p className="mb-0 fs-12 text-dark">
+                          Dra. Maria Camila
+                        </p>
                       </div>
                     </IonCardContent>
                   </IonCard>{" "}
@@ -163,12 +160,14 @@ const Home: React.FC = () => {
                       <div className="fs-23 font-w800 d-inline text-info">
                         17 Jun
                       </div>
-                      <div className="float-right d-inline box-grey">
-                        17:30
-                      </div>
+                      <div className="float-right d-inline box-grey">17:30</div>
                       <div>
-                        <p className="mb-0 fs-16 font-w400 text-dark">Traumatología</p>
-                        <p className="mb-0 fs-12 text-dark">Dr. Juan Fernando</p>
+                        <p className="mb-0 fs-16 font-w400 text-dark">
+                          Traumatología
+                        </p>
+                        <p className="mb-0 fs-12 text-dark">
+                          Dr. Juan Fernando
+                        </p>
                       </div>
                     </IonCardContent>
                   </IonCard>{" "}
@@ -179,12 +178,14 @@ const Home: React.FC = () => {
                       <div className="fs-23 font-w800 d-inline text-info">
                         18 Jun
                       </div>
-                      <div className="float-right d-inline box-grey">
-                        16:30
-                      </div>
+                      <div className="float-right d-inline box-grey">16:30</div>
                       <div>
-                        <p className="mb-0 fs-16 font-w400 text-dark">Traumatología 2</p>
-                        <p className="mb-0 fs-12 text-dark">Dr. Juan Fernando 2</p>
+                        <p className="mb-0 fs-16 font-w400 text-dark">
+                          Traumatología 2
+                        </p>
+                        <p className="mb-0 fs-12 text-dark">
+                          Dr. Juan Fernando 2
+                        </p>
                       </div>
                     </IonCardContent>
                   </IonCard>{" "}
@@ -195,12 +196,14 @@ const Home: React.FC = () => {
                       <div className="fs-23 font-w800 d-inline text-info">
                         19 Jun
                       </div>
-                      <div className="float-right d-inline box-grey">
-                        16:30
-                      </div>
+                      <div className="float-right d-inline box-grey">16:30</div>
                       <div>
-                        <p className="mb-0 fs-16 font-w400 text-dark">Traumatología 2</p>
-                        <p className="mb-0 fs-12 text-dark">Dr. Juan Fernando 2</p>
+                        <p className="mb-0 fs-16 font-w400 text-dark">
+                          Traumatología 2
+                        </p>
+                        <p className="mb-0 fs-12 text-dark">
+                          Dr. Juan Fernando 2
+                        </p>
                       </div>
                     </IonCardContent>
                   </IonCard>{" "}
@@ -213,21 +216,60 @@ const Home: React.FC = () => {
             <IonCol size="12" className="px-3">
               <h5 className="font-w600 fs-16 text-dark">
                 Mis afiliados favoritos
-                <FontAwesomeIcon icon={faAngleRight} className="mr-0 float-right text-info" />
+                <FontAwesomeIcon
+                  icon={faAngleRight}
+                  className="mr-0 float-right text-info"
+                />
               </h5>
 
               <IonCard className="m-0 card-slide" style={{ height: "auto" }}>
                 <IonCardContent className="card-content-slide">
-                  <Boxfull title="Centro médico OSDE" imageTitle="./images/osdl.png" iconTop={faHeart} 
-                    fechaTop="" horaTop="" yearTop="" iconTextoUno="" textoUno="Cll 13a #76-52 - Piso 1" 
-                    iconTextoDos="" textoDos="" iconTextoTres="" textoTres="" iconTextoCuatro="" textoCuatro="" 
-                    linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" 
-                    ir={false} linkIr="" tipo="" />
-                  <Boxfull title="Centro médico OSDE" imageTitle="./images/osdl.png" iconTop={faHeart} 
-                    fechaTop="" horaTop="" yearTop="" iconTextoUno="" textoUno="Cll 13a #76-52 - Piso 2" 
-                    iconTextoDos="" textoDos="" iconTextoTres="" textoTres="" iconTextoCuatro="" textoCuatro="" 
-                    linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" 
-                    ir={false} linkIr="" tipo="" />
+                  <Boxfull
+                    title="Centro médico OSDE"
+                    imageTitle="./images/osdl.png"
+                    iconTop={faHeart}
+                    fechaTop=""
+                    horaTop=""
+                    yearTop=""
+                    iconTextoUno=""
+                    textoUno="Cll 13a #76-52 - Piso 1"
+                    iconTextoDos=""
+                    textoDos=""
+                    iconTextoTres=""
+                    textoTres=""
+                    iconTextoCuatro=""
+                    textoCuatro=""
+                    linkBottomLeft=""
+                    linkBottomRight=""
+                    textLinkBottomLeft=""
+                    textLinkBottomRight=""
+                    ir={false}
+                    linkIr=""
+                    tipo=""
+                  />
+                  <Boxfull
+                    title="Centro médico OSDE"
+                    imageTitle="./images/osdl.png"
+                    iconTop={faHeart}
+                    fechaTop=""
+                    horaTop=""
+                    yearTop=""
+                    iconTextoUno=""
+                    textoUno="Cll 13a #76-52 - Piso 2"
+                    iconTextoDos=""
+                    textoDos=""
+                    iconTextoTres=""
+                    textoTres=""
+                    iconTextoCuatro=""
+                    textoCuatro=""
+                    linkBottomLeft=""
+                    linkBottomRight=""
+                    textLinkBottomLeft=""
+                    textLinkBottomRight=""
+                    ir={false}
+                    linkIr=""
+                    tipo=""
+                  />
                 </IonCardContent>
               </IonCard>
             </IonCol>
