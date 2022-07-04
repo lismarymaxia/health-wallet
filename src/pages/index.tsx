@@ -10,6 +10,7 @@ import { Vacunas } from "./vacunas";
 import { Home } from "./home";
 import { Registro } from "./registro";
 import { Afiliados } from "./afiliados";
+import { Perfil } from "./perfil";
 import { Notificaciones } from "./notificaciones";
 import { ProximasCitas } from "./proximasCitas";
 import { DetalleCita } from "./detalleCita";
@@ -30,6 +31,7 @@ export {
   Home,
   Registro,
   Afiliados,
+  Perfil,
   Notificaciones,
   ProximasCitas,
   DetalleCita,

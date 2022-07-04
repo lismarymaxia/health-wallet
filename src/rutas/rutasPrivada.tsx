@@ -26,6 +26,7 @@ import {
   ImagenologiaDtls,
   Laboratorio,
   Afiliados,
+  Perfil,
   Notificaciones,
   ProximasCitas,
   DetalleCita,
@@ -78,6 +79,9 @@ const RutasPrivadas: React.FC = () => {
           </Route>
           <Route exact path="/app/afiliados">
             <Afiliados />
+          </Route>
+          <Route exact path="/app/perfil">
+            <Perfil />
           </Route>
           <Route exact path="/app/notificaciones">
             <Notificaciones />

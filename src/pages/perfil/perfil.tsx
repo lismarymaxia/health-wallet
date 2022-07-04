@@ -20,54 +20,88 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import "../../style/tema.css";
 
-const ProximasCitas = () => { 
+const Perfil = () => { 
 
   return (
     <IonPage className="fondo">
-      {<Header title="Próximas citas" isbotton={true} isBuger={false}/>}
+      <div className="bg-info-alt">
+        <Header title="Tratamientos activos" isbotton={true} isBuger={false}/>
+        <h5 className="font-w700 fs-15 text-info-dark mb-2">
+          Laura Cristina García
+        </h5>
+      </div>
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
           <IonRow className="mt-2 px-3">
             <IonCol size="12" className="pb-3">
-              <div className="searchContainer mt-1 mb-4 d-inline-block" style={{width: "88%"}}>
-                <IonSearchbar
-                  placeholder="Buscar..."
-                  slot="end"
-                  class="px-0"
-                />
-              </div>
-              <div className="d-inline-block text-right" style={{width: "12%"}}>
-                <Link to="proximas-citas" className="bg-info-alt d-inline-block btn-filter fs-16 btn-shadow">
-                  <FontAwesomeIcon icon={faSliders} className="mr-0 float-right text-white" />
-                </Link>                
-              </div>
-
               <IonRow>
-                <IonCol size="6">
-                  <div className="fs-12 mb-3" style={{ lineHeight: "normal"}}>Citas: <span className="d-block text-info-dark fs-12 font-w600">Pendientes 2</span></div>
-                </IonCol>
-                <IonCol size="6" className="text-right">
-                  <div className="fs-12 mb-3" style={{ lineHeight: "normal"}}>Ordenar por: <span className="d-block text-info-dark fs-12 font-w600">Más próximo</span></div>
+                <IonCol size="12">
+                  <h5 className="font-w700 fs-15 text-info-dark mb-2">
+                    Tratamiento transitorio
+                  </h5>
                 </IonCol>
               </IonRow>
 
               <IonCard className="m-0 card-slide shadow-full" style={{ height: "auto" }}>
                 <IonCardContent className="card-content-slide">
-                  <Boxfull title="Traumatología" imageTitle="" iconTop="" fechaTop="15 Jun" horaTop="17:30" 
-                    yearTop="" iconTextoUno={faHospital} textoUno="Centro médico OSDE" iconTextoDos={faUserDoctor} 
-                    textoDos="Juan Fernando" iconTextoTres="" textoTres="" iconTextoCuatro="" textoCuatro=""  
-                    linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" 
-                    ir={true} linkIr="detalle-cita" tipo="" />
+                  <Boxfull 
+                    title="Gastritis crónica, no especificada" 
+                    imageTitle="" 
+                    iconTop="" 
+                    fechaTop="" 
+                    horaTop="" 
+                    yearTop="" 
+                    iconTextoUno="" 
+                    textoUno="Paracetamol (Acetaminofen) 500mg, tableta. 1 cada 6 horas durante 5 días" 
+                    iconTextoDos=""
+                    textoDos="Diagnostico" 
+                    iconTextoTres="" 
+                    textoTres="" 
+                    iconTextoCuatro="" 
+                    textoCuatro=""  
+                    linkBottomLeft="" 
+                    linkBottomRight="" 
+                    textLinkBottomLeft="" 
+                    textLinkBottomRight="" 
+                    ir={false} 
+                    linkIr="detalle-cita" 
+                    tipo="" />
                 </IonCardContent>
               </IonCard>
+
+              <IonRow className="mt-4">
+                <IonCol size="12">
+                  <h5 className="font-w700 fs-15 text-info-dark mb-2">
+                    Tratamiento permanente
+                  </h5>
+                </IonCol>
+              </IonRow>
+
               <IonCard className="m-0 mt-2 card-slide shadow-full" style={{ height: "auto" }}>
                 <IonCardContent className="card-content-slide">
-                  <Boxfull title="Odontología" imageTitle="" iconTop="" fechaTop="20 Jun" horaTop="09:00" 
-                    yearTop="" iconTextoUno={faHospital} textoUno="Centro médico OSDE" iconTextoDos={faUserDoctor} 
-                    textoDos="Juan Fernando" iconTextoTres="" textoTres="" iconTextoCuatro="" textoCuatro="" 
-                    linkBottomLeft="" linkBottomRight="" textLinkBottomLeft="" textLinkBottomRight="" 
-                    ir={true} linkIr="detalle-cita" tipo="" />
+                <Boxfull 
+                    title="Asma" 
+                    imageTitle="" 
+                    iconTop="" 
+                    fechaTop="" 
+                    horaTop="" 
+                    yearTop="" 
+                    iconTextoUno="" 
+                    textoUno="Medicina" 
+                    iconTextoDos=""
+                    textoDos="Diagnostico" 
+                    iconTextoTres="" 
+                    textoTres="" 
+                    iconTextoCuatro="" 
+                    textoCuatro=""  
+                    linkBottomLeft="" 
+                    linkBottomRight="" 
+                    textLinkBottomLeft="" 
+                    textLinkBottomRight="" 
+                    ir={false} 
+                    linkIr="detalle-cita" 
+                    tipo="" />
                 </IonCardContent>
               </IonCard>
             </IonCol>
@@ -78,4 +112,4 @@ const ProximasCitas = () => {
   );
 };
 
-export default ProximasCitas;
+export default Perfil;
