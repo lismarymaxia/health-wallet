@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   IonRouterOutlet,
   IonTabBar,
@@ -47,6 +48,16 @@ const RutasPrivadas: React.FC = () => {
       history.replace("/");
     }
   }, [history, isAuth]);
+  const location = useLocation();
+  const { pathname } = location;
+
+  const active = (ruta: string) => {
+    if (ruta === pathname) {
+      return "active";
+    } else {
+      return "";
+    }
+  };
 
   return (
     <>
@@ -101,28 +112,28 @@ const RutasPrivadas: React.FC = () => {
         </IonRouterOutlet>
         <IonTabBar slot="bottom" className="bar-menu">
           <IonTabButton tab="tab1" href="/app/home" className="text-info">
-            <div className="icon-menu active">
+            <div className={`icon-menu  ${active("/app/home")}`}>
               <FontAwesomeIcon icon={faHome} className="fs-18 w-100" />
               Inicio
             </div>
           </IonTabButton>
 
           <IonTabButton tab="tab2" href="/app/consultas" className="text-info">
-            <div className="icon-menu">
+            <div className={`icon-menu  ${active("/app/consultas")}`}>
               <FontAwesomeIcon icon={faStethoscope} className="fs-18 w-100" />
               Consultas
             </div>
           </IonTabButton>
 
           <IonTabButton tab="tab3" href="/app/estudios" className="text-info">
-            <div className="icon-menu">
+            <div className={`icon-menu  ${active("/app/estudios")}`}>
               <FontAwesomeIcon icon={faClipboardList} className="fs-18 w-100" />
               Estudios
             </div>
           </IonTabButton>
 
           <IonTabButton tab="tab4" href="/app/afiliados" className="text-info">
-            <div className="icon-menu">
+            <div className={`icon-menu  ${active("/app/afiliados")}`}>
               <FontAwesomeIcon
                 icon={faDiagramProject}
                 className="fs-18 w-100"
