@@ -6,7 +6,11 @@ import {
   IonBackButton,
   IonMenuButton,
 } from "@ionic/react";
-import { arrowBack } from "ionicons/icons";
+import { chevronBackOutline } from "ionicons/icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleRight
+} from "@fortawesome/free-solid-svg-icons";
 const Header: React.FC<{
   title: string;
   isbotton: boolean;
@@ -16,17 +20,12 @@ const Header: React.FC<{
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle
-            style={{
-              color: "#293f76",
-              fontSize: "18px",
-            }}
-          >
+          <IonTitle className="fs-16 font-w700 text-info-dark" style={{paddingLeft:"25%"}} >
             {title}
           </IonTitle>
           {isbotton && (
             <IonButtons slot="start">
-              <IonBackButton icon={arrowBack} text="" className="custom-back" />
+              <IonBackButton icon={chevronBackOutline} text="" className="custom-back text-gray-medium" />
             </IonButtons>
           )}
           {isBuger && (

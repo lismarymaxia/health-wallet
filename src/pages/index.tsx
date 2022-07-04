@@ -10,6 +10,10 @@ import { Vacunas } from "./vacunas";
 import { Home } from "./home";
 import { Registro } from "./registro";
 import { Afiliados } from "./afiliados";
+import { Notificaciones } from "./notificaciones";
+import { ProximasCitas } from "./proximasCitas";
+import { DetalleCita } from "./detalleCita";
+import { DetalleConsulta } from "./detalleConsulta";
 
 export {
   Login,
@@ -27,4 +31,8 @@ export {
   Home,
   Registro,
   Afiliados,
+  Notificaciones,
+  ProximasCitas,
+  DetalleCita,
+  DetalleConsulta
 };

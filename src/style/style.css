@@ -11924,12 +11924,17 @@ a.active {
 }
 
 .fs-15 {
-  font-size: 14px !important;
+  font-size: 15px !important;
   line-height: 1.5;
 }
 
 .fs-16 {
   font-size: 16px !important;
+  line-height: 1.5;
+}
+
+.fs-16 {
+  font-size: 17px !important;
   line-height: 1.5;
 }
 
@@ -11948,8 +11953,18 @@ a.active {
   line-height: 1.5;
 }
 
+.fs-23 {
+  font-size: 23px !important;
+  line-height: 1.4;
+}
+
 .fs-24 {
   font-size: 24px !important;
+  line-height: 1.4;
+}
+
+.fs-25 {
+  font-size: 25px !important;
   line-height: 1.4;
 }
 
