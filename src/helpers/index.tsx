@@ -1,3 +1,3 @@
 import { handleNombre } from "./helpers";
-import { tablaFrecuencia } from "./tablasHash";
-export { handleNombre, tablaFrecuencia };
+import { tablaFrecuencia, rutasActivas } from "./tablasHash";
+export { handleNombre, tablaFrecuencia, rutasActivas };
