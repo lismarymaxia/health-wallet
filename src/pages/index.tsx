@@ -11,6 +11,7 @@ import { Home } from "./home";
 import { Registro } from "./registro";
 import { Afiliados } from "./afiliados";
 import { Perfil } from "./perfil";
+import { PerfilTratamientos } from "./perfilTratamientos";
 import { Notificaciones } from "./notificaciones";
 import { ProximasCitas } from "./proximasCitas";
 import { DetalleCita } from "./detalleCita";
@@ -33,6 +34,7 @@ export {
   Registro,
   Afiliados,
   Perfil,
+  PerfilTratamientos,
   Notificaciones,
   ProximasCitas,
   DetalleCita,

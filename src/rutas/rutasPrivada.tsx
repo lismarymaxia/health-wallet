@@ -28,6 +28,7 @@ import {
   Laboratorio,
   Afiliados,
   Perfil,
+  PerfilTratamientos,
   Notificaciones,
   ProximasCitas,
   DetalleCita,
@@ -95,6 +96,18 @@ const RutasPrivadas: React.FC = () => {
           <Route exact path="/app/perfil">
             <Perfil />
           </Route>
+          <Route exact path="/app/perfiles">
+            <Perfil />
+          </Route>
+          <Route exact path="/app/perfil-alergias">
+            <PerfilTratamientos />
+          </Route>
+          <Route exact path="/app/perfil-enfermedades">
+            <PerfilTratamientos />
+          </Route>
+          <Route exact path="/app/perfil-tratamientos">
+            <PerfilTratamientos />
+          </Route>
           <Route exact path="/app/notificaciones">
             <Notificaciones />
           </Route>
@@ -114,7 +127,7 @@ const RutasPrivadas: React.FC = () => {
             <Redirect to="/app/home" />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar slot="bottom" className="bar-menu">
+        <IonTabBar slot="bottom" className={`bar-menu ${pathname === "/app/soporte" ? "d-none" : ""}`}>
           <IonTabButton tab="tab1" href="/app/home" className="text-info">
             <div className={`icon-menu  ${active("/app/home")}`}>
               <FontAwesomeIcon icon={faHome} className="fs-18 w-100" />
@@ -149,11 +162,6 @@ const RutasPrivadas: React.FC = () => {
               Perfil
             </div>
           </IonTabButton>
-
-          {/*<IonTabButton tab="tab3" onClick={handelLogout}>
-            <FontAwesomeIcon icon={faHeart} className="mr-0 float-right" />
-            Cerrar sesión
-          </IonTabButton>*/}
         </IonTabBar>
       </IonTabs>
     </>
