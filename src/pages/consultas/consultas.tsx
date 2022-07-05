@@ -80,7 +80,7 @@ const Consultas: React.FC = () => {
             <IonCol size="12" className="pb-3">
               <div
                 className="searchContainer mt-1 mb-4 d-inline-block"
-                style={{ width: "88%" }}
+                style={{ width: "86%" }}
               >
                 <IonSearchbar
                   value={searchTerm}
@@ -92,7 +92,7 @@ const Consultas: React.FC = () => {
               </div>
               <div
                 className="d-inline-block text-right"
-                style={{ width: "12%" }}
+                style={{ width: "14%" }}
               >
                 <Link
                   to="proximas-citas"

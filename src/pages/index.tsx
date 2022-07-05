@@ -15,6 +15,7 @@ import { Notificaciones } from "./notificaciones";
 import { ProximasCitas } from "./proximasCitas";
 import { DetalleCita } from "./detalleCita";
 import { DetalleConsulta } from "./detalleConsulta";
+import { Soporte } from "./soporte";
 export {
   Login,
   Datos,
@@ -36,4 +37,5 @@ export {
   ProximasCitas,
   DetalleCita,
   DetalleConsulta,
+  Soporte
 };

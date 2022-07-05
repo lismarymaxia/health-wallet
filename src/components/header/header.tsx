@@ -7,10 +7,6 @@ import {
   IonMenuButton,
 } from "@ionic/react";
 import { chevronBackOutline } from "ionicons/icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleRight
-} from "@fortawesome/free-solid-svg-icons";
 const Header: React.FC<{
   title: string;
   isbotton: boolean;

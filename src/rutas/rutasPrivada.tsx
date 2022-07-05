@@ -32,6 +32,7 @@ import {
   ProximasCitas,
   DetalleCita,
   DetalleConsulta,
+  Soporte,
 } from "../pages";
 import { Nav } from "../components";
 import { useSelector } from "react-redux";
@@ -106,6 +107,9 @@ const RutasPrivadas: React.FC = () => {
           <Route exact path="/app/detalle-consulta/:id">
             <DetalleConsulta />
           </Route>
+          <Route exact path="/app/soporte">
+            <Soporte />
+          </Route>
           <Route exact path="/app">
             <Redirect to="/app/home" />
           </Route>
@@ -134,16 +138,13 @@ const RutasPrivadas: React.FC = () => {
 
           <IonTabButton tab="tab4" href="/app/afiliados" className="text-info">
             <div className={`icon-menu  ${active("/app/afiliados")}`}>
-              <FontAwesomeIcon
-                icon={faDiagramProject}
-                className="fs-18 w-100"
-              />
+              <FontAwesomeIcon icon={faDiagramProject} className="fs-18 w-100" />
               Afiliados
             </div>
           </IonTabButton>
 
           <IonTabButton tab="tab5" href="/app/perfil" className="text-info">
-            <div className="icon-menu">
+            <div className={`icon-menu  ${active("/app/perfil")}`}>
               <FontAwesomeIcon icon={faUser} className="fs-18 w-100" />
               Perfil
             </div>
