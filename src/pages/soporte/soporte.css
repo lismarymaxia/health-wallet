@@ -1,0 +1,20 @@
+ion-item {
+    margin: 0;
+    padding: 0;
+    background: initial;
+    --background: initial;
+    color: initial;
+    font-size: initial;
+    --padding-top: 0rem !important;
+    --padding-bottom: 0rem !important;
+}
+.input-color-blue {
+    background: #e9f3fc !important;
+    border-radius: 0.4rem !important;
+    border: 0px !important;
+    box-shadow: none;
+}
+::placeholder {
+    color: #3b72a2;
+    font-size: 0.9rem;
+  }

@@ -109,10 +109,10 @@ const Boxfull: React.FC<{
             {iconTextoUno !== "" && (
               <FontAwesomeIcon
                 icon={iconTextoUno}
-                className="text-info-light icon-box-details"
+                className="text-info-light icon-box-details mr-2"
               />
             )}
-            <span className="ml-2">{textoUno}</span>
+            <span>{textoUno}</span>
           </p>
         </div>
 
@@ -122,10 +122,10 @@ const Boxfull: React.FC<{
               {iconTextoDos !== "" && (
                 <FontAwesomeIcon
                   icon={iconTextoDos}
-                  className="text-info-light icon-box-details"
+                  className="text-info-light icon-box-details mr-2"
                 />
               )}
-              <span className="ml-2">{textoDos}</span>
+              <span>{textoDos}</span>
             </p>
           </div>
         )}
@@ -136,10 +136,10 @@ const Boxfull: React.FC<{
               {iconTextoTres !== "" && (
                 <FontAwesomeIcon
                   icon={iconTextoTres}
-                  className="text-info-light icon-box-details"
+                  className="text-info-light icon-box-details mr-2"
                 />
               )}
-              <span className="ml-2">{textoTres}</span>
+              <span>{textoTres}</span>
             </p>
           </div>
         )}
@@ -150,10 +150,10 @@ const Boxfull: React.FC<{
               {iconTextoCuatro !== "" && (
                 <FontAwesomeIcon
                   icon={iconTextoCuatro}
-                  className="text-info-light icon-box-details"
+                  className="text-info-light icon-box-details mr-2"
                 />
               )}
-              <span className="ml-2">{textoCuatro}</span>
+              <span>{textoCuatro}</span>
             </p>
           </div>
         )}

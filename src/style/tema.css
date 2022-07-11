@@ -48,13 +48,18 @@
 .bar-menu{
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+ion-tab-button{
+    width: 20%;
 }
 .icon-menu{
     background: transparent;
-}
-.bg-info-alt {
-    background: rgb(14,56,92);
-    background: linear-gradient(240deg, rgba(14,56,92,1) 0%, rgba(22,111,155,1) 35%, rgba(22,150,178,1) 100%);
+    letter-spacing: 0rem;
+    min-width: 60px;
+    max-width: 60px;
+    padding: 0.8rem 0rem 0.4rem 0rem;
 }
 .icon-menu.active{
     background: linear-gradient(0deg, rgba(7,57,113,1) 0%, rgba(9,101,138,1) 35%, rgba(25,165,174,1) 100%);
@@ -62,7 +67,10 @@
     border-radius: 0.5rem;
     font-size: 0.7rem;
     font-weight: 100;
-    padding: 0.5rem 0.6rem 0.4rem 0.6rem;
+}
+.bg-info-alt {
+    background: rgb(14,56,92);
+    background: linear-gradient(240deg, rgba(14,56,92,1) 0%, rgba(22,111,155,1) 35%, rgba(22,150,178,1) 100%);
 }
 .header-md::after{
     background: 0px;
@@ -85,7 +93,6 @@
     -webkit-box-shadow: 0px 0px 50px 0px rgb(111 154 191 / 50%);
     -moz-box-shadow: 0px 0px 50px 0px rgba(111,154,191,0.5);
 }
-
 .searchContainer {
     border-bottom: 0px;
 }
@@ -121,4 +128,14 @@
 }
 .icon-box-details{
     min-width: 15px;
+}
+.input-color-blue{
+    background: #e9f3fc;
+    border-radius: 0.4rem;
+}
+.msj-chat{
+    background: #f2f6fa;
+    box-shadow: 1px 1px 7px 0px rgb(111 154 191 / 50%);
+    -webkit-box-shadow: 1px 1px 7px 0px rgb(111 154 191 / 50%);
+    -moz-box-shadow: 1px 1px 7px 0px rgb(111 154 191 / 50%);
 }

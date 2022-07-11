@@ -1,0 +1,29 @@
+.p-perfil ion-toolbar{
+    --background: none !important;
+    --color: #ffffff;
+}
+.p-perfil ion-thumbnail{
+    width: 40px;
+    height: 40px;
+}
+.p-perfil ion-img{
+    border-radius: 0.6rem;
+    box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+    -webkit-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+    -moz-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+}
+.border-radius-bottom{
+    border-radius: 0 0 1.6rem 1.6rem;
+}
+.fondo ion-item {
+    margin: 0;
+    padding: 0;
+    background: initial;
+    --background: initial;
+    color: initial;
+    font-size: initial;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
