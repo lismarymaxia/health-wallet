@@ -144,14 +144,14 @@ const RutasPrivadas: React.FC = () => {
               Inicio
             </div>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/app/consultas" className="text-info">
+          {/*<IonTabButton tab="tab2" href="/app/consultas" className="text-info">
             <div className={`icon-menu  ${active("/app/consultas")}`}>
               <FontAwesomeIcon icon={faStethoscope} className="fs-18 w-100" />
               Consultas
             </div>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/app/estudios" className="text-info">
-            <div className={`icon-menu  ${active("/app/estudios")}`}>
+          </IonTabButton>*/}
+          <IonTabButton tab="tab3" href="/app/consultas" className="text-info">
+            <div className={`icon-menu  ${active("/app/consultas")}`}>
               <FontAwesomeIcon icon={faClipboardList} className="fs-18 w-100" />
               Estudios
             </div>

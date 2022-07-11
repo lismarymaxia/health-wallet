@@ -79,7 +79,7 @@ const DetalleConsulta = () => {
         <IonGrid className="pb-4">
           <IonRow className="mt-2 px-3">
             <IonCol size="12" className="pb-3 border-bottom">
-              <h5 className="font-w700 fs-15 text-info-dark mb-3">Historial de consultas</h5>
+              <h5 className="font-w700 fs-15 text-info-dark mb-3">Histórico</h5>
               <IonCard
                 className="m-0 card-slide shadow-full"
                 style={{ height: "auto" }}

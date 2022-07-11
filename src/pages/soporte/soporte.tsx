@@ -14,7 +14,10 @@ import {
   IonText,
   IonItem,
   IonLabel,
-  IonIcon
+  IonIcon,
+  IonHeader,
+  IonButtons,
+  IonBackButton
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -29,12 +32,25 @@ import { Header, Boxfull } from "../../components";
 import { useHistory } from "react-router";
 import "../../style/tema.css";
 import "./soporte.css";
+import { chevronBackOutline } from "ionicons/icons";
 
 const Soporte = () => { 
 
   return (
     <IonPage className="fondo">
-      {<Header title="Soporte" isbotton={true} isBuger={false}/>}
+      <IonHeader>
+        <div className="p-perfil bg-info-alt border-radius-bottom">
+          <IonToolbar>
+            <IonTitle className="fs-16 font-w600 text-center" >
+              Soporte - Chat
+            </IonTitle>
+            <IonButtons slot="start">
+              <IonBackButton icon={chevronBackOutline} text="" className="custom-back text-white" />
+            </IonButtons>
+          </IonToolbar>
+        </div>
+      </IonHeader>
+      {/*<Header title="Soporte" isbotton={true} isBuger={false}/>*/}
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pt-3 px-3">
