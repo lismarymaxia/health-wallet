@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Redirect, Route } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Redirect, Route, useHistory, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
-  setupIonicReact,
+  /*setupIonicReact,*/
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,8 +15,9 @@ import {
   faStethoscope,
   faClipboardList,
   faDiagramProject,
+  faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { useHistory } from "react-router";
+import { Nav } from "../components";
 import {
   Home,
   Datos,
@@ -33,12 +34,12 @@ import {
   DetalleCita,
   DetalleConsulta,
 } from "../pages";
-import { Nav } from "../components";
-import { useSelector } from "react-redux";
+import { logout } from "../store";
 import "../style/tema.css";
-setupIonicReact();
+//setupIonicReact();
 
 const RutasPrivadas: React.FC = () => {
+  const dispatch = useDispatch();
   const isAuth: any = useSelector<any>((state) => state.reducerAuth.stdAuth);
 
   const history = useHistory();
@@ -48,6 +49,7 @@ const RutasPrivadas: React.FC = () => {
       history.replace("/");
     }
   }, [history, isAuth]);
+
   const location = useLocation();
   const { pathname } = location;
 
@@ -57,6 +59,11 @@ const RutasPrivadas: React.FC = () => {
     } else {
       return "";
     }
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    console.log("clic");
   };
 
   return (
@@ -117,21 +124,18 @@ const RutasPrivadas: React.FC = () => {
               Inicio
             </div>
           </IonTabButton>
-
           <IonTabButton tab="tab2" href="/app/consultas" className="text-info">
             <div className={`icon-menu  ${active("/app/consultas")}`}>
               <FontAwesomeIcon icon={faStethoscope} className="fs-18 w-100" />
               Consultas
             </div>
           </IonTabButton>
-
           <IonTabButton tab="tab3" href="/app/estudios" className="text-info">
             <div className={`icon-menu  ${active("/app/estudios")}`}>
               <FontAwesomeIcon icon={faClipboardList} className="fs-18 w-100" />
               Estudios
             </div>
           </IonTabButton>
-
           <IonTabButton tab="tab4" href="/app/afiliados" className="text-info">
             <div className={`icon-menu  ${active("/app/afiliados")}`}>
               <FontAwesomeIcon
@@ -141,11 +145,16 @@ const RutasPrivadas: React.FC = () => {
               Afiliados
             </div>
           </IonTabButton>
-
           <IonTabButton tab="tab5" href="/app/perfil" className="text-info">
-            <div className="icon-menu">
+            <div className={`icon-menu  ${active("/app/perfil")}`}>
               <FontAwesomeIcon icon={faUser} className="fs-18 w-100" />
               Perfil
+            </div>
+          </IonTabButton>
+          <IonTabButton tab="tab6" className="text-info">
+            <div onClick={handleLogout}>
+              <FontAwesomeIcon icon={faArrowRight} className="fs-18 w-100" />
+              cerrar
             </div>
           </IonTabButton>
 

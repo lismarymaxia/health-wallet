@@ -1,2 +1,2 @@
-import { selectInstitucion, selectDetalle } from "./funcionalidad";
-export { selectInstitucion, selectDetalle };
+import { storeLocal, getStoreSesion, logout } from "./aut";
+export { storeLocal, getStoreSesion, logout };

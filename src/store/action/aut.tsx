@@ -1,6 +1,6 @@
 export const CERRAR_S: string = "[AUT] CERRAR_S";
 export const STORE_SAVE: string = "[AUT] STORE_SAVE";
-export const StoreLocal = (data: any): {} => {
+export const storeLocal = (data: any): {} => {
   return (dispatch: any) => {
     const sessionStore = {
       user: data,
@@ -21,22 +21,21 @@ export const StoreSave = (data: any, stdAuth: boolean): {} => ({
   },
 });
 
-export const isStore = (): {} => {
-  return (dispatch: any) => {
-    if (sessionStorage.getItem("session") !== null) {
-      let session: any = sessionStorage.getItem("session");
-      let parseado = JSON.parse(session);
-      const [{ user, stdAuth }] = parseado;
-      dispatch(StoreSave(user, stdAuth));
-    }
-  };
+export const getStoreSesion = () => {
+  if (sessionStorage.getItem("session") !== null) {
+    let session: any = sessionStorage.getItem("session");
+    let parseado = JSON.parse(session);
+    const [{ user, stdAuth }] = parseado;
+    return { user, stdAuth };
+  } else {
+    return { user: {}, stdAuth: false };
+  }
 };
 
 export const logout = (): {} => {
   return (dispatch: any) => {
     if (sessionStorage.getItem("session") !== null) {
       sessionStorage.removeItem("session");
-      console.log("eliminando");
       dispatch(logoutAuth());
     }
   };

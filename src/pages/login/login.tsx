@@ -12,7 +12,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Action, CustomField } from "../../components";
-import { StoreLocal } from "../../store/action/aut";
+import { storeLocal } from "../../store/action/aut";
 import { authentication } from "../../servicios/servicios";
 import "./login.css";
 const Login: React.FC = () => {
@@ -43,7 +43,7 @@ const Login: React.FC = () => {
           const { data, status } = response;
           if (status === 200) {
             if (data.rsp === 1) {
-              dispatch(StoreLocal(data.data));
+              dispatch(storeLocal(data.data));
               setUsuario("");
               setClave("");
             } else {
