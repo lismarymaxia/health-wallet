@@ -12,7 +12,6 @@ import {
 } from "@ionic/react";
 import { Header } from "../../components";
 import { useState, useCallback, useEffect } from "react";
-import { afiliados } from "../../data";
 import { Link } from "react-router-dom";
 import "../../style/tema.css";
 import "./afiliados.css";
@@ -58,6 +57,7 @@ const Afiliados = () => {
       });
   }, []);
 
+  const handleFavorito = () => {};
   if (load) {
     return (
       <IonPage className="fondo">
