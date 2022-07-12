@@ -22,7 +22,7 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           horaTop=""
           yearTop={item.year}
           iconTextoUno={faHospital}
-          textoUno="Centro médico OSDE"
+          textoUno={item.centro}
           iconTextoDos={faUserDoctor}
           textoDos={item.medico}
           iconTextoTres=""

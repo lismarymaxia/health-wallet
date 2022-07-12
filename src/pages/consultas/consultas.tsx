@@ -46,7 +46,7 @@ const Consultas: React.FC = () => {
   useIonViewDidEnter(() => {
     setLoad(true);
     servicesWh
-      .get("/controller/consultasback.php", {
+      .get("/api/listado-consultas.php", {
         params: {
           op: "consultas",
           cedula: cedula,
