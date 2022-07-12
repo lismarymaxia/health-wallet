@@ -17,15 +17,21 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonIcon
+  IonIcon,
+  IonSlides,
+  IonSlide
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHospital,
   faUserDoctor,
   faSliders,
-  faAngleRight
+  faAngleRight,
+  faHospitalUser
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAccessibleIcon
+} from "@fortawesome/free-brands-svg-icons";
 import { Header, Boxfull } from "../../components";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
@@ -50,6 +56,14 @@ const Perfil = () => {
   const handelSoporte = () => {
     history.push("/app/soporte");
   };
+  const slideOpts = {
+    initialSlide: 0,
+    speed: 200,
+    slidesPerView: 1.7,
+    spaceBetween: 20,
+    //autoplay:true,
+    //loop: true
+  };
 
   return (
     <IonPage className="fondo">     
@@ -63,18 +77,81 @@ const Perfil = () => {
               <IonBackButton icon={chevronBackOutline} text="" className="custom-back text-white" />
             </IonButtons>
           </IonToolbar>
-          <div className="mx-3 pb-4 text-white">
-            <IonThumbnail slot="start" class="float-left mr-3">
-              <IonImg src={"./images/perfil.JPG"} />
-            </IonThumbnail>
+          <div className="mx-3 pb-2 text-white d-flex">
+            <div className="float-left">
+              <IonThumbnail slot="start" class="">
+                <IonImg src={"./images/perfil.JPG"} />
+              </IonThumbnail>
+            </div>
 
-            <span className="font-w500 fs-14 d-block">
-              Laura Cristina García
-            </span>
-            <span className="fs-12">
-              Cabeza de familia
-            </span>
+            <div className="w-100 ml-3 float-right d-grid">
+              <p className="fs-16 font-w500">
+                Laura Cristina García
+              </p>              
+              <div className="">
+                <span className="fs-12 float-left">
+                  Edad: 
+                </span>
+                <span className="fs-12 float-right">
+                  36 años 
+                </span>
+              </div>
+              <div className="">
+                <span className="fs-12 float-left">
+                  Cédula: 
+                </span>
+                <span className="fs-12 float-right">
+                  6-712-727
+                </span>
+              </div>
+              <div className="pb-2 border-bottom">
+                <span className="fs-12 float-left">
+                  Grupo Sanguineo: 
+                </span>
+                <span className="fs-12 float-right">
+                  ORH+
+                </span>
+              </div>
+              <div className="pt-2">
+                <span className="fs-12 float-left">
+                  Ver ficha completa
+                </span>
+                <span className="fs-12 float-right">
+                  editar
+                </span>
+              </div>
+            </div>            
           </div>
+          <IonRow className="mt-2 pb-3">
+            <IonCol size="12" className="px-3">
+              <IonSlides pager={false} options={slideOpts}>
+                <IonSlide>
+                  <IonCard className="m-0 card-slide px-2 box-op">
+                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                      <span><FontAwesomeIcon icon={faHospital} className="mr-0 fs-16" /></span>
+                      <span className="d-block">Aseguradora</span>
+                    </IonCardContent>
+                  </IonCard>
+                </IonSlide>
+                <IonSlide>
+                  <IonCard className="m-0 card-slide px-2 box-op">
+                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                      <span><FontAwesomeIcon icon={faAccessibleIcon} className="mr-0 fs-16" /></span>
+                      <span className="d-block">Discapacidad</span>
+                    </IonCardContent>
+                  </IonCard>
+                </IonSlide>
+                <IonSlide>
+                  <IonCard className="m-0 card-slide px-2 box-op">
+                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                      <span><FontAwesomeIcon icon={faHospitalUser} className="mr-0 fs-16" /></span>
+                      <span className="d-block">C. Emergencia</span>
+                    </IonCardContent>
+                  </IonCard>
+                </IonSlide>
+              </IonSlides>
+            </IonCol>
+          </IonRow>
         </div>
       </IonHeader>      
 

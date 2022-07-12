@@ -11,12 +11,15 @@ import {
   useIonViewDidEnter,
   IonSlide,
   IonSlides,
+  IonLabel,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleRight,
   faBell,
   faHeart,
+  faMicroscope,
+  faXRay,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { servicesWh } from "../../servicios/servicios";
@@ -108,7 +111,7 @@ const Home: React.FC = () => {
 
           <IonRow className="mt-4">
             <IonCol size="12" className="px-3">
-              <h5 className="font-w600 fs-16 text-dark">
+              <h5 className="font-w600 fs-16 text-info-dark">
                 Próximas citas
                 <Link to="proximas-citas" className="text-info-light">
                   <FontAwesomeIcon
@@ -214,8 +217,50 @@ const Home: React.FC = () => {
 
           <IonRow className="mt-4">
             <IonCol size="12" className="px-3">
-              <h5 className="font-w600 fs-16 text-dark">
-                Mis afiliados favoritos
+              <h5 className="font-w600 fs-16 text-info-dark">
+                Últimas actualizaciones
+              </h5>
+              <IonCard className="m-0 card-slide shadow-full">
+                <IonCardContent className="card-content-slide">
+                  <div className="slide-full">
+                    <div className="d-flex float-left">
+                      <FontAwesomeIcon icon={faMicroscope} className="mr-3 fs-16 text-info" />
+                      <div className="d-grid">
+                        <span className="fs-15 font-w600 text-info">Resultados de laboratorio</span>
+                        <span>CentroLab</span>
+                      </div>
+                    </div>
+                    <div className="float-right">
+                      <FontAwesomeIcon
+                        icon={faAngleRight}
+                        className="mr-0 float-right fs-18 text-info"
+                      />
+                    </div>
+                  </div>
+                  <div className="slide-full">
+                    <div className="d-flex float-left">
+                      <FontAwesomeIcon icon={faXRay} className="mr-3 fs-16 text-info" />
+                      <div className="d-grid">
+                        <span className="fs-15 font-w600 text-info">Resultados de imágenes</span>
+                        <span>CentroLab</span>
+                      </div>
+                    </div>
+                    <div className="float-right">
+                      <FontAwesomeIcon
+                        icon={faAngleRight}
+                        className="mr-0 float-right fs-18 text-info"
+                      />
+                    </div>
+                  </div>
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
+          </IonRow>
+
+          <IonRow className="mt-4">
+            <IonCol size="12" className="px-3">
+              <h5 className="font-w600 fs-16 text-info-dark">
+                Nuevos afiliados
                 <FontAwesomeIcon
                   icon={faAngleRight}
                   className="mr-0 float-right text-info"
