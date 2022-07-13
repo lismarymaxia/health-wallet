@@ -323,7 +323,7 @@ const Home: React.FC = () => {
                             item={item}
                             id={item.id}
                             title={item.nombre}
-                            imageTitle="./images/osdl.png"
+                            imageTitle={`https://toolkit.maxialatam.com/wallethealth/asset/${item.logo}`}
                             iconTop={faHeart}
                             texto="descripcion"
                             activo={item.activo}
