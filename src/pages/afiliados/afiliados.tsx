@@ -48,7 +48,7 @@ const Afiliados = () => {
         if (status === 200) {
           if (data.data) {
             setLoad(false);
-            setData(data.data);
+            setData([...data.fav, ...data.data]);
           } else {
             setLoad(false);
             setData([]);
@@ -136,6 +136,9 @@ const Afiliados = () => {
                               <FontAwesomeIcon
                                 icon={faHeart}
                                 className="mr-0 float-right"
+                                style={{
+                                  color: item.activo !== "" ? "red" : "",
+                                }}
                               />
                             </span>
                           </div>
