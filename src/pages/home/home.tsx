@@ -11,7 +11,7 @@ import {
   useIonViewDidEnter,
   IonSlide,
   IonSlides,
-  IonLabel,
+  IonToast,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,47 +21,56 @@ import {
   faMicroscope,
   faXRay,
 } from "@fortawesome/free-solid-svg-icons";
+import { servicesWh, serviciosAfiliados } from "../../servicios/servicios";
+import { BoxAfiliado } from "../../components";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { servicesWh } from "../../servicios/servicios";
-import { Boxfull } from "../../components";
-import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
 import "./home.css";
 import "../../style/tema.css";
 
 const Home: React.FC = () => {
   const history = useHistory();
+  const user = useSelector((state: any) => state.reducerAuth.user);
+
   const handelNotificaciones = () => {
     history.push("/app/notificaciones");
   };
-  const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
+
   const slideOpts = {
     initialSlide: 0,
     speed: 200,
     slidesPerView: 1.7,
     spaceBetween: 20,
-    //autoplay:true,
-    //loop: true
   };
   const [load, setLoad] = useState<Boolean>(true);
-  const [data, setData] = useState<any>({
-    cedula: "",
-    nombre: "",
-    telefono: "",
-    celular: "",
-    direccion: "",
-    sexo: "",
-    fechanacimiento: "",
-    edad: "",
-    tiposangre: "",
+  const [datos, setDatos] = useState<any>([]);
+  const [notificacion, setNotificacion] = useState({
+    msg: "",
+    estado: false,
   });
+
+  const isFavorito = (datos: any) => {
+    let nuevo = datos.map((item: any) => {
+      return {
+        ...item,
+        activo: item.idusuario === user.id.toString() ? "activo" : "",
+      };
+    });
+    return nuevo;
+  };
+
+  const updateDatos = (item: any) => {
+    let nuevo = datos.map((items: any) =>
+      items.id === item.id ? (items = item) : items
+    );
+    setDatos(nuevo);
+  };
 
   useIonViewDidEnter(() => {
     servicesWh
-      .get("/controller/api.php", {
+      .get("/controller/afiliados.php", {
         params: {
-          op: "registro",
-          id: cedula,
+          op: "getAfiliadosRecientes",
           imestamp: new Date().getTime(),
         },
         responseType: "json",
@@ -71,10 +80,10 @@ const Home: React.FC = () => {
         if (status === 200) {
           if (data) {
             setLoad(false);
-            //setData(data.data);
+            setDatos(isFavorito(data.data));
           } else {
             setLoad(false);
-            setData({});
+            setDatos([]);
           }
         }
       })
@@ -83,10 +92,37 @@ const Home: React.FC = () => {
       });
   });
 
+  const handleFavorito = (id: any, item: any) => {
+    let formDa = new FormData();
+    formDa.append("op", "addFavorito");
+    formDa.append("idafiliado", id);
+    formDa.append("idusuario", user.idpaciente);
+    serviciosAfiliados(formDa)
+      .then(function (response) {
+        const { data, status } = response;
+        if (status === 200) {
+          if (data.rsp === 1) {
+            setNotificacion({
+              msg: data.msg,
+              estado: true,
+            });
+            let clone = { ...item, activo: "activo" };
+            updateDatos(clone);
+          } else {
+            setNotificacion({
+              msg: data.msg,
+              estado: true,
+            });
+          }
+        }
+      })
+      .catch(function (err) {
+        console.warn("Error:" + err);
+      });
+  };
+
   return (
     <IonPage className="fondo">
-      {/*<Header title="Health Wallet" isbotton={false} isBuger={true} />*/}
-
       <IonContent fullscreen className="bg-light">
         <IonGrid className="bg-light pb-4">
           <IonRow className="bg-info-alt pt-3 pb-2 text-white">
@@ -224,9 +260,14 @@ const Home: React.FC = () => {
                 <IonCardContent className="card-content-slide">
                   <div className="slide-full">
                     <div className="d-flex float-left">
-                      <FontAwesomeIcon icon={faMicroscope} className="mr-3 fs-16 text-info" />
+                      <FontAwesomeIcon
+                        icon={faMicroscope}
+                        className="mr-3 fs-16 text-info"
+                      />
                       <div className="d-grid">
-                        <span className="fs-15 font-w600 text-info">Resultados de laboratorio</span>
+                        <span className="fs-15 font-w600 text-info">
+                          Resultados de laboratorio
+                        </span>
                         <span>CentroLab</span>
                       </div>
                     </div>
@@ -239,9 +280,14 @@ const Home: React.FC = () => {
                   </div>
                   <div className="slide-full">
                     <div className="d-flex float-left">
-                      <FontAwesomeIcon icon={faXRay} className="mr-3 fs-16 text-info" />
+                      <FontAwesomeIcon
+                        icon={faXRay}
+                        className="mr-3 fs-16 text-info"
+                      />
                       <div className="d-grid">
-                        <span className="fs-15 font-w600 text-info">Resultados de imágenes</span>
+                        <span className="fs-15 font-w600 text-info">
+                          Resultados de imágenes
+                        </span>
                         <span>CentroLab</span>
                       </div>
                     </div>
@@ -269,58 +315,35 @@ const Home: React.FC = () => {
 
               <IonCard className="m-0 card-slide" style={{ height: "auto" }}>
                 <IonCardContent className="card-content-slide">
-                  <Boxfull
-                    title="Centro médico OSDE"
-                    imageTitle="./images/osdl.png"
-                    iconTop={faHeart}
-                    fechaTop=""
-                    horaTop=""
-                    yearTop=""
-                    iconTextoUno=""
-                    textoUno="Cll 13a #76-52 - Piso 1"
-                    iconTextoDos=""
-                    textoDos=""
-                    iconTextoTres=""
-                    textoTres=""
-                    iconTextoCuatro=""
-                    textoCuatro=""
-                    linkBottomLeft=""
-                    linkBottomRight=""
-                    textLinkBottomLeft=""
-                    textLinkBottomRight=""
-                    ir={false}
-                    linkIr=""
-                    tipo=""
-                  />
-                  <Boxfull
-                    title="Centro médico OSDE"
-                    imageTitle="./images/osdl.png"
-                    iconTop={faHeart}
-                    fechaTop=""
-                    horaTop=""
-                    yearTop=""
-                    iconTextoUno=""
-                    textoUno="Cll 13a #76-52 - Piso 2"
-                    iconTextoDos=""
-                    textoDos=""
-                    iconTextoTres=""
-                    textoTres=""
-                    iconTextoCuatro=""
-                    textoCuatro=""
-                    linkBottomLeft=""
-                    linkBottomRight=""
-                    textLinkBottomLeft=""
-                    textLinkBottomRight=""
-                    ir={false}
-                    linkIr=""
-                    tipo=""
-                  />
+                  {load
+                    ? "cargando"
+                    : datos.map((item: any, index: any) => (
+                        <div key={index}>
+                          <BoxAfiliado
+                            item={item}
+                            id={item.id}
+                            title={item.nombre}
+                            imageTitle="./images/osdl.png"
+                            iconTop={faHeart}
+                            texto="descripcion"
+                            activo={item.activo}
+                            handleClic={handleFavorito}
+                          />
+                        </div>
+                      ))}
                 </IonCardContent>
               </IonCard>
             </IonCol>
           </IonRow>
         </IonGrid>
-
+        <IonToast
+          isOpen={notificacion.estado}
+          onDidDismiss={() =>
+            setNotificacion({ ...notificacion, estado: false })
+          }
+          message={notificacion.msg}
+          duration={500}
+        />
         {/*<IonList
           className="acordion__fondo"
           inset={true}

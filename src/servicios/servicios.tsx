@@ -41,3 +41,13 @@ export const serviciosPaciente = (form: any) =>
   servicesWh.post("/controller/pacienteback.php", form, {
     responseType: "json",
   });
+
+export const serviciosAfiliados = (form: any) =>
+  servicesWh.post("/controller/afiliados.php", form, {
+    responseType: "json",
+  });
+
+export const serviciosConsultas = (form: any) =>
+  servicesWh.post("/controller/consultasback.php", form, {
+    responseType: "json",
+  });

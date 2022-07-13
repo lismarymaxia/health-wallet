@@ -57,7 +57,6 @@ const Afiliados = () => {
       });
   }, []);
 
-  const handleFavorito = () => {};
   if (load) {
     return (
       <IonPage className="fondo">

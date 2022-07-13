@@ -155,7 +155,3 @@ const EditDatos: React.FC = () => {
   );
 };
 export default EditDatos;
-
-/*
-ismary no sabes si el aumento del 10% se realizara para esta quincena,porque sabes ayer bogdan me escribio para avisarme sobre el depostio de mi quincena donde me explico que no tenia usdt pero que habia cuadrado para realizarme deposito, pero el cuando me dio el ejemplo de cuanto seria me lo explico con el monto de 240$ y con el aumento seria otro monto,
-*/

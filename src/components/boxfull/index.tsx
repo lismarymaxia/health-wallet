@@ -1,2 +1,3 @@
 import Boxfull from "./boxfull";
-export { Boxfull };
+import BoxAfiliado from "./boxAfiliado";
+export { Boxfull, BoxAfiliado };
