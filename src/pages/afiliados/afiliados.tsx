@@ -122,7 +122,7 @@ const Afiliados = () => {
                           key={item.id}
                         >
                           <IonImg
-                            src={`https://toolkit.maxialatam.com/wallethealth/asset/css.jpeg`}
+                            src={`https://toolkit.maxialatam.com/wallethealth/asset/${item.logo}`}
                             alt="employee avatar"
                             style={{ width: "50px" }}
                             className="float-left mr-2"
