@@ -10,16 +10,18 @@ import {
   IonImg,
   IonProgressBar,
 } from "@ionic/react";
-import { Header } from "../../components";
 import { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../../style/tema.css";
-import "./afiliados.css";
+import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faSliders } from "@fortawesome/free-solid-svg-icons";
+import { Header } from "../../components";
 import { servicesWh } from "../../servicios/servicios";
+import "../../style/tema.css";
+import "./afiliados.css";
 
 const Afiliados = () => {
+  const user = useSelector((state: any) => state.reducerAuth.user);
   const [searchTerm, setSearchTerm] = useState("");
   const [data, setData] = useState<any>([]);
   const [load, setLoad] = useState<Boolean>(true);
@@ -36,6 +38,7 @@ const Afiliados = () => {
       .get("/controller/afiliados.php", {
         params: {
           op: "getAfiliados",
+          idusuario: user.id,
           imestamp: new Date().getTime(),
         },
         responseType: "json",

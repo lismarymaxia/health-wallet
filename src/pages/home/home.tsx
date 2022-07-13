@@ -96,7 +96,7 @@ const Home: React.FC = () => {
     let formDa = new FormData();
     formDa.append("op", "addFavorito");
     formDa.append("idafiliado", id);
-    formDa.append("idusuario", user.idpaciente);
+    formDa.append("idusuario", user.id);
     serviciosAfiliados(formDa)
       .then(function (response) {
         const { data, status } = response;
