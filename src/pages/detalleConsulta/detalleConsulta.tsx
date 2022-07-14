@@ -43,7 +43,7 @@ const DetalleConsulta = () => {
   useIonViewDidEnter(() => {
     setLoad(true);
     servicesWh
-      .get("/controller/consultasback.php", {
+      .get("/api/api-detalle-consultas.php", {
         params: {
           op: "consultasDetalle",
           id: id,
