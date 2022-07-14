@@ -1,5 +1,4 @@
 import {
-  IonGrid,
   IonRow,
   IonCol,
   IonContent,
@@ -24,6 +23,7 @@ import {
   IonItem,
   IonSelect,
   IonSelectOption,
+  IonGrid,
 } from "@ionic/react";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -34,12 +34,13 @@ import {
   faStethoscope,
   faXRay,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { chevronBackOutline } from "ionicons/icons";
 import { Header } from "../../components";
 import { servicesWh, serviciosConsultas } from "../../servicios/servicios";
 import { Card } from "./Card";
-import { Link } from "react-router-dom";
+import { formtFechaCorta } from "../../helpers";
 import "../../style/tema.css";
-import { chevronBackOutline } from "ionicons/icons";
 
 const Consultas: React.FC = () => {
   const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
@@ -59,12 +60,13 @@ const Consultas: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loadSearch, setLoadSearch] = useState<Boolean>(false);
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
-  const [desde, setDesde] = useState("");
-  const [hasta, setHasta] = useState("");
-
   const [totalResults, setTotalResults] = useState(0);
   const [page, setPage] = useState<any>(1);
   const [isOpen, setIsOpen] = useState(false);
+  const [desde, setDesde] = useState("");
+  const [hasta, setHasta] = useState("");
+  const [transitionU, setTransitionU] = useState(false);
+  const [transitionD, setTransitionD] = useState(false);
 
   const fecth = () => {
     servicesWh
@@ -133,6 +135,14 @@ const Consultas: React.FC = () => {
     formDa.append("op", "buscador");
     formDa.append("busqueda", searchTerm);
     formDa.append("cedula", cedula);
+    if (desde !== "") {
+      let d = formtFechaCorta(desde) || "";
+      formDa.append("desde", d);
+    }
+    if (hasta !== "") {
+      let h = formtFechaCorta(hasta) || "";
+      formDa.append("hasta", h);
+    }
     serviciosConsultas(formDa)
       .then(function (response) {
         const { data, status } = response;
@@ -173,9 +183,8 @@ const Consultas: React.FC = () => {
       </IonPage>
     );
   }
-  console.log(desde);
-  console.log(hasta);
 
+  console.log({ desde, hasta });
   return (
     <IonPage className="fondo">
       <IonHeader>
@@ -294,7 +303,7 @@ const Consultas: React.FC = () => {
         </IonGrid>
         <IonModal isOpen={isOpen}>
           <IonHeader>
-            <IonToolbar>
+            <IonToolbar className="ion-padding">
               <IonTitle>Filtrar</IonTitle>
               <IonButtons slot="end">
                 <IonButton onClick={() => setIsOpen(false)}>Cerrar</IonButton>
@@ -302,34 +311,81 @@ const Consultas: React.FC = () => {
             </IonToolbar>
           </IonHeader>
           <IonContent>
-            <IonDatetime
-              presentation="date"
-              doneText="ok"
-              cancelText="Cancelar"
-              value={desde}
-              onIonChange={(e) => setDesde(e.detail.value!)}
-            ></IonDatetime>
-            <IonDatetime
-              presentation="date"
-              doneText="ok"
-              cancelText="Cancelar"
-              value={hasta}
-              onIonChange={(e) => setHasta(e.detail.value!)}
-            ></IonDatetime>
-            <IonItem>
-              <IonSelect
-                value={afiliado}
-                interface="popover"
-                placeholder="Selecione un afiliado"
-                onIonChange={(e) => setAfiliado(e.detail.value)}
-              >
-                {afiliados.map((item: any) => (
-                  <IonSelectOption value={item.id} key={item.id}>
-                    {item.nombre}
-                  </IonSelectOption>
-                ))}
-              </IonSelect>
-            </IonItem>
+            <IonGrid>
+              <IonRow className="ion-justify-content-start">
+                <IonCol sizeSm="12" sizeMd="6" sizeLg="12">
+                  <IonItem>
+                    <IonButton
+                      color="primary"
+                      onClick={() => setTransitionU(true)}
+                    >
+                      Desde
+                    </IonButton>
+                  </IonItem>
+                  {transitionU && (
+                    <IonDatetime
+                      presentation="date"
+                      doneText="ok"
+                      cancelText="Cancelar"
+                      value={desde}
+                      onIonChange={(e) => {
+                        setDesde(e.detail.value!);
+                        setTransitionU(false);
+                      }}
+                    ></IonDatetime>
+                  )}
+                </IonCol>
+                <IonCol sizeSm="12" sizeMd="6" sizeLg="12">
+                  <IonItem>
+                    <IonButton
+                      color="primary"
+                      onClick={() => setTransitionD(true)}
+                    >
+                      Hasta
+                    </IonButton>
+                  </IonItem>
+                  {transitionD && (
+                    <IonDatetime
+                      presentation="date"
+                      doneText="ok"
+                      cancelText="Cancelar"
+                      value={hasta}
+                      onIonChange={(e) => {
+                        setHasta(e.detail.value!);
+                        setTransitionD(false);
+                      }}
+                    ></IonDatetime>
+                  )}
+                </IonCol>
+                <IonCol sizeSm="12" sizeMd="6" sizeLg="12">
+                  {" "}
+                  <IonItem>
+                    <IonSelect
+                      value={afiliado}
+                      interface="popover"
+                      placeholder="Selecione un afiliado"
+                      onIonChange={(e) => setAfiliado(e.detail.value)}
+                    >
+                      {afiliados.map((item: any) => (
+                        <IonSelectOption value={item.id} key={item.id}>
+                          {item.nombre}
+                        </IonSelectOption>
+                      ))}
+                    </IonSelect>
+                  </IonItem>
+                  <IonItem>
+                    <IonButton
+                      color="primary"
+                      onClick={(e) => {
+                        handleSearch(e);
+                      }}
+                    >
+                      filtrar
+                    </IonButton>
+                  </IonItem>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
           </IonContent>
         </IonModal>
       </IonContent>

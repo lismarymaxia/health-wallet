@@ -5,3 +5,12 @@ export const handleNombre = (id: any, data: any) => {
     return item.label;
   }
 };
+export const formtFechaCorta = (fecha: any) => {
+  let f = new Date(fecha);
+  if (f != null) {
+    let nueva = "";
+    const [dia, mes, yy] = f.toLocaleDateString().split("/");
+    nueva = `${yy}-${mes}-${dia}`;
+    return nueva;
+  }
+};
