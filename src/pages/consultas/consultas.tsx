@@ -70,7 +70,7 @@ const Consultas: React.FC = () => {
 
   const fecth = () => {
     servicesWh
-      .get("/controller/consultasback.php", {
+      .get("/api/listado-consultas.php", {
         params: {
           op: "consultas",
           cedula: cedula,
