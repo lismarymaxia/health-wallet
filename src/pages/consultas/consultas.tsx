@@ -18,7 +18,12 @@ import {
   IonCardContent,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
-  useIonViewWillEnter,
+  IonButton,
+  IonModal,
+  IonDatetime,
+  IonItem,
+  IonSelect,
+  IonSelectOption,
 } from "@ionic/react";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -48,12 +53,18 @@ const Consultas: React.FC = () => {
   };
 
   const [load, setLoad] = useState<Boolean>(true);
-
   const [data, setData] = useState<any>([]);
+  const [afiliados, setAfiliados] = useState<any>([]);
+  const [afiliado, setAfiliado] = useState<any>("");
   const [searchTerm, setSearchTerm] = useState("");
   const [loadSearch, setLoadSearch] = useState<Boolean>(false);
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
+  const [desde, setDesde] = useState("");
+  const [hasta, setHasta] = useState("");
+
+  const [totalResults, setTotalResults] = useState(0);
   const [page, setPage] = useState<any>(1);
+  const [isOpen, setIsOpen] = useState(false);
 
   const fecth = () => {
     servicesWh
@@ -61,6 +72,7 @@ const Consultas: React.FC = () => {
         params: {
           op: "consultas",
           cedula: cedula,
+          busqueda: searchTerm,
           page: page,
           imestamp: new Date().getTime(),
         },
@@ -73,6 +85,7 @@ const Consultas: React.FC = () => {
             setLoad(false);
             setData((prev: any) => [...prev, ...data.data]);
             setPage(page + 1);
+            setTotalResults(data.totalResults);
           } else {
             setLoad(false);
             setData([]);
@@ -84,9 +97,33 @@ const Consultas: React.FC = () => {
       });
   };
 
-  console.log(data);
+  const getafiliados = () => {
+    servicesWh
+      .get("/controller/afiliados.php", {
+        params: {
+          op: "getCombo",
+          imestamp: new Date().getTime(),
+        },
+        responseType: "json",
+      })
+      .then((rsp) => {
+        const { data, status } = rsp;
+        if (status === 200) {
+          if (data) {
+            setAfiliados(data.data);
+          } else {
+            setAfiliados([]);
+          }
+        }
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
+  };
+
   useIonViewDidEnter(() => {
     fecth();
+    getafiliados();
   });
 
   const handleSearch = (e: any) => {
@@ -115,12 +152,13 @@ const Consultas: React.FC = () => {
   };
 
   const loadData = (ev: any) => {
-    fecth();
     setTimeout(() => {
       console.log("Loaded data");
       ev.target.complete();
-      if (data.length === 1000) {
+      if (data.length === totalResults) {
         setInfiniteDisabled(true);
+      } else {
+        fecth();
       }
     }, 500);
   };
@@ -135,6 +173,8 @@ const Consultas: React.FC = () => {
       </IonPage>
     );
   }
+  console.log(desde);
+  console.log(hasta);
 
   return (
     <IonPage className="fondo">
@@ -221,7 +261,8 @@ const Consultas: React.FC = () => {
                 style={{ width: "14%" }}
               >
                 <Link
-                  to="proximas-citas"
+                  onClick={() => setIsOpen(true)}
+                  to="#"
                   className="bg-info-alt d-inline-block btn-filter fs-16 btn-shadow"
                 >
                   <FontAwesomeIcon
@@ -232,11 +273,7 @@ const Consultas: React.FC = () => {
               </div>
 
               <h5 className="font-w700 fs-15 text-info-dark mb-2">Histórico</h5>
-              {/*data
-                .filter(pacsearch(searchTerm))
-                .map((item: any, index: any) => (
-                  <Card item={item} key={index} />
-                ))*/}
+
               {loadSearch
                 ? "buscando"
                 : data.map((item: any, index: any) => (
@@ -255,15 +292,49 @@ const Consultas: React.FC = () => {
             </IonCol>
           </IonRow>
         </IonGrid>
+        <IonModal isOpen={isOpen}>
+          <IonHeader>
+            <IonToolbar>
+              <IonTitle>Filtrar</IonTitle>
+              <IonButtons slot="end">
+                <IonButton onClick={() => setIsOpen(false)}>Cerrar</IonButton>
+              </IonButtons>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent>
+            <IonDatetime
+              presentation="date"
+              doneText="ok"
+              cancelText="Cancelar"
+              value={desde}
+              onIonChange={(e) => setDesde(e.detail.value!)}
+            ></IonDatetime>
+            <IonDatetime
+              presentation="date"
+              doneText="ok"
+              cancelText="Cancelar"
+              value={hasta}
+              onIonChange={(e) => setHasta(e.detail.value!)}
+            ></IonDatetime>
+            <IonItem>
+              <IonSelect
+                value={afiliado}
+                interface="popover"
+                placeholder="Selecione un afiliado"
+                onIonChange={(e) => setAfiliado(e.detail.value)}
+              >
+                {afiliados.map((item: any) => (
+                  <IonSelectOption value={item.id} key={item.id}>
+                    {item.nombre}
+                  </IonSelectOption>
+                ))}
+              </IonSelect>
+            </IonItem>
+          </IonContent>
+        </IonModal>
       </IonContent>
     </IonPage>
   );
 };
 
 export default Consultas;
-
-/*const pacsearch = useCallback((searc: any) => {
-    return function name(params: any) {
-      return params?.medico?.toUpperCase().includes(searc.toUpperCase());
-    };
-  }, []);*/

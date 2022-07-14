@@ -8,9 +8,20 @@ const BoxAfiliado: React.FC<{
   imageTitle: string;
   iconTop: any;
   texto: string;
-  activo: string;
-  handleClic: any;
-}> = ({ item, id, title, imageTitle, iconTop, texto, activo, handleClic }) => {
+  idfav: string;
+  handleAdd: any;
+  handleDelet: any;
+}> = ({
+  item,
+  id,
+  title,
+  imageTitle,
+  iconTop,
+  texto,
+  idfav,
+  handleAdd,
+  handleDelet,
+}) => {
   return (
     <>
       <div className="slide-full">
@@ -30,16 +41,25 @@ const BoxAfiliado: React.FC<{
          `}
         >
           {title}
-          {iconTop !== "" && (
+
+          {idfav === "" ? (
             <IonButton
               color="dark"
               fill="clear"
-              onClick={() => handleClic(id, item)}
+              onClick={() => handleAdd(id, item)}
+            >
+              <FontAwesomeIcon icon={iconTop} className="mr-0 float-right" />
+            </IonButton>
+          ) : (
+            <IonButton
+              color="dark"
+              fill="clear"
+              onClick={() => handleDelet(idfav, item)}
             >
               <FontAwesomeIcon
                 icon={iconTop}
                 className="mr-0 float-right"
-                style={{ color: activo !== "" ? "red" : "" }}
+                style={{ color: "red" }}
               />
             </IonButton>
           )}

@@ -53,7 +53,7 @@ const Home: React.FC = () => {
     let nuevo = datos.map((item: any) => {
       return {
         ...item,
-        activo: item.idusuario === user.id.toString() ? "activo" : "",
+        idfav: item.idusuario === user.id.toString() ? item.idfav : "",
       };
     });
     return nuevo;
@@ -106,7 +106,36 @@ const Home: React.FC = () => {
               msg: data.msg,
               estado: true,
             });
-            let clone = { ...item, activo: "activo" };
+            let clone = { ...item, idfav: data.id };
+            updateDatos(clone);
+          } else {
+            setNotificacion({
+              msg: data.msg,
+              estado: true,
+            });
+          }
+        }
+      })
+      .catch(function (err) {
+        console.warn("Error:" + err);
+      });
+  };
+
+  const handleDeletFavorito = (id: any, item: any) => {
+    let formDa = new FormData();
+    formDa.append("op", "deletFavorito");
+    formDa.append("id", id);
+
+    serviciosAfiliados(formDa)
+      .then(function (response) {
+        const { data, status } = response;
+        if (status === 200) {
+          if (data.rsp === 1) {
+            setNotificacion({
+              msg: data.msg,
+              estado: true,
+            });
+            let clone = { ...item, idfav: "" };
             updateDatos(clone);
           } else {
             setNotificacion({
@@ -326,8 +355,9 @@ const Home: React.FC = () => {
                             imageTitle={`https://toolkit.maxialatam.com/wallethealth/asset/${item.logo}`}
                             iconTop={faHeart}
                             texto="descripcion"
-                            activo={item.activo}
-                            handleClic={handleFavorito}
+                            idfav={item.idfav}
+                            handleAdd={handleFavorito}
+                            handleDelet={handleDeletFavorito}
                           />
                         </div>
                       ))}
