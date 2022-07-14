@@ -6,11 +6,25 @@ export const handleNombre = (id: any, data: any) => {
   }
 };
 export const formtFechaCorta = (fecha: any) => {
-  let f = new Date(fecha);
-  if (f != null) {
+  if (fecha != null && fecha !== "") {
+    let f = new Date(fecha);
     let nueva = "";
     const [dia, mes, yy] = f.toLocaleDateString().split("/");
     nueva = `${yy}-${mes}-${dia}`;
+    return nueva;
+  } else {
+    return "";
+  }
+};
+
+export const fechaFrontend = (fecha: any) => {
+  let nueva = "";
+  if (fecha != null && fecha !== "") {
+    let f = new Date(fecha);
+    const [dia, mes, yy] = f.toLocaleDateString().split("/");
+    nueva = `${dia}-${mes}-${yy}`;
+    return nueva;
+  } else {
     return nueva;
   }
 };

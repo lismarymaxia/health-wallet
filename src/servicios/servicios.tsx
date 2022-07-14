@@ -48,6 +48,7 @@ export const serviciosAfiliados = (form: any) =>
   });
 
 export const serviciosConsultas = (form: any) =>
-  servicesWh.post("/controller/consultasback.php", form, {
+  servicesWh.post("/api/listado-consultas.php", form, {
     responseType: "json",
   });
+/*-controller/consultasback.php-*/

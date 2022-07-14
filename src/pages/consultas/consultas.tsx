@@ -39,7 +39,7 @@ import { chevronBackOutline } from "ionicons/icons";
 import { Header } from "../../components";
 import { servicesWh, serviciosConsultas } from "../../servicios/servicios";
 import { Card } from "./Card";
-import { formtFechaCorta } from "../../helpers";
+import { formtFechaCorta, fechaFrontend } from "../../helpers";
 import "../../style/tema.css";
 
 const Consultas: React.FC = () => {
@@ -69,6 +69,8 @@ const Consultas: React.FC = () => {
   const [transitionD, setTransitionD] = useState(false);
 
   const fecth = () => {
+    let d = desde !== "" ? formtFechaCorta(desde) : "";
+    let h = hasta !== "" ? formtFechaCorta(hasta) : "";
     servicesWh
       .get("/api/listado-consultas.php", {
         params: {
@@ -76,6 +78,8 @@ const Consultas: React.FC = () => {
           cedula: cedula,
           busqueda: searchTerm,
           page: page,
+          desde: d,
+          hasta: h,
           imestamp: new Date().getTime(),
         },
         responseType: "json",
@@ -147,13 +151,13 @@ const Consultas: React.FC = () => {
       .then(function (response) {
         const { data, status } = response;
         if (status === 200) {
-          if (data.rsp === 1) {
-            setData(data.data);
-            setLoadSearch(false);
-          } else {
-            setData([]);
-            setLoadSearch(false);
-          }
+          setData(data.data);
+          setLoadSearch(false);
+          setPage(data.current_page + 1);
+          setTotalResults(data.totalResults);
+        } else {
+          setData([]);
+          setLoadSearch(false);
         }
       })
       .catch(function (err) {
@@ -184,7 +188,6 @@ const Consultas: React.FC = () => {
     );
   }
 
-  console.log({ desde, hasta });
   return (
     <IonPage className="fondo">
       <IonHeader>
@@ -312,16 +315,20 @@ const Consultas: React.FC = () => {
           </IonHeader>
           <IonContent>
             <IonGrid>
-              <IonRow className="ion-justify-content-start">
-                <IonCol sizeSm="12" sizeMd="6" sizeLg="12">
+              <IonRow>
+                <IonCol size="12">
                   <IonItem>
                     <IonButton
-                      color="primary"
-                      onClick={() => setTransitionU(true)}
+                      color="dark"
+                      fill="clear"
+                      onClick={() => setTransitionU(!transitionU)}
                     >
                       Desde
                     </IonButton>
+                    {fechaFrontend(desde)}
                   </IonItem>
+                </IonCol>
+                <IonCol size="12">
                   {transitionU && (
                     <IonDatetime
                       presentation="date"
@@ -335,15 +342,19 @@ const Consultas: React.FC = () => {
                     ></IonDatetime>
                   )}
                 </IonCol>
-                <IonCol sizeSm="12" sizeMd="6" sizeLg="12">
+                <IonCol size="12">
                   <IonItem>
                     <IonButton
-                      color="primary"
-                      onClick={() => setTransitionD(true)}
+                      color="dark"
+                      fill="clear"
+                      onClick={() => setTransitionD(!transitionD)}
                     >
                       Hasta
                     </IonButton>
+                    {fechaFrontend(hasta)}
                   </IonItem>
+                </IonCol>
+                <IonCol size="12">
                   {transitionD && (
                     <IonDatetime
                       presentation="date"
@@ -357,8 +368,7 @@ const Consultas: React.FC = () => {
                     ></IonDatetime>
                   )}
                 </IonCol>
-                <IonCol sizeSm="12" sizeMd="6" sizeLg="12">
-                  {" "}
+                <IonCol size="12">
                   <IonItem>
                     <IonSelect
                       value={afiliado}
@@ -373,16 +383,17 @@ const Consultas: React.FC = () => {
                       ))}
                     </IonSelect>
                   </IonItem>
-                  <IonItem>
-                    <IonButton
-                      color="primary"
-                      onClick={(e) => {
-                        handleSearch(e);
-                      }}
-                    >
-                      filtrar
-                    </IonButton>
-                  </IonItem>
+                </IonCol>
+                <IonCol size="12">
+                  <IonButton
+                    color="dark"
+                    onClick={(e) => {
+                      handleSearch(e);
+                    }}
+                    fill="clear"
+                  >
+                    filtrar
+                  </IonButton>
                 </IonCol>
               </IonRow>
             </IonGrid>
