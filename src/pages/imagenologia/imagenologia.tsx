@@ -1,30 +1,49 @@
 import {
+  faXRay,
+  faMicroscope,
+  faStethoscope,
+  faSliders,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
   IonContent,
   IonPage,
-  IonLabel,
-  IonButton,
-  IonIcon,
   IonCard,
   IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonProgressBar,
+  IonCol,
+  IonGrid,
+  IonHeader,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonRow,
+  IonSearchbar,
+  IonSlide,
+  IonSlides,
+  IonTitle,
+  IonToolbar,
 } from "@ionic/react";
-import { linkSharp } from "ionicons/icons";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Header } from "../../components";
-import { services } from "../../servicios/servicios";
+import { Link } from "react-router-dom";
+import { services, serviciosConsultas } from "../../servicios/servicios";
+import { Card } from "./card";
 import "./imagenologia.css";
 
 const Imagenologia: React.FC = () => {
   const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
-
-  /*const institucion = useSelector(
-    (state: any) => state.reducerFuncionalidad.institutcion
-  );*/
   const [load, setLoad] = useState<Boolean>(true);
   const [data, setData] = useState<any>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
+  const [totalResults, setTotalResults] = useState(0);
+  const [page, setPage] = useState<any>(1);
+  const [isOpen, setIsOpen] = useState(false);
+  const slideOpts = {
+    initialSlide: 0,
+    speed: 200,
+    slidesPerView: 1.7,
+    spaceBetween: 20,
+  };
 
   useEffect(() => {
     services
@@ -32,6 +51,7 @@ const Imagenologia: React.FC = () => {
         params: {
           op: "imagenologia",
           id: cedula,
+          page: page,
           imestamp: new Date().getTime(),
         },
         responseType: "json",
@@ -54,120 +74,187 @@ const Imagenologia: React.FC = () => {
       .catch((e) => {
         console.warn(e);
       });
-  }, [cedula]);
+  }, [cedula, page]);
 
-  if (load) {
-    return (
-      <IonPage>
-        <Header title="Consulta" isbotton={true} isBuger={false} />
-        <IonContent fullscreen>
-          <IonProgressBar type="indeterminate" color="success"></IonProgressBar>
-        </IonContent>
-      </IonPage>
-    );
-  }
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    setLoad(true);
+    let formDa = new FormData();
+    formDa.append("op", "buscador");
+    formDa.append("busqueda", searchTerm);
+    formDa.append("cedula", cedula);
+    serviciosConsultas(formDa)
+      .then(function (response) {
+        const { data, status } = response;
+        if (status === 200) {
+          setData(data.data);
+          setLoad(false);
+          setPage(data.current_page + 1);
+          setTotalResults(data.totalResults);
+        } else {
+          setData([]);
+          setLoad(false);
+        }
+      })
+      .catch(function (err) {
+        console.warn("Error:" + err);
+      });
+  };
+  const loadData = (ev: any) => {
+    setTimeout(() => {
+      ev.target.complete();
+      if (data.length === totalResults) {
+        setInfiniteDisabled(true);
+      } else {
+        //fecth();
+      }
+    }, 500);
+  };
+
   return (
-    <IonPage>
-      <Header title="Imagenología" isbotton={true} isBuger={false} />
-      <IonContent fullscreen>
-        {data.map((item: any, index: any) => (
-          <IonCard className="card__consulta card_custon" key={index}>
-            <IonCardHeader>
-              <IonCardTitle>{item.tipo}</IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-              <div style={{paddingBottom: "0.2rem"}}>
-                <IonLabel style={{ color: "#333333", fontSize: "0.95rem" }}>
-                  {item.unidad}
-                </IonLabel>
+    <IonPage className="fondo">
+      <IonHeader>
+        <div className="p-perfil bg-info-alt border-radius-bottom">
+          <IonToolbar>
+            <IonTitle className="fs-16 font-w600 text-center">
+              Imagenologia
+            </IonTitle>
+            {/*<IonButtons slot="start">
+              <IonBackButton
+                icon={chevronBackOutline}
+                text=""
+                className="custom-back text-white"
+              />
+  </IonButtons>*/}
+          </IonToolbar>
+          <IonRow className="mt-4 pb-3">
+            <IonCol size="12" className="px-3">
+              <IonSlides pager={false} options={slideOpts}>
+                <IonSlide>
+                  <IonCard className="m-0 card-slide px-2 box-op  active">
+                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                      <span>
+                        <FontAwesomeIcon icon={faXRay} className="mr-0 fs-16" />
+                      </span>
+
+                      <span>
+                        <Link
+                          to="/app/imagenologia"
+                          className="d-block"
+                          style={{ color: "#3B72A2" }}
+                        >
+                          Imagenologia
+                        </Link>
+                      </span>
+                    </IonCardContent>
+                  </IonCard>
+                </IonSlide>
+                <IonSlide>
+                  <IonCard className="m-0 card-slide px-2 box-op">
+                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                      <span>
+                        <FontAwesomeIcon
+                          icon={faMicroscope}
+                          className="mr-0 fs-16"
+                        />
+                      </span>
+                      <span>
+                        <Link
+                          to="/app/laboratorio"
+                          className="d-block"
+                          style={{ color: "#fff" }}
+                        >
+                          Laboratorios
+                        </Link>
+                      </span>
+                    </IonCardContent>
+                  </IonCard>
+                </IonSlide>
+                <IonSlide>
+                  <IonCard className="m-0 card-slide px-2 box-op">
+                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                      <span>
+                        <FontAwesomeIcon
+                          icon={faStethoscope}
+                          className="mr-0 fs-16"
+                        />
+                      </span>
+                      <span>
+                        <Link
+                          to="/app/consultas"
+                          className="d-block"
+                          style={{ color: "#fff" }}
+                        >
+                          Consultas
+                        </Link>
+                      </span>
+                    </IonCardContent>
+                  </IonCard>
+                </IonSlide>
+              </IonSlides>
+            </IonCol>
+          </IonRow>
+        </div>
+      </IonHeader>
+      <IonContent fullscreen className="bg-light">
+        <IonGrid className="pb-4">
+          <IonRow className="mt-1 px-3">
+            <IonCol size="12" className="pb-3">
+              <div
+                className="searchContainer mt-1 mb-3 d-inline-block"
+                style={{ width: "86%" }}
+              >
+                <form action="" onSubmit={handleSearch}>
+                  <IonSearchbar
+                    value={searchTerm}
+                    onIonChange={(e) => setSearchTerm(e.detail.value!)}
+                    placeholder="Buscar..."
+                    slot="end"
+                    class="px-0"
+                  />
+
+                  <input type="submit" style={{ display: "none" }} />
+                </form>
               </div>
-              <div>
-                  <IonLabel>
-                    Estudio: {item.estudio}
-                  </IonLabel>
-              </div>
-              <div>
-               <IonLabel>
-                  Fecha: {item.fecha}
-                </IonLabel>
+              <div
+                className="d-inline-block text-right"
+                style={{ width: "14%" }}
+              >
+                <Link
+                  onClick={() => setIsOpen(true)}
+                  to="#"
+                  className="bg-info-alt d-inline-block btn-filter fs-16 btn-shadow"
+                >
+                  <FontAwesomeIcon
+                    icon={faSliders}
+                    className="mr-0 float-right text-white"
+                  />
+                </Link>
               </div>
 
-              <IonButton
-                expand="full"
-                fill="clear"
-                target="_blank"
-                href={item.url}
-                size="small"
-                style={{height: "auto"}}
+              <h5 className="font-w700 fs-15 text-info-dark mb-2">Histórico</h5>
+
+              {load
+                ? "Cargando..."
+                : data.map((item: any, index: any) => (
+                    <Card item={item} key={index} />
+                  ))}
+              <IonInfiniteScroll
+                onIonInfinite={loadData}
+                threshold="100px"
+                disabled={isInfiniteDisabled}
               >
-                ver
-                <IonIcon
-                  icon={linkSharp}
-                  className="ion-margin-start"
-                  size="small"
-                />{" "}
-              </IonButton>
-            </IonCardContent>
-          </IonCard>
-        ))}
+                <IonInfiniteScrollContent
+                  loadingSpinner="bubbles"
+                  loadingText="Cargando..."
+                ></IonInfiniteScrollContent>
+              </IonInfiniteScroll>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );
 };
 
 export default Imagenologia;
-/*
-Estudio: US - Abdomen completo(higado,ri?on,bazo,pancreas,via  biliar)
-Unidad "Policlínica Dr. Roberto Ramirez de Diego"
-fecha: "17-FEB-22"
-
- {load ? (
-          <div className="ion-padding custom-skeleton">
-            <IonSkeletonText animated style={{ width: "60%" }} />
-            <IonSkeletonText animated />
-            <IonSkeletonText animated style={{ width: "88%" }} />
-            <IonSkeletonText animated style={{ width: "70%" }} />
-            <IonSkeletonText animated style={{ width: "60%" }} />
-          </div>
-        ) : (
-          data.map((item: any, index: any) => (
-            <div className="post" key={index}>
-              <IonItem lines="none">
-                <IonAvatar className="content__button">
-                  <IonButton
-                    fill="clear"
-                    style={{
-                      background: "#148f77",
-                      color: "#ffff",
-                      width: "3.5rem",
-                      height: "3.5rem",
-                      borderRadius: "50%",
-                    }}
-                    routerLink="/app/imagenologia-detalle"
-                  >
-                    <IonIcon icon={documentTextSharp} />
-                  </IonButton>
-                </IonAvatar>
-                <IonLabel className="ion-text-wrap">
-                  <div className="postInfo">
-                    <p>Fecha:{item.fecha}</p>
-                  </div>
-                  <div className="postInfo">
-                    <p>Estudio:{item.estudio}</p>
-                  </div>
-                  <div className="postInfo">
-                    <p>Estado:{item.estado}</p>
-                  </div>
-
-                  <p className="postText"></p>
-                  <div className="postReactions">
-                    <div className="postReaction">
-                      <p></p>
-                    </div>
-                  </div>
-                </IonLabel>
-              </IonItem>
-            </div>
-          ))
-        )}
-*/

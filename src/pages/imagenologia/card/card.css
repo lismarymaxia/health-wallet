@@ -1,0 +1,46 @@
+.card__consulta {
+  border: 1px solid #dfe1e5;
+  background: #efefef;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+  /*
+  background: linear-gradient(
+    180deg,
+    rgba(3, 33, 27, 1) 0%,
+    rgba(14, 98, 81, 1) 100%
+  );
+  */
+}
+.swiper-pagination-bullet-active {
+  background: #ffffff;
+}
+
+.swiper-pagination-bullet {
+  background: #2d2727;
+}
+
+.searchbar-search-icon.sc-ion-searchbar-md {
+  color: white;
+  pointer-events: none;
+}
+
+.content__frecuencia {
+  display: flex;
+  justify-content: space-between;
+  background: #d1d1d1;
+  border-radius: 4px;
+  padding: 0px;
+  font-weight: bold;
+}
+
+.item__frecuencia {
+  list-style: none;
+  margin-right: 4px;
+}
+
+.active {
+  background: #2bc155;
+  color: #ffffff;
+  padding-left: 2px;
+  padding-right: 2px;
+}

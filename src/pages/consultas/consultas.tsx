@@ -4,13 +4,11 @@ import {
   IonContent,
   IonPage,
   IonSearchbar,
-  IonProgressBar,
   useIonViewDidEnter,
   IonHeader,
   IonToolbar,
   IonTitle,
   IonButtons,
-  IonBackButton,
   IonSlides,
   IonSlide,
   IonCard,
@@ -35,8 +33,7 @@ import {
   faXRay,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { chevronBackOutline } from "ionicons/icons";
-import { Header } from "../../components";
+//import { Header } from "../../components";
 import { servicesWh, serviciosConsultas } from "../../servicios/servicios";
 import { Card } from "./Card";
 import { formtFechaCorta, fechaFrontend } from "../../helpers";
@@ -58,7 +55,6 @@ const Consultas: React.FC = () => {
   const [afiliados, setAfiliados] = useState<any>([]);
   const [afiliado, setAfiliado] = useState<any>("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [loadSearch, setLoadSearch] = useState<Boolean>(false);
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
   const [totalResults, setTotalResults] = useState(0);
   const [page, setPage] = useState<any>(1);
@@ -134,7 +130,7 @@ const Consultas: React.FC = () => {
 
   const handleSearch = (e: any) => {
     e.preventDefault();
-    setLoadSearch(true);
+    setLoad(true);
     let formDa = new FormData();
     formDa.append("op", "buscador");
     formDa.append("busqueda", searchTerm);
@@ -152,12 +148,12 @@ const Consultas: React.FC = () => {
         const { data, status } = response;
         if (status === 200) {
           setData(data.data);
-          setLoadSearch(false);
+          setLoad(false);
           setPage(data.current_page + 1);
           setTotalResults(data.totalResults);
         } else {
           setData([]);
-          setLoadSearch(false);
+          setLoad(false);
         }
       })
       .catch(function (err) {
@@ -177,7 +173,39 @@ const Consultas: React.FC = () => {
     }, 500);
   };
 
-  if (load) {
+  const handleClear = () => {
+    setSearchTerm("");
+    setDesde("");
+    setHasta("");
+    servicesWh
+      .get("/api/listado-consultas.php", {
+        params: {
+          op: "consultas",
+          cedula: cedula,
+          page: 1,
+          imestamp: new Date().getTime(),
+        },
+        responseType: "json",
+      })
+      .then((rsp) => {
+        const { data, status } = rsp;
+        if (status === 200) {
+          if (data) {
+            setLoad(false);
+            setData((prev: any) => [...prev, ...data.data]);
+            setPage(2);
+            setTotalResults(data.totalResults);
+          } else {
+            setLoad(false);
+            setData([]);
+          }
+        }
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
+  };
+  /*if (load) {
     return (
       <IonPage className="fondo">
         <Header title="Consultas" isbotton={true} isBuger={false} />
@@ -186,7 +214,7 @@ const Consultas: React.FC = () => {
         </IonContent>
       </IonPage>
     );
-  }
+  }*/
 
   return (
     <IonPage className="fondo">
@@ -196,13 +224,13 @@ const Consultas: React.FC = () => {
             <IonTitle className="fs-16 font-w600 text-center">
               Estudios
             </IonTitle>
-            <IonButtons slot="start">
+            {/*<IonButtons slot="start">
               <IonBackButton
                 icon={chevronBackOutline}
                 text=""
                 className="custom-back text-white"
               />
-            </IonButtons>
+  </IonButtons>*/}
           </IonToolbar>
           <IonRow className="mt-4 pb-3">
             <IonCol size="12" className="px-3">
@@ -213,7 +241,16 @@ const Consultas: React.FC = () => {
                       <span>
                         <FontAwesomeIcon icon={faXRay} className="mr-0 fs-16" />
                       </span>
-                      <span className="d-block">Imágenes</span>
+
+                      <span>
+                        <Link
+                          to="/app/imagenologia"
+                          className="d-block"
+                          style={{ color: "#fff" }}
+                        >
+                          Imagenologia
+                        </Link>
+                      </span>
                     </IonCardContent>
                   </IonCard>
                 </IonSlide>
@@ -226,7 +263,15 @@ const Consultas: React.FC = () => {
                           className="mr-0 fs-16"
                         />
                       </span>
-                      <span className="d-block">Laboratorios</span>
+                      <span>
+                        <Link
+                          to="/app/laboratorio"
+                          className="d-block"
+                          style={{ color: "#fff" }}
+                        >
+                          Laboratorios
+                        </Link>
+                      </span>
                     </IonCardContent>
                   </IonCard>
                 </IonSlide>
@@ -239,7 +284,15 @@ const Consultas: React.FC = () => {
                           className="mr-0 fs-16"
                         />
                       </span>
-                      <span className="d-block">Consultas</span>
+                      <span>
+                        <Link
+                          to="/app/consultas"
+                          className="d-block"
+                          style={{ color: "#3B72A2" }}
+                        >
+                          Consultas
+                        </Link>
+                      </span>
                     </IonCardContent>
                   </IonCard>
                 </IonSlide>
@@ -260,6 +313,9 @@ const Consultas: React.FC = () => {
                   <IonSearchbar
                     value={searchTerm}
                     onIonChange={(e) => setSearchTerm(e.detail.value!)}
+                    onIonClear={() => {
+                      handleClear();
+                    }}
                     placeholder="Buscar..."
                     slot="end"
                     class="px-0"
@@ -286,8 +342,8 @@ const Consultas: React.FC = () => {
 
               <h5 className="font-w700 fs-15 text-info-dark mb-2">Histórico</h5>
 
-              {loadSearch
-                ? "buscando"
+              {load
+                ? "Cargando..."
                 : data.map((item: any, index: any) => (
                     <Card item={item} key={index} />
                   ))}

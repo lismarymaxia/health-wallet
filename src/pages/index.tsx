@@ -2,7 +2,7 @@ import { Login } from "./login";
 import { Datos, EditDatos } from "./datos";
 import { Citas } from "./citas";
 import { Consultas, Consulta } from "./consultas";
-import { Imagenologia, ImagenologiaDtls } from "./imagenologia";
+import { Imagenologia } from "./imagenologia";
 import { Laboratorio } from "./laboratorio";
 import { Medicamentos } from "./medicamentos";
 import { Post } from "./post";
@@ -25,7 +25,6 @@ export {
   Consultas,
   Consulta,
   Imagenologia,
-  ImagenologiaDtls,
   Laboratorio,
   Medicamentos,
   Post,
@@ -39,5 +38,5 @@ export {
   ProximasCitas,
   DetalleCita,
   DetalleConsulta,
-  Soporte
+  Soporte,
 };

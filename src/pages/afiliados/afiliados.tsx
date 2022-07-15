@@ -10,6 +10,7 @@ import {
   IonImg,
   IonProgressBar,
   IonButton,
+  IonToast,
 } from "@ionic/react";
 import { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -139,7 +140,7 @@ const Afiliados = () => {
       </IonPage>
     );
   }
-  console.log(datos);
+
   return (
     <IonPage className="fondo">
       <Header title="Afiliados" isbotton={true} isBuger={false} />
@@ -246,6 +247,12 @@ const Afiliados = () => {
           </IonRow>
         </IonGrid>
       </IonContent>
+      <IonToast
+        isOpen={notificacion.estado}
+        onDidDismiss={() => setNotificacion({ ...notificacion, estado: false })}
+        message={notificacion.msg}
+        duration={500}
+      />
     </IonPage>
   );
 };
