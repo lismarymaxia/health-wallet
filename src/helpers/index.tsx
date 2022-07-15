@@ -1,3 +1,17 @@
-import { handleNombre, formtFechaCorta, fechaFrontend } from "./helpers";
-import { tablaFrecuencia } from "./tablasHash";
-export { handleNombre, formtFechaCorta, fechaFrontend, tablaFrecuencia };
+import {
+  handleNombre,
+  formtFechaCorta,
+  fechaFrontend,
+  fecha_imagenologia,
+  fecha_laboratorio,
+} from "./helpers";
+import { tablaFrecuencia, meses } from "./tablasHash";
+export {
+  handleNombre,
+  formtFechaCorta,
+  fechaFrontend,
+  tablaFrecuencia,
+  meses,
+  fecha_imagenologia,
+  fecha_laboratorio,
+};
