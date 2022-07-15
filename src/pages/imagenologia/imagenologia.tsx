@@ -25,7 +25,7 @@ import {
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { services, serviciosConsultas } from "../../servicios/servicios";
+import { servicesWh, serviciosConsultas } from "../../servicios/servicios";
 import { Card } from "./card";
 import "./imagenologia.css";
 
@@ -46,8 +46,8 @@ const Imagenologia: React.FC = () => {
   };
 
   useEffect(() => {
-    services
-      .get("/api.php", {
+    servicesWh
+      .get("/api/listado-imagenologia", {
         params: {
           op: "imagenologia",
           id: cedula,

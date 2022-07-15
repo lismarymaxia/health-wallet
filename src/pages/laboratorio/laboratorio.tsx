@@ -25,7 +25,7 @@ import {
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { services, serviciosConsultas } from "../../servicios/servicios";
+import { serviciosConsultas, servicesWh } from "../../servicios/servicios";
 import { Card } from "./card";
 const Laboratorio: React.FC = () => {
   const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
@@ -47,8 +47,8 @@ const Laboratorio: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    services
-      .get("/api.php", {
+    servicesWh
+      .get("/api/listado-laboratorio.php", {
         params: {
           op: "timeline_lab",
           page: page,
