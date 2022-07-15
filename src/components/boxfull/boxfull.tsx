@@ -26,7 +26,8 @@ const Boxfull: React.FC<{
   ir: boolean;
   linkIr: string;
   tipo: string;
-  urlExterna?: string;
+  textoUrlExternaLeft ?: string;
+  urlExternaLeft ?: string;
 }> = ({
   title,
   imageTitle,
@@ -49,13 +50,14 @@ const Boxfull: React.FC<{
   ir,
   linkIr,
   tipo,
-  urlExterna,
+  textoUrlExternaLeft,
+  urlExternaLeft,  
 }) => {
   const history = useHistory();
   const handelClick = () => {
     //history.push("/app/afiliados");
   };
-  const linkExterno = (url:string) => {
+  const linkExterno = (url?:string) => {
     window.open(`${url}`, "_blank");
   };
   return (
@@ -191,11 +193,13 @@ const Boxfull: React.FC<{
           </div>
         )}
 
-        {urlExterna && (
-          <div className="mr-0 float-right" style={{ marginTop: "-12px" }}>
-            <Link to="#" onClick={()=>{{linkExterno(urlExterna)}} }>
-              <FontAwesomeIcon icon={faAngleRight} className="text-info-dark" />
-            </Link>
+        {textoUrlExternaLeft !== "" && (
+          <div>
+            <p className="mb-0 mt-3 fs-12 float-left">
+              <Link to="#" onClick={()=>{{linkExterno(urlExternaLeft)}} } className="text-info-light" style={{textDecoration:"underline"}}>
+                {textoUrlExternaLeft}
+              </Link>
+            </p>
           </div>
         )}
 

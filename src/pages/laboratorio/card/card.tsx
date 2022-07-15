@@ -19,7 +19,7 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           title={item.desde}
           imageTitle=""
           iconTop=""
-          fechaTop={item.fecha}
+          fechaTop={item.fecha_solicitud}
           horaTop=""
           yearTop={item.year}
           iconTextoUno={faHospital}
@@ -34,9 +34,11 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           linkBottomRight=""
           textLinkBottomLeft=""
           textLinkBottomRight=""
-          ir={true}
-          linkIr={`detalle-consulta/${item.id}`}
+          ir={false}
+          linkIr=""
           tipo=""
+          textoUrlExternaLeft = "Ver informe"
+          urlExternaLeft="https://toolkit.maxialatam.com/wallethealth/api/test.php"
         />
       </IonCardContent>
     </IonCard>

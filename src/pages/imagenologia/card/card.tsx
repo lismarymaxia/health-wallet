@@ -1,5 +1,5 @@
 import { IonCard, IonCardContent } from "@ionic/react";
-import { faHospital, faXRay, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHospital, faXRay, faUser, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
 import { Boxfull } from "../../../components";
 import "./card.css";
 
@@ -15,7 +15,7 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
     >
       <IonCardContent className="card-content-slide">
         <Boxfull
-          title={item.desde}
+          title={item.estudio}
           imageTitle=""
           iconTop=""
           fechaTop={item.fecha}
@@ -24,8 +24,8 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           iconTextoUno={faHospital}
           textoUno={item.unidad}
           iconTextoDos={faXRay}
-          textoDos={item.estudio}
-          iconTextoTres={faUser}
+          textoDos=""
+          iconTextoTres={faUserDoctor}
           textoTres={item.nombre}
           iconTextoCuatro=""
           textoCuatro=""
@@ -36,7 +36,8 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           ir={false}
           linkIr=""
           tipo=""
-          urlExterna="https://toolkit.maxialatam.com/wallethealth/api/test.php"
+          textoUrlExternaLeft = "Ver informe"
+          urlExternaLeft="https://toolkit.maxialatam.com/wallethealth/api/test.php"
         />
       </IonCardContent>
     </IonCard>

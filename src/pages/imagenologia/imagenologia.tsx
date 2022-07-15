@@ -128,70 +128,66 @@ const Imagenologia: React.FC = () => {
   </IonButtons>*/}
           </IonToolbar>
           <IonRow className="mt-4 pb-3">
-            <IonCol size="12" className="px-3">
-              <IonSlides pager={false} options={slideOpts}>
-                <IonSlide>
-                  <IonCard className="m-0 card-slide px-2 box-op  active">
-                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
-                      <span>
-                        <FontAwesomeIcon icon={faXRay} className="mr-0 fs-16" />
-                      </span>
+            <IonCol size="4">
+              <IonCard className="m-0 card-slide px-2 box-op  active">
+                <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                  <span>
+                    <FontAwesomeIcon icon={faXRay} className="mr-0 fs-16" />
+                  </span>
 
-                      <span>
-                        <Link
-                          to="/app/imagenologia"
-                          className="d-block"
-                          style={{ color: "#3B72A2" }}
-                        >
-                          Imagenologia
-                        </Link>
-                      </span>
-                    </IonCardContent>
-                  </IonCard>
-                </IonSlide>
-                <IonSlide>
-                  <IonCard className="m-0 card-slide px-2 box-op">
-                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
-                      <span>
-                        <FontAwesomeIcon
-                          icon={faMicroscope}
-                          className="mr-0 fs-16"
-                        />
-                      </span>
-                      <span>
-                        <Link
-                          to="/app/laboratorio"
-                          className="d-block"
-                          style={{ color: "#fff" }}
-                        >
-                          Laboratorios
-                        </Link>
-                      </span>
-                    </IonCardContent>
-                  </IonCard>
-                </IonSlide>
-                <IonSlide>
-                  <IonCard className="m-0 card-slide px-2 box-op">
-                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
-                      <span>
-                        <FontAwesomeIcon
-                          icon={faStethoscope}
-                          className="mr-0 fs-16"
-                        />
-                      </span>
-                      <span>
-                        <Link
-                          to="/app/consultas"
-                          className="d-block"
-                          style={{ color: "#fff" }}
-                        >
-                          Consultas
-                        </Link>
-                      </span>
-                    </IonCardContent>
-                  </IonCard>
-                </IonSlide>
-              </IonSlides>
+                  <span>
+                    <Link
+                      to="/app/imagenologia"
+                      className="d-block"
+                      style={{ color: "#3B72A2" }}
+                    >
+                      Imagenología
+                    </Link>
+                  </span>
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
+            <IonCol size="4">
+              <IonCard className="m-0 card-slide px-2 box-op">
+                <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                  <span>
+                    <FontAwesomeIcon
+                      icon={faMicroscope}
+                      className="mr-0 fs-16"
+                    />
+                  </span>
+                  <span>
+                    <Link
+                      to="/app/laboratorio"
+                      className="d-block"
+                      style={{ color: "#fff" }}
+                    >
+                      Laboratorios
+                    </Link>
+                  </span>
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
+            <IonCol size="4">
+                <IonCard className="m-0 card-slide px-2 box-op">
+                  <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faStethoscope}
+                        className="mr-0 fs-16"
+                      />
+                    </span>
+                    <span>
+                      <Link
+                        to="/app/consultas"
+                        className="d-block"
+                        style={{ color: "#fff" }}
+                      >
+                        Consultas
+                      </Link>
+                    </span>
+                  </IonCardContent>
+                </IonCard>
             </IonCol>
           </IonRow>
         </div>
