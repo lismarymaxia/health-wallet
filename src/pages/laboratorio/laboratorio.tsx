@@ -52,7 +52,7 @@ const Laboratorio: React.FC = () => {
         params: {
           op: "timeline_lab",
           page: page,
-          id: cedula,
+          cedula: cedula,
           imestamp: new Date().getTime(),
         },
         responseType: "json",
