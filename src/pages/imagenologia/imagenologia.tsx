@@ -17,8 +17,6 @@ import {
   IonInfiniteScrollContent,
   IonRow,
   IonSearchbar,
-  IonSlide,
-  IonSlides,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -38,12 +36,6 @@ const Imagenologia: React.FC = () => {
   const [totalResults, setTotalResults] = useState(0);
   const [page, setPage] = useState<any>(1);
   const [isOpen, setIsOpen] = useState(false);
-  const slideOpts = {
-    initialSlide: 0,
-    speed: 200,
-    slidesPerView: 1.7,
-    spaceBetween: 20,
-  };
 
   useEffect(() => {
     servicesWh
@@ -168,26 +160,26 @@ const Imagenologia: React.FC = () => {
                 </IonCardContent>
               </IonCard>
             </IonCol>
-            <IonCol size="4" className="pl-1 pr-2">
-                <IonCard className="m-0 card-slide px-2 box-op">
-                  <IonCardContent className="card-content-slide text-center fs-12 py-2 px-0">
-                    <span>
-                      <FontAwesomeIcon
-                        icon={faStethoscope}
-                        className="mr-0 fs-16"
-                      />
-                    </span>
-                    <span>
-                      <Link
-                        to="/app/consultas"
-                        className="d-block"
-                        style={{ color: "#fff" }}
-                      >
-                        Consultas
-                      </Link>
-                    </span>
-                  </IonCardContent>
-                </IonCard>
+            <IonCol size="4">
+              <IonCard className="m-0 card-slide px-2 box-op">
+                <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                  <span>
+                    <FontAwesomeIcon
+                      icon={faStethoscope}
+                      className="mr-0 fs-16"
+                    />
+                  </span>
+                  <span>
+                    <Link
+                      to="/app/consultas"
+                      className="d-block"
+                      style={{ color: "#fff" }}
+                    >
+                      Consultas
+                    </Link>
+                  </span>
+                </IonCardContent>
+              </IonCard>
             </IonCol>
           </IonRow>
         </div>

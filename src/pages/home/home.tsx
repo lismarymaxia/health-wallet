@@ -21,10 +21,11 @@ import {
   faMicroscope,
   faXRay,
 } from "@fortawesome/free-solid-svg-icons";
-import { servicesWh, serviciosAfiliados } from "../../servicios/servicios";
-import { BoxAfiliado } from "../../components";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { servicesWh, serviciosAfiliados } from "../../servicios/servicios";
+import { BoxAfiliado } from "../../components";
+import { orderId } from "../../helpers";
 import "./home.css";
 import "../../style/tema.css";
 
@@ -47,6 +48,28 @@ const Home: React.FC = () => {
   const [notificacion, setNotificacion] = useState({
     msg: "",
     estado: false,
+  });
+
+  const [laboratorio, setLaboratorio] = useState({
+    centro: "​",
+    desde: "",
+    doctor: "",
+    fecha_solicitud: "",
+    id: "",
+    tipo_paciente: "",
+  });
+  const [imagenologia, setImagenologia] = useState({
+    cedula: "",
+    conimagen: "",
+    estado: "",
+    estudio: "",
+    fecha: "",
+    id: "",
+    nombre: "",
+    numeroacceso: "",
+    reporte: "",
+    unidad: "",
+    url: "",
   });
 
   const isFavorito = (datos: any) => {
@@ -84,6 +107,60 @@ const Home: React.FC = () => {
           } else {
             setLoad(false);
             setDatos([]);
+          }
+        }
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
+    /*-IMAGENOLOGIA-*/
+    servicesWh
+      .get("/controller/homeback.php", {
+        params: {
+          op: "getUltimoImag",
+          cedula: user.cedula,
+          imestamp: new Date().getTime(),
+        },
+        responseType: "json",
+      })
+      .then((rsp) => {
+        const { data, status } = rsp;
+        if (status === 200) {
+          if (data) {
+            if (data.data.length > 0) {
+              setImagenologia(data.data[0]);
+            }
+          } else {
+          }
+        }
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
+    /*-LABORATORIO-*/
+    servicesWh
+      .get("/controller/homeback.php", {
+        params: {
+          op: "getUltimoLab",
+          cedula: user.cedula,
+          imestamp: new Date().getTime(),
+        },
+        responseType: "json",
+      })
+      .then((rsp) => {
+        const { data, status } = rsp;
+        if (status === 200) {
+          if (data) {
+            const tratada = JSON.parse(data);
+            const claves = Object.keys(tratada);
+            const iterar = claves.map((item) => {
+              return { ...tratada[item], id: item };
+            });
+            if (claves.length > 0) {
+              setLaboratorio(iterar[0]);
+              console.log(iterar[0]);
+            }
+          } else {
           }
         }
       })
@@ -298,6 +375,7 @@ const Home: React.FC = () => {
                           Resultados de laboratorio
                         </span>
                         <span>CentroLab</span>
+                        {laboratorio.centro}
                       </div>
                     </div>
                     <div className="float-right">
@@ -318,6 +396,7 @@ const Home: React.FC = () => {
                           Resultados de imágenes
                         </span>
                         <span>CentroLab</span>
+                        {imagenologia.nombre}
                       </div>
                     </div>
                     <div className="float-right">

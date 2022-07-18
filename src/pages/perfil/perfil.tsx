@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   IonGrid,
   IonRow,
@@ -24,14 +25,16 @@ import {
   faAngleRight,
   faHospitalUser,
 } from "@fortawesome/free-solid-svg-icons";
-
+import { chevronBackOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
+import { useSelector } from "react-redux";
+import { servicesWh } from "../../servicios/servicios";
 import "./perfil.css";
 import "../../style/tema.css";
-import { chevronBackOutline } from "ionicons/icons";
-
 const Perfil = () => {
+  const user = useSelector((state: any) => state.reducerAuth.user);
   const history = useHistory();
+  const [perfil, setPerfil] = useState({ sangre: "", numemerg: "" });
   const handelPerfilAlergias = () => {
     history.push("/app/perfil-alergias");
   };
@@ -55,6 +58,30 @@ const Perfil = () => {
     //autoplay:true,
     //loop: true
   };
+
+  useEffect(() => {
+    servicesWh
+      .get("/controller/pacienteback.php", {
+        params: {
+          op: "getPacienteId",
+          id: user.id,
+          imestamp: new Date().getTime(),
+        },
+        responseType: "json",
+      })
+      .then((rsp) => {
+        const { data, status } = rsp;
+        if (status === 200) {
+          if (data) {
+            setPerfil({ sangre: data.sangre, numemerg: data.numemerg });
+          } else {
+          }
+        }
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
+  }, [user]);
 
   return (
     <IonPage className="fondo">
@@ -83,18 +110,18 @@ const Perfil = () => {
             </div>
 
             <div className="w-100 ml-3 float-right d-grid">
-              <p className="fs-16 font-w500">Laura Cristina García</p>
+              <p className="fs-16 font-w500">{user.nombre}</p>
               <div className="">
                 <span className="fs-12 float-left">Edad:</span>
                 <span className="fs-12 float-right">36 años</span>
               </div>
               <div className="">
                 <span className="fs-12 float-left">Cédula:</span>
-                <span className="fs-12 float-right">6-712-727</span>
+                <span className="fs-12 float-right">{user.cedula}</span>
               </div>
               <div className="pb-2 border-bottom">
                 <span className="fs-12 float-left">Grupo Sanguineo:</span>
-                <span className="fs-12 float-right">ORH+</span>
+                <span className="fs-12 float-right">{perfil.sangre}</span>
               </div>
               <div className="pt-2">
                 <span className="fs-12 float-left">Ver ficha completa</span>

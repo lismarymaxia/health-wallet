@@ -4,6 +4,8 @@ import {
   fechaFrontend,
   fecha_imagenologia,
   fecha_laboratorio,
+  orderId,
+  cadenaUpercase,
 } from "./helpers";
 import { tablaFrecuencia, meses } from "./tablasHash";
 export {
@@ -14,4 +16,6 @@ export {
   meses,
   fecha_imagenologia,
   fecha_laboratorio,
+  orderId,
+  cadenaUpercase,
 };
