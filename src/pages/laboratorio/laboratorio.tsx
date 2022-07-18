@@ -64,7 +64,10 @@ const Laboratorio: React.FC = () => {
             setLoad(false);
             const tratada = JSON.parse(data);
             const claves = Object.keys(tratada);
-            const iterar = claves.map((item) => tratada[item]);
+            //const iterar = claves.map((item) => tratada[item]);
+            const iterar = claves.map((item) => {
+              return { ...tratada[item], rid: item };
+            });
             setData(iterar);
           } else {
             setLoad(false);

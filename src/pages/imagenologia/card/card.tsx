@@ -1,5 +1,10 @@
 import { IonCard, IonCardContent } from "@ionic/react";
-import { faHospital, faXRay, faUser, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHospital,
+  faXRay,
+  faUserDoctor,
+} from "@fortawesome/free-solid-svg-icons";
+import { fecha_imagenologia } from "../../../helpers";
 import { Boxfull } from "../../../components";
 import "./card.css";
 
@@ -8,6 +13,7 @@ interface ContainerProps {
 }
 
 export const Card: React.FC<ContainerProps> = ({ item }) => {
+  const { daymonth, yy } = fecha_imagenologia(item.fecha);
   return (
     <IonCard
       className="m-0 mt-2 card-slide shadow-full"
@@ -18,9 +24,9 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           title={item.estudio}
           imageTitle=""
           iconTop=""
-          fechaTop={item.fecha}
+          fechaTop={daymonth}
           horaTop=""
-          yearTop={item.year}
+          yearTop={yy}
           iconTextoUno={faHospital}
           textoUno={item.unidad}
           iconTextoDos={faXRay}
@@ -36,7 +42,7 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           ir={false}
           linkIr=""
           tipo=""
-          textoUrlExternaLeft = "Ver informe"
+          textoUrlExternaLeft="Ver informe"
           urlExternaLeft="https://toolkit.maxialatam.com/wallethealth/api/test.php"
         />
       </IonCardContent>

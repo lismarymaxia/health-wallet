@@ -1,5 +1,8 @@
 import { IonCard, IonCardContent } from "@ionic/react";
 import { faHospital, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
+
+import { fecha_laboratorio } from "../../../helpers";
 import { Boxfull } from "../../../components";
 import "./card.css";
 
@@ -8,7 +11,9 @@ interface ContainerProps {
 }
 
 export const Card: React.FC<ContainerProps> = ({ item }) => {
-  console.log(item);
+  const { daymonth, yy } = fecha_laboratorio(item.fecha_solicitud);
+  const user = useSelector((state: any) => state.reducerAuth.user);
+  console.log(user.cedula);
   return (
     <IonCard
       className="m-0 mt-2 card-slide shadow-full"
@@ -19,9 +24,9 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           title={item.desde}
           imageTitle=""
           iconTop=""
-          fechaTop={item.fecha_solicitud}
+          fechaTop={daymonth}
           horaTop=""
-          yearTop={item.year}
+          yearTop={yy}
           iconTextoUno={faHospital}
           textoUno={item.centro}
           iconTextoDos={faUserDoctor}
@@ -37,8 +42,8 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           ir={false}
           linkIr=""
           tipo=""
-          textoUrlExternaLeft = "Ver informe"
-          urlExternaLeft="http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=cip&rid=rid"
+          textoUrlExternaLeft="Ver informe"
+          urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=${user.cedula}&rid=${item.rid}`}
         />
       </IonCardContent>
     </IonCard>
