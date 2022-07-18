@@ -144,7 +144,7 @@ const Laboratorio: React.FC = () => {
                     <Link
                       to="/app/imagenologia"
                       className="d-block"
-                      style={{ color: "#3B72A2" }}
+                      style={{ color: "#ffffff" }}
                     >
                       Imagenología
                     </Link>
@@ -232,6 +232,18 @@ const Laboratorio: React.FC = () => {
                   />
                 </Link>
               </div>
+
+              <h5 className="font-w700 fs-15 text-info-dark mb-2">Dashboard</h5>
+              <IonCard className="mx-0 mb-2 mt-2 card-slide shadow-full">
+                <IonCardContent className="card-content-slide">
+                  <span className="text-danger">Gráfico</span>
+                </IonCardContent>
+              </IonCard>
+              <IonCard className="mx-0 mb-4 mt-2 card-slide shadow-full">
+                <IonCardContent className="card-content-slide">
+                  <span className="text-danger">Último laboratorio</span>
+                </IonCardContent>
+              </IonCard>
 
               <h5 className="font-w700 fs-15 text-info-dark mb-2">Histórico</h5>
 

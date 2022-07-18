@@ -60,7 +60,9 @@ export const cadenaUpercase = (text: string) => {
   let cadena = text.trim().split(" ");
   console.log(cadena);
   let formato = cadena
-    .map((palabra: any) => {
+    .map((palabra: any) => {      
+      palabra = palabra.replaceAll("\u200BPOLICLINICA", "POLICLÍNICA");
+
       return palabra.length <= 2
         ? palabra.toLowerCase()
         : palabra.substring(0, 1).toUpperCase() +

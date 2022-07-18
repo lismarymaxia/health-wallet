@@ -244,7 +244,7 @@ const Consultas: React.FC = () => {
                     <Link
                       to="/app/imagenologia"
                       className="d-block"
-                      style={{ color: "#3B72A2" }}
+                      style={{ color: "#ffffff" }}
                     >
                       Imagenología
                     </Link>
