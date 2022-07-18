@@ -117,7 +117,7 @@ const Imagenologia: React.FC = () => {
         <div className="p-perfil bg-info-alt border-radius-bottom">
           <IonToolbar>
             <IonTitle className="fs-16 font-w600 text-center">
-              Imagenologia
+              Imagenología
             </IonTitle>
             {/*<IonButtons slot="start">
               <IonBackButton
@@ -128,9 +128,9 @@ const Imagenologia: React.FC = () => {
   </IonButtons>*/}
           </IonToolbar>
           <IonRow className="mt-4 pb-3">
-            <IonCol size="4">
-              <IonCard className="m-0 card-slide px-2 box-op  active">
-                <IonCardContent className="card-content-slide text-center fs-12 py-2">
+            <IonCol size="4" className="pl-2 pr-1">
+              <IonCard className="m-0 card-slide px-2 box-op active">
+                <IonCardContent className="card-content-slide text-center fs-12 py-2 px-0">
                   <span>
                     <FontAwesomeIcon icon={faXRay} className="mr-0 fs-16" />
                   </span>
@@ -147,9 +147,9 @@ const Imagenologia: React.FC = () => {
                 </IonCardContent>
               </IonCard>
             </IonCol>
-            <IonCol size="4">
+            <IonCol size="4" className="px-2">
               <IonCard className="m-0 card-slide px-2 box-op">
-                <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                <IonCardContent className="card-content-slide text-center fs-12 py-2 px-0">
                   <span>
                     <FontAwesomeIcon
                       icon={faMicroscope}
@@ -168,9 +168,9 @@ const Imagenologia: React.FC = () => {
                 </IonCardContent>
               </IonCard>
             </IonCol>
-            <IonCol size="4">
+            <IonCol size="4" className="pl-1 pr-2">
                 <IonCard className="m-0 card-slide px-2 box-op">
-                  <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                  <IonCardContent className="card-content-slide text-center fs-12 py-2 px-0">
                     <span>
                       <FontAwesomeIcon
                         icon={faStethoscope}
