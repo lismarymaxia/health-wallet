@@ -1,8 +1,7 @@
 import { IonCard, IonCardContent } from "@ionic/react";
 import { faHospital, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-
-import { fecha_laboratorio } from "../../../helpers";
+import { fecha_laboratorio, cadenaUpercase } from "../../../helpers";
 import { Boxfull } from "../../../components";
 import "./card.css";
 
@@ -13,7 +12,7 @@ interface ContainerProps {
 export const Card: React.FC<ContainerProps> = ({ item }) => {
   const { daymonth, yy } = fecha_laboratorio(item.fecha_solicitud);
   const user = useSelector((state: any) => state.reducerAuth.user);
-  console.log(user.cedula);
+
   return (
     <IonCard
       className="m-0 mt-2 card-slide shadow-full"
@@ -28,7 +27,7 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           horaTop=""
           yearTop={yy}
           iconTextoUno={faHospital}
-          textoUno={item.centro}
+          textoUno={cadenaUpercase(item.centro.trim())}
           iconTextoDos={faUserDoctor}
           textoDos={item.doctor}
           iconTextoTres=""

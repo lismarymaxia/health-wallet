@@ -4,7 +4,7 @@ import {
   faXRay,
   faUserDoctor,
 } from "@fortawesome/free-solid-svg-icons";
-import { fecha_imagenologia } from "../../../helpers";
+import { fecha_imagenologia, cadenaUpercase } from "../../../helpers";
 import { Boxfull } from "../../../components";
 import "./card.css";
 
@@ -28,7 +28,7 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           horaTop=""
           yearTop={yy}
           iconTextoUno={faHospital}
-          textoUno={item.unidad}
+          textoUno={cadenaUpercase(item.unidad)}
           iconTextoDos={faXRay}
           textoDos=""
           iconTextoTres={faUserDoctor}

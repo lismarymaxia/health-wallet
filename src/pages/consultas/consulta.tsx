@@ -195,7 +195,3 @@ const Consulta: React.FC = () => {
 };
 
 export default Consulta;
-
-/*
-https://toolkit.maxialatam.com/portalcsspd1/registro.php?idp=1&idc=905&idcentro=3
-*/

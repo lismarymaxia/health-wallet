@@ -51,6 +51,3 @@ export const serviciosConsultas = (form: any) =>
   servicesWh.post("/api/listado-consultas.php", form, {
     responseType: "json",
   });
-
-const urlLab =
-  "http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=cip&rid=rid";

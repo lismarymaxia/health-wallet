@@ -1,4 +1,5 @@
 import { meses } from "./tablasHash";
+
 export const handleNombre = (id: any, data: any) => {
   let filter: any = data.filter((item: any) => item.value === id);
   if (filter.length > 0) {
@@ -6,6 +7,7 @@ export const handleNombre = (id: any, data: any) => {
     return item.label;
   }
 };
+
 export const formtFechaCorta = (fecha: any) => {
   if (fecha != null && fecha !== "") {
     let f = new Date(fecha);
@@ -47,4 +49,23 @@ export const fecha_laboratorio = (fecha: any) => {
   } else {
     return { daymonth: "", yy: "" };
   }
+};
+
+export const orderId = (data: any) => {
+  //data.sort((a: any, b: any) => (a > b ? 1 : a < b ? -1 : 0));
+  return data.sort((a: any, b: any) => b.id - a.id);
+};
+
+export const cadenaUpercase = (text: string) => {
+  let cadena = text.trim().split(" ");
+  console.log(cadena);
+  let formato = cadena
+    .map((palabra: any) => {
+      return palabra.length <= 2
+        ? palabra.toLowerCase()
+        : palabra.substring(0, 1).toUpperCase() +
+            palabra.substring(1).toLowerCase();
+    })
+    .join(" ");
+  return formato;
 };
