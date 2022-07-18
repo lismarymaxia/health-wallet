@@ -38,7 +38,7 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           linkIr=""
           tipo=""
           textoUrlExternaLeft = "Ver informe"
-          urlExternaLeft="https://toolkit.maxialatam.com/wallethealth/api/test.php"
+          urlExternaLeft="http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=cip&rid=rid"
         />
       </IonCardContent>
     </IonCard>
