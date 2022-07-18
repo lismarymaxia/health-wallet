@@ -62,6 +62,8 @@ export const cadenaUpercase = (text: string) => {
   let formato = cadena
     .map((palabra: any) => {      
       palabra = palabra.replaceAll("\u200BPOLICLINICA", "POLICLÍNICA");
+      palabra = palabra.replaceAll("Policlinica", "Policlínica");
+      palabra = palabra.replaceAll("MEDICO", "MÉDICO");
 
       return palabra.length <= 2
         ? palabra.toLowerCase()
