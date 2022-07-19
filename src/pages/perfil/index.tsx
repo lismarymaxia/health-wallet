@@ -1,2 +1,3 @@
 import Perfil from "./perfil";
-export { Perfil };
+import Perfiles from "./perfil";
+export { Perfil, Perfiles };
