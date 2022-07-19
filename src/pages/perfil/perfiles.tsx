@@ -65,9 +65,20 @@ const Perfiles = () => {
         <IonGrid className="pb-4">
           <IonRow className="mt-4 px-3">
             <IonCol size="12" className="pb-3">
-                <h5 className="font-w700 fs-15 text-info-dark mb-2">
-                Perfiles
-                </h5>
+                <h4 className="font-w700 text-info-dark mb-2">
+                Bienvenido
+                </h4>
+                <p className="fs-14 text-info-dark mb-4">
+                ¿A que perfil deseas ingresar?
+                </p>
+                <div className="float-left">
+                    <IonThumbnail slot="start" class="">
+                        <IonImg src={"./images/perfil.JPG"} />
+                    </IonThumbnail>
+                    <IonThumbnail slot="start" class="">
+                        <IonImg src={"./images/juan.jpg"} />
+                    </IonThumbnail>
+                </div>
             </IonCol>
           </IonRow>
         </IonGrid>
