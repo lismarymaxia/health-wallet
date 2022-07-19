@@ -9,7 +9,7 @@ import { Post } from "./post";
 import { Vacunas } from "./vacunas";
 import { Home } from "./home";
 import { Registro } from "./registro";
-import { Afiliados } from "./afiliados";
+import { Afiliados, Afiliado } from "./afiliados";
 import { Perfil } from "./perfil";
 import { PerfilTratamientos } from "./perfilTratamientos";
 import { Notificaciones } from "./notificaciones";
@@ -32,6 +32,7 @@ export {
   Home,
   Registro,
   Afiliados,
+  Afiliado,
   Perfil,
   PerfilTratamientos,
   Notificaciones,

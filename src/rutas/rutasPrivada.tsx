@@ -26,6 +26,7 @@ import {
   Imagenologia,
   Laboratorio,
   Afiliados,
+  Afiliado,
   Perfil,
   PerfilTratamientos,
   Notificaciones,
@@ -36,7 +37,6 @@ import {
 } from "../pages";
 import { logout } from "../store";
 import "../style/tema.css";
-//setupIonicReact();
 
 const RutasPrivadas: React.FC = () => {
   const dispatch = useDispatch();
@@ -95,6 +95,10 @@ const RutasPrivadas: React.FC = () => {
           <Route exact path="/app/afiliados">
             <Afiliados />
           </Route>
+          <Route exact path="/app/afiliado/:id">
+            <Afiliado />
+          </Route>
+
           <Route exact path="/app/perfil">
             <Perfil />
           </Route>

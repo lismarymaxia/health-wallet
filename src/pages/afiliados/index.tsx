@@ -1,2 +1,3 @@
 import Afiliados from "./afiliados";
-export { Afiliados };
+import Afiliado from "./afiliado";
+export { Afiliados, Afiliado };
