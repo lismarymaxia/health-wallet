@@ -159,3 +159,16 @@ ion-tab-button{
 .d-grid{
     display: grid;
 }
+.listas li{
+    list-style: initial;
+    margin-bottom: 0.6rem;
+    line-height: normal;
+}
+
+.listas li::marker {
+    color: blue;
+}
+
+.listas li span {
+    margin-left: -8px;
+}
