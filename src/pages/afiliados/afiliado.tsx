@@ -16,13 +16,19 @@ import {
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faHospital, faUserDoctor, faXRay } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
-import { Boxfull, Header } from "../../components";
-import { servicesWh, serviciosAfiliados } from "../../servicios/servicios";
+import { Header } from "../../components";
+import {
+  servicesWh,
+  serviciosAfiliados,
+  getConsulta,
+  getLaboratorio,
+  getImagenologia,
+} from "../../servicios/servicios";
 import "../../style/tema.css";
 import "./afiliados.css";
-import { cadenaUpercase } from "../../helpers";
+import { ContentCard } from "./card";
 
 const Afiliado = () => {
   const { id }: any = useParams();
@@ -32,6 +38,8 @@ const Afiliado = () => {
   const [loadEsp, setLoadEsp] = useState<Boolean>(true);
   const [primeraColum, setPrimeraColum] = useState<any>([]);
   const [segundaColum, setSegundaColum] = useState<any>([]);
+  const [registros, setRegistros] = useState<any>([]);
+  const [loadRg, setLoadRg] = useState<Boolean>(true);
   const [notificacion, setNotificacion] = useState({
     msg: "",
     estado: false,
@@ -44,7 +52,34 @@ const Afiliado = () => {
     setDatos(nuevo);
   };
 
+  const getRegistro = () => {
+    setLoadRg(true);
+    Promise.all([
+      getConsulta(1, user.cedula),
+      getLaboratorio(1, user.cedula),
+      getImagenologia(1, user.cedula),
+    ])
+      .then((rsp: any) => {
+        const [cnst, lab, img] = rsp;
+
+        let newCnst = cnst.data.data.map((item: any) => {
+          return { ...item, tipo: "Consulta" };
+        });
+
+        let newImg = img.data.data.map((item: any) => {
+          return { ...item, tipo: "Imagenologia" };
+        });
+        const conector = [...newCnst, ...newImg];
+        setRegistros((prev: any) => [...prev, ...conector]);
+        setLoadRg(false);
+      })
+      .catch((error) => {
+        console.error("Error en triple peticion" + error);
+      });
+  };
+
   useEffect(() => {
+    getRegistro();
     setLoad(true);
     servicesWh
       .get("/controller/afiliados.php", {
@@ -71,9 +106,7 @@ const Afiliado = () => {
       .catch((e) => {
         console.warn(e);
       });
-  }, []);
 
-  useEffect(() => {
     setLoadEsp(true);
     servicesWh
       .get("/controller/afiliados.php", {
@@ -109,7 +142,8 @@ const Afiliado = () => {
       .catch((e) => {
         console.warn(e);
       });
-  }, []);
+  }, [user, id]);
+
   const handleFavorito = (id: any, item: any) => {
     let formDa = new FormData();
     formDa.append("op", "addFavorito");
@@ -216,7 +250,7 @@ const Afiliado = () => {
                               style={{ width: "50px", height: "50px" }}
                               className="float-left mr-2"
                             />
-                            <div className="d-flex justify-content-between">                              
+                            <div className="d-flex justify-content-between">
                               <div className="fs-14 font-w500 text-info mt-1 title">
                                 <span className="w-100">{item.nombre}</span>
                               </div>
@@ -228,7 +262,9 @@ const Afiliado = () => {
                                     className="m-0"
                                     style={{ width: "28px" }}
                                     fill="clear"
-                                    onClick={() => handleFavorito(item.id, item)}
+                                    onClick={() =>
+                                      handleFavorito(item.id, item)
+                                    }
                                   >
                                     <FontAwesomeIcon
                                       icon={faHeart}
@@ -271,21 +307,29 @@ const Afiliado = () => {
             <IonCol size="12" className="px-3">
               <IonCard className="m-0 mb-2 pb-2 card-slide w-100 afiliados">
                 <IonCardHeader>
-                  <IonCardTitle className="fs-14 pb-2">Especialidades</IonCardTitle>
+                  <IonCardTitle className="fs-14 pb-2">
+                    Especialidades
+                  </IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent className="card-content-slide">
                   <IonRow>
                     <IonCol size="6" className="pr-1 listas">
-                      {primeraColum.length > 0
+                      {loadEsp
+                        ? "Cargando"
+                        : primeraColum.length > 0
                         ? primeraColum.map((item: any, index: number) => (
                             <li key={index}>{item.nombre}</li>
                           ))
                         : null}
                     </IonCol>
                     <IonCol size="6" className="listas">
-                      {segundaColum.length > 0
+                      {loadEsp
+                        ? "Cargando"
+                        : segundaColum.length > 0
                         ? segundaColum.map((item: any, index: number) => (
-                            <li key={index}><span>{item.nombre}</span></li>
+                            <li key={index}>
+                              <span>{item.nombre}</span>
+                            </li>
                           ))
                         : null}
                     </IonCol>
@@ -299,84 +343,16 @@ const Afiliado = () => {
                 style={{ height: "auto" }}
               >
                 <IonCardHeader>
-                  <IonCardTitle className="fs-14 pb-2">Mis registros</IonCardTitle>
+                  <IonCardTitle className="fs-14 pb-2">
+                    Mis registros
+                  </IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent className="card-content-slide">
-                  <Boxfull
-                    title="CON - 101-00 Consulta externa"
-                    imageTitle=""
-                    iconTop=""
-                    fechaTop="22 Mar"
-                    horaTop=""
-                    yearTop="2021"
-                    iconTextoUno={faHospital}
-                    textoUno="Policlínica Roberto Ramírez de Diego"
-                    iconTextoDos={faUserDoctor}
-                    textoDos="Rolando Yee Escobar"
-                    iconTextoTres=""
-                    textoTres=""
-                    iconTextoCuatro=""
-                    textoCuatro=""
-                    linkBottomLeft=""
-                    linkBottomRight=""
-                    textLinkBottomLeft=""
-                    textLinkBottomRight=""
-                    ir={true}
-                    linkIr={`detalle-consulta/1`}
-                    tipo=""
-                  />
-
-                  <Boxfull
-                    title="LAB - COVID GENERAL"
-                    imageTitle=""
-                    iconTop=""
-                    fechaTop="06 Sep"
-                    horaTop=""
-                    yearTop="2020"
-                    iconTextoUno={faHospital}
-                    textoUno={cadenaUpercase("Policlínica Dr. Roberto Ramirez de Diego")}
-                    iconTextoDos={faUserDoctor}
-                    textoDos="Médico Css"
-                    iconTextoTres=""
-                    textoTres=""
-                    iconTextoCuatro=""
-                    textoCuatro=""
-                    linkBottomLeft=""
-                    linkBottomRight=""
-                    textLinkBottomLeft=""
-                    textLinkBottomRight=""
-                    ir={false}
-                    linkIr=""
-                    tipo=""
-                    textoUrlExternaLeft="Ver informe"
-                    urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=6-712-727&rid=141427`}
-                  />
-
-                  <Boxfull
-                    title="IMG - Rx - Torax PA o AP"
-                    imageTitle=""
-                    iconTop=""
-                    fechaTop="27 MAY"
-                    horaTop=""
-                    yearTop="2022"
-                    iconTextoUno={faHospital}
-                    textoUno={cadenaUpercase("Policlínica Roberto Ramirez de Diego")}
-                    iconTextoDos={faXRay}
-                    textoDos=""
-                    iconTextoTres={faUserDoctor}
-                    textoTres=""
-                    iconTextoCuatro=""
-                    textoCuatro=""
-                    linkBottomLeft=""
-                    linkBottomRight=""
-                    textLinkBottomLeft=""
-                    textLinkBottomRight=""
-                    ir={false}
-                    linkIr=""
-                    tipo=""
-                    textoUrlExternaLeft="Ver informe"
-                    urlExternaLeft="https://toolkit.maxialatam.com/wallethealth/api/test.php"
-                  />
+                  {loadRg
+                    ? "Cargando"
+                    : registros.map((item: any, index: number) => (
+                        <ContentCard item={item} key={index} />
+                      ))}
                 </IonCardContent>
               </IonCard>
             </IonCol>

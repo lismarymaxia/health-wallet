@@ -32,6 +32,7 @@ const Afiliados = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [datos, setDatos] = useState<any>([]);
   const [load, setLoad] = useState<Boolean>(true);
+
   const [notificacion, setNotificacion] = useState({
     msg: "",
     estado: false,
@@ -76,7 +77,7 @@ const Afiliados = () => {
       .catch((e) => {
         console.warn(e);
       });
-  }, []);
+  }, [user]);
 
   const handleFavorito = (id: any, item: any) => {
     let formDa = new FormData();
@@ -202,7 +203,7 @@ const Afiliados = () => {
                           className="card-content-slide"
                           id={`employeeItem_${item.id}`}
                           key={item.id}
-                        >                          
+                        >
                           <div>
                             <IonImg
                               src={`https://toolkit.maxialatam.com/wallethealth/asset/${item.logo}`}
@@ -210,7 +211,7 @@ const Afiliados = () => {
                               style={{ width: "50px", height: "50px" }}
                               className="float-left mr-2"
                             />
-                            <div className="d-flex justify-content-between">                              
+                            <div className="d-flex justify-content-between">
                               <div className="fs-15 font-w600 text-info mt-1 title">
                                 <span className="w-100">{item.nombre}</span>
                               </div>
@@ -221,9 +222,7 @@ const Afiliados = () => {
                                   className="m-0"
                                   style={{ width: "28px" }}
                                   fill="clear"
-                                  onClick={() =>
-                                    handleFavorito(item.id, item)
-                                  }
+                                  onClick={() => handleFavorito(item.id, item)}
                                 >
                                   <FontAwesomeIcon
                                     icon={faHeart}
@@ -251,21 +250,23 @@ const Afiliados = () => {
                           </div>
                           <div>
                             <p className="mb-0 ml-5 pl-2 fs-12">
-                              <span className="float-left">{item.descripcion}</span>
+                              <span className="float-left">
+                                {item.descripcion}
+                              </span>
                               <IonButton
-                                  color="dark"
-                                  className="float-right m-0"
-                                  style={{ width: "28px", height: "20px" }}
-                                  fill="clear"
-                                  onClick={() => {
-                                    handleDetail(item.id);
-                                  }}
-                                >
-                                  <FontAwesomeIcon
-                                    icon={faAngleRight}
-                                    className="mr-0"
-                                  />
-                                </IonButton>
+                                color="dark"
+                                className="float-right m-0"
+                                style={{ width: "28px", height: "20px" }}
+                                fill="clear"
+                                onClick={() => {
+                                  handleDetail(item.id);
+                                }}
+                              >
+                                <FontAwesomeIcon
+                                  icon={faAngleRight}
+                                  className="mr-0"
+                                />
+                              </IonButton>
                             </p>
                           </div>
                         </IonCardContent>

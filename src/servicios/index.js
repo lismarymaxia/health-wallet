@@ -1,5 +1,8 @@
 import {
   getPost,
+  getConsulta,
+  getLaboratorio,
+  getImagenologia,
   registroUsuario,
   serviciosPaciente,
   getEnfermedad,
@@ -8,6 +11,9 @@ import {
 } from "./servicios";
 export {
   getPost,
+  getConsulta,
+  getLaboratorio,
+  getImagenologia,
   registroUsuario,
   serviciosPaciente,
   getEnfermedad,

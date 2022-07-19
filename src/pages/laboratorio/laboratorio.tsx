@@ -17,8 +17,6 @@ import {
   IonInfiniteScrollContent,
   IonRow,
   IonSearchbar,
-  IonSlide,
-  IonSlides,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -29,15 +27,6 @@ import { serviciosConsultas, servicesWh } from "../../servicios/servicios";
 import { Card } from "./card";
 const Laboratorio: React.FC = () => {
   const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
-  const slideOpts = {
-    initialSlide: 0,
-    speed: 200,
-    slidesPerView: 1.7,
-    spaceBetween: 20,
-    //autoplay:true,
-    //loop: true
-  };
-
   const [load, setLoad] = useState<Boolean>(true);
   const [data, setData] = useState<any>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -174,25 +163,25 @@ const Laboratorio: React.FC = () => {
               </IonCard>
             </IonCol>
             <IonCol size="4" className="pl-1 pr-2">
-                <IonCard className="m-0 card-slide px-2 box-op">
-                  <IonCardContent className="card-content-slide text-center fs-12 py-2 px-0">
-                    <span>
-                      <FontAwesomeIcon
-                        icon={faStethoscope}
-                        className="mr-0 fs-16"
-                      />
-                    </span>
-                    <span>
-                      <Link
-                        to="/app/consultas"
-                        className="d-block"
-                        style={{ color: "#fff" }}
-                      >
-                        Consultas
-                      </Link>
-                    </span>
-                  </IonCardContent>
-                </IonCard>
+              <IonCard className="m-0 card-slide px-2 box-op">
+                <IonCardContent className="card-content-slide text-center fs-12 py-2 px-0">
+                  <span>
+                    <FontAwesomeIcon
+                      icon={faStethoscope}
+                      className="mr-0 fs-16"
+                    />
+                  </span>
+                  <span>
+                    <Link
+                      to="/app/consultas"
+                      className="d-block"
+                      style={{ color: "#fff" }}
+                    >
+                      Consultas
+                    </Link>
+                  </span>
+                </IonCardContent>
+              </IonCard>
             </IonCol>
           </IonRow>
         </div>

@@ -51,3 +51,39 @@ export const serviciosConsultas = (form: any) =>
   servicesWh.post("/api/listado-consultas.php", form, {
     responseType: "json",
   });
+
+export const getLaboratorio = (page: any, cedula: any) =>
+  servicesWh.get("/api/listado-laboratorio.php", {
+    params: {
+      op: "timeline_lab",
+      page: page,
+      cedula: cedula,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+
+export const getImagenologia = (page: any, cedula: any) =>
+  servicesWh.get("/api/listado-imagenologia", {
+    params: {
+      op: "imagenologia",
+      page: page,
+      id: cedula,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+
+export const getConsulta = (page: any, cedula: any) =>
+  servicesWh.get("/api/listado-consultas.php", {
+    params: {
+      op: "consultas",
+      cedula: cedula,
+      page: page,
+      busqueda: "",
+      desde: "",
+      hasta: "",
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
