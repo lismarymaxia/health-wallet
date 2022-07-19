@@ -29,6 +29,9 @@ const Afiliado = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
   const [datos, setDatos] = useState<any>([]);
   const [load, setLoad] = useState<Boolean>(true);
+  const [loadEsp, setLoadEsp] = useState<Boolean>(true);
+  const [primeraColum, setPrimeraColum] = useState<any>([]);
+  const [segundaColum, setSegundaColum] = useState<any>([]);
   const [notificacion, setNotificacion] = useState({
     msg: "",
     estado: false,
@@ -71,7 +74,7 @@ const Afiliado = () => {
   }, []);
 
   useEffect(() => {
-    //setLoad(true);
+    setLoadEsp(true);
     servicesWh
       .get("/controller/afiliados.php", {
         params: {
@@ -86,11 +89,20 @@ const Afiliado = () => {
         const { data, status } = rsp;
         if (status === 200) {
           if (data.data) {
-            //setLoad(false);
-            ///setDatos(data.data);
+            let long = Math.round(data.data.length / 2);
+            let primerColum: any = [];
+            let segundColum: any = [];
+            data.data.forEach((item: any, index: number) => {
+              if (index >= long) {
+                primerColum.push(item);
+              } else {
+                segundColum.push(item);
+              }
+            });
+            setLoadEsp(false);
+            setPrimeraColum(primerColum);
+            setSegundaColum(segundColum);
           } else {
-            //setLoad(false);
-            //setDatos([]);
           }
         }
       })
@@ -253,9 +265,22 @@ const Afiliado = () => {
                   <IonCardTitle>Especialidades</IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent className="card-content-slide">
-                  <div className="fs-15 font-w600 text-info mt-1 title">
-                    <span className="w-100">una</span>
-                  </div>
+                  <IonRow>
+                    <IonCol size="6" className="px-3">
+                      {primeraColum.length > 0
+                        ? primeraColum.map((item: any, index: number) => (
+                            <li key={index}>{item.nombre}</li>
+                          ))
+                        : null}
+                    </IonCol>
+                    <IonCol size="6" className="px-3">
+                      {segundaColum.length > 0
+                        ? segundaColum.map((item: any, index: number) => (
+                            <li key={index}>{item.nombre}</li>
+                          ))
+                        : null}
+                    </IonCol>
+                  </IonRow>
                 </IonCardContent>
               </IonCard>
             </IonCol>
