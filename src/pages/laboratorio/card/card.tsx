@@ -29,7 +29,7 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           iconTextoUno={faHospital}
           textoUno={cadenaUpercase(item.centro.trim())}
           iconTextoDos={faUserDoctor}
-          textoDos={item.doctor}
+          textoDos={cadenaUpercase(item.doctor)}
           iconTextoTres=""
           textoTres=""
           iconTextoCuatro=""

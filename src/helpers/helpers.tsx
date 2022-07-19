@@ -35,7 +35,7 @@ export const fechaFrontend = (fecha: any) => {
 export const fecha_imagenologia = (fecha: any) => {
   if (fecha != null && fecha !== "") {
     const [dia, mes, yy] = fecha.split("-");
-    return { daymonth: `${dia}-${mes}`, yy: yy };
+    return { daymonth: `${dia} ${mes}`, yy: `20${yy}` };
   } else {
     return { daymonth: "", yy: "" };
   }
@@ -45,7 +45,7 @@ export const fecha_laboratorio = (fecha: any) => {
   if (fecha != null && fecha !== "") {
     const [fch] = fecha.split(" ");
     const [dia, mes, yy] = fch.split("/");
-    return { daymonth: `${dia}-${meses[mes]}`, yy: yy };
+    return { daymonth: `${dia} ${meses[mes]}`, yy: `20${yy}` };
   } else {
     return { daymonth: "", yy: "" };
   }
@@ -60,7 +60,11 @@ export const cadenaUpercase = (text: string) => {
   let cadena = text.trim().split(" ");
   console.log(cadena);
   let formato = cadena
-    .map((palabra: any) => {
+    .map((palabra: any) => {      
+      palabra = palabra.replaceAll("\u200BPOLICLINICA", "POLICLÍNICA");
+      palabra = palabra.replaceAll("Policlinica", "Policlínica");
+      palabra = palabra.replaceAll("MEDICO", "MÉDICO");
+
       return palabra.length <= 2
         ? palabra.toLowerCase()
         : palabra.substring(0, 1).toUpperCase() +
