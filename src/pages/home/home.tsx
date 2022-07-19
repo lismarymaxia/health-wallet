@@ -12,6 +12,7 @@ import {
   IonSlide,
   IonSlides,
   IonToast,
+  IonSkeletonText,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -20,12 +21,13 @@ import {
   faHeart,
   faMicroscope,
   faXRay,
+  faHospital,
 } from "@fortawesome/free-solid-svg-icons";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { servicesWh, serviciosAfiliados } from "../../servicios/servicios";
 import { BoxAfiliado } from "../../components";
-import { orderId } from "../../helpers";
+import { orderId, fechaActual } from "../../helpers";
 import "./home.css";
 import "../../style/tema.css";
 
@@ -51,7 +53,7 @@ const Home: React.FC = () => {
   });
 
   const [laboratorio, setLaboratorio] = useState({
-    centro: "​",
+    centro: "",
     desde: "",
     doctor: "",
     fecha_solicitud: "",
@@ -128,7 +130,7 @@ const Home: React.FC = () => {
         if (status === 200) {
           if (data) {
             if (data.data.length > 0) {
-              setImagenologia(data.data[0]);
+              setImagenologia(orderId(data.data)[0]);
             }
           } else {
           }
@@ -157,8 +159,7 @@ const Home: React.FC = () => {
               return { ...tratada[item], id: item };
             });
             if (claves.length > 0) {
-              setLaboratorio(iterar[0]);
-              console.log(iterar[0]);
+              setLaboratorio(orderId(iterar)[0]);
             }
           } else {
           }
@@ -202,7 +203,6 @@ const Home: React.FC = () => {
     let formDa = new FormData();
     formDa.append("op", "deletFavorito");
     formDa.append("id", id);
-
     serviciosAfiliados(formDa)
       .then(function (response) {
         const { data, status } = response;
@@ -233,14 +233,17 @@ const Home: React.FC = () => {
         <IonGrid className="bg-light pb-4">
           <IonRow className="bg-info-alt pt-3 pb-2 text-white">
             <IonCol size="12" className="px-3 fs-13">
-              Lunes, 13 de junio
+              {fechaActual()}
               <FontAwesomeIcon
                 icon={faBell}
                 className="mr-0 float-right fs-18"
                 onClick={handelNotificaciones}
                 style={{ cursor: "pointer" }}
               />
-              <div className="fs-20 font-w600 text-white">¡Hola Usuario!</div>
+              <div className="fs-20 font-w600 text-white">
+                ¡Hola {}
+                {user.nombre}!
+              </div>
             </IonCol>
             <IonCol size="12" className="px-3 pt-3 mb-2">
               <IonCard className="m-0">
@@ -374,8 +377,35 @@ const Home: React.FC = () => {
                         <span className="fs-15 font-w600 text-info">
                           Resultados de laboratorio
                         </span>
-                        <span>CentroLab</span>
-                        {laboratorio.centro}
+
+                        <span className="mt-2 d-flex">
+                          <FontAwesomeIcon
+                            icon={faHospital}
+                            className="text-info-light icon-box-details mr-2"
+                          />
+                          {laboratorio.centro === "" ? (
+                            <IonSkeletonText
+                              animated
+                              style={{ width: "100%" }}
+                            />
+                          ) : (
+                            laboratorio.centro
+                          )}
+                        </span>
+                        <span className="mt-2 d-flex">
+                          <FontAwesomeIcon
+                            icon={faXRay}
+                            className="text-info-light icon-box-details mr-2"
+                          />
+                          {laboratorio.desde === "" ? (
+                            <IonSkeletonText
+                              animated
+                              style={{ width: "100%" }}
+                            />
+                          ) : (
+                            laboratorio.desde
+                          )}
+                        </span>
                       </div>
                     </div>
                     <div className="float-right">
@@ -395,8 +425,34 @@ const Home: React.FC = () => {
                         <span className="fs-15 font-w600 text-info">
                           Resultados de imágenes
                         </span>
-                        <span>CentroLab</span>
-                        {imagenologia.nombre}
+                        <span className="mt-2">
+                          <FontAwesomeIcon
+                            icon={faHospital}
+                            className="text-info-light icon-box-details mr-2"
+                          />
+                          {imagenologia.unidad === "" ? (
+                            <IonSkeletonText
+                              animated
+                              style={{ width: "100%" }}
+                            />
+                          ) : (
+                            imagenologia.unidad
+                          )}
+                        </span>
+                        <span className="mt-2">
+                          <FontAwesomeIcon
+                            icon={faXRay}
+                            className="text-info-light icon-box-details mr-2"
+                          />
+                          {imagenologia.estudio === "" ? (
+                            <IonSkeletonText
+                              animated
+                              style={{ width: "100%" }}
+                            />
+                          ) : (
+                            imagenologia.estudio
+                          )}
+                        </span>
                       </div>
                     </div>
                     <div className="float-right">

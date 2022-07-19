@@ -1,7 +1,7 @@
 import { IonCard, IonCardContent } from "@ionic/react";
 import { faHospital, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { fecha_laboratorio, cadenaUpercase } from "../../../helpers";
+import { fechaLaboratorio, cadenaUpercase } from "../../../helpers";
 import { Boxfull } from "../../../components";
 import "./card.css";
 
@@ -10,7 +10,7 @@ interface ContainerProps {
 }
 
 export const Card: React.FC<ContainerProps> = ({ item }) => {
-  const { daymonth, yy } = fecha_laboratorio(item.fecha_solicitud);
+  const { daymonth, yy } = fechaLaboratorio(item.fecha_solicitud);
   const user = useSelector((state: any) => state.reducerAuth.user);
 
   return (

@@ -13,16 +13,21 @@ import {
   IonToast,
 } from "@ionic/react";
 import { useState, useCallback, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faSliders } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faSliders,
+  faAngleRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { Header } from "../../components";
 import { servicesWh, serviciosAfiliados } from "../../servicios/servicios";
 import "../../style/tema.css";
 import "./afiliados.css";
 
 const Afiliados = () => {
+  const history = useHistory();
   const user = useSelector((state: any) => state.reducerAuth.user);
   const [searchTerm, setSearchTerm] = useState("");
   const [datos, setDatos] = useState<any>([]);
@@ -106,7 +111,6 @@ const Afiliados = () => {
     let formDa = new FormData();
     formDa.append("op", "deletFavorito");
     formDa.append("id", id);
-
     serviciosAfiliados(formDa)
       .then(function (response) {
         const { data, status } = response;
@@ -130,6 +134,11 @@ const Afiliados = () => {
         console.warn("Error:" + err);
       });
   };
+
+  const handleDetail = (id: any) => {
+    history.push(`/app/afiliado/${id}`);
+  };
+
   if (load) {
     return (
       <IonPage className="fondo">
@@ -200,42 +209,59 @@ const Afiliados = () => {
                             style={{ width: "50px" }}
                             className="float-left mr-2"
                           />
-                          <div className="fs-15 font-w600 text-info mt-1 title">
-                            <span className="w-100">{item.nombre}</span>
-                            <span>
-                              {item.idfav === "" ? (
+                          <div>
+                            <div className="d-flex justify-content-between">
+                              <div className="fs-15 font-w600 text-info mt-1 title">
+                                <span className="w-100">{item.nombre}</span>
+                              </div>
+
+                              <span className="d-flex">
+                                {item.idfav === "" ? (
+                                  <IonButton
+                                    color="dark"
+                                    fill="clear"
+                                    onClick={() =>
+                                      handleFavorito(item.id, item)
+                                    }
+                                  >
+                                    <FontAwesomeIcon
+                                      icon={faHeart}
+                                      className="mr-0 float-right"
+                                    />
+                                  </IonButton>
+                                ) : (
+                                  <IonButton
+                                    color="dark"
+                                    fill="clear"
+                                    onClick={() =>
+                                      handleDeletFavorito(item.idfav, item)
+                                    }
+                                  >
+                                    <FontAwesomeIcon
+                                      icon={faHeart}
+                                      className="mr-0 float-right"
+                                      style={{ color: "red" }}
+                                    />
+                                  </IonButton>
+                                )}
                                 <IonButton
                                   color="dark"
                                   fill="clear"
-                                  onClick={() => handleFavorito(item.id, item)}
+                                  onClick={() => {
+                                    handleDetail(item.id);
+                                  }}
                                 >
                                   <FontAwesomeIcon
-                                    icon={faHeart}
+                                    icon={faAngleRight}
                                     className="mr-0 float-right"
                                   />
                                 </IonButton>
-                              ) : (
-                                <IonButton
-                                  color="dark"
-                                  fill="clear"
-                                  onClick={() =>
-                                    handleDeletFavorito(item.idfav, item)
-                                  }
-                                >
-                                  <FontAwesomeIcon
-                                    icon={faHeart}
-                                    className="mr-0 float-right"
-                                    style={{ color: "red" }}
-                                  />
-                                </IonButton>
-                              )}
-                            </span>
+                              </span>
+                            </div>
                           </div>
                           <div>
                             <p className="mb-0 mt-1 fs-12 d-flex">
-                              <span>
-                                {item.descripcion}Cll 13a #76-52 - Piso 1
-                              </span>
+                              <span>{item.descripcion}</span>
                             </p>
                           </div>
                         </IonCardContent>

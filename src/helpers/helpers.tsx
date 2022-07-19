@@ -7,7 +7,7 @@ export const handleNombre = (id: any, data: any) => {
     return item.label;
   }
 };
-
+/*-FECHA---------------------------------------------------*/
 export const formtFechaCorta = (fecha: any) => {
   if (fecha != null && fecha !== "") {
     let f = new Date(fecha);
@@ -32,7 +32,7 @@ export const fechaFrontend = (fecha: any) => {
   }
 };
 
-export const fecha_imagenologia = (fecha: any) => {
+export const fechaImagenologia = (fecha: any) => {
   if (fecha != null && fecha !== "") {
     const [dia, mes, yy] = fecha.split("-");
     return { daymonth: `${dia} ${mes}`, yy: `20${yy}` };
@@ -41,7 +41,7 @@ export const fecha_imagenologia = (fecha: any) => {
   }
 };
 
-export const fecha_laboratorio = (fecha: any) => {
+export const fechaLaboratorio = (fecha: any) => {
   if (fecha != null && fecha !== "") {
     const [fch] = fecha.split(" ");
     const [dia, mes, yy] = fch.split("/");
@@ -51,16 +51,25 @@ export const fecha_laboratorio = (fecha: any) => {
   }
 };
 
+export const fechaActual = () => {
+  var fecha = new Date();
+  var options: any = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  };
+
+  return fecha.toLocaleDateString("es-ES", options);
+};
+/*-ORDENADO-ID-----------------------------------*/
 export const orderId = (data: any) => {
-  //data.sort((a: any, b: any) => (a > b ? 1 : a < b ? -1 : 0));
   return data.sort((a: any, b: any) => b.id - a.id);
 };
 
 export const cadenaUpercase = (text: string) => {
   let cadena = text.trim().split(" ");
-  console.log(cadena);
   let formato = cadena
-    .map((palabra: any) => {      
+    .map((palabra: any) => {
       palabra = palabra.replaceAll("\u200BPOLICLINICA", "POLICLÍNICA");
       palabra = palabra.replaceAll("Policlinica", "Policlínica");
       palabra = palabra.replaceAll("MEDICO", "MÉDICO");

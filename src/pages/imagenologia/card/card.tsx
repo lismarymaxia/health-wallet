@@ -4,7 +4,7 @@ import {
   faXRay,
   faUserDoctor,
 } from "@fortawesome/free-solid-svg-icons";
-import { fecha_imagenologia, cadenaUpercase } from "../../../helpers";
+import { fechaImagenologia, cadenaUpercase } from "../../../helpers";
 import { Boxfull } from "../../../components";
 import "./card.css";
 
@@ -13,7 +13,7 @@ interface ContainerProps {
 }
 
 export const Card: React.FC<ContainerProps> = ({ item }) => {
-  const { daymonth, yy } = fecha_imagenologia(item.fecha);
+  const { daymonth, yy } = fechaImagenologia(item.fecha);
   return (
     <IonCard
       className="m-0 mt-2 card-slide shadow-full"
@@ -32,7 +32,7 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           iconTextoDos={faXRay}
           textoDos=""
           iconTextoTres={faUserDoctor}
-          textoTres={cadenaUpercase(item.nombre)}
+          textoTres=""
           iconTextoCuatro=""
           textoCuatro=""
           linkBottomLeft=""
