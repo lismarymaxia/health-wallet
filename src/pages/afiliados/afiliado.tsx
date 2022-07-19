@@ -197,45 +197,54 @@ const Afiliado = () => {
                           id={`employeeItem_${item.id}`}
                           key={item.id}
                         >
-                          <IonImg
-                            src={`https://toolkit.maxialatam.com/wallethealth/asset/${item.logo}`}
-                            alt="employee avatar"
-                            style={{ width: "50px" }}
-                            className="float-left mr-2"
-                          />
-                          <div className="fs-15 font-w600 text-info mt-1 title">
-                            <span className="w-100">{item.nombre}</span>
-                            <span>
-                              {item.idfav === "" ? (
-                                <IonButton
-                                  color="dark"
-                                  fill="clear"
-                                  onClick={() => handleFavorito(item.id, item)}
-                                >
-                                  <FontAwesomeIcon
-                                    icon={faHeart}
-                                    className="mr-0 float-right"
-                                  />
-                                </IonButton>
-                              ) : (
-                                <IonButton
-                                  color="dark"
-                                  fill="clear"
-                                  onClick={() =>
-                                    handleDeletFavorito(item.idfav, item)
-                                  }
-                                >
-                                  <FontAwesomeIcon
-                                    icon={faHeart}
-                                    className="mr-0 float-right"
-                                    style={{ color: "red" }}
-                                  />
-                                </IonButton>
-                              )}
-                            </span>
+                          <div>
+                            <IonImg
+                              src={`https://toolkit.maxialatam.com/wallethealth/asset/${item.logo}`}
+                              alt="employee avatar"
+                              style={{ width: "50px", height: "50px" }}
+                              className="float-left mr-2"
+                            />
+                            <div className="d-flex justify-content-between">                              
+                              <div className="fs-15 font-w600 text-info mt-1 title">
+                                <span className="w-100">{item.nombre}</span>
+                              </div>
+
+                              <span>
+                                {item.idfav === "" ? (
+                                  <IonButton
+                                    color="dark"
+                                    className="m-0"
+                                    style={{ width: "28px" }}
+                                    fill="clear"
+                                    onClick={() => handleFavorito(item.id, item)}
+                                  >
+                                    <FontAwesomeIcon
+                                      icon={faHeart}
+                                      className="mr-0 float-right"
+                                    />
+                                  </IonButton>
+                                ) : (
+                                  <IonButton
+                                    color="dark"
+                                    className="m-0"
+                                    style={{ width: "28px" }}
+                                    fill="clear"
+                                    onClick={() =>
+                                      handleDeletFavorito(item.idfav, item)
+                                    }
+                                  >
+                                    <FontAwesomeIcon
+                                      icon={faHeart}
+                                      className="mr-0 float-right"
+                                      style={{ color: "red" }}
+                                    />
+                                  </IonButton>
+                                )}
+                              </span>
+                            </div>
                           </div>
                           <div>
-                            <p className="mb-0 mt-1 fs-12 d-flex">
+                            <p className="mb-0 ml-5 pl-2 fs-12">
                               <span>{item.descripcion}</span>
                             </p>
                           </div>
