@@ -41,6 +41,8 @@ import "../style/tema.css";
 
 const RutasPrivadas: React.FC = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const { pathname } = location;
   const isAuth: any = useSelector<any>((state) => state.reducerAuth.stdAuth);
 
   const history = useHistory();
@@ -50,9 +52,6 @@ const RutasPrivadas: React.FC = () => {
       history.replace("/");
     }
   }, [history, isAuth]);
-
-  const location = useLocation();
-  const { pathname } = location;
 
   const active = (ruta: string) => {
     if (ruta === pathname) {
@@ -64,7 +63,6 @@ const RutasPrivadas: React.FC = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    console.log("clic");
   };
 
   return (
@@ -165,8 +163,8 @@ const RutasPrivadas: React.FC = () => {
               Afiliados
             </div>
           </IonTabButton>
-          <IonTabButton tab="tab5" href="/app/perfil" className="text-info">
-            <div className={`icon-menu  ${active("/app/perfil")}`}>
+          <IonTabButton tab="tab5" href="/app/perfiles" className="text-info">
+            <div className={`icon-menu  ${active("/app/perfiles")}`}>
               <FontAwesomeIcon icon={faUser} className="fs-18 w-100" />
               Perfil
             </div>
