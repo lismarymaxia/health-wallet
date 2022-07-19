@@ -11,7 +11,6 @@ import {
   IonButton,
   IonToast,
   IonCardHeader,
-  IonCardSubtitle,
   IonCardTitle,
 } from "@ionic/react";
 import { useState, useEffect } from "react";
