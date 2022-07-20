@@ -34,6 +34,7 @@ export const fechaFrontend = (fecha: any) => {
 
 export const fechaImagenologia = (fecha: any) => {
   if (fecha != null && fecha !== "") {
+    console.log(fecha);
     const [dia, mes, yy] = fecha.split("-");
     return { daymonth: `${dia} ${mes}`, yy: `20${yy}` };
   } else {

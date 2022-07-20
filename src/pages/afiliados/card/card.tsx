@@ -6,7 +6,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { BoxfullGeneral } from "../../../components";
-import { cadenaUpercase } from "../../../helpers";
+import {
+  fechaImagenologia,
+  cadenaUpercase,
+  fechaLaboratorio,
+} from "../../../helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface ContainerProps {
@@ -16,6 +20,10 @@ interface ContainerProps {
 
 const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
   const user = useSelector((state: any) => state.reducerAuth.user);
+  const { daymonth, yy } = fechaImagenologia(item.fecha);
+  const { daymonth: monthlab, yy: yylab } = fechaLaboratorio(
+    item.fecha_solicitud
+  );
   return (
     <div>
       {item.tipo === "Consulta" && (
@@ -27,7 +35,31 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
             </IonLabel>
           </IonItem>
           <div className="ion-padding" slot="content">
-            Detalle de consulta
+            <BoxfullGeneral
+              title=""
+              imageTitle=""
+              iconTop=""
+              fechaTop={item.fecha}
+              horaTop=""
+              yearTop={item.year}
+              iconTextoUno={faHospital}
+              textoUno={item.centro}
+              iconTextoDos={faUserDoctor}
+              textoDos={item.medico}
+              iconTextoTres=""
+              textoTres=""
+              iconTextoCuatro=""
+              textoCuatro=""
+              linkBottomLeft=""
+              linkBottomRight=""
+              textLinkBottomLeft=""
+              textLinkBottomRight=""
+              ir={false}
+              linkIr=""
+              tipo=""
+              textoUrlExternaLeft=""
+              urlExternaLeft=""
+            />
           </div>
         </IonAccordion>
       )}
@@ -44,13 +76,13 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
               title="Titulo"
               imageTitle=""
               iconTop=""
-              fechaTop="05 ENE"
+              fechaTop={monthlab}
               horaTop=""
-              yearTop="2022"
+              yearTop={yylab}
               iconTextoUno={faHospital}
-              textoUno={item.centro}
+              textoUno={cadenaUpercase(item.centro.trim())}
               iconTextoDos={faUserDoctor}
-              textoDos={item.doctor}
+              textoDos={cadenaUpercase(item.doctor)}
               iconTextoTres=""
               textoTres=""
               iconTextoCuatro=""
@@ -59,8 +91,8 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
               linkBottomRight=""
               textLinkBottomLeft=""
               textLinkBottomRight=""
-              ir={false}
-              linkIr=""
+              ir={true}
+              linkIr={`/app/laboratorio-examen/${item.rid}`}
               tipo=""
               textoUrlExternaLeft="Ver informe"
               urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=${user.cedula}&rid=${item.rid}`}
@@ -78,16 +110,16 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
           </IonItem>
           <div className="ion-padding" slot="content">
             <BoxfullGeneral
-              title="Titulo"
+              title={item.estudio}
               imageTitle=""
               iconTop=""
-              fechaTop="05 ENE"
+              fechaTop={daymonth}
               horaTop=""
-              yearTop="2022"
+              yearTop={yy}
               iconTextoUno={faHospital}
-              textoUno={"Policlínica Roberto Ramírez de Diego"}
+              textoUno={cadenaUpercase(item.unidad)}
               iconTextoDos={faUserDoctor}
-              textoDos={"Rolando Yee Escobar"}
+              textoDos=""
               iconTextoTres=""
               textoTres=""
               iconTextoCuatro=""
