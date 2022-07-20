@@ -90,3 +90,19 @@ export const tabActive = (ruta: string, pathname: string) => {
     return "";
   }
 };
+/*-COMPARTIR---------------------------------------*/
+export const compartir = (url: string) => {
+  let Navigator: any;
+  Navigator = window.navigator;
+
+  if (Navigator && Navigator.share) {
+    Navigator.share({
+      title: `Comparit estudio`,
+      url: url,
+    })
+      .then(() => console.log("Successful share"))
+      .catch((error: string) => console.log("Error sharing", error));
+  } else {
+    console.log("share not supported");
+  }
+};

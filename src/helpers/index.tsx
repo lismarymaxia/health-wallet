@@ -8,6 +8,7 @@ import {
   orderId,
   cadenaUpercase,
   tabActive,
+  compartir,
 } from "./helpers";
 import { tablaFrecuencia, meses } from "./tablasHash";
 export {
@@ -22,4 +23,5 @@ export {
   orderId,
   cadenaUpercase,
   tabActive,
+  compartir,
 };

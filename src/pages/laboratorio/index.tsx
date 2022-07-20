@@ -1,2 +1,3 @@
 import Laboratorio from "./laboratorio";
-export { Laboratorio };
+import ExamenLab from "./examen";
+export { Laboratorio, ExamenLab };
