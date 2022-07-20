@@ -189,3 +189,10 @@ ion-tab-button{
 :host{
     background: initial;
 }
+.fs-6 {
+    font-size: 6px !important;
+    line-height: 1;
+}
+.lh-normal{
+    line-height: normal;
+}

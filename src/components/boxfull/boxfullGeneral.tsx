@@ -63,26 +63,54 @@ const BoxfullGeneral: React.FC<{
   return (
     <>
       <div
-        className="w-100 d-inline-block pb-1"
+        className="slide-full bg-info-light p-2 border-radius"
         onClick={() => {
           handelClick();
         }}
       >
-
-        <div
-          className="fs-15 float-left"
-        >
-          {title}
-        </div>
-
-        {ir && (
-          <div className="mr-0 float-right">
-            <Link to={linkIr}>
-              <FontAwesomeIcon icon={faAngleRight} className="text-info-dark" />
-            </Link>
-          </div>
+        {imageTitle !== "" && (
+          <IonImg
+            src={imageTitle}
+            style={{ width: "50px" }}
+            className="float-left mr-2"
+          />
         )}
 
+        {fechaTop !== "" && (
+          <p className="mr-0 float-right d-grid">
+            {fechaTop !== "" && (
+              <span className="mr-0 float-right text-right fs-18 font-w600 text-info lh-normal">
+                {fechaTop}
+              </span>
+            )}
+
+            {horaTop !== "" && (
+              <span className="mr-0 box-grey float-right text-right lh-normal">
+                {horaTop}
+              </span>
+            )}
+
+            {yearTop !== "" && (
+              <span className="mr-0 float-right text-right fs-12 lh-normal">
+                {yearTop}
+              </span>
+            )}
+          </p>
+        )}
+
+        <div
+          className={
+            imageTitle !== ""
+              ? `fs-15 font-w600 text-info mt-2`
+              : `fs-15 font-w600 text-info`
+          }
+        >
+          {title}
+
+          {iconTop !== "" && (
+            <FontAwesomeIcon icon={iconTop} className="mr-0 float-right" />
+          )}
+        </div>
         <div>
           <p className="mb-0 mt-1 fs-12 d-flex">
             {iconTextoUno !== "" && (
@@ -97,7 +125,7 @@ const BoxfullGeneral: React.FC<{
 
         {textoDos !== "" && (
           <div>
-            <p className="mb-0 mt-2 fs-12 d-flex">
+            <p className="mb-0 mt-1 fs-12 d-flex">
               {iconTextoDos !== "" && (
                 <FontAwesomeIcon
                   icon={iconTextoDos}
@@ -111,7 +139,7 @@ const BoxfullGeneral: React.FC<{
 
         {textoTres !== "" && (
           <div>
-            <p className="mb-0 mt-2 fs-12 d-flex">
+            <p className="mb-0 mt-1 fs-12 d-flex">
               {iconTextoTres !== "" && (
                 <FontAwesomeIcon
                   icon={iconTextoTres}
@@ -125,7 +153,7 @@ const BoxfullGeneral: React.FC<{
 
         {textoCuatro !== "" && (
           <div>
-            <p className="mb-0 mt-2 fs-12 d-flex">
+            <p className="mb-0 mt-1 fs-12 d-flex">
               {iconTextoCuatro !== "" && (
                 <FontAwesomeIcon
                   icon={iconTextoCuatro}
@@ -139,7 +167,7 @@ const BoxfullGeneral: React.FC<{
 
         {textLinkBottomLeft !== "" && (
           <div>
-            <p className="mb-0 mt-3 fs-12 float-left">
+            <p className="mb-0 mt-2 fs-12 float-left">
               <Link to={linkBottomLeft} className="text-info-light underline">
                 {textLinkBottomLeft}
               </Link>
@@ -149,17 +177,25 @@ const BoxfullGeneral: React.FC<{
 
         {textLinkBottomRight !== "" && (
           <div>
-            <p className="mb-0 mt-3 fs-12 float-right">
+            <p className="mb-0 mt-2 fs-12 float-right">
               <Link to={linkBottomRight} className="text-info-light underline">
                 {textLinkBottomRight}
               </Link>
             </p>
           </div>
-        )}        
+        )}
+
+        {ir && (
+          <div className="mr-0 float-right" style={{ marginTop: "-12px" }}>
+            <Link to={linkIr}>
+              <FontAwesomeIcon icon={faAngleRight} className="text-info-dark" />
+            </Link>
+          </div>
+        )}
 
         {textoUrlExternaLeft !== "" && (
           <div>
-            <p className="mb-0 mt-3 fs-12 float-left">
+            <p className="mb-0 mt-2 fs-12 float-left">
               <Link
                 to="#"
                 onClick={() => {
