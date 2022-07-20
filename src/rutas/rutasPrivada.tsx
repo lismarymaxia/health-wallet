@@ -6,7 +6,6 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
-  /*setupIonicReact,*/
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -18,6 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Nav } from "../components";
 import {
+  Cuentas,
   Home,
   Datos,
   EditDatos,
@@ -37,6 +37,7 @@ import {
   Soporte,
 } from "../pages";
 import { logout } from "../store";
+import { tabActive } from "../helpers";
 import "../style/tema.css";
 
 const RutasPrivadas: React.FC = () => {
@@ -53,14 +54,6 @@ const RutasPrivadas: React.FC = () => {
     }
   }, [history, isAuth]);
 
-  const active = (ruta: string) => {
-    if (ruta === pathname) {
-      return "active";
-    } else {
-      return "";
-    }
-  };
-
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -70,6 +63,9 @@ const RutasPrivadas: React.FC = () => {
       <Nav />
       <IonTabs>
         <IonRouterOutlet id="navApp">
+          <Route exact path="/app/cuentas">
+            <Cuentas />
+          </Route>
           <Route exact path="/app/home">
             <Home />
           </Route>
@@ -97,7 +93,6 @@ const RutasPrivadas: React.FC = () => {
           <Route exact path="/app/afiliado/:id">
             <Afiliado />
           </Route>
-
           <Route exact path="/app/perfil">
             <Perfil />
           </Route>
@@ -129,7 +124,7 @@ const RutasPrivadas: React.FC = () => {
             <Soporte />
           </Route>
           <Route exact path="/app">
-            <Redirect to="/app/home" />
+            <Redirect to="/app/cuentas" />
           </Route>
         </IonRouterOutlet>
         <IonTabBar
@@ -137,25 +132,23 @@ const RutasPrivadas: React.FC = () => {
           className={`bar-menu ${pathname === "/app/soporte" ? "d-none" : ""}`}
         >
           <IonTabButton tab="tab1" href="/app/home" className="text-info">
-            <div className={`icon-menu  ${active("/app/home")}`}>
+            <div className={`icon-menu  ${tabActive("/app/home", pathname)}`}>
               <FontAwesomeIcon icon={faHome} className="fs-18 w-100" />
               Inicio
             </div>
           </IonTabButton>
-          {/*<IonTabButton tab="tab2" href="/app/consultas" className="text-info">
-            <div className={`icon-menu  ${active("/app/consultas")}`}>
-              <FontAwesomeIcon icon={faStethoscope} className="fs-18 w-100" />
-              Consultas
-            </div>
-          </IonTabButton>*/}
           <IonTabButton tab="tab3" href="/app/consultas" className="text-info">
-            <div className={`icon-menu  ${active("/app/consultas")}`}>
+            <div
+              className={`icon-menu  ${tabActive("/app/consultas", pathname)}`}
+            >
               <FontAwesomeIcon icon={faClipboardList} className="fs-18 w-100" />
               Estudios
             </div>
           </IonTabButton>
           <IonTabButton tab="tab4" href="/app/afiliados" className="text-info">
-            <div className={`icon-menu  ${active("/app/afiliados")}`}>
+            <div
+              className={`icon-menu  ${tabActive("/app/afiliados", pathname)}`}
+            >
               <FontAwesomeIcon
                 icon={faDiagramProject}
                 className="fs-18 w-100"
@@ -164,7 +157,9 @@ const RutasPrivadas: React.FC = () => {
             </div>
           </IonTabButton>
           <IonTabButton tab="tab5" href="/app/perfiles" className="text-info">
-            <div className={`icon-menu  ${active("/app/perfiles")}`}>
+            <div
+              className={`icon-menu  ${tabActive("/app/perfiles", pathname)}`}
+            >
               <FontAwesomeIcon icon={faUser} className="fs-18 w-100" />
               Perfil
             </div>

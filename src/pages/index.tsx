@@ -1,4 +1,4 @@
-import { Login } from "./login";
+import { Login, Cuentas } from "./login";
 import { Datos, EditDatos } from "./datos";
 import { Citas } from "./citas";
 import { Consultas, Consulta } from "./consultas";
@@ -19,6 +19,7 @@ import { DetalleConsulta } from "./detalleConsulta";
 import { Soporte } from "./soporte";
 export {
   Login,
+  Cuentas,
   Datos,
   EditDatos,
   Citas,

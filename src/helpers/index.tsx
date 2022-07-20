@@ -7,6 +7,7 @@ import {
   fechaActual,
   orderId,
   cadenaUpercase,
+  tabActive,
 } from "./helpers";
 import { tablaFrecuencia, meses } from "./tablasHash";
 export {
@@ -20,4 +21,5 @@ export {
   fechaLaboratorio,
   orderId,
   cadenaUpercase,
+  tabActive,
 };

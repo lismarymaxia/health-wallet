@@ -1,2 +1,3 @@
 import Login from "./login";
-export { Login };
+import Cuentas from "./cuentas";
+export { Login, Cuentas };

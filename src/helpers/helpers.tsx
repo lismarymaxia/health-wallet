@@ -82,3 +82,11 @@ export const cadenaUpercase = (text: string) => {
     .join(" ");
   return formato;
 };
+/*-TAB------------------------------------------------*/
+export const tabActive = (ruta: string, pathname: string) => {
+  if (ruta === pathname) {
+    return "active";
+  } else {
+    return "";
+  }
+};
