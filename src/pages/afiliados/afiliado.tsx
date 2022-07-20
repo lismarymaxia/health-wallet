@@ -69,6 +69,7 @@ const Afiliado = () => {
         let newImg = img.data.data.map((item: any) => {
           return { ...item, tipo: "Imagenologia" };
         });
+
         const conector = [...newCnst, ...newImg];
         setRegistros((prev: any) => [...prev, ...conector]);
         setLoadRg(false);
