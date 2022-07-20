@@ -172,3 +172,6 @@ ion-tab-button{
 .listas li span {
     margin-left: -8px;
 }
+:host{
+    background: initial;
+}
