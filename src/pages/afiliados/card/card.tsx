@@ -15,7 +15,7 @@ const ContentCard: React.FC<ContainerProps> = ({ item }) => {
     <div>
       {item.tipo === "Consulta" && (
         <Boxfull
-          title="CON - 101-00 Consulta externa"
+          title="Consulta - 101-00 Consulta externa"
           imageTitle=""
           iconTop=""
           fechaTop="22 Mar"
@@ -67,7 +67,7 @@ const ContentCard: React.FC<ContainerProps> = ({ item }) => {
             />*/}
       {item.tipo === "Imagenologia" && (
         <Boxfull
-          title="IMG - Rx - Torax PA o AP"
+          title="Imagenolog&iacute;a - Rx - Torax PA o AP"
           imageTitle=""
           iconTop=""
           fechaTop="27 MAY"

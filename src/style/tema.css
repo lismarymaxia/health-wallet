@@ -40,6 +40,20 @@
 .card-content-slide div p{
     line-height: normal;
 }
+
+.item-afiliado{
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid #eeeeee;
+}
+.item-afiliado:first-of-type{
+    padding-top: 0rem;
+}
+.item-afiliado:last-of-type{
+    padding-bottom: 0rem;
+    border-bottom: none;
+}
+
 .box-grey{
     padding: 0.2rem 0.8rem;
     background-color: #eaecf0;
@@ -174,4 +188,11 @@ ion-tab-button{
 }
 :host{
     background: initial;
+}
+.fs-6 {
+    font-size: 6px !important;
+    line-height: 1;
+}
+.lh-normal{
+    line-height: normal;
 }

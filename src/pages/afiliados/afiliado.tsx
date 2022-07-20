@@ -12,13 +12,17 @@ import {
   IonToast,
   IonCardHeader,
   IonCardTitle,
+  IonAccordionGroup,
+  IonAccordion,
+  IonItem,
+  IonLabel,
 } from "@ionic/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faHeart, faHospital, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
-import { Header } from "../../components";
+import { Boxfull, BoxfullGeneral, Header } from "../../components";
 import {
   servicesWh,
   serviciosAfiliados,
@@ -202,6 +206,18 @@ const Afiliado = () => {
       });
   };
 
+  const accordionGroup = useRef<null | HTMLIonAccordionGroupElement>(null);
+  const toggleAccordion = () => {
+    if (!accordionGroup.current) { return; }
+    const nativeEl = accordionGroup.current;
+
+    if (nativeEl.value === 'second') {
+      nativeEl.value = undefined;
+    } else {
+      nativeEl.value = 'second';
+    }
+  }
+
   if (load) {
     return (
       <IonPage className="fondo">
@@ -305,7 +321,7 @@ const Afiliado = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol size="12" className="px-3">
+            <IonCol size="12" className="px-3 d-none">
               <IonCard className="m-0 mb-2 pb-2 card-slide w-100 afiliados">
                 <IonCardHeader>
                   <IonCardTitle className="fs-14 pb-2">
@@ -338,6 +354,7 @@ const Afiliado = () => {
                 </IonCardContent>
               </IonCard>
             </IonCol>
+
             <IonCol size="12" className="px-3">
               <IonCard
                 className="m-0 mt-2 card-slide shadow-full"
@@ -348,7 +365,98 @@ const Afiliado = () => {
                     Mis registros
                   </IonCardTitle>
                 </IonCardHeader>
+                
                 <IonCardContent className="card-content-slide">
+                  <IonAccordionGroup ref={accordionGroup}>
+                    <IonAccordion value="first">
+                      <IonItem slot="header">
+                        <IonLabel className="text-body fs-14 d-flex">
+                          <FontAwesomeIcon
+                            icon={faCircle}
+                            className="fs-6 mr-2 mt-2"
+                          />Consulta - 
+                        </IonLabel>
+                      </IonItem>
+                      <div className="ion-padding" slot="content">
+                        Detalle de consulta
+                      </div>
+                    </IonAccordion>
+                    <IonAccordion value="second">
+                      <IonItem slot="header">
+                        <IonLabel className="text-body fs-14 d-flex">
+                          <FontAwesomeIcon
+                            icon={faCircle}
+                            className="fs-6 mr-2 mt-2"
+                          />Laboratorio - 
+                        </IonLabel>
+                      </IonItem>
+                      <div className="ion-padding" slot="content">
+                        <BoxfullGeneral
+                          title="Titulo"
+                          imageTitle=""
+                          iconTop=""
+                          fechaTop="05 ENE"
+                          horaTop=""
+                          yearTop="2022"
+                          iconTextoUno={faHospital}
+                          textoUno={("Policlínica Roberto Ramírez de Diego")}
+                          iconTextoDos={faUserDoctor}
+                          textoDos={("Rolando Yee Escobar")}
+                          iconTextoTres=""
+                          textoTres=""
+                          iconTextoCuatro=""
+                          textoCuatro=""
+                          linkBottomLeft=""
+                          linkBottomRight=""
+                          textLinkBottomLeft=""
+                          textLinkBottomRight=""
+                          ir={false}
+                          linkIr=""
+                          tipo=""
+                          textoUrlExternaLeft="Ver informe"
+                          urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=6-712-727&rid=123`}
+                        />
+                      </div>
+                    </IonAccordion>
+                    <IonAccordion value="third">
+                      <IonItem slot="header">
+                        <IonLabel className="text-body fs-14 d-flex">
+                          <FontAwesomeIcon
+                            icon={faCircle}
+                            className="fs-6 mr-2 mt-2"
+                          />Imagenología - 
+                        </IonLabel>
+                      </IonItem>
+                      <div className="ion-padding" slot="content">
+                        <BoxfullGeneral
+                          title="Titulo"
+                          imageTitle=""
+                          iconTop=""
+                          fechaTop="05 ENE"
+                          horaTop=""
+                          yearTop="2022"
+                          iconTextoUno={faHospital}
+                          textoUno={("Policlínica Roberto Ramírez de Diego")}
+                          iconTextoDos={faUserDoctor}
+                          textoDos={("Rolando Yee Escobar")}
+                          iconTextoTres=""
+                          textoTres=""
+                          iconTextoCuatro=""
+                          textoCuatro=""
+                          linkBottomLeft=""
+                          linkBottomRight=""
+                          textLinkBottomLeft=""
+                          textLinkBottomRight=""
+                          ir={false}
+                          linkIr=""
+                          tipo=""
+                          textoUrlExternaLeft="Ver informe"
+                          urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=6-712-727&rid=123`}
+                        />
+                      </div>
+                    </IonAccordion>
+                  </IonAccordionGroup>
+                  
                   {loadRg
                     ? "Cargando"
                     : registros.map((item: any, index: number) => (
