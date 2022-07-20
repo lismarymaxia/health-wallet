@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { faXRay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -36,6 +36,7 @@ const ExamenLab: React.FC = () => {
   const handleCompartir = () => {
     compartir(url);
   };
+
   return (
     <IonPage className="fondo">
       <Header title="Resultado Laboratorio" isbotton={true} isBuger={false} />

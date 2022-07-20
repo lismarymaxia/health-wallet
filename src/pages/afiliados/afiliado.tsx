@@ -13,16 +13,13 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonAccordionGroup,
-  IonAccordion,
-  IonItem,
-  IonLabel,
 } from "@ionic/react";
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle, faHeart, faHospital, faUserDoctor } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
-import { Boxfull, BoxfullGeneral, Header } from "../../components";
+import { Header } from "../../components";
 import {
   servicesWh,
   serviciosAfiliados,
@@ -69,12 +66,19 @@ const Afiliado = () => {
         let newCnst = cnst.data.data.map((item: any) => {
           return { ...item, tipo: "Consulta" };
         });
+        console.log(newCnst);
 
         let newImg = img.data.data.map((item: any) => {
           return { ...item, tipo: "Imagenologia" };
         });
 
-        const conector = [...newCnst, ...newImg];
+        const tratada = JSON.parse(lab.data);
+        const claves = Object.keys(tratada);
+        const newLab = claves.map((item) => {
+          return { ...tratada[item], rid: item, tipo: "Laboratorio" };
+        });
+        console.log(newLab);
+        const conector = [...newCnst, ...newImg, ...newLab];
         setRegistros((prev: any) => [...prev, ...conector]);
         setLoadRg(false);
       })
@@ -141,6 +145,8 @@ const Afiliado = () => {
             setPrimeraColum(primerColum);
             setSegundaColum(segundColum);
           } else {
+            setPrimeraColum([]);
+            setSegundaColum([]);
           }
         }
       })
@@ -208,15 +214,17 @@ const Afiliado = () => {
 
   const accordionGroup = useRef<null | HTMLIonAccordionGroupElement>(null);
   const toggleAccordion = () => {
-    if (!accordionGroup.current) { return; }
+    if (!accordionGroup.current) {
+      return;
+    }
     const nativeEl = accordionGroup.current;
 
-    if (nativeEl.value === 'second') {
+    if (nativeEl.value === "second") {
       nativeEl.value = undefined;
     } else {
-      nativeEl.value = 'second';
+      nativeEl.value = "second";
     }
-  }
+  };
 
   if (load) {
     return (
@@ -365,103 +373,19 @@ const Afiliado = () => {
                     Mis registros
                   </IonCardTitle>
                 </IonCardHeader>
-                
+
                 <IonCardContent className="card-content-slide">
                   <IonAccordionGroup ref={accordionGroup}>
-                    <IonAccordion value="first">
-                      <IonItem slot="header">
-                        <IonLabel className="text-body fs-14 d-flex">
-                          <FontAwesomeIcon
-                            icon={faCircle}
-                            className="fs-6 mr-2 mt-2"
-                          />Consulta - 
-                        </IonLabel>
-                      </IonItem>
-                      <div className="ion-padding" slot="content">
-                        Detalle de consulta
-                      </div>
-                    </IonAccordion>
-                    <IonAccordion value="second">
-                      <IonItem slot="header">
-                        <IonLabel className="text-body fs-14 d-flex">
-                          <FontAwesomeIcon
-                            icon={faCircle}
-                            className="fs-6 mr-2 mt-2"
-                          />Laboratorio - 
-                        </IonLabel>
-                      </IonItem>
-                      <div className="ion-padding" slot="content">
-                        <BoxfullGeneral
-                          title="Titulo"
-                          imageTitle=""
-                          iconTop=""
-                          fechaTop="05 ENE"
-                          horaTop=""
-                          yearTop="2022"
-                          iconTextoUno={faHospital}
-                          textoUno={("Policlínica Roberto Ramírez de Diego")}
-                          iconTextoDos={faUserDoctor}
-                          textoDos={("Rolando Yee Escobar")}
-                          iconTextoTres=""
-                          textoTres=""
-                          iconTextoCuatro=""
-                          textoCuatro=""
-                          linkBottomLeft=""
-                          linkBottomRight=""
-                          textLinkBottomLeft=""
-                          textLinkBottomRight=""
-                          ir={false}
-                          linkIr=""
-                          tipo=""
-                          textoUrlExternaLeft="Ver informe"
-                          urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=6-712-727&rid=123`}
-                        />
-                      </div>
-                    </IonAccordion>
-                    <IonAccordion value="third">
-                      <IonItem slot="header">
-                        <IonLabel className="text-body fs-14 d-flex">
-                          <FontAwesomeIcon
-                            icon={faCircle}
-                            className="fs-6 mr-2 mt-2"
-                          />Imagenología - 
-                        </IonLabel>
-                      </IonItem>
-                      <div className="ion-padding" slot="content">
-                        <BoxfullGeneral
-                          title="Titulo"
-                          imageTitle=""
-                          iconTop=""
-                          fechaTop="05 ENE"
-                          horaTop=""
-                          yearTop="2022"
-                          iconTextoUno={faHospital}
-                          textoUno={("Policlínica Roberto Ramírez de Diego")}
-                          iconTextoDos={faUserDoctor}
-                          textoDos={("Rolando Yee Escobar")}
-                          iconTextoTres=""
-                          textoTres=""
-                          iconTextoCuatro=""
-                          textoCuatro=""
-                          linkBottomLeft=""
-                          linkBottomRight=""
-                          textLinkBottomLeft=""
-                          textLinkBottomRight=""
-                          ir={false}
-                          linkIr=""
-                          tipo=""
-                          textoUrlExternaLeft="Ver informe"
-                          urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=6-712-727&rid=123`}
-                        />
-                      </div>
-                    </IonAccordion>
+                    {loadRg
+                      ? "Cargando"
+                      : registros.map((item: any, index: number) => (
+                          <ContentCard
+                            item={item}
+                            value={`tab${index}`}
+                            key={index}
+                          />
+                        ))}
                   </IonAccordionGroup>
-                  
-                  {loadRg
-                    ? "Cargando"
-                    : registros.map((item: any, index: number) => (
-                        <ContentCard item={item} key={index} />
-                      ))}
                 </IonCardContent>
               </IonCard>
             </IonCol>
