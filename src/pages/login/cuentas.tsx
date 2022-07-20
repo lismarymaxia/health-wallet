@@ -8,6 +8,7 @@ import {
   IonThumbnail,
   IonImg,
   IonButton,
+  IonLabel,
 } from "@ionic/react";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,7 +66,7 @@ const Cuentas = () => {
             <IonCol size="12" className="pb-3">
               <h4 className="font-w700 text-info-dark mb-2">Bienvenido</h4>
               <p className="fs-14 text-info-dark mb-4">
-                ¿A que perfil deseas ingresar?
+                ¿A qué perfil deseas ingresar?
               </p>
               <div className="d-flex">
                 {load ? (
@@ -77,7 +78,8 @@ const Cuentas = () => {
                       className="mr-2"
                       key={item.idpaciente}
                     >
-                      <IonImg src={"./images/perfil.JPG"} />
+                      <IonImg src={`./images/${item.imagen}`} />
+                      <IonLabel>{item.nombre}</IonLabel>
                       <IonButton
                         color="primary"
                         onClick={() => {
@@ -96,9 +98,6 @@ const Cuentas = () => {
                     registrar
                   </IonThumbnail>
                 )}
-                {/*<IonThumbnail slot="start" class="">
-                  <IonImg src={"./images/juan.jpg"} />
-  </IonThumbnail>*/}
               </div>
             </IonCol>
           </IonRow>
