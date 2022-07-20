@@ -1,6 +1,6 @@
 import { Nav } from "./nav";
 import { Header } from "./header";
-import { Boxfull, BoxAfiliado } from "./boxfull";
+import { Boxfull, BoxAfiliado, BoxfullGeneral } from "./boxfull";
 import { Action } from "./button";
 import { CustomField, CustomFieldOnblur } from "./field";
 import { Info, InfoDoctor, InfoConsulta } from "./info";
@@ -9,6 +9,7 @@ export {
   Header,
   Boxfull,
   BoxAfiliado,
+  BoxfullGeneral,
   Action,
   Info,
   InfoConsulta,

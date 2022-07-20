@@ -207,7 +207,7 @@ const Afiliados = () => {
                           <div>
                             <IonImg
                               src={`https://toolkit.maxialatam.com/wallethealth/asset/${item.logo}`}
-                              alt="employee avatar"
+                              alt={item.nombre}
                               style={{ width: "50px", height: "50px" }}
                               className="float-left mr-2"
                             />
@@ -219,9 +219,9 @@ const Afiliados = () => {
                               {item.idfav === "" ? (
                                 <IonButton
                                   color="dark"
+                                  fill="clear"
                                   className="m-0"
                                   style={{ width: "28px" }}
-                                  fill="clear"
                                   onClick={() => handleFavorito(item.id, item)}
                                 >
                                   <FontAwesomeIcon
@@ -232,9 +232,9 @@ const Afiliados = () => {
                               ) : (
                                 <IonButton
                                   color="dark"
+                                  fill="clear"
                                   className="m-0"
                                   style={{ width: "28px" }}
-                                  fill="clear"
                                   onClick={() =>
                                     handleDeletFavorito(item.idfav, item)
                                   }

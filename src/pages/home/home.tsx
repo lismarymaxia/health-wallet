@@ -27,7 +27,7 @@ import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { servicesWh, serviciosAfiliados } from "../../servicios/servicios";
 import { BoxAfiliado } from "../../components";
-import { orderId, fechaActual } from "../../helpers";
+import { orderId, fechaActual, cadenaUpercase } from "../../helpers";
 import "./home.css";
 import "../../style/tema.css";
 
@@ -227,6 +227,10 @@ const Home: React.FC = () => {
       });
   };
 
+  const handleDetail = (id: any) => {
+    history.push(`/app/afiliado/${id}`);
+  };
+
   return (
     <IonPage className="fondo">
       <IonContent fullscreen className="bg-light">
@@ -373,63 +377,58 @@ const Home: React.FC = () => {
                         icon={faMicroscope}
                         className="mr-3 fs-16 text-info"
                       />
-                      <div className="d-grid">
-                        <span className="fs-15 font-w600 text-info">
+                      <div className="d-inline-block">
+                        <span className="fs-15 font-w600 text-info float-left">
                           Resultados de laboratorio
                         </span>
-
-                        <span className="mt-2 d-flex">
+                        <div className="float-right">
                           <FontAwesomeIcon
-                            icon={faHospital}
-                            className="text-info-light icon-box-details mr-2"
+                            icon={faAngleRight}
+                            className="mr-0 float-right fs-18 text-info"
                           />
+                        </div>
+
+                        <span className="d-inline-block fs-13">
                           {laboratorio.centro === "" ? (
                             <IonSkeletonText
                               animated
                               style={{ width: "100%" }}
                             />
                           ) : (
-                            laboratorio.centro
+                            cadenaUpercase(laboratorio.centro)
                           )}
                         </span>
-                        <span className="mt-2 d-flex">
-                          <FontAwesomeIcon
-                            icon={faXRay}
-                            className="text-info-light icon-box-details mr-2"
-                          />
+                        <span className="d-inline-block fs-13">
                           {laboratorio.desde === "" ? (
                             <IonSkeletonText
                               animated
                               style={{ width: "100%" }}
                             />
                           ) : (
-                            laboratorio.desde
+                            cadenaUpercase(laboratorio.desde)
                           )}
                         </span>
                       </div>
-                    </div>
-                    <div className="float-right">
-                      <FontAwesomeIcon
-                        icon={faAngleRight}
-                        className="mr-0 float-right fs-18 text-info"
-                      />
-                    </div>
+                    </div>                    
                   </div>
-                  <div className="slide-full">
+                  <div className="slide-full pt-2">
                     <div className="d-flex float-left">
                       <FontAwesomeIcon
                         icon={faXRay}
                         className="mr-3 fs-16 text-info"
                       />
-                      <div className="d-grid">
-                        <span className="fs-15 font-w600 text-info">
+                      <div className="d-inline-block">
+                        <span className="fs-15 font-w600 text-info float-left">
                           Resultados de imágenes
                         </span>
-                        <span className="mt-2">
+                        <div className="float-right">
                           <FontAwesomeIcon
-                            icon={faHospital}
-                            className="text-info-light icon-box-details mr-2"
+                            icon={faAngleRight}
+                            className="mr-0 float-right fs-18 text-info"
                           />
+                        </div>
+
+                        <div className="d-inline-block fs-13">
                           {imagenologia.unidad === "" ? (
                             <IonSkeletonText
                               animated
@@ -438,12 +437,8 @@ const Home: React.FC = () => {
                           ) : (
                             imagenologia.unidad
                           )}
-                        </span>
-                        <span className="mt-2">
-                          <FontAwesomeIcon
-                            icon={faXRay}
-                            className="text-info-light icon-box-details mr-2"
-                          />
+                        </div>
+                        <div className="d-inline-block fs-13">
                           {imagenologia.estudio === "" ? (
                             <IonSkeletonText
                               animated
@@ -452,15 +447,9 @@ const Home: React.FC = () => {
                           ) : (
                             imagenologia.estudio
                           )}
-                        </span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="float-right">
-                      <FontAwesomeIcon
-                        icon={faAngleRight}
-                        className="mr-0 float-right fs-18 text-info"
-                      />
-                    </div>
+                    </div>                    
                   </div>
                 </IonCardContent>
               </IonCard>
@@ -477,22 +466,24 @@ const Home: React.FC = () => {
                 />
               </h5>
 
-              <IonCard className="m-0 card-slide" style={{ height: "auto" }}>
+              <IonCard className="m-0 mb-2 pb-2 card-slide w-100 afiliados">
                 <IonCardContent className="card-content-slide">
                   {load
-                    ? "cargando"
+                    ? "Cargando"
                     : datos.map((item: any, index: any) => (
-                        <div key={index}>
+                        <div key={index} className="w-100 d-inline-block item-afiliado">
                           <BoxAfiliado
                             item={item}
                             id={item.id}
                             title={item.nombre}
+                            descripcion={item.descripcion}
                             imageTitle={`https://toolkit.maxialatam.com/wallethealth/asset/${item.logo}`}
                             iconTop={faHeart}
                             texto="descripcion"
                             idfav={item.idfav}
                             handleAdd={handleFavorito}
                             handleDelet={handleDeletFavorito}
+                            handleDetail={handleDetail}
                           />
                         </div>
                       ))}
