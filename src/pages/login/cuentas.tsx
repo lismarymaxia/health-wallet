@@ -13,7 +13,7 @@ import {
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faUserCheck, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { servicesWh } from "../../servicios/servicios";
 import { storeLocal } from "../../store/action/aut";
 import "./cuentas.css";
@@ -65,21 +65,22 @@ const Cuentas = () => {
           <IonRow className="mt-4 px-3">
             <IonCol size="12" className="pb-3">
               <h4 className="font-w700 text-info-dark mb-2">Bienvenido</h4>
-              <p className="fs-14 text-info-dark mb-4">
+              <p className="fs-14 text-info-dark">
                 ¿A qué perfil deseas ingresar?
               </p>
+            </IonCol>
+          </IonRow>
+          <IonRow className="px-3">              
               <div className="d-flex">
                 {load ? (
                   "Cargando..."
                 ) : data.length > 0 ? (
                   data.map((item: any) => (
-                    <IonThumbnail
-                      slot="start"
-                      className="mr-2"
-                      key={item.idpaciente}
-                    >
-                      <IonImg src={`./images/${item.imagen}`} />
-                      <IonLabel>{item.nombre}</IonLabel>
+                    <IonCol size="4" className="p-2 p-perfil">
+                      <div className="box-perfiles">
+                        <IonImg src={`./images/${item.imagen}`} className="mb-2"/>
+                      </div>
+                      <IonLabel className="fs-13">{item.nombre}</IonLabel>
                       <IonButton
                         color="primary"
                         onClick={() => {
@@ -91,15 +92,20 @@ const Cuentas = () => {
                           className="mr-0 float-right"
                         />
                       </IonButton>
-                    </IonThumbnail>
+                    </IonCol>
                   ))
                 ) : (
-                  <IonThumbnail slot="start" className="">
+                  <IonCol size="4" className="p-2">
                     registrar
-                  </IonThumbnail>
+                  </IonCol>
                 )}
+                <IonCol size="4" className="p-2 text-center col-perfiles">
+                  <div className="box-perfiles">
+                    <IonImg src={`./images/nuevo-usuario.jpg`} className="mb-2"/>
+                  </div>
+                  <IonLabel className="fs-13">Crear nuevo perfil</IonLabel>
+                </IonCol>
               </div>
-            </IonCol>
           </IonRow>
         </IonGrid>
       </IonContent>

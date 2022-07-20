@@ -30,6 +30,7 @@ import {
   Afiliado,
   Perfil,
   Perfiles,
+  PerfilCrear,
   PerfilTratamientos,
   Notificaciones,
   ProximasCitas,
@@ -102,6 +103,9 @@ const RutasPrivadas: React.FC = () => {
           </Route>
           <Route exact path="/app/perfiles">
             <Perfiles />
+          </Route>
+          <Route exact path="/app/perfil-crear">
+            <PerfilCrear />
           </Route>
           <Route exact path="/app/perfil-alergias">
             <PerfilTratamientos />
