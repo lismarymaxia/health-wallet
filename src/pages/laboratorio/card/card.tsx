@@ -38,8 +38,8 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           linkBottomRight=""
           textLinkBottomLeft=""
           textLinkBottomRight=""
-          ir={false}
-          linkIr=""
+          ir={true}
+          linkIr={`/app/laboratorio-examen/${item.rid}`}
           tipo=""
           textoUrlExternaLeft="Ver informe"
           urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=${user.cedula}&rid=${item.rid}`}

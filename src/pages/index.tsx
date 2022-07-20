@@ -3,7 +3,7 @@ import { Datos, EditDatos } from "./datos";
 import { Citas } from "./citas";
 import { Consultas, Consulta } from "./consultas";
 import { Imagenologia } from "./imagenologia";
-import { Laboratorio } from "./laboratorio";
+import { Laboratorio, ExamenLab } from "./laboratorio";
 import { Medicamentos } from "./medicamentos";
 import { Post } from "./post";
 import { Vacunas } from "./vacunas";
@@ -27,6 +27,7 @@ export {
   Consulta,
   Imagenologia,
   Laboratorio,
+  ExamenLab,
   Medicamentos,
   Post,
   Vacunas,

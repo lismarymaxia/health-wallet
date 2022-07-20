@@ -25,6 +25,7 @@ import {
   Consulta,
   Imagenologia,
   Laboratorio,
+  ExamenLab,
   Afiliados,
   Afiliado,
   Perfil,
@@ -86,6 +87,9 @@ const RutasPrivadas: React.FC = () => {
           </Route>
           <Route path="/app/laboratorio">
             <Laboratorio />
+          </Route>
+          <Route path="/app/laboratorio-examen/:id">
+            <ExamenLab />
           </Route>
           <Route exact path="/app/afiliados">
             <Afiliados />

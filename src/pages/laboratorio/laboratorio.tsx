@@ -25,6 +25,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { serviciosConsultas, servicesWh } from "../../servicios/servicios";
 import { Card } from "./card";
+import Examen from "./examen";
 const Laboratorio: React.FC = () => {
   const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
   const [load, setLoad] = useState<Boolean>(true);
