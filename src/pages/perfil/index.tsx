@@ -1,3 +1,4 @@
 import Perfil from "./perfil";
 import Perfiles from "./perfiles";
-export { Perfil, Perfiles };
+import PerfilCrear from "./perfilCrear";
+export { Perfil, Perfiles, PerfilCrear };

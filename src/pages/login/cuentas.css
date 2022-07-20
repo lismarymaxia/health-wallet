@@ -27,3 +27,17 @@
 .cursor-pointer {
   cursor: pointer;
 }
+img{
+  --border-radius: 0.6rem;
+}
+.box-perfiles {
+  width: 100%;
+  min-height: 40px; 
+  text-align: center;
+  vertical-align: middle;
+  background: #6c95b9;
+  border-radius: 0.8rem;
+}
+.box-perfiles img{
+  border-radius: 0.8rem;
+}
