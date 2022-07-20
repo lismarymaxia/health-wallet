@@ -164,9 +164,16 @@ const RutasPrivadas: React.FC = () => {
               Afiliados
             </div>
           </IonTabButton>
-          <IonTabButton tab="tab5" href="/app/perfiles" className="text-info">
+          <IonTabButton
+            tab="tab5"
+            href="/app/perfil-crear"
+            className="text-info"
+          >
             <div
-              className={`icon-menu  ${tabActive("/app/perfiles", pathname)}`}
+              className={`icon-menu  ${tabActive(
+                "/app/perfil-crear",
+                pathname
+              )}`}
             >
               <FontAwesomeIcon icon={faUser} className="fs-18 w-100" />
               Perfil
