@@ -78,3 +78,6 @@ ion-button{
     border-radius: 50%;
     padding: 1.5rem;
 }
+.swiper-slide {
+    margin-right: 0.5rem !important;
+}
