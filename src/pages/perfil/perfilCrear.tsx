@@ -1,14 +1,11 @@
 import {
   IonContent,
   IonPage,
-  IonSearchbar,
   IonGrid,
   IonRow,
   IonCol,
   IonCard,
   IonCardContent,
-  IonImg,
-  IonProgressBar,
   IonButton,
   IonToast,
   IonLabel,
@@ -18,18 +15,13 @@ import {
   IonSelectOption,
   IonList,
 } from "@ionic/react";
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeart,
-  faSliders,
-  faAngleRight,
-  faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { Header } from "../../components";
-import { servicesWh, serviciosAfiliados } from "../../servicios/servicios";
+import { gruposSanguineos } from "../../helpers";
 import "../../style/tema.css";
 import "./perfil.css";
 
@@ -47,7 +39,9 @@ const PerfilCrear = () => {
         <IonGrid className="pb-4">
           <IonRow className="mt-3 px-3">
             <IonCol size="12" className="pb-2">
-              <h5 className="font-w600 fs-16 text-blue-dark">Creación de perfil</h5>
+              <h5 className="font-w600 fs-16 text-blue-dark">
+                Creación de perfil
+              </h5>
             </IonCol>
           </IonRow>
 
@@ -56,22 +50,33 @@ const PerfilCrear = () => {
               <IonCard className="m-0 mb-2 pb-2 card-slide">
                 <IonCardContent>
                   <div className="text-center subir-perfil">
-                    <FontAwesomeIcon icon={faUserPlus} className="cursor-pointer text-info fs-18" />
+                    <FontAwesomeIcon
+                      icon={faUserPlus}
+                      className="cursor-pointer text-info fs-18"
+                    />
                   </div>
                   <IonItem>
-                    <IonLabel position="stacked">Nombre <span className="text-danger">*</span></IonLabel>
+                    <IonLabel position="stacked">
+                      Nombre <span className="text-danger">*</span>
+                    </IonLabel>
                     <IonInput value=""> </IonInput>
                   </IonItem>
                   <IonItem>
-                    <IonLabel position="stacked">Apellido <span className="text-danger">*</span></IonLabel>
+                    <IonLabel position="stacked">
+                      Apellido <span className="text-danger">*</span>
+                    </IonLabel>
                     <IonInput value=""> </IonInput>
                   </IonItem>
                   <IonItem>
-                    <IonLabel position="stacked">N° de documento <span className="text-danger">*</span></IonLabel>
+                    <IonLabel position="stacked">
+                      N° de documento <span className="text-danger">*</span>
+                    </IonLabel>
                     <IonInput value=""> </IonInput>
                   </IonItem>
                   <IonItem>
-                    <IonLabel position="stacked">Fecha de nacimiento <span className="text-danger">*</span></IonLabel>
+                    <IonLabel position="stacked">
+                      Fecha de nacimiento <span className="text-danger">*</span>
+                    </IonLabel>
                     <IonInput value=""> </IonInput>
                   </IonItem>
                   <IonItem>
@@ -80,7 +85,9 @@ const PerfilCrear = () => {
                   </IonItem>
                   <IonList>
                     <IonItem>
-                      <IonLabel position="stacked">Grupo sanguíneo <span className="text-danger">*</span></IonLabel>
+                      <IonLabel position="stacked">
+                        Grupo sanguíneo <span className="text-danger">*</span>
+                      </IonLabel>
                       <IonSelect interface="action-sheet" placeholder="Tipo">
                         <IonSelectOption value="A+">A+</IonSelectOption>
                         <IonSelectOption value="A-">A-</IonSelectOption>
@@ -96,19 +103,32 @@ const PerfilCrear = () => {
                   <IonList>
                     <IonItem>
                       <IonLabel position="stacked">Discapacidad</IonLabel>
-                      <IonSelect interface="action-sheet" placeholder="Seleccionar">
-                        <IonSelectOption value="Auditiva">Auditiva</IonSelectOption>
-                        <IonSelectOption value="Intelectual">Intelectual</IonSelectOption>
+                      <IonSelect
+                        interface="action-sheet"
+                        placeholder="Seleccionar"
+                      >
+                        <IonSelectOption value="Auditiva">
+                          Auditiva
+                        </IonSelectOption>
+                        <IonSelectOption value="Intelectual">
+                          Intelectual
+                        </IonSelectOption>
                         <IonSelectOption value="Física">Física</IonSelectOption>
                         <IonSelectOption value="Mental">Mental</IonSelectOption>
                         <IonSelectOption value="Visual">Visual</IonSelectOption>
-                        <IonSelectOption value="Visceral">Visceral</IonSelectOption>
+                        <IonSelectOption value="Visceral">
+                          Visceral
+                        </IonSelectOption>
                       </IonSelect>
                     </IonItem>
-                    <span className="fs-12 text-underline text-light cursor-pointer">Cargar carnet de SENADIS</span>
+                    <span className="fs-12 text-underline text-light cursor-pointer">
+                      Cargar carnet de SENADIS
+                    </span>
                   </IonList>
                   <IonItem>
-                    <IonLabel position="stacked">Enfermedades crónicas</IonLabel>
+                    <IonLabel position="stacked">
+                      Enfermedades crónicas
+                    </IonLabel>
                     <IonInput value=""> </IonInput>
                   </IonItem>
                   <IonItem>
@@ -121,11 +141,12 @@ const PerfilCrear = () => {
                   </IonItem>
 
                   <div className="pt-2 text-center">
-                    <IonButton className="border-radius" fill="outline">Guardar perfil</IonButton>
+                    <IonButton className="border-radius" fill="outline">
+                      Guardar perfil
+                    </IonButton>
                   </div>
                 </IonCardContent>
               </IonCard>
-              
             </IonCol>
           </IonRow>
         </IonGrid>

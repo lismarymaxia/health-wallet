@@ -17,3 +17,13 @@ export const meses: any = {
   "11": "Nov",
   "12": "Dic",
 };
+
+export const gruposSanguineos = [
+  { value: "A+", label: "A+" },
+  { value: "A-", label: "A-" },
+  { value: "B+", label: "B+" },
+  { value: "B-", labal: "B-" },
+  { value: "AB+", label: "AB+" },
+  { value: "AB-", label: "AB-" },
+  { value: "O+", label: "O+" },
+];

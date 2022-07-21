@@ -11,14 +11,13 @@ import {
   tabActive,
   compartir,
 } from "./helpers";
-import { tablaFrecuencia, meses } from "./tablasHash";
+import { tablaFrecuencia, meses, gruposSanguineos } from "./tablasHash";
 export {
+  /*-HELPERS-----------------------*/
   handleNombre,
   formtFechaCorta,
   fechaFrontend,
-  tablaFrecuencia,
   fechaActual,
-  meses,
   fechaImagenologia,
   fechaLaboratorio,
   orderId,
@@ -26,4 +25,8 @@ export {
   cadenaUpercase,
   tabActive,
   compartir,
+  /*-TABLA-HASH------------------*/
+  meses,
+  tablaFrecuencia,
+  gruposSanguineos,
 };
