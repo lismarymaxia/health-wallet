@@ -124,7 +124,7 @@ const Perfil = () => {
             </div>
 
             <div className="w-100 ml-3 float-right d-grid">
-              <p className="fs-16 font-w500">{user.nombre}</p>
+              <p className="fs-14 font-w500 mb-1">{user.nombre}</p>
               <div className="">
                 <span className="fs-12 float-left">Edad:</span>
                 <span className="fs-12 float-right">36 años</span>
@@ -138,8 +138,8 @@ const Perfil = () => {
                 <span className="fs-12 float-right">{perfil.sangre}</span>
               </div>
               <div className="pt-2">
-                <span className="fs-12 float-left">Ver ficha completa</span>
-                <span className="fs-12 float-right">editar</span>
+                <span className="fs-12 float-left text-underline">Ver ficha completa</span>
+                <span className="fs-12 float-right text-underline">Editar</span>
               </div>
             </div>
           </div>
@@ -284,9 +284,22 @@ const Perfil = () => {
                     Mi familia
                   </h5>
                 </IonCol>
+                <IonCol size="12">
+                  <IonSlides pager={false} options={slideOpts} className="slide-perfiles">
+                    <IonSlide>
+                      <IonImg src={`./images/juan.jpg`} className="mb-2" />
+                    </IonSlide>
+                    <IonSlide>
+                      <IonImg src={`./images/perfil.jpg`} className="mb-2" />
+                    </IonSlide>
+                    <IonSlide>
+                      <IonImg src={`./images/nuevo-usuario.jpg`} className="mb-2" />
+                    </IonSlide>
+                  </IonSlides>                  
+                </IonCol>
               </IonRow>
 
-              <IonRow className="mt-4">
+              <IonRow className="mt-2">
                 <IonCol size="12">
                   <h5 className="font-w700 fs-15 text-info-dark mb-2">
                     Configuración
@@ -294,7 +307,7 @@ const Perfil = () => {
                 </IonCol>
               </IonRow>
 
-              <IonCard className="m-0 mt-2 card-slide shadow-full">
+              <IonCard className="m-0 card-slide shadow-full">
                 <IonCardContent className="card-content-slidex">                  
                   <div
                     className="pt-3 pb-1 px-1 cursor-pointer"
