@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Redirect, Route, useHistory, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   IonRouterOutlet,
   IonTabBar,
@@ -13,7 +13,6 @@ import {
   faUser,
   faClipboardList,
   faDiagramProject,
-  faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { Nav } from "../components";
 import {
@@ -38,12 +37,10 @@ import {
   DetalleConsulta,
   Soporte,
 } from "../pages";
-import { logout } from "../store";
 import { tabActive } from "../helpers";
 import "../style/tema.css";
 
 const RutasPrivadas: React.FC = () => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const { pathname } = location;
   const isAuth: any = useSelector<any>((state) => state.reducerAuth.stdAuth);
@@ -55,10 +52,6 @@ const RutasPrivadas: React.FC = () => {
       history.replace("/");
     }
   }, [history, isAuth]);
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
 
   return (
     <>
@@ -166,23 +159,17 @@ const RutasPrivadas: React.FC = () => {
           </IonTabButton>
           <IonTabButton
             tab="tab5"
-            href="/app/perfil-crear"
+            href="/app/perfil"
             className="text-info"
           >
             <div
               className={`icon-menu  ${tabActive(
-                "/app/perfil-crear",
+                "/app/perfil",
                 pathname
               )}`}
             >
               <FontAwesomeIcon icon={faUser} className="fs-18 w-100" />
               Perfil
-            </div>
-          </IonTabButton>
-          <IonTabButton tab="tab6" className="text-info">
-            <div onClick={handleLogout}>
-              <FontAwesomeIcon icon={faArrowRight} className="fs-18 w-100" />
-              cerrar
             </div>
           </IonTabButton>
         </IonTabBar>

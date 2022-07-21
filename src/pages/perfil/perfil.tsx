@@ -17,6 +17,7 @@ import {
   IonLabel,
   IonSlides,
   IonSlide,
+  IonButton,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -24,14 +25,24 @@ import {
   faSliders,
   faAngleRight,
   faHospitalUser,
+  faWheelchair,
+  faPhone,
+  faCapsules,
+  faUserDoctor,
+  faHeadphonesSimple,
+  faCircleInfo,
+  faUser,
+  faShieldHalved
 } from "@fortawesome/free-solid-svg-icons";
 import { chevronBackOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { servicesWh } from "../../servicios/servicios";
 import "./perfil.css";
 import "../../style/tema.css";
+import { logout } from "../../store";
 const Perfil = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state: any) => state.reducerAuth.user);
   const history = useHistory();
   const [perfil, setPerfil] = useState({ sangre: "", numemerg: "" });
@@ -49,6 +60,9 @@ const Perfil = () => {
   };
   const handelSoporte = () => {
     history.push("/app/soporte");
+  };
+  const handleLogout = () => {
+    dispatch(logout());
   };
   const slideOpts = {
     initialSlide: 0,
@@ -150,7 +164,7 @@ const Perfil = () => {
                     <IonCardContent className="card-content-slide text-center fs-12 py-2">
                       <span>
                         <FontAwesomeIcon
-                          icon={faSliders}
+                          icon={faWheelchair}
                           className="mr-0 fs-16"
                         />
                       </span>
@@ -163,11 +177,37 @@ const Perfil = () => {
                     <IonCardContent className="card-content-slide text-center fs-12 py-2">
                       <span>
                         <FontAwesomeIcon
-                          icon={faHospitalUser}
+                          icon={faPhone}
                           className="mr-0 fs-16"
                         />
                       </span>
                       <span className="d-block">C. Emergencia</span>
+                    </IonCardContent>
+                  </IonCard>
+                </IonSlide>
+                <IonSlide>
+                  <IonCard className="m-0 card-slide px-2 box-op">
+                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                      <span>
+                        <FontAwesomeIcon
+                          icon={faUserDoctor}
+                          className="mr-0 fs-16"
+                        />
+                      </span>
+                      <span className="d-block">Mis m&eacute;dicos</span>
+                    </IonCardContent>
+                  </IonCard>
+                </IonSlide>
+                <IonSlide>
+                  <IonCard className="m-0 card-slide px-2 box-op">
+                    <IonCardContent className="card-content-slide text-center fs-12 py-2">
+                      <span>
+                        <FontAwesomeIcon
+                          icon={faCapsules}
+                          className="mr-0 fs-16"
+                        />
+                      </span>
+                      <span className="d-block">Medicamentos</span>
                     </IonCardContent>
                   </IonCard>
                 </IonSlide>
@@ -241,20 +281,30 @@ const Perfil = () => {
               <IonRow className="mt-4">
                 <IonCol size="12">
                   <h5 className="font-w700 fs-15 text-info-dark mb-2">
-                    Manejo de perfiles
+                    Mi familia
+                  </h5>
+                </IonCol>
+              </IonRow>
+
+              <IonRow className="mt-4">
+                <IonCol size="12">
+                  <h5 className="font-w700 fs-15 text-info-dark mb-2">
+                    Configuración
                   </h5>
                 </IonCol>
               </IonRow>
 
               <IonCard className="m-0 mt-2 card-slide shadow-full">
-                <IonCardContent className="card-content-slidex">
+                <IonCardContent className="card-content-slidex">                  
                   <div
-                    className="py-3 px-1 border-bottom cursor-pointer"
-                    onClick={handelPerfiles}
+                    className="pt-3 pb-1 px-1 cursor-pointer"
+                    onClick={handelSoporte}
                   >
-                    <IonLabel className="font-w500">
-                      Seleccionar perfil
-                    </IonLabel>
+                    <FontAwesomeIcon
+                      icon={faHeadphonesSimple}
+                      className="mr-2 fs-18 text-info"
+                    />
+                    <IonLabel className="font-w500">Soporte</IonLabel>
                     <FontAwesomeIcon
                       icon={faAngleRight}
                       className="mr-0 float-right fs-18 text-info"
@@ -264,14 +314,49 @@ const Perfil = () => {
                     className="pt-3 pb-1 px-1 cursor-pointer"
                     onClick={handelSoporte}
                   >
-                    <IonLabel className="font-w500">Soporte</IonLabel>
+                    <FontAwesomeIcon
+                      icon={faCircleInfo}
+                      className="mr-2 fs-18 text-info"
+                    />
+                    <IonLabel className="font-w500">T&eacute;rminos y condiciones</IonLabel>
                     <FontAwesomeIcon
                       icon={faAngleRight}
                       className="mr-0 float-right fs-18 text-info"
                     />
                   </div>
+                  <div
+                    className="pt-3 pb-1 px-1 cursor-pointer"
+                    onClick={handelSoporte}
+                  >
+                    <FontAwesomeIcon
+                      icon={faShieldHalved}
+                      className="mr-2 fs-18 text-info"
+                    />
+                    <IonLabel className="font-w500">Seguridad</IonLabel>
+                    <FontAwesomeIcon
+                      icon={faAngleRight}
+                      className="mr-0 float-right fs-18 text-info"
+                    />
+                  </div>
+                  <div
+                    className="pt-3 pb-1 px-1 cursor-pointer"
+                    onClick={handelSoporte}
+                  >
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      className="mr-2 fs-18 text-info"
+                    />
+                    <IonLabel className="font-w500">Mi cuenta</IonLabel>
+                    <FontAwesomeIcon
+                      icon={faAngleRight}
+                      className="mr-0 float-right fs-18 text-info"
+                    />
+                  </div>                  
                 </IonCardContent>
               </IonCard>
+              <div className="pt-2 text-center">
+                <IonButton className="border-radius" fill="outline" onClick={handleLogout}>Cerrar sesión</IonButton>
+              </div>
             </IonCol>
           </IonRow>
         </IonGrid>
