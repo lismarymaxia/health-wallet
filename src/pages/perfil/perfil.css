@@ -81,3 +81,21 @@ ion-button{
 .swiper-slide {
     margin-right: 0.5rem !important;
 }
+.slide-perfiles ion-img{
+    width: 60px;
+    margin-right: 0.5rem;
+}
+.p-perfil-sub ion-thumbnail{
+    width: 50px;
+    height: auto;
+}
+.p-perfil-sub ion-toolbar {
+    --background: none !important;
+    --color: #ffffff;
+}
+.p-perfil-sub ion-img {
+    border-radius: 0.6rem;
+    box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+    -webkit-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+    -moz-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+}

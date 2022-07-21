@@ -55,8 +55,23 @@ const Perfil = () => {
   const handelPerfilTratamientos = () => {
     history.push("/app/perfil-tratamientos");
   };
-  const handelPerfiles = () => {
-    history.push("/app/perfiles");
+  const handelFichaCompleta = () => {
+    history.push("/app/ficha-completa");
+  };
+  const handelAseguradora = () => {
+    history.push("/app/aseguradora");
+  };
+  const handelDiscapacidad = () => {
+    history.push("/app/discapacidad");
+  };
+  const handelContactoEmergencia = () => {
+    history.push("/app/contacto-emergencia");
+  };
+  const handelMisMedicos = () => {
+    history.push("/app/mis-medicos");
+  };
+  const handelMisMedicamentos = () => {
+    history.push("/app/mis-medicamentos");
   };
   const handelSoporte = () => {
     history.push("/app/soporte");
@@ -124,7 +139,7 @@ const Perfil = () => {
             </div>
 
             <div className="w-100 ml-3 float-right d-grid">
-              <p className="fs-16 font-w500">{user.nombre}</p>
+              <p className="fs-14 font-w500 mb-1">{user.nombre}</p>
               <div className="">
                 <span className="fs-12 float-left">Edad:</span>
                 <span className="fs-12 float-right">36 años</span>
@@ -138,8 +153,8 @@ const Perfil = () => {
                 <span className="fs-12 float-right">{perfil.sangre}</span>
               </div>
               <div className="pt-2">
-                <span className="fs-12 float-left">Ver ficha completa</span>
-                <span className="fs-12 float-right">editar</span>
+                <span className="fs-12 float-left text-underline cursor-pointer" onClick={handelFichaCompleta}>Ver ficha completa</span>
+                <span className="fs-12 float-right text-underline">Editar</span>
               </div>
             </div>
           </div>
@@ -147,7 +162,7 @@ const Perfil = () => {
             <IonCol size="12" className="px-3">
               <IonSlides pager={false} options={slideOpts}>
                 <IonSlide>
-                  <IonCard className="m-0 card-slide px-2 box-op">
+                  <IonCard className="m-0 card-slide px-2 box-op" onClick={handelAseguradora}>
                     <IonCardContent className="card-content-slide text-center fs-12 py-2">
                       <span>
                         <FontAwesomeIcon
@@ -160,7 +175,7 @@ const Perfil = () => {
                   </IonCard>
                 </IonSlide>
                 <IonSlide>
-                  <IonCard className="m-0 card-slide px-2 box-op">
+                  <IonCard className="m-0 card-slide px-2 box-op" onClick={handelDiscapacidad}>
                     <IonCardContent className="card-content-slide text-center fs-12 py-2">
                       <span>
                         <FontAwesomeIcon
@@ -173,7 +188,7 @@ const Perfil = () => {
                   </IonCard>
                 </IonSlide>
                 <IonSlide>
-                  <IonCard className="m-0 card-slide px-2 box-op">
+                  <IonCard className="m-0 card-slide px-2 box-op" onClick={handelContactoEmergencia}>
                     <IonCardContent className="card-content-slide text-center fs-12 py-2">
                       <span>
                         <FontAwesomeIcon
@@ -186,7 +201,7 @@ const Perfil = () => {
                   </IonCard>
                 </IonSlide>
                 <IonSlide>
-                  <IonCard className="m-0 card-slide px-2 box-op">
+                  <IonCard className="m-0 card-slide px-2 box-op" onClick={handelMisMedicos}>
                     <IonCardContent className="card-content-slide text-center fs-12 py-2">
                       <span>
                         <FontAwesomeIcon
@@ -199,7 +214,7 @@ const Perfil = () => {
                   </IonCard>
                 </IonSlide>
                 <IonSlide>
-                  <IonCard className="m-0 card-slide px-2 box-op">
+                  <IonCard className="m-0 card-slide px-2 box-op" onClick={handelMisMedicamentos}>
                     <IonCardContent className="card-content-slide text-center fs-12 py-2">
                       <span>
                         <FontAwesomeIcon
@@ -284,9 +299,22 @@ const Perfil = () => {
                     Mi familia
                   </h5>
                 </IonCol>
+                <IonCol size="12">
+                  <IonSlides pager={false} options={slideOpts} className="slide-perfiles">
+                    <IonSlide>
+                      <IonImg src={`./images/juan.jpg`} className="mb-2" />
+                    </IonSlide>
+                    <IonSlide>
+                      <IonImg src={`./images/perfil.jpg`} className="mb-2" />
+                    </IonSlide>
+                    <IonSlide>
+                      <IonImg src={`./images/nuevo-usuario.jpg`} className="mb-2" />
+                    </IonSlide>
+                  </IonSlides>                  
+                </IonCol>
               </IonRow>
 
-              <IonRow className="mt-4">
+              <IonRow className="mt-2">
                 <IonCol size="12">
                   <h5 className="font-w700 fs-15 text-info-dark mb-2">
                     Configuración
@@ -294,7 +322,7 @@ const Perfil = () => {
                 </IonCol>
               </IonRow>
 
-              <IonCard className="m-0 mt-2 card-slide shadow-full">
+              <IonCard className="m-0 card-slide shadow-full">
                 <IonCardContent className="card-content-slidex">                  
                   <div
                     className="pt-3 pb-1 px-1 cursor-pointer"
