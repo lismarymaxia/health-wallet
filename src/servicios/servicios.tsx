@@ -52,7 +52,7 @@ export const serviciosConsultas = (form: any) =>
     responseType: "json",
   });
 
-export const getLaboratorio = (page: any, cedula: any) =>
+export const getLaboratorio = (idafiliado: any, page: any, cedula: any) =>
   servicesWh.get("/api/listado-laboratorio.php", {
     params: {
       op: "timeline_lab",
@@ -63,7 +63,7 @@ export const getLaboratorio = (page: any, cedula: any) =>
     responseType: "json",
   });
 
-export const getImagenologia = (page: any, cedula: any) =>
+export const getImagenologia = (idafiliado: any, page: any, cedula: any) =>
   servicesWh.get("/api/listado-imagenologia", {
     params: {
       op: "imagenologia",
@@ -74,7 +74,7 @@ export const getImagenologia = (page: any, cedula: any) =>
     responseType: "json",
   });
 
-export const getConsulta = (page: any, cedula: any) =>
+export const getConsulta = (idafiliado: any, page: any, cedula: any) =>
   servicesWh.get("/api/listado-consultas.php", {
     params: {
       op: "consultas",

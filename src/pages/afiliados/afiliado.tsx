@@ -13,6 +13,8 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonAccordionGroup,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
 } from "@ionic/react";
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -20,6 +22,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 import { Header } from "../../components";
+import { ContentCard } from "./card";
 import {
   servicesWh,
   serviciosAfiliados,
@@ -27,9 +30,9 @@ import {
   getLaboratorio,
   getImagenologia,
 } from "../../servicios/servicios";
+import { removeDuplicado } from "../../helpers";
 import "../../style/tema.css";
 import "./afiliados.css";
-import { ContentCard } from "./card";
 
 const Afiliado = () => {
   const { id }: any = useParams();
@@ -45,6 +48,11 @@ const Afiliado = () => {
     msg: "",
     estado: false,
   });
+  const accordionGroup = useRef<null | HTMLIonAccordionGroupElement>(null);
+  /*INFINITO-SCROLL----------------------------------- */
+  const [page, setPage] = useState<any>(1);
+  const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
+  const [totalResults, setTotalResults] = useState(0);
 
   const updateDatos = (item: any) => {
     let nuevo = datos.map((items: any) =>
@@ -54,11 +62,10 @@ const Afiliado = () => {
   };
 
   const getRegistro = () => {
-    setLoadRg(true);
     Promise.all([
-      getConsulta(1, user.cedula),
-      getLaboratorio(1, user.cedula),
-      getImagenologia(1, user.cedula),
+      getConsulta(id, page, user.cedula),
+      getLaboratorio(id, page, user.cedula),
+      getImagenologia(id, page, user.cedula),
     ])
       .then((rsp: any) => {
         const [cnst, lab, img] = rsp;
@@ -66,7 +73,6 @@ const Afiliado = () => {
         let newCnst = cnst.data.data.map((item: any) => {
           return { ...item, tipo: "Consulta" };
         });
-        console.log(newCnst);
 
         let newImg = img.data.data.map((item: any) => {
           return { ...item, tipo: "Imagenologia" };
@@ -77,9 +83,14 @@ const Afiliado = () => {
         const newLab = claves.map((item) => {
           return { ...tratada[item], rid: item, tipo: "Laboratorio" };
         });
-        console.log(newLab);
+
         const conector = [...newCnst, ...newImg, ...newLab];
+        const unicos = removeDuplicado(conector);
+        console.log(unicos);
+
         setRegistros((prev: any) => [...prev, ...conector]);
+        setTotalResults(cnst.data.totalResults);
+        setPage(page + 1);
         setLoadRg(false);
       })
       .catch((error) => {
@@ -88,8 +99,9 @@ const Afiliado = () => {
   };
 
   useEffect(() => {
-    getRegistro();
     setLoad(true);
+    setLoadRg(true);
+    getRegistro();
     servicesWh
       .get("/controller/afiliados.php", {
         params: {
@@ -212,19 +224,17 @@ const Afiliado = () => {
       });
   };
 
-  const accordionGroup = useRef<null | HTMLIonAccordionGroupElement>(null);
-  const toggleAccordion = () => {
-    if (!accordionGroup.current) {
-      return;
-    }
-    const nativeEl = accordionGroup.current;
-
-    if (nativeEl.value === "second") {
-      nativeEl.value = undefined;
-    } else {
-      nativeEl.value = "second";
-    }
+  const loadData = (ev: any) => {
+    setTimeout(() => {
+      ev.target.complete();
+      if (registros.length === totalResults) {
+        setInfiniteDisabled(true);
+      } else {
+        getRegistro();
+      }
+    }, 500);
   };
+  console.log(removeDuplicado(registros));
 
   if (load) {
     return (
@@ -329,7 +339,7 @@ const Afiliado = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol size="12" className="px-3 d-none">
+            <IonCol size="12" className="px-3">
               <IonCard className="m-0 mb-2 pb-2 card-slide w-100 afiliados">
                 <IonCardHeader>
                   <IonCardTitle className="fs-14 pb-2">
@@ -362,7 +372,6 @@ const Afiliado = () => {
                 </IonCardContent>
               </IonCard>
             </IonCol>
-
             <IonCol size="12" className="px-3">
               <IonCard
                 className="m-0 mt-2 card-slide shadow-full"
@@ -378,15 +387,27 @@ const Afiliado = () => {
                   <IonAccordionGroup ref={accordionGroup}>
                     {loadRg
                       ? "Cargando"
-                      : registros.map((item: any, index: number) => (
-                          <ContentCard
-                            item={item}
-                            value={`tab${index}`}
-                            key={index}
-                          />
-                        ))}
+                      : removeDuplicado(registros).map(
+                          (item: any, index: number) => (
+                            <ContentCard
+                              item={item}
+                              value={`tab${index}`}
+                              key={index}
+                            />
+                          )
+                        )}
                   </IonAccordionGroup>
                 </IonCardContent>
+                <IonInfiniteScroll
+                  onIonInfinite={loadData}
+                  threshold="100px"
+                  disabled={isInfiniteDisabled}
+                >
+                  <IonInfiniteScrollContent
+                    loadingSpinner="bubbles"
+                    loadingText="Cargando..."
+                  ></IonInfiniteScrollContent>
+                </IonInfiniteScroll>
               </IonCard>
             </IonCol>
           </IonRow>
