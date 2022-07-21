@@ -33,7 +33,7 @@ import { chevronBackOutline } from "ionicons/icons";
 
 const FichaCompleta = () => { 
   return (
-    <IonPage className="fondo">     
+    <IonPage className="fondo">
       <IonHeader>
         <div className="p-perfil-sub bg-info-alt border-radius-bottom">
           <IonToolbar>

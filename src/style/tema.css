@@ -199,3 +199,11 @@ ion-tab-button{
 .text-underline{
     text-decoration: underline;
 }
+
+.list-box:first-of-type{
+    padding-top: 0rem !important;
+}
+.list-box:last-of-type{
+    padding-bottom: 0rem !important;
+    --inner-border-width: 0 0 0px 0;
+}

@@ -10,7 +10,7 @@ import { Vacunas } from "./vacunas";
 import { Home } from "./home";
 import { Registro } from "./registro";
 import { Afiliados, Afiliado } from "./afiliados";
-import { Perfil, Perfiles, PerfilCrear, FichaCompleta } from "./perfil";
+import { Perfil, Perfiles, PerfilCrear, FichaCompleta, Discapacidad, ContactoEmergencia, MisMedicos, MisMedicamentos } from "./perfil";
 import { PerfilTratamientos } from "./perfilTratamientos";
 import { Notificaciones } from "./notificaciones";
 import { ProximasCitas } from "./proximasCitas";
@@ -39,6 +39,10 @@ export {
   Perfiles,
   PerfilCrear,
   FichaCompleta,
+  ContactoEmergencia,
+  MisMedicos,
+  MisMedicamentos,
+  Discapacidad,
   PerfilTratamientos,
   Notificaciones,
   ProximasCitas,
