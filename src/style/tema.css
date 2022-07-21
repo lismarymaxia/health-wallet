@@ -196,3 +196,6 @@ ion-tab-button{
 .lh-normal{
     line-height: normal;
 }
+.text-underline{
+    text-decoration: underline;
+}
