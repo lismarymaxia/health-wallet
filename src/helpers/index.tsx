@@ -11,7 +11,12 @@ import {
   tabActive,
   compartir,
 } from "./helpers";
-import { tablaFrecuencia, meses, gruposSanguineos } from "./tablasHash";
+import {
+  tablaFrecuencia,
+  meses,
+  grupoSanguineos,
+  grupodiscapacidad,
+} from "./tablasHash";
 export {
   /*-HELPERS-----------------------*/
   handleNombre,
@@ -28,5 +33,6 @@ export {
   /*-TABLA-HASH------------------*/
   meses,
   tablaFrecuencia,
-  gruposSanguineos,
+  grupoSanguineos,
+  grupodiscapacidad,
 };

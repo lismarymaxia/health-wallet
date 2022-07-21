@@ -1,4 +1,5 @@
 import {
+  servicesWh,
   getPost,
   getConsulta,
   getLaboratorio,
@@ -10,6 +11,7 @@ import {
   serviciosConsultas,
 } from "./servicios";
 export {
+  servicesWh,
   getPost,
   getConsulta,
   getLaboratorio,

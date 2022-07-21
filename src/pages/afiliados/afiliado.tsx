@@ -85,8 +85,6 @@ const Afiliado = () => {
         });
 
         const conector = [...newCnst, ...newImg, ...newLab];
-        const unicos = removeDuplicado(conector);
-        console.log(unicos);
 
         setRegistros((prev: any) => [...prev, ...conector]);
         setTotalResults(cnst.data.totalResults);
@@ -234,7 +232,6 @@ const Afiliado = () => {
       }
     }, 500);
   };
-  console.log(removeDuplicado(registros));
 
   if (load) {
     return (

@@ -18,12 +18,21 @@ export const meses: any = {
   "12": "Dic",
 };
 
-export const gruposSanguineos = [
+export const grupoSanguineos = [
   { value: "A+", label: "A+" },
   { value: "A-", label: "A-" },
   { value: "B+", label: "B+" },
-  { value: "B-", labal: "B-" },
+  { value: "B-", label: "B-" },
   { value: "AB+", label: "AB+" },
   { value: "AB-", label: "AB-" },
   { value: "O+", label: "O+" },
+];
+
+export const grupodiscapacidad = [
+  { value: "Auditiva", label: "Auditiva" },
+  { value: "Intelectual", label: "Intelectual" },
+  { value: "Física", label: "Física" },
+  { value: "Mental", label: "Mental" },
+  { value: "Visual", label: "Visual" },
+  { value: "Visceral", label: "Visceral" },
 ];
