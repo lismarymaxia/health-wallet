@@ -22,8 +22,59 @@
     --background: initial;
     color: initial;
     font-size: initial;
+    color: #7e7e7e !important;
 }
 
 .cursor-pointer{
     cursor: pointer;
+}
+ion-item.item-interactive {
+    border: 0px;
+    --padding-start: 0rem;
+    --padding-end: 0rem;
+    padding-inline-end: 0rem;
+}
+.label-stacked.sc-ion-label-md-h {
+    font-size: 1.2rem;
+}
+.sc-ion-input-md-h {
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    margin-top: 0.8rem;
+}
+ion-item.item-interactive input.native-input.sc-ion-input-md {
+    padding: 0.5rem;
+}
+:host(.item-interactive), .item-interactive {
+    --border-width: 0 0 0px 0 !important;
+    --background-hover: none;
+}
+.item-inner {
+    --padding-inline-end: 0px !important;
+}
+.item-fill-none.item-interactive.ion-focus .item-highlight, .item-fill-none.item-interactive.item-has-focus .item-highlight, .item-fill-none.item-interactive.ion-touched.ion-invalid .item-highlight{
+    border-color: #ffffff !important;
+}
+ion-select{
+    padding: 0.5rem;
+    margin-top: 0.8rem;
+    border-radius: 0.4rem;
+    border: 1px solid #ccc;
+}
+.select-icon-inner {
+    margin-top: 6px !important;
+}
+.list-md {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+ion-button{
+    --border-width: 1px;
+    --border-radius: 0.4rem !important;
+    text-transform: initial;
+}
+.subir-perfil svg{
+    border: 1px solid #3B72A2;
+    border-radius: 50%;
+    padding: 1.5rem;
 }
