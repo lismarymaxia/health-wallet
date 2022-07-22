@@ -13,7 +13,6 @@ import {
   IonButtons,
   IonBackButton,
   IonThumbnail,
-  IonImg,
   IonLabel,
   IonSlides,
   IonSlide,
@@ -36,7 +35,7 @@ import { chevronBackOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getPerfiles, getPerfil } from "../../servicios/servicios";
-import { INITIALPERFIL, SLIDEOPTS, fechaPerfil } from "../../helpers";
+import { INITIALPERFIL, fechaPerfil } from "../../helpers";
 import "./perfil.css";
 import "../../style/tema.css";
 import { logout } from "../../store";
@@ -46,6 +45,15 @@ const Perfil = () => {
   const history = useHistory();
   const [perfil, setPerfil] = useState(INITIALPERFIL);
   const [perfiles, setPerfiles] = useState([]);
+
+  const SLIDEOPTS = {
+    initialSlide: 0,
+    speed: 200,
+    slidesPerView: 1.7,
+    spaceBetween: 20,
+    //autoplay:true,
+    //loop: true
+  };
 
   const handelPerfilAlergias = () => {
     history.push("/app/perfil-alergias");
@@ -79,6 +87,9 @@ const Perfil = () => {
   };
   const handleLogout = () => {
     dispatch(logout());
+  };
+  const handelNuevoPerfil = () => {
+    history.push("/app/perfil-crear");
   };
 
   useEffect(() => {
@@ -115,7 +126,7 @@ const Perfil = () => {
           <div className="mx-3 pb-2 text-white d-flex">
             <div className="float-left">
               <IonThumbnail slot="start" class="">
-                <img src={"./images/perfil.jpg"} />
+                <img src={`./images/${perfil?.imagen}`} />
               </IonThumbnail>
             </div>
 
@@ -307,13 +318,13 @@ const Perfil = () => {
                     className="slide-perfiles"
                   >
                     {perfiles.map((item: any, index: number) => (
-                      <IonSlide key={index}>
-                        <img
+                      <IonSlide key={index}>                        
+                          <img
                           src={`./images/${item.imagen}`}
                           className="mb-2"
                         />
                       </IonSlide>
-                    ))}
+                    ))}                    
                   </IonSlides>
                 </IonCol>
               </IonRow>

@@ -57,7 +57,7 @@ const Cuentas = () => {
     dispatch(storeLocal(nueva));
     history.push("/app/home");
   };
-  const handleNueva = () => {
+  const handelNuevoPerfil = () => {
     history.push("/app/perfil-crear");
   };
   return (
@@ -94,7 +94,7 @@ const Cuentas = () => {
               </IonCol>
             )}
             <IonCol className="p-2 p-perfil">
-              <div className="box-perfiles" onClick={handleNueva}>
+              <div className="box-perfiles" onClick={handelNuevoPerfil}>
                 <img src={`./images/nuevo-usuario.jpg`} className="mb-2" />
                 <IonLabel className="fs-13">Crear nuevo perfil</IonLabel>
               </div>
