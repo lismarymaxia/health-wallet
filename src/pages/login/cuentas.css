@@ -1,12 +1,17 @@
-ion-content{
-  --background: rgb(14,56,92);
-  --background: linear-gradient(240deg, rgba(14,56,92,1) 0%, rgba(22,111,155,1) 35%, rgba(22,150,178,1) 100%);
+.fondo__cuentas ion-content {
+  --background: rgb(14, 56, 92);
+  --background: linear-gradient(
+    240deg,
+    rgba(14, 56, 92, 1) 0%,
+    rgba(22, 111, 155, 1) 35%,
+    rgba(22, 150, 178, 1) 100%
+  );
 }
-.box-perfiles{
+.box-perfiles {
   text-align: center;
   display: grid;
 }
-.box-perfiles img{
+.box-perfiles img {
   border-radius: 0.9rem;
   box-shadow: 3px 5px 8px 1px rgb(7 41 70);
   -webkit-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
