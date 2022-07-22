@@ -134,7 +134,7 @@ const Perfil = () => {
           <div className="mx-3 pb-2 text-white d-flex">
             <div className="float-left">
               <IonThumbnail slot="start" class="">
-                <IonImg src={"./images/perfil.JPG"} />
+                <img src={"./images/perfil.jpg"} />
               </IonThumbnail>
             </div>
 
@@ -302,13 +302,13 @@ const Perfil = () => {
                 <IonCol size="12">
                   <IonSlides pager={false} options={slideOpts} className="slide-perfiles">
                     <IonSlide>
-                      <IonImg src={`./images/juan.jpg`} className="mb-2" />
+                      <img src={`./images/juan.jpg`} className="mb-2" />
                     </IonSlide>
                     <IonSlide>
-                      <IonImg src={`./images/perfil.jpg`} className="mb-2" />
+                      <img src={`./images/perfil.jpg`} className="mb-2" />
                     </IonSlide>
                     <IonSlide>
-                      <IonImg src={`./images/nuevo-usuario.jpg`} className="mb-2" />
+                      <img src={`./images/nuevo-usuario.jpg`} className="mb-2" />
                     </IonSlide>
                   </IonSlides>                  
                 </IonCol>

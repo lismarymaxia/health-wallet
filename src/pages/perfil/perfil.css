@@ -6,11 +6,14 @@
     width: 40px;
     height: 40px;
 }
-.p-perfil ion-img{
-    border-radius: 0.6rem;
+.p-perfil img{
+    border-radius: 0.9rem;
     box-shadow: 3px 5px 8px 1px rgb(7 41 70);
     -webkit-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
     -moz-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+    width: 80px;
+    max-width: 90px;
+    margin: auto;
 }
 .border-radius-bottom{
     border-radius: 0 0 1.6rem 1.6rem;
@@ -81,8 +84,10 @@ ion-button{
 .swiper-slide {
     margin-right: 0.5rem !important;
 }
-.slide-perfiles ion-img{
+.slide-perfiles img{
+    border-radius: 0.9rem;
     width: 60px;
+    max-width: 90px;
     margin-right: 0.5rem;
 }
 .p-perfil-sub ion-thumbnail{
