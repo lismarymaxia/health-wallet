@@ -65,7 +65,7 @@ export const fechaPerfil = (data: string) => {
   let fecha = new Date(data);
   const formt = fecha.toLocaleDateString("es-ES", {
     year: "numeric",
-    month: "short",
+    month: "long",
     day: "numeric",
   });
   return formt;

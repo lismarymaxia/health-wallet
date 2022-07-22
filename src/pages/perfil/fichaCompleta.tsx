@@ -20,7 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { chevronBackOutline } from "ionicons/icons";
-import { INITIALPERFIL } from "../../helpers";
+import { INITIALPERFIL, fechaPerfil } from "../../helpers";
 import { getPerfil } from "../../servicios/servicios";
 import "./perfil.css";
 import "../../style/tema.css";
@@ -95,7 +95,7 @@ const FichaCompleta = () => {
                         Fecha de nacimiento
                       </div>
                       <div className="fs-13 font-w500 pl-3">
-                        03 de Diciembre de 1987
+                        {fechaPerfil(perfil.fechanacimiento)}
                       </div>
                     </div>
                   </IonItem>
@@ -108,7 +108,9 @@ const FichaCompleta = () => {
                         />
                         Tipo de sangre
                       </div>
-                      <div className="fs-13 font-w500 pl-3">O+</div>
+                      <div className="fs-13 font-w500 pl-3">
+                        {perfil.gruposangre}
+                      </div>
                     </div>
                   </IonItem>
                   <IonItem>

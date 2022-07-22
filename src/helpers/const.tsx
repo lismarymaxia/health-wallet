@@ -10,6 +10,7 @@ export const INITIALPERFIL = {
   enfermedad: "",
   tratamiento: "",
   fecha: "",
+  discapacidad: "",
 };
 /*-CONFIGURACION---------*/
 export const SLIDEOPTS = {

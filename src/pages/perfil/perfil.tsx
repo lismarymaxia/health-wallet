@@ -36,11 +36,19 @@ import { chevronBackOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getPerfiles, getPerfil } from "../../servicios/servicios";
-import { INITIALPERFIL, SLIDEOPTS, fechaPerfil } from "../../helpers";
+import { INITIALPERFIL } from "../../helpers";
 import "./perfil.css";
 import "../../style/tema.css";
 import { logout } from "../../store";
 const Perfil = () => {
+  const SLIDEOPTS = {
+    initialSlide: 0,
+    speed: 200,
+    slidesPerView: 1.7,
+    spaceBetween: 20,
+    //autoplay:true,
+    //loop: true
+  };
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.reducerAuth.user);
   const history = useHistory();
