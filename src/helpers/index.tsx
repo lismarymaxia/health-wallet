@@ -18,7 +18,7 @@ import {
   grupoSanguineos,
   grupodiscapacidad,
 } from "./tablasHash";
-import { INITIALPERFIL, SLIDEOPTS } from "./const";
+import { INITIALPERFIL, SLIDEOPTS, PERFILNUEVO } from "./const";
 export {
   /*-HELPERS-----------------------*/
   handleNombre,
@@ -41,4 +41,5 @@ export {
   /*-CONSTANTES-----------------*/
   INITIALPERFIL,
   SLIDEOPTS,
+  PERFILNUEVO,
 };

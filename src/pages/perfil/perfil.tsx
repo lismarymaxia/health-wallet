@@ -13,7 +13,6 @@ import {
   IonButtons,
   IonBackButton,
   IonThumbnail,
-  IonImg,
   IonLabel,
   IonSlides,
   IonSlide,
@@ -36,7 +35,7 @@ import { chevronBackOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getPerfiles, getPerfil } from "../../servicios/servicios";
-import { INITIALPERFIL } from "../../helpers";
+import { INITIALPERFIL, PERFILNUEVO } from "../../helpers";
 import "./perfil.css";
 import "../../style/tema.css";
 import { logout } from "../../store";
@@ -88,19 +87,27 @@ const Perfil = () => {
   const handleLogout = () => {
     dispatch(logout());
   };
+  const handelNuevoPerfil = () => {
+    history.push("/app/perfil-crear");
+  };
 
   useEffect(() => {
     Promise.all([getPerfil(user.idpaciente), getPerfiles(user.id)])
       .then((rsp: any) => {
         const [prfil, prfiles] = rsp;
         setPerfil(prfil.data.data);
-        setPerfiles(prfiles.data.data);
+        const conectar = prfiles.data.data.concat(PERFILNUEVO);
+        setPerfiles(conectar);
       })
       .catch((error) => {
         console.error("Error en triple peticion" + error);
       });
   }, [user]);
 
+  const handleCrear = (nombre: string) => {
+    if (nombre !== "nuevo-perfil") return;
+    console.log("crear");
+  };
   return (
     <IonPage className="fondo">
       <IonHeader>
@@ -123,7 +130,7 @@ const Perfil = () => {
           <div className="mx-3 pb-2 text-white d-flex">
             <div className="float-left">
               <IonThumbnail slot="start" class="">
-                <IonImg src={"./images/perfil.JPG"} />
+                <img src={`./images/${perfil?.imagen}`} alt="imagen" />
               </IonThumbnail>
             </div>
 
@@ -314,14 +321,27 @@ const Perfil = () => {
                     options={SLIDEOPTS}
                     className="slide-perfiles"
                   >
-                    {perfiles.map((item: any, index: number) => (
-                      <IonSlide key={index}>
-                        <IonImg
-                          src={`./images/${item.imagen}`}
-                          className="mb-2"
-                        />
-                      </IonSlide>
-                    ))}
+                    {/*<IonSlide>
+                      <img
+                        src="./images/nuevo-usuario.jpg"
+                        className="mb-2"
+                        alt="nuevo"
+                      />
+                </IonSlide>*/}
+                    {perfiles
+                      .map((item: any, index: number) => (
+                        <IonSlide
+                          key={index}
+                          onClick={() => handleCrear(item.nombre)}
+                        >
+                          <img
+                            src={`./images/${item.imagen}`}
+                            className="mb-2"
+                            alt={item.imagen}
+                          />
+                        </IonSlide>
+                      ))
+                      .concat()}
                   </IonSlides>
                 </IonCol>
               </IonRow>

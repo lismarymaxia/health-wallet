@@ -12,6 +12,14 @@ export const INITIALPERFIL = {
   fecha: "",
   discapacidad: "",
 };
+
+export const PERFILNUEVO = {
+  id: "0",
+  nombre: "nuevo-perfil",
+  apellido: "",
+  cedula: "",
+  imagen: "nuevo-usuario.jpg",
+};
 /*-CONFIGURACION---------*/
 export const SLIDEOPTS = {
   initialSlide: 0,

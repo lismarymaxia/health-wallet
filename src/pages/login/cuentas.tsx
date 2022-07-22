@@ -57,7 +57,7 @@ const Cuentas = () => {
     dispatch(storeLocal(nueva));
     history.push("/app/home");
   };
-  const handleNueva = () => {
+  const handelNuevoPerfil = () => {
     history.push("/app/perfil-crear");
   };
   return (
@@ -71,31 +71,35 @@ const Cuentas = () => {
             </IonCol>
           </IonRow>
           <IonRow className="ion-align-items-center">
-            {load ? (
-              "Cargando..."
-            ) : data.length > 0 ? (
-              data.map((item: any, index: number) => (
-                <IonCol
-                  className="p-2 p-perfil"
-                  key={index}
-                  onClick={() => {
-                    handleClic(item);
-                  }}
-                >
-                  <div className="box-perfiles">
-                    <img src={`./images/${item.imagen}`} className="mb-2" />
-                    <IonLabel className="fs-13">{item.nombre}</IonLabel>
-                  </div>
-                </IonCol>
-              ))
-            ) : (
-              <IonCol size="4" className="p-2">
-                registrar
-              </IonCol>
-            )}
+            {load
+              ? "Cargando..."
+              : data.length > 0
+              ? data.map((item: any, index: number) => (
+                  <IonCol
+                    className="p-2 p-perfil"
+                    key={index}
+                    onClick={() => {
+                      handleClic(item);
+                    }}
+                  >
+                    <div className="box-perfiles">
+                      <img
+                        src={`./images/${item.imagen}`}
+                        className="mb-2"
+                        alt={item.imagen}
+                      />
+                      <IonLabel className="fs-13">{item.nombre}</IonLabel>
+                    </div>
+                  </IonCol>
+                ))
+              : null}
             <IonCol className="p-2 p-perfil">
-              <div className="box-perfiles" onClick={handleNueva}>
-                <img src={`./images/nuevo-usuario.jpg`} className="mb-2" />
+              <div className="box-perfiles" onClick={handelNuevoPerfil}>
+                <img
+                  src={`./images/nuevo-usuario.jpg`}
+                  className="mb-2"
+                  alt="nuevo"
+                />
                 <IonLabel className="fs-13">Crear nuevo perfil</IonLabel>
               </div>
             </IonCol>
