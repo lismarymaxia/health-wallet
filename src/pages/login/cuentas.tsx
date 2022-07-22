@@ -61,42 +61,29 @@ const Cuentas = () => {
     history.push("/app/perfil-crear");
   };
   return (
-    <IonPage className="fondo">
-      <IonContent fullscreen className="bg-light">
-        <IonGrid className="pb-4">
+    <IonPage>
+      <IonContent fullscreen>
+        <IonGrid className="pb-4 text-white">
           <IonRow className="mt-4 px-3">
             <IonCol size="12" className="pb-3">
-              <h4 className="font-w700 text-info-dark mb-2">Bienvenido</h4>
-              <p className="fs-14 text-info-dark">
+              <h3 className="font-w700 text-white mt-3 mb-0">Bienvenido</h3>
+              <p className="fs-16">
                 ¿A qué perfil deseas ingresar?
               </p>
             </IonCol>
           </IonRow>
-          <IonRow className="px-3">
-            <div className="d-flex">
+          <IonRow className="ion-align-items-center">
               {load ? (
                 "Cargando..."
               ) : data.length > 0 ? (
                 data.map((item: any, index: number) => (
-                  <IonCol size="4" className="p-2 p-perfil" key={index}>
+                  <IonCol className="p-2 p-perfil" key={index}  onClick={() => {
+                    handleClic(item);
+                  }}>
                     <div className="box-perfiles">
-                      <IonImg
-                        src={`./images/${item.imagen}`}
-                        className="mb-2"
-                      />
+                      <img src={`./images/${item.imagen}`} className="mb-2" />                    
+                      <IonLabel className="fs-13">{item.nombre}</IonLabel>
                     </div>
-                    <IonLabel className="fs-13">{item.nombre}</IonLabel>
-                    <IonButton
-                      color="primary"
-                      onClick={() => {
-                        handleClic(item);
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={faCheck}
-                        className="mr-0 float-right"
-                      />
-                    </IonButton>
                   </IonCol>
                 ))
               ) : (
@@ -104,13 +91,13 @@ const Cuentas = () => {
                   registrar
                 </IonCol>
               )}
-              <IonCol size="4" className="p-2 text-center col-perfiles">
+              <IonCol className="p-2 p-perfil">
                 <div className="box-perfiles" onClick={handleNueva}>
-                  <IonImg src={`./images/nuevo-usuario.jpg`} className="mb-2" />
-                </div>
-                <IonLabel className="fs-13">Crear nuevo perfil</IonLabel>
+                  <img src={`./images/nuevo-usuario.jpg`} className="mb-2" />
+                  <IonLabel className="fs-13">Crear nuevo perfil</IonLabel>
+                </div>                
               </IonCol>
-            </div>
+            
           </IonRow>
         </IonGrid>
       </IonContent>

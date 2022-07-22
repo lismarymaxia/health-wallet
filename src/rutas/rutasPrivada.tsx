@@ -150,7 +150,7 @@ const RutasPrivadas: React.FC = () => {
         </IonRouterOutlet>
         <IonTabBar
           slot="bottom"
-          className={`bar-menu ${pathname === "/app/soporte" ? "d-none" : ""}`}
+          className={`bar-menu ${pathname === "/app/soporte" || pathname === "/app/cuentas" ? "d-none" : ""}`}
         >
           <IonTabButton tab="tab1" href="/app/home" className="text-info">
             <div className={`icon-menu  ${tabActive("/app/home", pathname)}`}>

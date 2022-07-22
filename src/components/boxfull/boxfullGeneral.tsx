@@ -1,6 +1,6 @@
 import { IonImg } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faArrowUpFromBracket, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
@@ -164,12 +164,12 @@ const BoxfullGeneral: React.FC<{
             </p>
           </div>
         )}
-
+        <div className="w-100 d-inline-block">
         {textLinkBottomLeft !== "" && (
           <div>
             <p className="mb-0 mt-2 fs-12 float-left">
-              <Link to={linkBottomLeft} className="text-info-light underline">
-                {textLinkBottomLeft}
+              <Link to={linkBottomLeft} className="text-info-light underline">                
+                {textLinkBottomLeft}                
               </Link>
             </p>
           </div>
@@ -180,6 +180,9 @@ const BoxfullGeneral: React.FC<{
             <p className="mb-0 mt-2 fs-12 float-right">
               <Link to={linkBottomRight} className="text-info-light underline">
                 {textLinkBottomRight}
+                {textLinkBottomRight === "Compartir" && (
+                  <FontAwesomeIcon icon={faShareNodes} className="ml-1 text-info" />
+                )}
               </Link>
             </p>
           </div>
@@ -209,6 +212,7 @@ const BoxfullGeneral: React.FC<{
             </p>
           </div>
         )}
+        </div>
 
         {tipo && (
           <p className="mb-0 fs-12 float-right text-info-light">{tipo}</p>

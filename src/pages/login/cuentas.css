@@ -1,43 +1,17 @@
-.p-perfil ion-toolbar {
-  --background: none !important;
-  --color: #ffffff;
+ion-content{
+  --background: rgb(14,56,92);
+  --background: linear-gradient(240deg, rgba(14,56,92,1) 0%, rgba(22,111,155,1) 35%, rgba(22,150,178,1) 100%);
 }
-.p-perfil ion-thumbnail {
-  width: 40px;
-  height: 40px; 
+.box-perfiles{
+  text-align: center;
+  display: grid;
 }
-.p-perfil ion-img {
-  border-radius: 0.6rem;
+.box-perfiles img{
+  border-radius: 0.9rem;
   box-shadow: 3px 5px 8px 1px rgb(7 41 70);
   -webkit-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
   -moz-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
-}
-.border-radius-bottom {
-  border-radius: 0 0 1.6rem 1.6rem;
-}
-.fondo ion-item {
-  margin: 0;
-  padding: 0;
-  background: initial;
-  --background: initial;
-  color: initial;
-  font-size: initial;
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
-img{
-  --border-radius: 0.6rem;
-}
-.box-perfiles {
-  width: 100%;
-  min-height: 40px; 
-  text-align: center;
-  vertical-align: middle;
-  background: #6c95b9;
-  border-radius: 0.8rem;
-}
-.box-perfiles img{
-  border-radius: 0.8rem;
+  width: 60px;
+  max-width: 90px;
+  margin: auto;
 }

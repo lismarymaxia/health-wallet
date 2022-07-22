@@ -24,6 +24,7 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
   const { daymonth: monthlab, yy: yylab } = fechaLaboratorio(
     item.fecha_solicitud
   );
+
   return (
     <div>
       {item.tipo === "Consulta" && (
@@ -31,7 +32,7 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
           <IonItem slot="header">
             <IonLabel className="text-body fs-14 d-flex">
               <FontAwesomeIcon icon={faCircle} className="fs-6 mr-2 mt-2" />
-              {item.centroproduccion}
+              Consulta - {item.centroproduccion}
             </IonLabel>
           </IonItem>
           <div className="ion-padding" slot="content">
@@ -68,12 +69,12 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
           <IonItem slot="header">
             <IonLabel className="text-body fs-14 d-flex">
               <FontAwesomeIcon icon={faCircle} className="fs-6 mr-2 mt-2" />
-              Laboratorio -{item.desde}
+              Laboratorio - {item.desde}
             </IonLabel>
           </IonItem>
           <div className="ion-padding" slot="content">
             <BoxfullGeneral
-              title="Titulo"
+              title=""
               imageTitle=""
               iconTop=""
               fechaTop={monthlab}
@@ -90,8 +91,8 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
               linkBottomLeft=""
               linkBottomRight=""
               textLinkBottomLeft=""
-              textLinkBottomRight=""
-              ir={true}
+              textLinkBottomRight="Compartir"
+              ir={false}
               linkIr={`/app/laboratorio-examen/${item.rid}`}
               tipo=""
               textoUrlExternaLeft="Ver informe"
@@ -105,12 +106,12 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
           <IonItem slot="header">
             <IonLabel className="text-body fs-14 d-flex">
               <FontAwesomeIcon icon={faCircle} className="fs-6 mr-2 mt-2" />
-              Imagenología -
+              Imagenología - {item.estudio}
             </IonLabel>
           </IonItem>
           <div className="ion-padding" slot="content">
             <BoxfullGeneral
-              title={item.estudio}
+              title=""
               imageTitle=""
               iconTop=""
               fechaTop={daymonth}
