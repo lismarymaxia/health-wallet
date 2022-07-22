@@ -161,7 +161,6 @@ const Consultas: React.FC = () => {
 
   const loadData = (ev: any) => {
     setTimeout(() => {
-      console.log("Loaded data");
       ev.target.complete();
       if (data.length === totalResults) {
         setInfiniteDisabled(true);

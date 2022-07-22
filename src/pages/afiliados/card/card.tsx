@@ -55,8 +55,8 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
               linkBottomRight=""
               textLinkBottomLeft=""
               textLinkBottomRight=""
-              ir={false}
-              linkIr=""
+              ir={true}
+              linkIr={`detalle-consulta/${item.id}`}
               tipo=""
               textoUrlExternaLeft=""
               urlExternaLeft=""

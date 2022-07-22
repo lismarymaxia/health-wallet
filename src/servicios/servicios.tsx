@@ -37,11 +37,6 @@ export const registroUsuario = (form: any) =>
     responseType: "json",
   });
 
-export const serviciosPaciente = (form: any) =>
-  servicesWh.post("/controller/pacienteback.php", form, {
-    responseType: "json",
-  });
-
 export const serviciosAfiliados = (form: any) =>
   servicesWh.post("/controller/afiliados.php", form, {
     responseType: "json",
@@ -52,7 +47,7 @@ export const serviciosConsultas = (form: any) =>
     responseType: "json",
   });
 
-export const getLaboratorio = (page: any, cedula: any) =>
+export const getLaboratorio = (idafiliado: any, page: any, cedula: any) =>
   servicesWh.get("/api/listado-laboratorio.php", {
     params: {
       op: "timeline_lab",
@@ -63,7 +58,7 @@ export const getLaboratorio = (page: any, cedula: any) =>
     responseType: "json",
   });
 
-export const getImagenologia = (page: any, cedula: any) =>
+export const getImagenologia = (idafiliado: any, page: any, cedula: any) =>
   servicesWh.get("/api/listado-imagenologia", {
     params: {
       op: "imagenologia",
@@ -74,7 +69,7 @@ export const getImagenologia = (page: any, cedula: any) =>
     responseType: "json",
   });
 
-export const getConsulta = (page: any, cedula: any) =>
+export const getConsulta = (idafiliado: any, page: any, cedula: any) =>
   servicesWh.get("/api/listado-consultas.php", {
     params: {
       op: "consultas",
@@ -85,5 +80,30 @@ export const getConsulta = (page: any, cedula: any) =>
       hasta: "",
       imestamp: new Date().getTime(),
     },
+    responseType: "json",
+  });
+/*-PACIENTES----------------------------------------------*/
+export const getPerfil = (idusuario: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getPerfil",
+      id: idusuario,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+
+export const getPerfiles = (idusuario: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getPerfiles",
+      id: idusuario,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+
+export const serviciosPaciente = (form: any) =>
+  servicesWh.post("/controller/pacienteback.php", form, {
     responseType: "json",
   });

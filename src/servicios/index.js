@@ -1,4 +1,5 @@
 import {
+  servicesWh,
   getPost,
   getConsulta,
   getLaboratorio,
@@ -8,8 +9,10 @@ import {
   getEnfermedad,
   serviciosAfiliados,
   serviciosConsultas,
+  getPerfiles,
 } from "./servicios";
 export {
+  servicesWh,
   getPost,
   getConsulta,
   getLaboratorio,
@@ -19,4 +22,5 @@ export {
   getEnfermedad,
   serviciosAfiliados,
   serviciosConsultas,
+  getPerfiles,
 };

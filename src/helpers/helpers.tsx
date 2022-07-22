@@ -34,7 +34,6 @@ export const fechaFrontend = (fecha: any) => {
 
 export const fechaImagenologia = (fecha: any) => {
   if (fecha != null && fecha !== "") {
-    console.log(fecha);
     const [dia, mes, yy] = fecha.split("-");
     return { daymonth: `${dia} ${mes}`, yy: `20${yy}` };
   } else {
@@ -53,8 +52,8 @@ export const fechaLaboratorio = (fecha: any) => {
 };
 
 export const fechaActual = () => {
-  var fecha = new Date();
-  var options: any = {
+  let fecha = new Date();
+  let options: any = {
     weekday: "long",
     month: "long",
     day: "numeric",
@@ -62,10 +61,47 @@ export const fechaActual = () => {
 
   return fecha.toLocaleDateString("es-ES", options);
 };
-/*-ORDENADO-ID-----------------------------------*/
+export const fechaPerfil = (data: string) => {
+  let fecha = new Date(data);
+  const formt = fecha.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  return formt;
+};
+
+/*-FUNCIONES-MATRIZ------------------------------*/
 export const orderId = (data: any) => {
   return data.sort((a: any, b: any) => b.id - a.id);
 };
+
+/*export const removeDuplicado = (data: any) => {
+  return data.filter(
+    (item: any, index: number) => data.indexOf(item) === index
+  );
+};*/
+export const removeDuplicado = (data: any) => {
+  return data.reduce(
+    (partial: any, item: any) =>
+      partial.includes(item) ? partial : [...partial, item],
+    []
+  );
+};
+
+function removeDuplicates(originalArray: any, prop: string) {
+  let newArray = [];
+  let lookupObject: any = {};
+
+  for (let i in originalArray) {
+    lookupObject[originalArray[i][prop]] = originalArray[i];
+  }
+
+  for (let i in lookupObject) {
+    newArray.push(lookupObject[i]);
+  }
+  return newArray;
+}
 
 export const cadenaUpercase = (text: string) => {
   let cadena = text.trim().split(" ");
