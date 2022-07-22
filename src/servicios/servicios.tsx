@@ -37,11 +37,6 @@ export const registroUsuario = (form: any) =>
     responseType: "json",
   });
 
-export const serviciosPaciente = (form: any) =>
-  servicesWh.post("/controller/pacienteback.php", form, {
-    responseType: "json",
-  });
-
 export const serviciosAfiliados = (form: any) =>
   servicesWh.post("/controller/afiliados.php", form, {
     responseType: "json",
@@ -85,5 +80,30 @@ export const getConsulta = (idafiliado: any, page: any, cedula: any) =>
       hasta: "",
       imestamp: new Date().getTime(),
     },
+    responseType: "json",
+  });
+/*-PACIENTES----------------------------------------------*/
+export const getPerfil = (idusuario: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getPerfil",
+      id: idusuario,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+
+export const getPerfiles = (idusuario: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getPerfiles",
+      id: idusuario,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+
+export const serviciosPaciente = (form: any) =>
+  servicesWh.post("/controller/pacienteback.php", form, {
     responseType: "json",
   });

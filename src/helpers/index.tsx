@@ -5,6 +5,7 @@ import {
   fechaImagenologia,
   fechaLaboratorio,
   fechaActual,
+  fechaPerfil,
   orderId,
   removeDuplicado,
   cadenaUpercase,
@@ -17,6 +18,7 @@ import {
   grupoSanguineos,
   grupodiscapacidad,
 } from "./tablasHash";
+import { INITIALPERFIL, SLIDEOPTS } from "./const";
 export {
   /*-HELPERS-----------------------*/
   handleNombre,
@@ -25,6 +27,7 @@ export {
   fechaActual,
   fechaImagenologia,
   fechaLaboratorio,
+  fechaPerfil,
   orderId,
   removeDuplicado,
   cadenaUpercase,
@@ -35,4 +38,7 @@ export {
   tablaFrecuencia,
   grupoSanguineos,
   grupodiscapacidad,
+  /*-CONSTANTES-----------------*/
+  INITIALPERFIL,
+  SLIDEOPTS,
 };

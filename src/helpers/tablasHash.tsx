@@ -29,10 +29,10 @@ export const grupoSanguineos = [
 ];
 
 export const grupodiscapacidad = [
-  { value: "Auditiva", label: "Auditiva" },
-  { value: "Intelectual", label: "Intelectual" },
-  { value: "Física", label: "Física" },
-  { value: "Mental", label: "Mental" },
-  { value: "Visual", label: "Visual" },
-  { value: "Visceral", label: "Visceral" },
+  { value: "1", label: "Auditiva" },
+  { value: "2", label: "Intelectual" },
+  { value: "3", label: "Física" },
+  { value: "4", label: "Mental" },
+  { value: "5", label: "Visual" },
+  { value: "6", label: "Visceral" },
 ];

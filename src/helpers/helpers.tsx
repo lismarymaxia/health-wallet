@@ -52,8 +52,8 @@ export const fechaLaboratorio = (fecha: any) => {
 };
 
 export const fechaActual = () => {
-  var fecha = new Date();
-  var options: any = {
+  let fecha = new Date();
+  let options: any = {
     weekday: "long",
     month: "long",
     day: "numeric",
@@ -61,6 +61,16 @@ export const fechaActual = () => {
 
   return fecha.toLocaleDateString("es-ES", options);
 };
+export const fechaPerfil = (data: string) => {
+  let fecha = new Date(data);
+  const formt = fecha.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  return formt;
+};
+
 /*-FUNCIONES-MATRIZ------------------------------*/
 export const orderId = (data: any) => {
   return data.sort((a: any, b: any) => b.id - a.id);

@@ -5,7 +5,6 @@ import {
   IonCol,
   IonContent,
   IonPage,
-  IonThumbnail,
   IonImg,
   IonButton,
   IonLabel,
@@ -13,11 +12,7 @@ import {
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCheck,
-  faUserCheck,
-  faUserPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { servicesWh } from "../../servicios/servicios";
 import { storeLocal } from "../../store/action/aut";
 import "./cuentas.css";

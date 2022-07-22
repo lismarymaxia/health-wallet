@@ -21,7 +21,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { serviciosPaciente, servicesWh, getEnfermedad } from "../../servicios";
+import { serviciosPaciente, servicesWh } from "../../servicios";
 import { Header } from "../../components";
 import { grupoSanguineos, grupodiscapacidad } from "../../helpers";
 import { useForm } from "../../hook";
@@ -35,7 +35,6 @@ const PerfilCrear = () => {
   const [alergia, setAlergia] = useState("");
   const [grupoAlergias, setGrupoAlergias] = useState([]);
   const [grupo, setGrupo] = useState("");
-  const [enfermedad, setEnfermedad] = useState({ label: "", value: "" });
   const [notificacion, setNotificacion] = useState({
     msg: "",
     estado: false,
@@ -46,17 +45,28 @@ const PerfilCrear = () => {
     documento: "",
     nacimiento: "",
     edad: "",
-    sangre: "",
+    gruposangre: "",
     discapacidad: "",
+    enfermedad: "",
+    tratamiento: "",
   };
 
   const [form, handleInputChange, handleInputReset] = useForm(initial);
 
-  const handleCrear = (id: any, item: any) => {
+  const handleAdd = () => {
     let formDa = new FormData();
-    formDa.append("op", "addFavorito");
-    formDa.append("idafiliado", id);
+    formDa.append("op", "addPaciente");
     formDa.append("idusuario", user.id);
+    formDa.append("nombre", form.nombre);
+    formDa.append("apellido", form.apellido);
+    formDa.append("cedula", form.documento);
+    formDa.append("gruposangre", form.gruposangre);
+    formDa.append("edad", form.edad);
+    formDa.append("enfermedad", form.enfermedad);
+    formDa.append("tratamiento", form.tratamiento);
+    formDa.append("idgrupo", grupo);
+    formDa.append("idalergia", alergia);
+    formDa.append("iddiscapacidad", form.discapacidad);
     serviciosPaciente(formDa)
       .then(function (response) {
         const { data, status } = response;
@@ -66,6 +76,7 @@ const PerfilCrear = () => {
               msg: data.msg,
               estado: true,
             });
+            handleInputReset();
           } else {
             setNotificacion({
               msg: data.msg,
@@ -130,27 +141,6 @@ const PerfilCrear = () => {
       });
   };
 
-  const handleSearch = (e: any) => {
-    setEnfermedad({ ...enfermedad, label: e });
-    console.log(e);
-    if (e.length > 3) {
-      getEnfermedad(e)
-        .then((rsp: any) => {
-          const { data, estatus } = rsp.data;
-          if (estatus === "ok") {
-            if (data) {
-              //setData(data);
-            }
-          }
-        })
-        .catch((e: any) => {
-          console.warn(e);
-        });
-    } else if (e.length < 3) {
-      //setData([]);
-      // setTransition(false);
-    }
-  };
   return (
     <IonPage className="fondo">
       <Header title="Nuevo dependiente" isbotton={true} isBuger={false} />
@@ -223,9 +213,7 @@ const PerfilCrear = () => {
                           onIonChange={(e: any) =>
                             handleInputChange(e.detail.value!, "nacimiento")
                           }
-                        >
-                          {" "}
-                        </IonInput>
+                        ></IonInput>
                       </IonItem>
 
                       <IonItem>
@@ -247,9 +235,9 @@ const PerfilCrear = () => {
                           <IonSelect
                             interface="action-sheet"
                             placeholder="Tipo"
-                            value={form.sangre}
+                            value={form.gruposangre}
                             onIonChange={(e: any) =>
-                              handleInputChange(e.detail.value!, "sangre")
+                              handleInputChange(e.detail.value!, "gruposangre")
                             }
                           >
                             {grupoSanguineos.map((item: any, index: any) => (
@@ -293,12 +281,12 @@ const PerfilCrear = () => {
                           Enfermedades crónicas
                         </IonLabel>
                         <IonInput
-                          value={enfermedad.label}
                           placeholder="Enfermedad"
-                          onIonChange={(e) => handleSearch(e.detail.value!)}
-                        >
-                          {" "}
-                        </IonInput>
+                          value={form.enfermedad}
+                          onIonChange={(e: any) =>
+                            handleInputChange(e.detail.value!, "enfermedad")
+                          }
+                        ></IonInput>
                       </IonItem>
                       <IonList>
                         <IonItem>
@@ -346,13 +334,22 @@ const PerfilCrear = () => {
                         <IonLabel position="stacked">
                           Tratamientos activos
                         </IonLabel>
-                        <IonInput value=""> </IonInput>
+                        <IonInput
+                          value={form.tratamiento}
+                          onIonChange={(e: any) =>
+                            handleInputChange(e.detail.value!, "tratamiento")
+                          }
+                        ></IonInput>
                       </IonItem>
                     </div>
                   )}
                   {transition && (
                     <div className="pt-2 text-center">
-                      <IonButton className="border-radius" fill="outline">
+                      <IonButton
+                        className="border-radius"
+                        fill="outline"
+                        onClick={handleAdd}
+                      >
                         Guardar perfil
                       </IonButton>
                     </div>
@@ -387,3 +384,22 @@ const PerfilCrear = () => {
 };
 
 export default PerfilCrear;
+/*const handleSearch = (e: any) => {
+    setEnfermedad({ ...enfermedad, label: e });
+    console.log(e);
+    if (e.length > 3) {
+      getEnfermedad(e)
+        .then((rsp: any) => {
+          const { data, estatus } = rsp.data;
+          if (estatus === "ok") {
+            if (data) {
+
+            }
+          }
+        })
+        .catch((e: any) => {
+          console.warn(e);
+        });
+    } else if (e.length < 3) {
+    }
+  };*/

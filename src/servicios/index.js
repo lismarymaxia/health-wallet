@@ -9,6 +9,7 @@ import {
   getEnfermedad,
   serviciosAfiliados,
   serviciosConsultas,
+  getPerfiles,
 } from "./servicios";
 export {
   servicesWh,
@@ -21,4 +22,5 @@ export {
   getEnfermedad,
   serviciosAfiliados,
   serviciosConsultas,
+  getPerfiles,
 };
