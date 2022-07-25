@@ -1,2 +1,3 @@
 import Header from "./header";
-export { Header };
+import HeaderEstudios from "./headerEstudios";
+export { Header, HeaderEstudios };

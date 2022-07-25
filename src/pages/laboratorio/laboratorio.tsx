@@ -1,9 +1,7 @@
-import {
-  faXRay,
-  faMicroscope,
-  faStethoscope,
-  faSliders,
-} from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { faSliders } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   IonCard,
@@ -12,19 +10,14 @@ import {
   IonPage,
   IonCol,
   IonGrid,
-  IonHeader,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   IonRow,
   IonSearchbar,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { serviciosConsultas, servicesWh } from "../../servicios/servicios";
 import { Card } from "./card";
+import { HeaderEstudios } from "../../components";
+import { serviciosConsultas, servicesWh } from "../../servicios/servicios";
 import Examen from "./examen";
 const Laboratorio: React.FC = () => {
   const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
@@ -108,85 +101,7 @@ const Laboratorio: React.FC = () => {
 
   return (
     <IonPage className="fondo">
-      <IonHeader>
-        <div className="p-perfil bg-info-alt border-radius-bottom">
-          <IonToolbar>
-            <IonTitle className="fs-16 font-w600 text-center">
-              Laboratorios
-            </IonTitle>
-            {/*<IonButtons slot="start">
-              <IonBackButton
-                icon={chevronBackOutline}
-                text=""
-                className="custom-back text-white"
-              />
-  </IonButtons>*/}
-          </IonToolbar>
-          <IonRow className="mt-4 pb-3">
-            <IonCol size="4" className="pl-2 pr-1">
-              <IonCard className="m-0 card-slide px-2 box-op">
-                <IonCardContent className="card-content-slide text-center fs-12 py-2 px-0">
-                  <span>
-                    <FontAwesomeIcon icon={faXRay} className="mr-0 fs-16" />
-                  </span>
-
-                  <span>
-                    <Link
-                      to="/app/imagenologia"
-                      className="d-block"
-                      style={{ color: "#ffffff" }}
-                    >
-                      Imagenología
-                    </Link>
-                  </span>
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-            <IonCol size="4" className="px-2">
-              <IonCard className="m-0 card-slide px-2 box-op active">
-                <IonCardContent className="card-content-slide text-center fs-12 py-2 px-0">
-                  <span>
-                    <FontAwesomeIcon
-                      icon={faMicroscope}
-                      className="mr-0 fs-16"
-                    />
-                  </span>
-                  <span>
-                    <Link
-                      to="/app/laboratorio"
-                      className="d-block"
-                      style={{ color: "#3B72A2" }}
-                    >
-                      Laboratorios
-                    </Link>
-                  </span>
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-            <IonCol size="4" className="pl-1 pr-2">
-              <IonCard className="m-0 card-slide px-2 box-op">
-                <IonCardContent className="card-content-slide text-center fs-12 py-2 px-0">
-                  <span>
-                    <FontAwesomeIcon
-                      icon={faStethoscope}
-                      className="mr-0 fs-16"
-                    />
-                  </span>
-                  <span>
-                    <Link
-                      to="/app/consultas"
-                      className="d-block"
-                      style={{ color: "#fff" }}
-                    >
-                      Consultas
-                    </Link>
-                  </span>
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-        </div>
-      </IonHeader>
+      <HeaderEstudios title="Laboratorios" />
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
           <IonRow className="mt-1 px-3">
