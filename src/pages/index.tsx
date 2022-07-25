@@ -5,12 +5,20 @@ import { Consultas, Consulta } from "./consultas";
 import { Imagenologia } from "./imagenologia";
 import { Laboratorio, ExamenLab } from "./laboratorio";
 import { Medicamentos } from "./medicamentos";
-import { Post } from "./post";
-import { Vacunas } from "./vacunas";
 import { Home } from "./home";
 import { Registro } from "./registro";
 import { Afiliados, Afiliado } from "./afiliados";
-import { Perfil, Perfiles, PerfilCrear, FichaCompleta, Discapacidad, ContactoEmergencia, MisMedicos, MisMedicamentos } from "./perfil";
+import {
+  Perfil,
+  Perfiles,
+  PerfilCrear,
+  FichaCompleta,
+  Discapacidad,
+  ContactoEmergencia,
+  MisMedicos,
+  MisMedicamentos,
+  PerfilAlergias,
+} from "./perfil";
 import { PerfilTratamientos } from "./perfilTratamientos";
 import { Notificaciones } from "./notificaciones";
 import { ProximasCitas } from "./proximasCitas";
@@ -29,8 +37,6 @@ export {
   Laboratorio,
   ExamenLab,
   Medicamentos,
-  Post,
-  Vacunas,
   Home,
   Registro,
   Afiliados,
@@ -38,6 +44,7 @@ export {
   Perfil,
   Perfiles,
   PerfilCrear,
+  PerfilAlergias,
   FichaCompleta,
   ContactoEmergencia,
   MisMedicos,

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   IonGrid,
   IonRow,
@@ -13,33 +12,30 @@ import {
   IonButtons,
   IonBackButton,
   IonThumbnail,
-  IonImg
+  IonImg,
 } from "@ionic/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHospital,
-  faUserDoctor,
-  faSliders
-} from "@fortawesome/free-solid-svg-icons";
-import { Header, Boxfull } from "../../components";
-import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
 import "./perfilTratamientos.css";
 import "../../style/tema.css";
 import { chevronBackOutline } from "ionicons/icons";
 
-const PerfilTratamientos = () => { 
-
+const PerfilTratamientos = () => {
   return (
-    <IonPage className="fondo">     
+    <IonPage className="fondo">
       <IonHeader>
         <div className="p-perfil bg-info-alt border-radius-bottom">
           <IonToolbar>
-            <IonTitle className="fs-16 font-w700" style={{paddingLeft:"12%"}} >
+            <IonTitle
+              className="fs-16 font-w700"
+              style={{ paddingLeft: "12%" }}
+            >
               Tratamientos activos
             </IonTitle>
             <IonButtons slot="start">
-              <IonBackButton icon={chevronBackOutline} text="" className="custom-back text-white" />
+              <IonBackButton
+                icon={chevronBackOutline}
+                text=""
+                className="custom-back text-white"
+              />
             </IonButtons>
           </IonToolbar>
           <div className="mx-3 pb-4 text-white">
@@ -50,12 +46,10 @@ const PerfilTratamientos = () => {
             <span className="font-w500 fs-14 d-block">
               Laura Cristina García
             </span>
-            <span className="fs-12">
-              Cabeza de familia
-            </span>
+            <span className="fs-12">Cabeza de familia</span>
           </div>
         </div>
-      </IonHeader>      
+      </IonHeader>
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
@@ -69,16 +63,22 @@ const PerfilTratamientos = () => {
                 </IonCol>
               </IonRow>
 
-              <IonCard className="m-0 card-slide shadow-full" style={{ height: "auto" }}>
+              <IonCard
+                className="m-0 card-slide shadow-full"
+                style={{ height: "auto" }}
+              >
                 <IonCardContent className="card-content-slide">
-                <div className="text-info fs-15 font-w600 mb-2">
-                  <span>Gastritis crónica, no especificada</span>                  
-                </div>
-                <div>
-                  <span className="fs-12 mb-4 d-block">Paracetamol (Acetaminofen) 500mg, tableta. 1 cada 6 horas durante 5 días</span>
-                  <span className="fs-12 font-w600 d-block">Diagnóstico</span>
-                  <span className="fs-12 mb-2">05 May 2005</span>
-                </div>
+                  <div className="text-info fs-15 font-w600 mb-2">
+                    <span>Gastritis crónica, no especificada</span>
+                  </div>
+                  <div>
+                    <span className="fs-12 mb-4 d-block">
+                      Paracetamol (Acetaminofen) 500mg, tableta. 1 cada 6 horas
+                      durante 5 días
+                    </span>
+                    <span className="fs-12 font-w600 d-block">Diagnóstico</span>
+                    <span className="fs-12 mb-2">05 May 2005</span>
+                  </div>
                 </IonCardContent>
               </IonCard>
 
@@ -90,20 +90,27 @@ const PerfilTratamientos = () => {
                 </IonCol>
               </IonRow>
 
-              <IonCard className="m-0 pb-3 mt-2 card-slide shadow-full" style={{ height: "auto" }}>
+              <IonCard
+                className="m-0 pb-3 mt-2 card-slide shadow-full"
+                style={{ height: "auto" }}
+              >
                 <IonCardContent className="card-content-slidex">
                   <div className="text-info fs-15 font-w600 mb-2">
-                    <span>Asma</span>                  
+                    <span>Asma</span>
                   </div>
                   <div className="float-left">
                     <span className="fs-12 d-block">Medicina</span>
-                    <span className="fs-13 font-w600 mb-4 d-block">Seretide</span>
+                    <span className="fs-13 font-w600 mb-4 d-block">
+                      Seretide
+                    </span>
                     <span className="fs-12 font-w600 d-block">Diagnóstico</span>
                     <span className="fs-12 mb-2">05 May 2005</span>
                   </div>
                   <div className="float-right">
                     <span className="fs-12 d-block">Recordatorio</span>
-                    <span className="fs-13 font-w600 mb-4 d-block">1 Puf diario</span>
+                    <span className="fs-13 font-w600 mb-4 d-block">
+                      1 Puf diario
+                    </span>
                   </div>
                 </IonCardContent>
               </IonCard>

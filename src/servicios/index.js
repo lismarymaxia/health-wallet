@@ -1,26 +1,52 @@
 import {
   servicesWh,
   getPost,
-  getConsulta,
-  getLaboratorio,
-  getImagenologia,
-  registroUsuario,
-  serviciosPaciente,
-  getEnfermedad,
-  serviciosAfiliados,
-  serviciosConsultas,
+  /*-PERFILES----------*/
+  getPerfil,
   getPerfiles,
+  /*-USUARIOS----------*/
+  registroUsuario,
+  /*-PACIENTES---------*/
+  serviciosPaciente,
+  /*-AFILIADO----------*/
+  serviciosAfiliados,
+  /*-CONSULTAS--------*/
+  serviciosConsultas,
+  getConsulta,
+  /*-ALERGIAS----------*/
+  getAlergiasPaciente,
+  getGrupoAlergias,
+  getAlergias,
+  /*-ENFERMEDADES---*/
+  getEnfermedad,
+  /*-LABORATORIO-----*/
+  getLaboratorio,
+  /*-IMAGENOLOGIA---*/
+  getImagenologia,
 } from "./servicios";
 export {
   servicesWh,
   getPost,
-  getConsulta,
-  getLaboratorio,
-  getImagenologia,
-  registroUsuario,
-  serviciosPaciente,
-  getEnfermedad,
-  serviciosAfiliados,
-  serviciosConsultas,
+  /*-PERFILES----------*/
+  getPerfil,
   getPerfiles,
+  /*-USUARIOS----------*/
+  registroUsuario,
+  /*-PACIENTES---------*/
+  serviciosPaciente,
+  /*-AFILIADO----------*/
+  serviciosAfiliados,
+  /*-CONSULTAS--------*/
+  serviciosConsultas,
+  getConsulta,
+  /*-ALERGIAS----------*/
+  getAlergiasPaciente,
+  getGrupoAlergias,
+  getAlergias,
+  /*-ENFERMEDADES---*/
+  getEnfermedad,
+  /*-LABORATORIO-----*/
+  getLaboratorio,
+  /*-IMAGENOLOGIA---*/
+  getImagenologia,
 };

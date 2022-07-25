@@ -107,3 +107,33 @@ export const serviciosPaciente = (form: any) =>
   servicesWh.post("/controller/pacienteback.php", form, {
     responseType: "json",
   });
+
+/*-ALERGIAS----------------------------------------------*/
+export const getAlergiasPaciente = (id: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getAlergias",
+      id: id,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+
+export const getGrupoAlergias = () =>
+  servicesWh.get("/controller/combosback.php", {
+    params: {
+      op: "gruposdealergias",
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+
+export const getAlergias = (idgrupo: any) =>
+  servicesWh.get("/controller/combosback.php", {
+    params: {
+      op: "alergias",
+      idgrupo: idgrupo,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });

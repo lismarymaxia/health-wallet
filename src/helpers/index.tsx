@@ -1,5 +1,5 @@
 import {
-  handleNombre,
+  filterNombre,
   formtFechaCorta,
   fechaFrontend,
   fechaImagenologia,
@@ -18,10 +18,10 @@ import {
   grupoSanguineos,
   grupodiscapacidad,
 } from "./tablasHash";
-import { INITIALPERFIL, SLIDEOPTS, PERFILNUEVO } from "./const";
+import { INITIALPERFIL, SLIDEOPTS, INITIALCREARPERFIL, NOTAB } from "./const";
 export {
   /*-HELPERS-----------------------*/
-  handleNombre,
+  filterNombre,
   formtFechaCorta,
   fechaFrontend,
   fechaActual,
@@ -41,5 +41,6 @@ export {
   /*-CONSTANTES-----------------*/
   INITIALPERFIL,
   SLIDEOPTS,
-  PERFILNUEVO,
+  INITIALCREARPERFIL,
+  NOTAB,
 };

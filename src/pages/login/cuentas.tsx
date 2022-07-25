@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   IonGrid,
   IonRow,
   IonCol,
   IonContent,
   IonPage,
-  IonImg,
-  IonButton,
   IonLabel,
 } from "@ionic/react";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { servicesWh } from "../../servicios/servicios";
 import { storeLocal } from "../../store/action/aut";
 import "./cuentas.css";
@@ -55,10 +51,10 @@ const Cuentas = () => {
   const handleClic = (item: any) => {
     let nueva = Object.assign({}, user, item);
     dispatch(storeLocal(nueva));
-    history.push("/app/home");
+    history.replace("/app/home");
   };
   const handelNuevoPerfil = () => {
-    history.push("/app/perfil-crear");
+    history.replace("/app/perfil-crear");
   };
   return (
     <IonPage className="fondo__cuentas">

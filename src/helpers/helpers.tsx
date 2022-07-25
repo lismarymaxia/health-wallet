@@ -1,12 +1,5 @@
 import { meses } from "./tablasHash";
 
-export const handleNombre = (id: any, data: any) => {
-  let filter: any = data.filter((item: any) => item.value === id);
-  if (filter.length > 0) {
-    const [item] = filter;
-    return item.label;
-  }
-};
 /*-FECHA---------------------------------------------------*/
 export const formtFechaCorta = (fecha: any) => {
   if (fecha != null && fecha !== "") {
@@ -61,6 +54,7 @@ export const fechaActual = () => {
 
   return fecha.toLocaleDateString("es-ES", options);
 };
+
 export const fechaPerfil = (data: string) => {
   let fecha = new Date(data);
   const formt = fecha.toLocaleDateString("es-ES", {
@@ -76,6 +70,13 @@ export const orderId = (data: any) => {
   return data.sort((a: any, b: any) => b.id - a.id);
 };
 
+export const filterNombre = (id: any, data: any) => {
+  let filter: any = data.filter((item: any) => item.value === id);
+  if (filter.length > 0) {
+    const [item] = filter;
+    return item.label;
+  }
+};
 /*export const removeDuplicado = (data: any) => {
   return data.filter(
     (item: any, index: number) => data.indexOf(item) === index

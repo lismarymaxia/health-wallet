@@ -14,59 +14,45 @@ import {
   IonSelect,
   IonSelectOption,
   IonList,
-  useIonViewDidEnter,
+  IonToggle,
 } from "@ionic/react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { serviciosPaciente, servicesWh } from "../../servicios";
+import { useDispatch, useSelector } from "react-redux";
+import { storeLocal } from "../../store/action/aut";
+import { serviciosPaciente } from "../../servicios";
 import { Header } from "../../components";
-import { grupoSanguineos, grupodiscapacidad } from "../../helpers";
+import { grupoSanguineos, INITIALCREARPERFIL } from "../../helpers";
 import { useForm } from "../../hook";
 import "../../style/tema.css";
 import "./perfil.css";
 
 const PerfilCrear = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((state: any) => state.reducerAuth.user);
-  const [transition, setTransition] = useState(false);
-  const [alergias, setAlergias] = useState([]);
-  const [alergia, setAlergia] = useState("");
-  const [grupoAlergias, setGrupoAlergias] = useState([]);
-  const [grupo, setGrupo] = useState("");
   const [notificacion, setNotificacion] = useState({
     msg: "",
     estado: false,
   });
-  const initial = {
-    nombre: "",
-    apellido: "",
-    documento: "",
-    nacimiento: "",
-    edad: "",
-    gruposangre: "",
-    discapacidad: "",
-    enfermedad: "",
-    tratamiento: "",
-  };
-
-  const [form, handleInputChange, handleInputReset] = useForm(initial);
+  const [checked, setChecked] = useState(false);
+  const [form, handleInputChange, handleInputReset] =
+    useForm(INITIALCREARPERFIL);
 
   const handleAdd = () => {
+    let discapacidad = checked ? "si" : "no";
     let formDa = new FormData();
     formDa.append("op", "addPaciente");
     formDa.append("idusuario", user.id);
     formDa.append("nombre", form.nombre);
     formDa.append("apellido", form.apellido);
     formDa.append("cedula", form.documento);
+    formDa.append("fechanacimiento", form.nacimiento);
     formDa.append("gruposangre", form.gruposangre);
     formDa.append("edad", form.edad);
-    formDa.append("enfermedad", form.enfermedad);
-    formDa.append("tratamiento", form.tratamiento);
-    formDa.append("idgrupo", grupo);
-    formDa.append("idalergia", alergia);
-    formDa.append("iddiscapacidad", form.discapacidad);
+    formDa.append("discapacidad", discapacidad);
     serviciosPaciente(formDa)
       .then(function (response) {
         const { data, status } = response;
@@ -76,6 +62,10 @@ const PerfilCrear = () => {
               msg: data.msg,
               estado: true,
             });
+            let clone = { ...form, idpaciente: data.id, idregex: data.idregex };
+            let nueva = Object.assign({}, user, clone);
+            dispatch(storeLocal(nueva));
+            history.replace("/app/home");
             handleInputReset();
           } else {
             setNotificacion({
@@ -87,57 +77,6 @@ const PerfilCrear = () => {
       })
       .catch(function (err) {
         console.warn("Error:" + err);
-      });
-  };
-
-  useIonViewDidEnter(() => {
-    servicesWh
-      .get("/controller/combosback.php", {
-        params: {
-          op: "gruposdealergias",
-          imestamp: new Date().getTime(),
-        },
-        responseType: "json",
-      })
-      .then((rsp: any) => {
-        const { data, status } = rsp;
-        if (status === 200) {
-          if (data) {
-            setGrupoAlergias(data.data);
-          } else {
-            setGrupoAlergias([]);
-          }
-        }
-      })
-      .catch((e) => {
-        console.warn(e);
-      });
-  });
-
-  const handleAlergia = (id: any) => {
-    setGrupo(id);
-    servicesWh
-      .get("/controller/combosback.php", {
-        params: {
-          op: "alergias",
-          idgrupo: id,
-          imestamp: new Date().getTime(),
-        },
-        responseType: "json",
-      })
-      .then((rsp) => {
-        const { data, status } = rsp;
-        if (status === 200) {
-          if (data) {
-            console.log(data.data);
-            setAlergias(data.data);
-          } else {
-            setAlergias([]);
-          }
-        }
-      })
-      .catch((e) => {
-        console.warn(e);
       });
   };
 
@@ -165,208 +104,103 @@ const PerfilCrear = () => {
                       className="cursor-pointer text-info fs-18"
                     />
                   </div>
-                  {!transition && (
-                    <div>
-                      <IonItem>
-                        <IonLabel position="stacked">
-                          Nombre <span className="text-danger">*</span>
-                        </IonLabel>
-                        <IonInput
-                          name="nombre"
-                          value={form.nombre}
-                          onIonChange={(e: any) =>
-                            handleInputChange(e.detail.value!, "nombre")
-                          }
-                        ></IonInput>
-                      </IonItem>
-                      <IonItem>
-                        <IonLabel position="stacked">
-                          Apellido <span className="text-danger">*</span>
-                        </IonLabel>
-                        <IonInput
-                          value={form.apellido}
-                          onIonChange={(e: any) =>
-                            handleInputChange(e.detail.value!, "apellido")
-                          }
-                        ></IonInput>
-                      </IonItem>
-                      <IonItem>
-                        <IonLabel position="stacked">
-                          N° de documento <span className="text-danger">*</span>
-                        </IonLabel>
-                        <IonInput
-                          value={form.documento}
-                          onIonChange={(e: any) =>
-                            handleInputChange(e.detail.value!, "documento")
-                          }
-                        ></IonInput>
-                      </IonItem>
 
-                      <IonItem>
-                        <IonLabel position="stacked">
-                          Fecha de nacimiento{" "}
-                          <span className="text-danger">*</span>
-                        </IonLabel>
-                        <IonInput
-                          type="date"
-                          value={form.nacimiento}
-                          onIonChange={(e: any) =>
-                            handleInputChange(e.detail.value!, "nacimiento")
-                          }
-                        ></IonInput>
-                      </IonItem>
+                  <IonItem>
+                    <IonLabel position="stacked">
+                      Nombre <span className="text-danger">*</span>
+                    </IonLabel>
+                    <IonInput
+                      name="nombre"
+                      value={form.nombre}
+                      onIonChange={(e: any) =>
+                        handleInputChange(e.detail.value!, "nombre")
+                      }
+                    ></IonInput>
+                  </IonItem>
+                  <IonItem>
+                    <IonLabel position="stacked">
+                      Apellido <span className="text-danger">*</span>
+                    </IonLabel>
+                    <IonInput
+                      value={form.apellido}
+                      onIonChange={(e: any) =>
+                        handleInputChange(e.detail.value!, "apellido")
+                      }
+                    ></IonInput>
+                  </IonItem>
+                  <IonItem>
+                    <IonLabel position="stacked">
+                      N° de documento <span className="text-danger">*</span>
+                    </IonLabel>
+                    <IonInput
+                      value={form.documento}
+                      onIonChange={(e: any) =>
+                        handleInputChange(e.detail.value!, "documento")
+                      }
+                    ></IonInput>
+                  </IonItem>
 
-                      <IonItem>
-                        <IonLabel position="stacked">Edad</IonLabel>
-                        <IonInput
-                          value={form.edad}
-                          onIonChange={(e: any) =>
-                            handleInputChange(e.detail.value!, "edad")
-                          }
-                        ></IonInput>
-                      </IonItem>
+                  <IonItem>
+                    <IonLabel position="stacked">
+                      Fecha de nacimiento <span className="text-danger">*</span>
+                    </IonLabel>
+                    <IonInput
+                      type="date"
+                      value={form.nacimiento}
+                      onIonChange={(e: any) =>
+                        handleInputChange(e.detail.value!, "nacimiento")
+                      }
+                    ></IonInput>
+                  </IonItem>
 
-                      <IonList>
-                        <IonItem>
-                          <IonLabel position="stacked">
-                            Grupo sanguíneo{" "}
-                            <span className="text-danger">*</span>
-                          </IonLabel>
-                          <IonSelect
-                            interface="action-sheet"
-                            placeholder="Tipo"
-                            value={form.gruposangre}
-                            onIonChange={(e: any) =>
-                              handleInputChange(e.detail.value!, "gruposangre")
-                            }
-                          >
-                            {grupoSanguineos.map((item: any, index: any) => (
-                              <IonSelectOption value={item.value} key={index}>
-                                {item.label}
-                              </IonSelectOption>
-                            ))}
-                          </IonSelect>
-                        </IonItem>
-                      </IonList>
-                    </div>
-                  )}
-                  {transition && (
-                    <div>
-                      <IonList>
-                        <IonItem>
-                          <IonLabel position="stacked">Discapacidad</IonLabel>
-                          <IonSelect
-                            interface="action-sheet"
-                            placeholder="Seleccionar"
-                            value={form.discapacidad}
-                            onIonChange={(e: any) =>
-                              handleInputChange(e.detail.value!, "discapacidad")
-                            }
-                          >
-                            {grupodiscapacidad.map(
-                              (item: any, index: number) => (
-                                <IonSelectOption value={item.value} key={index}>
-                                  {item.label}
-                                </IonSelectOption>
-                              )
-                            )}
-                          </IonSelect>
-                        </IonItem>
-                        <span className="fs-12 text-underline text-light cursor-pointer">
-                          Cargar carnet de SENADIS
-                        </span>
-                      </IonList>
-                      <IonItem>
-                        <IonLabel position="stacked">
-                          Enfermedades crónicas
-                        </IonLabel>
-                        <IonInput
-                          placeholder="Enfermedad"
-                          value={form.enfermedad}
-                          onIonChange={(e: any) =>
-                            handleInputChange(e.detail.value!, "enfermedad")
-                          }
-                        ></IonInput>
-                      </IonItem>
-                      <IonList>
-                        <IonItem>
-                          <IonLabel position="stacked">
-                            Grupo <span className="text-danger">*</span>
-                          </IonLabel>
-                          <IonSelect
-                            value={grupo}
-                            interface="action-sheet"
-                            placeholder="Selecionar"
-                            onIonChange={(e) => handleAlergia(e.detail.value!)}
-                          >
-                            {grupoAlergias.map((item: any, index: any) => (
-                              <IonSelectOption value={item.value} key={index}>
-                                {item.label}
-                              </IonSelectOption>
-                            ))}
-                          </IonSelect>
-                        </IonItem>
-                      </IonList>
+                  <IonItem>
+                    <IonLabel position="stacked">Edad</IonLabel>
+                    <IonInput
+                      value={form.edad}
+                      onIonChange={(e: any) =>
+                        handleInputChange(e.detail.value!, "edad")
+                      }
+                    ></IonInput>
+                  </IonItem>
 
-                      <IonList>
-                        <IonItem>
-                          <IonLabel position="stacked">
-                            Alergias <span className="text-danger">*</span>
-                          </IonLabel>
-                          <IonSelect
-                            value={alergia}
-                            interface="action-sheet"
-                            placeholder="Tipo"
-                            onIonChange={(e: any) =>
-                              setAlergia(e.detail.value!)
-                            }
-                          >
-                            {alergias.map((item: any, index: any) => (
-                              <IonSelectOption value={item.value} key={index}>
-                                {item.label}
-                              </IonSelectOption>
-                            ))}
-                          </IonSelect>
-                        </IonItem>
-                      </IonList>
-
-                      <IonItem>
-                        <IonLabel position="stacked">
-                          Tratamientos activos
-                        </IonLabel>
-                        <IonInput
-                          value={form.tratamiento}
-                          onIonChange={(e: any) =>
-                            handleInputChange(e.detail.value!, "tratamiento")
-                          }
-                        ></IonInput>
-                      </IonItem>
-                    </div>
-                  )}
-                  {transition && (
-                    <div className="pt-2 text-center">
-                      <IonButton
-                        className="border-radius"
-                        fill="outline"
-                        onClick={handleAdd}
+                  <IonList>
+                    <IonItem>
+                      <IonLabel position="stacked">
+                        Grupo sanguíneo <span className="text-danger">*</span>
+                      </IonLabel>
+                      <IonSelect
+                        interface="action-sheet"
+                        placeholder="Tipo"
+                        value={form.gruposangre}
+                        onIonChange={(e: any) =>
+                          handleInputChange(e.detail.value!, "gruposangre")
+                        }
                       >
-                        Guardar perfil
-                      </IonButton>
-                    </div>
-                  )}
-                  {!transition && (
-                    <div className="pt-2 text-center">
-                      <IonButton
-                        className="border-radius"
-                        fill="outline"
-                        onClick={() => {
-                          setTransition(true);
-                        }}
-                      >
-                        Siguiente
-                      </IonButton>
-                    </div>
-                  )}
+                        {grupoSanguineos.map((item: any, index: any) => (
+                          <IonSelectOption value={item.value} key={index}>
+                            {item.label}
+                          </IonSelectOption>
+                        ))}
+                      </IonSelect>
+                    </IonItem>
+                  </IonList>
+                  <IonItem>
+                    <IonLabel>Discapacidad: {checked ? "Si" : "No"}</IonLabel>
+                    <IonToggle
+                      checked={checked}
+                      onIonChange={(e) => setChecked(e.detail.checked)}
+                    />
+                  </IonItem>
+
+                  <div className="pt-2 text-center">
+                    <IonButton
+                      className="border-radius"
+                      fill="outline"
+                      onClick={handleAdd}
+                    >
+                      Guardar perfil
+                    </IonButton>
+                  </div>
                 </IonCardContent>
               </IonCard>
             </IonCol>
@@ -384,22 +218,3 @@ const PerfilCrear = () => {
 };
 
 export default PerfilCrear;
-/*const handleSearch = (e: any) => {
-    setEnfermedad({ ...enfermedad, label: e });
-    console.log(e);
-    if (e.length > 3) {
-      getEnfermedad(e)
-        .then((rsp: any) => {
-          const { data, estatus } = rsp.data;
-          if (estatus === "ok") {
-            if (data) {
-
-            }
-          }
-        })
-        .catch((e: any) => {
-          console.warn(e);
-        });
-    } else if (e.length < 3) {
-    }
-  };*/

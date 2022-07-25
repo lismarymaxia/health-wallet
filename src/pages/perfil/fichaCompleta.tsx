@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   IonGrid,
   IonRow,
@@ -15,6 +15,7 @@ import {
   IonThumbnail,
   IonImg,
   IonItem,
+  useIonViewDidEnter,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
@@ -28,16 +29,16 @@ import "../../style/tema.css";
 const FichaCompleta = () => {
   const [perfil, setPerfil] = useState(INITIALPERFIL);
   const user = useSelector((state: any) => state.reducerAuth.user);
-  useEffect(() => {
+  useIonViewDidEnter(() => {
     getPerfil(user.idpaciente)
       .then((rsp: any) => {
         const { data } = rsp;
         setPerfil(data.data);
       })
       .catch((error) => {
-        console.error("Error en triple peticion" + error);
+        console.error("Error en get perfiles" + error);
       });
-  }, [user]);
+  });
   return (
     <IonPage className="fondo">
       <IonHeader>
@@ -59,7 +60,7 @@ const FichaCompleta = () => {
           </IonToolbar>
           <div className="mx-3 pb-4 text-white">
             <IonThumbnail slot="start" class="float-left mr-3">
-              <IonImg src={"./images/perfil.JPG"} />
+              <IonImg src={`./images/${perfil?.imagen}`} />
             </IonThumbnail>
 
             <span className="font-w500 fs-14 d-block">{perfil.nombre}</span>
@@ -123,7 +124,16 @@ const FichaCompleta = () => {
                         Discapacidad
                       </div>
                       <div className="fs-13 font-w500 pl-3">
-                        No <span className="text-light">/ Si</span>
+                        {perfil.discapacidad === "no" ? (
+                          "No"
+                        ) : (
+                          <span className="text-light">No</span>
+                        )}
+                        {perfil.discapacidad === "si" ? (
+                          "/Si"
+                        ) : (
+                          <span className="text-light">/ Si</span>
+                        )}
                         <span className="text-light float-right">
                           Ver carnet de SENADIS
                         </span>
@@ -153,8 +163,18 @@ const FichaCompleta = () => {
                         />
                         Alergias
                       </div>
+
                       <div className="fs-13 font-w500 pl-3">
-                        No <span className="text-light">/ Si</span>
+                        {perfil.alergias === "no" ? (
+                          "No"
+                        ) : (
+                          <span className="text-light">No</span>
+                        )}
+                        {perfil.alergias === "si" ? (
+                          "/Si"
+                        ) : (
+                          <span className="text-light">/ Si</span>
+                        )}
                       </div>
                     </div>
                   </IonItem>

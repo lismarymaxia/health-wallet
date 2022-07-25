@@ -6,4 +6,15 @@ import Discapacidad from "./discapacidad";
 import ContactoEmergencia from "./contactoEmergencia";
 import MisMedicos from "./misMedicos";
 import MisMedicamentos from "./misMedicamentos";
-export { Perfil, Perfiles, PerfilCrear, FichaCompleta, Discapacidad, ContactoEmergencia, MisMedicos, MisMedicamentos };
+import { PerfilAlergias } from "./alergias";
+export {
+  Perfil,
+  Perfiles,
+  PerfilCrear,
+  FichaCompleta,
+  Discapacidad,
+  ContactoEmergencia,
+  MisMedicos,
+  MisMedicamentos,
+  PerfilAlergias,
+};

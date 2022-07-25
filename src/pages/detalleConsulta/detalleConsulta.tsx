@@ -110,7 +110,9 @@ const DetalleConsulta = () => {
                   />
 
                   <div>
-                    <div className="fs-15 font-w600 text-info my-3">Resumen de consulta</div>
+                    <div className="fs-15 font-w600 text-info my-3">
+                      Resumen de consulta
+                    </div>
                     <div className="mb-3">
                       <span className="fs-13 font-w600 d-block">
                         Motivo de la visita:{" "}
@@ -128,47 +130,54 @@ const DetalleConsulta = () => {
                     <span className="fs-13 font-w600 d-block">
                       Lista de afecciones o diagnósticos:{" "}
                     </span>
-                    {diagnosticos.map((item: any) => (
-                      <div key={item.id}>
-                        <ul className="content__frecuencia">
-                          <li className="item__frecuencia fs-13 font-w500 active">
-                            Primera vez
-                          </li>
-                          <li className="item__frecuencia fs-13 font-w500">
-                            Subsecuente
-                          </li>
-                          <li className="item__frecuencia fs-13 font-w500">
-                            Orient.Diagnóstica
-                          </li>
-                        </ul>
-                        <div>
-                          <IonLabel>{item.text}</IonLabel>
-                        </div>
-                      </div>
-                    ))}
+                    {load
+                      ? "Cargando..."
+                      : diagnosticos.map((item: any) => (
+                          <div key={item.id}>
+                            <ul className="content__frecuencia">
+                              <li className="item__frecuencia fs-13 font-w500 active">
+                                Primera vez
+                              </li>
+                              <li className="item__frecuencia fs-13 font-w500">
+                                Subsecuente
+                              </li>
+                              <li className="item__frecuencia fs-13 font-w500">
+                                Orient.Diagnóstica
+                              </li>
+                            </ul>
+                            <div>
+                              <IonLabel>{item.text}</IonLabel>
+                            </div>
+                          </div>
+                        ))}
                   </div>
                   <div className="mb-3">
-                    <span className="fs-13 font-w600 d-block">Tratamientos:</span>
-                    {tratamientos.map((item: any, index: any) => (
-                      <div key={index}>
-                        <div>{item.textmedicamento}</div>
-                        <div>
-                          <span className="fs-13 font-w600">Desde: </span>
-                          {item.fechaini}
-                        </div>
-                        <div>
-                          <span className="fs-13 font-w600">Hasta: </span>
-                          {item.fechafin}
-                        </div>
-                        <div>
-                          {item.dosis}{" "}
-                          <span className="fs-13 font-w600">cada </span>{" "}
-                          {item.cadah}
-                          horas <span className="fs-13 font-w600">durante </span>
-                          {item.duracion}
-                        </div>
-                      </div>
-                    ))}
+                    <span className="fs-13 font-w600 d-block">
+                      Tratamientos:
+                    </span>
+                    {load
+                      ? "Cargando..."
+                      : tratamientos.map((item: any, index: any) => (
+                          <div key={index}>
+                            <div>{item.textmedicamento}</div>
+                            <div>
+                              <span className="fs-13 font-w600">Desde: </span>
+                              {item.fechaini}
+                            </div>
+                            <div>
+                              <span className="fs-13 font-w600">Hasta: </span>
+                              {item.fechafin}
+                            </div>
+                            <div>
+                              {item.dosis}{" "}
+                              <span className="fs-13 font-w600">cada </span>{" "}
+                              {item.cadah}
+                              horas{" "}
+                              <span className="fs-13 font-w600">durante </span>
+                              {item.duracion}
+                            </div>
+                          </div>
+                        ))}
                   </div>
                 </IonCardContent>
               </IonCard>

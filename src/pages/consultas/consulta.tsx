@@ -21,7 +21,6 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Header } from "../../components";
 import { servicesWh } from "../../servicios/servicios";
-//import { tablaFrecuencia } from "../../helpers";
 
 import "./consultas.css";
 

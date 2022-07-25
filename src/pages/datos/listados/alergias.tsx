@@ -19,7 +19,7 @@ import {
 } from "ionicons/icons";
 import { useSelector } from "react-redux";
 import { servicesWh, serviciosPaciente } from "../../../servicios/servicios";
-import { handleNombre } from "../../../helpers";
+import { filterNombre } from "../../../helpers";
 
 interface Propiedades {
   listado: Array<string>;
@@ -121,9 +121,9 @@ const Alergias: React.FC<Propiedades> = ({ listado, setListado }) => {
               const state: any = {
                 id: data.id,
                 idgrupo: grupo,
-                namegroup: handleNombre(grupo, dataGroudAlergias),
+                namegroup: filterNombre(grupo, dataGroudAlergias),
                 idalerg: alergia,
-                namealergia: handleNombre(alergia, dataAlergias),
+                namealergia: filterNombre(alergia, dataAlergias),
               };
               setListado((prev: any) => [...prev, state]);
             } else {

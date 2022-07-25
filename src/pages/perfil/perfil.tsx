@@ -17,6 +17,7 @@ import {
   IonSlides,
   IonSlide,
   IonButton,
+  useIonLoading,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -34,21 +35,20 @@ import {
 import { chevronBackOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { getPerfiles, getPerfil } from "../../servicios/servicios";
-import { INITIALPERFIL, PERFILNUEVO } from "../../helpers";
-import "./perfil.css";
-import "../../style/tema.css";
+import { getPerfiles, getPerfil } from "../../servicios";
+import { INITIALPERFIL } from "../../helpers";
+import { storeLocal } from "../../store/action/aut";
 import { logout } from "../../store";
+import "./perfil.css";
 const Perfil = () => {
   const SLIDEOPTS = {
     initialSlide: 0,
     speed: 200,
     slidesPerView: 1.7,
     spaceBetween: 20,
-    //autoplay:true,
-    //loop: true
   };
   const dispatch = useDispatch();
+  const [present] = useIonLoading();
   const user = useSelector((state: any) => state.reducerAuth.user);
   const history = useHistory();
   const [perfil, setPerfil] = useState(INITIALPERFIL);
@@ -87,26 +87,29 @@ const Perfil = () => {
   const handleLogout = () => {
     dispatch(logout());
   };
-  const handelNuevoPerfil = () => {
-    history.push("/app/perfil-crear");
-  };
 
   useEffect(() => {
     Promise.all([getPerfil(user.idpaciente), getPerfiles(user.id)])
       .then((rsp: any) => {
         const [prfil, prfiles] = rsp;
         setPerfil(prfil.data.data);
-        const conectar = prfiles.data.data.concat(PERFILNUEVO);
-        setPerfiles(conectar);
+        setPerfiles(prfiles.data.data);
       })
       .catch((error) => {
         console.error("Error en triple peticion" + error);
       });
   }, [user]);
 
-  const handleCrear = (nombre: string) => {
-    if (nombre !== "nuevo-perfil") return;
-    console.log("crear");
+  const handleClicPerfil = (nombre: string, item: any) => {
+    if (nombre === "nuevo-perfil") {
+      history.push("/app/perfil-crear");
+    } else {
+      present({
+        message: "Cargando perfil...",
+        duration: 3000,
+      });
+      dispatch(storeLocal(item));
+    }
   };
   return (
     <IonPage className="fondo">
@@ -321,18 +324,12 @@ const Perfil = () => {
                     options={SLIDEOPTS}
                     className="slide-perfiles"
                   >
-                    {/*<IonSlide>
-                      <img
-                        src="./images/nuevo-usuario.jpg"
-                        className="mb-2"
-                        alt="nuevo"
-                      />
-                </IonSlide>*/}
                     {perfiles
                       .map((item: any, index: number) => (
                         <IonSlide
                           key={index}
-                          onClick={() => handleCrear(item.nombre)}
+                          onClick={() => handleClicPerfil(item.nombre, item)}
+                          style={{ cursor: "pointer" }}
                         >
                           <img
                             src={`./images/${item.imagen}`}

@@ -11,15 +11,18 @@ export const INITIALPERFIL = {
   tratamiento: "",
   fecha: "",
   discapacidad: "",
+  alergias: "",
 };
 
-export const PERFILNUEVO = {
-  id: "0",
-  nombre: "nuevo-perfil",
+export const INITIALCREARPERFIL = {
+  nombre: "",
   apellido: "",
-  cedula: "",
-  imagen: "nuevo-usuario.jpg",
+  documento: "",
+  nacimiento: "",
+  edad: "",
+  gruposangre: "",
 };
+
 /*-CONFIGURACION---------*/
 export const SLIDEOPTS = {
   initialSlide: 0,
@@ -29,3 +32,5 @@ export const SLIDEOPTS = {
   //autoplay:true,
   //loop: true
 };
+
+export const NOTAB = ["/app/soporte", "/app/cuentas", "/app/perfil-crear"];

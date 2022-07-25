@@ -19,7 +19,7 @@ const Login: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const auth = useSelector((state: any) => state.reducerAuth.stdAuth);
-  const [usuario, setUsuario] = useState<string>("García@gmail.com"); //---esilda.mendoza@gmail.com
+  const [usuario, setUsuario] = useState<string>("García@gmail.com");
   const [clave, setClave] = useState<string>("maxia");
   const [toast, setToast] = useState(false);
   const [notificacion, setNotificacion] = useState(false);

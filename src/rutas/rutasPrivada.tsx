@@ -29,6 +29,7 @@ import {
   Afiliado,
   Perfil,
   Perfiles,
+  PerfilAlergias,
   PerfilCrear,
   FichaCompleta,
   ContactoEmergencia,
@@ -42,7 +43,7 @@ import {
   DetalleConsulta,
   Soporte,
 } from "../pages";
-import { tabActive } from "../helpers";
+import { tabActive, NOTAB } from "../helpers";
 import "../style/tema.css";
 
 const RutasPrivadas: React.FC = () => {
@@ -121,7 +122,7 @@ const RutasPrivadas: React.FC = () => {
             <MisMedicamentos />
           </Route>
           <Route exact path="/app/perfil-alergias">
-            <PerfilTratamientos />
+            <PerfilAlergias />
           </Route>
           <Route exact path="/app/perfil-enfermedades">
             <PerfilTratamientos />
@@ -150,7 +151,7 @@ const RutasPrivadas: React.FC = () => {
         </IonRouterOutlet>
         <IonTabBar
           slot="bottom"
-          className={`bar-menu ${pathname === "/app/soporte" || pathname === "/app/cuentas" ? "d-none" : ""}`}
+          className={`bar-menu ${NOTAB.includes(pathname) ? "d-none" : ""}`}
         >
           <IonTabButton tab="tab1" href="/app/home" className="text-info">
             <div className={`icon-menu  ${tabActive("/app/home", pathname)}`}>
@@ -177,17 +178,8 @@ const RutasPrivadas: React.FC = () => {
               Afiliados
             </div>
           </IonTabButton>
-          <IonTabButton
-            tab="tab5"
-            href="/app/perfil"
-            className="text-info"
-          >
-            <div
-              className={`icon-menu  ${tabActive(
-                "/app/perfil",
-                pathname
-              )}`}
-            >
+          <IonTabButton tab="tab5" href="/app/perfil" className="text-info">
+            <div className={`icon-menu  ${tabActive("/app/perfil", pathname)}`}>
               <FontAwesomeIcon icon={faUser} className="fs-18 w-100" />
               Perfil
             </div>
