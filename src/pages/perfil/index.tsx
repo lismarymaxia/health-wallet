@@ -8,6 +8,7 @@ import ContactoEmergencia from "./contactoEmergencia";
 import MisMedicos from "./misMedicos";
 import MisMedicamentos from "./misMedicamentos";
 import { PerfilAlergias } from "./alergias";
+import { PerfilEnfermedades } from "./enfermedades";
 export {
   Perfiles,
   Perfil,
@@ -19,4 +20,5 @@ export {
   MisMedicos,
   MisMedicamentos,
   PerfilAlergias,
+  PerfilEnfermedades,
 };
