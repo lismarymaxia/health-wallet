@@ -23,7 +23,6 @@ const HeaderEstudios: React.FC<{
   const handleLink = (ruta: string) => {
     history.push(ruta);
   };
-  console.log(path);
 
   return (
     <IonHeader>

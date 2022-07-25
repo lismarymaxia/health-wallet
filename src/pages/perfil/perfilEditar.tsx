@@ -16,20 +16,17 @@ import {
   IonList,
   IonToggle,
 } from "@ionic/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { storeLocal } from "../../store/action/aut";
-import { serviciosPaciente } from "../../servicios";
 import { Header } from "../../components";
-import { grupoSanguineos, INITIALCREARPERFIL } from "../../helpers";
-import { useForm } from "../../hook";
-import "../../style/tema.css";
-import "./perfil.css";
+import { storeLocal } from "../../store/action/aut";
+import { serviciosPaciente, getPerfilEdicion } from "../../servicios/servicios";
+import { grupoSanguineos } from "../../helpers";
 
-const PerfilCrear = () => {
+const PerfilEditar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state: any) => state.reducerAuth.user);
@@ -37,21 +34,54 @@ const PerfilCrear = () => {
     msg: "",
     estado: false,
   });
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [cedula, setCedula] = useState("");
+  const [fechaNacimiento, setFechaNacimiento] = useState("");
+  const [edad, setEdad] = useState("");
+  const [grupoSangre, setGrupoSangre] = useState("");
   const [checked, setChecked] = useState(false);
-  const [form, handleInputChange, handleInputReset] =
-    useForm(INITIALCREARPERFIL);
+
+  useEffect(() => {
+    getPerfilEdicion(user.idpaciente)
+      .then((rsp: any) => {
+        const { data } = rsp;
+        const {
+          nombre,
+          apellido,
+          cedula,
+          discapacidad,
+          edad,
+          fechanacimiento,
+          gruposangre,
+        } = data.data;
+        setNombre(nombre);
+
+        setApellido(apellido);
+        setCedula(cedula);
+        setFechaNacimiento(fechanacimiento);
+        setEdad(edad);
+        setGrupoSangre(gruposangre);
+        let d = discapacidad === "si" ? true : false;
+        setChecked(d);
+      })
+      .catch((error) => {
+        console.error("Error en get perfiles" + error);
+      });
+  }, [user]);
 
   const handleAdd = () => {
     let discapacidad = checked ? "si" : "no";
     let formDa = new FormData();
-    formDa.append("op", "addPaciente");
+    formDa.append("op", "editPaciente");
+    formDa.append("id", user.idpaciente);
     formDa.append("idusuario", user.id);
-    formDa.append("nombre", form.nombre);
-    formDa.append("apellido", form.apellido);
-    formDa.append("cedula", form.cedula);
-    formDa.append("fechanacimiento", form.fechanacimiento);
-    formDa.append("gruposangre", form.gruposangre);
-    formDa.append("edad", form.edad);
+    formDa.append("nombre", nombre);
+    formDa.append("apellido", apellido);
+    formDa.append("cedula", cedula);
+    formDa.append("fechanacimiento", fechaNacimiento);
+    formDa.append("gruposangre", grupoSangre);
+    formDa.append("edad", edad);
     formDa.append("discapacidad", discapacidad);
     serviciosPaciente(formDa)
       .then(function (response) {
@@ -62,11 +92,16 @@ const PerfilCrear = () => {
               msg: data.msg,
               estado: true,
             });
-            let clone = { ...form, idpaciente: data.id, idregex: data.idregex };
+
+            let clone = {
+              ...user,
+              nombre: nombre,
+              apellido: apellido,
+              cedula: cedula,
+            };
             let nueva = Object.assign({}, user, clone);
             dispatch(storeLocal(nueva));
-            history.replace("/app/home");
-            handleInputReset();
+            history.replace("/app/perfil");
           } else {
             setNotificacion({
               msg: data.msg,
@@ -82,15 +117,13 @@ const PerfilCrear = () => {
 
   return (
     <IonPage className="fondo">
-      <Header title="Nuevo dependiente" isbotton={true} isBuger={false} />
+      <Header title="Perfil" isbotton={true} isBuger={false} />
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
           <IonRow className="mt-3 px-3">
             <IonCol size="12" className="pb-2">
-              <h5 className="font-w600 fs-16 text-blue-dark">
-                Creación de perfil
-              </h5>
+              <h5 className="font-w600 fs-16 text-blue-dark">Edicion</h5>
             </IonCol>
           </IonRow>
 
@@ -111,10 +144,8 @@ const PerfilCrear = () => {
                     </IonLabel>
                     <IonInput
                       name="nombre"
-                      value={form.nombre}
-                      onIonChange={(e: any) =>
-                        handleInputChange(e.detail.value!, "nombre")
-                      }
+                      value={nombre}
+                      onIonChange={(e: any) => setNombre(e.detail.value!)}
                     ></IonInput>
                   </IonItem>
                   <IonItem>
@@ -122,10 +153,8 @@ const PerfilCrear = () => {
                       Apellido <span className="text-danger">*</span>
                     </IonLabel>
                     <IonInput
-                      value={form.apellido}
-                      onIonChange={(e: any) =>
-                        handleInputChange(e.detail.value!, "apellido")
-                      }
+                      value={apellido}
+                      onIonChange={(e: any) => setApellido(e.detail.value!)}
                     ></IonInput>
                   </IonItem>
                   <IonItem>
@@ -133,10 +162,8 @@ const PerfilCrear = () => {
                       N° de documento <span className="text-danger">*</span>
                     </IonLabel>
                     <IonInput
-                      value={form.cedula}
-                      onIonChange={(e: any) =>
-                        handleInputChange(e.detail.value!, "cedula")
-                      }
+                      value={cedula}
+                      onIonChange={(e: any) => setCedula(e.detail.value!)}
                     ></IonInput>
                   </IonItem>
 
@@ -146,9 +173,9 @@ const PerfilCrear = () => {
                     </IonLabel>
                     <IonInput
                       type="date"
-                      value={form.fechanacimiento}
+                      value={fechaNacimiento}
                       onIonChange={(e: any) =>
-                        handleInputChange(e.detail.value!, "fechanacimiento")
+                        setFechaNacimiento(e.detail.value!)
                       }
                     ></IonInput>
                   </IonItem>
@@ -156,10 +183,8 @@ const PerfilCrear = () => {
                   <IonItem>
                     <IonLabel position="stacked">Edad</IonLabel>
                     <IonInput
-                      value={form.edad}
-                      onIonChange={(e: any) =>
-                        handleInputChange(e.detail.value!, "edad")
-                      }
+                      value={edad}
+                      onIonChange={(e: any) => setEdad(e.detail.value!)}
                     ></IonInput>
                   </IonItem>
 
@@ -171,9 +196,9 @@ const PerfilCrear = () => {
                       <IonSelect
                         interface="action-sheet"
                         placeholder="Tipo"
-                        value={form.gruposangre}
+                        value={grupoSangre}
                         onIonChange={(e: any) =>
-                          handleInputChange(e.detail.value!, "gruposangre")
+                          setGrupoSangre(e.detail.value!)
                         }
                       >
                         {grupoSanguineos.map((item: any, index: any) => (
@@ -198,7 +223,7 @@ const PerfilCrear = () => {
                       fill="outline"
                       onClick={handleAdd}
                     >
-                      Guardar perfil
+                      Guardar
                     </IonButton>
                   </div>
                 </IonCardContent>
@@ -217,4 +242,4 @@ const PerfilCrear = () => {
   );
 };
 
-export default PerfilCrear;
+export default PerfilEditar;

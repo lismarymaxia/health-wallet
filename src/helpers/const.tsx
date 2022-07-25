@@ -7,8 +7,6 @@ export const INITIALPERFIL = {
   numeroemergencia: "",
   imagen: "",
   edad: "",
-  enfermedad: "",
-  tratamiento: "",
   fecha: "",
   discapacidad: "",
   alergias: "",
@@ -17,8 +15,8 @@ export const INITIALPERFIL = {
 export const INITIALCREARPERFIL = {
   nombre: "",
   apellido: "",
-  documento: "",
-  nacimiento: "",
+  cedula: "",
+  fechanacimiento: "",
   edad: "",
   gruposangre: "",
 };

@@ -1,6 +1,7 @@
-import Perfil from "./perfil";
 import Perfiles from "./perfiles";
+import Perfil from "./perfil";
 import PerfilCrear from "./perfilCrear";
+import PerfilEditar from "./perfilEditar";
 import FichaCompleta from "./fichaCompleta";
 import Discapacidad from "./discapacidad";
 import ContactoEmergencia from "./contactoEmergencia";
@@ -8,9 +9,10 @@ import MisMedicos from "./misMedicos";
 import MisMedicamentos from "./misMedicamentos";
 import { PerfilAlergias } from "./alergias";
 export {
-  Perfil,
   Perfiles,
+  Perfil,
   PerfilCrear,
+  PerfilEditar,
   FichaCompleta,
   Discapacidad,
   ContactoEmergencia,

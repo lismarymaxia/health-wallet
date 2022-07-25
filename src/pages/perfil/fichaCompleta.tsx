@@ -24,7 +24,6 @@ import { chevronBackOutline } from "ionicons/icons";
 import { INITIALPERFIL, fechaPerfil } from "../../helpers";
 import { getPerfil } from "../../servicios/servicios";
 import "./perfil.css";
-import "../../style/tema.css";
 
 const FichaCompleta = () => {
   const [perfil, setPerfil] = useState(INITIALPERFIL);

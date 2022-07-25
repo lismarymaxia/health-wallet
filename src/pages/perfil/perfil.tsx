@@ -84,6 +84,9 @@ const Perfil = () => {
   const handelSoporte = () => {
     history.push("/app/soporte");
   };
+  const handleEditar = () => {
+    history.push("/app/perfil-editar");
+  };
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -158,7 +161,12 @@ const Perfil = () => {
                 >
                   Ver ficha completa
                 </span>
-                <span className="fs-12 float-right text-underline">Editar</span>
+                <span
+                  className="fs-12 float-right text-underline"
+                  onClick={handleEditar}
+                >
+                  Editar
+                </span>
               </div>
             </div>
           </div>

@@ -31,6 +31,7 @@ import {
   Perfiles,
   PerfilAlergias,
   PerfilCrear,
+  PerfilEditar,
   FichaCompleta,
   ContactoEmergencia,
   MisMedicos,
@@ -105,6 +106,9 @@ const RutasPrivadas: React.FC = () => {
           </Route>
           <Route exact path="/app/perfil-crear">
             <PerfilCrear />
+          </Route>
+          <Route exact path="/app/perfil-editar">
+            <PerfilEditar />
           </Route>
           <Route exact path="/app/ficha-completa">
             <FichaCompleta />

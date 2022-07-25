@@ -92,7 +92,15 @@ export const getPerfil = (idusuario: any) =>
     },
     responseType: "json",
   });
-
+export const getPerfilEdicion = (idusuario: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getPerfilEdicion",
+      id: idusuario,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
 export const getPerfiles = (idusuario: any) =>
   servicesWh.get("/controller/pacienteback.php", {
     params: {
