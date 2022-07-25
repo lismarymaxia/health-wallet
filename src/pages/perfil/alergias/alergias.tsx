@@ -42,6 +42,7 @@ import {
 } from "../../../servicios/servicios";
 import { useListado } from "../../../hook";
 import { INITIALPERFIL, filterNombre } from "../../../helpers";
+import { HeaderPerfil } from "../../../components";
 const PerfilAlergias = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
   const [
@@ -61,6 +62,7 @@ const PerfilAlergias = () => {
     estado: false,
   });
   const [checked, setChecked] = useState(false);
+  const [transition, setTransition] = useState(false);
 
   useEffect(() => {
     getPerfil(user.idpaciente)
@@ -137,6 +139,7 @@ const PerfilAlergias = () => {
                 estado: estado,
               };
               handleAddItem(state);
+              setTransition(false);
             } else {
               setNotificacion({
                 msg: data.msg,
@@ -215,50 +218,18 @@ const PerfilAlergias = () => {
   };
   return (
     <IonPage className="fondo">
-      <IonHeader>
-        <div className="p-perfil bg-info-alt border-radius-bottom">
-          <IonToolbar>
-            <IonTitle
-              className="fs-16 font-w700"
-              style={{ paddingLeft: "12%" }}
-            >
-              Alergias activas
-            </IonTitle>
-            <IonButtons slot="start">
-              <IonBackButton
-                icon={chevronBackOutline}
-                text=""
-                className="custom-back text-white"
-              />
-            </IonButtons>
-          </IonToolbar>
-          <div className="mx-3 pb-4 text-white">
-            <IonThumbnail slot="start" class="float-left mr-3">
-              <IonImg src={`./images/${perfil?.imagen}`} />
-            </IonThumbnail>
-
-            <span className="font-w500 fs-14 d-block">{perfil.nombre}</span>
-            <span className="fs-12">Cabeza de familia</span>
-          </div>
-        </div>
-      </IonHeader>
+      <HeaderPerfil title='Alergias' />
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
-          <IonRow>
+          {transition && <IonRow>
             <IonCol size="12" className="px-3">
-              <IonCard className="m-0 mb-2 pb-2 card-slide">
+              <IonCard className="m-0 mb-2 mt-4 pb-2 card-slide">
                 <IonCardContent>
-                  <div className="text-center subir-perfil">
-                    <FontAwesomeIcon
-                      icon={faUserPlus}
-                      className="cursor-pointer text-info fs-18"
-                    />
-                  </div>
                   <IonList>
                     <IonItem>
                       <IonLabel position="stacked">
-                        Grupo sanguíneo <span className="text-danger">*</span>
+                        Grupo <span className="text-danger">*</span>
                       </IonLabel>
                       <IonSelect
                         interface="action-sheet"
@@ -277,7 +248,7 @@ const PerfilAlergias = () => {
                   <IonList>
                     <IonItem>
                       <IonLabel position="stacked">
-                        Grupo sanguíneo <span className="text-danger">*</span>
+                        Alergia <span className="text-danger">*</span>
                       </IonLabel>
                       <IonSelect
                         interface="action-sheet"
@@ -293,29 +264,32 @@ const PerfilAlergias = () => {
                       </IonSelect>
                     </IonItem>
                   </IonList>
-                  <IonItem>
-                    <IonLabel>Activa: {checked ? "Si" : "No"}</IonLabel>
-                    <IonToggle
-                      checked={checked}
-                      onIonChange={(e) => setChecked(e.detail.checked)}
-                    />
-                  </IonItem>
-
-                  <div className="pt-2 text-center">
+                  <IonList>
+                    <IonItem className="border-none">
+                      <IonLabel>Activa: {checked ? "Si" : "No"}</IonLabel>
+                      <IonToggle
+                        checked={checked}
+                        onIonChange={(e) => setChecked(e.detail.checked)}
+                      />
+                    </IonItem>
+                  </IonList>
+                </IonCardContent>
+              </IonCard>
+            </IonCol>
+            <IonCol>
+            <div className="pt-2 text-center">
                     <IonButton
                       className="border-radius"
                       fill="outline"
                       onClick={handleAddAlergia}
                     >
-                      agregar
+                      Guardar
                     </IonButton>
                   </div>
-                </IonCardContent>
-              </IonCard>
             </IonCol>
-          </IonRow>
-          <IonRow className="mt-4 px-3">
-            <IonCol size="12" className="pb-3">
+          </IonRow>}
+          {!transition && <IonRow className="mt-4 px-3">
+            <IonCol size="12" className="pb-2">
               <IonRow>
                 <IonCol size="12">
                   <h5 className="font-w700 fs-15 text-info-dark mb-2">
@@ -323,22 +297,36 @@ const PerfilAlergias = () => {
                   </h5>
                 </IonCol>
               </IonRow>
-
-              <IonCard
-                className="m-0 card-slide shadow-full"
-                style={{ height: "auto" }}
-              >
-                <IonCardContent className="card-content-slide">
-                  {listado.map((item: any, index: number) => (
+                
+              {listado.length == 0 ? 'No tiene alergias registradas' : listado.map((item: any, index: number) => (
+                <IonCard
+                  className="m-0 mb-3 card-slide shadow-full"
+                >
+                  <IonCardContent className="card-content-slide">
                     <div key={index}>
                       <div className="text-info fs-15 font-w600 mb-2">
                         <span>
-                          {item.namegroup}, {item.namealergia}
+                          {item.namealergia}
                         </span>
+                        <div className="float-right">
+                        <IonToggle
+                          checked={checked}
+                          onIonChange={(e) => setChecked(e.detail.checked)}
+                        />
+                        </div>
                       </div>
                       <div>
-                        <span className="fs-12 mb-4 d-block">
+                        <span>
+                          Grupo: {item.namegroup}
+                        </span>
+                        <a href="#" className="text-danger d-block fs-12 text-underline" 
+                          onClick={() => {
+                            handleDeletAlergia(item.id);
+                          }}
+                        >Eliminar</a>
+                        <span className="fs-12 mb-2 d-block">
                           <IonButton
+                            className="d-none"
                             color="light"
                             onClick={() => {
                               handleDeletAlergia(item.id);
@@ -346,7 +334,9 @@ const PerfilAlergias = () => {
                           >
                             <IonIcon icon={trashSharp} />
                           </IonButton>
+
                           <IonButton
+                            className="d-none"
                             color="light"
                             onClick={() => {
                               handleToggle(item.id, item.estado, item);
@@ -361,11 +351,23 @@ const PerfilAlergias = () => {
                         </span>
                       </div>
                     </div>
-                  ))}
-                </IonCardContent>
-              </IonCard>
+                  </IonCardContent>
+                </IonCard>
+              ))}
+              
             </IonCol>
-          </IonRow>
+            <IonCol>
+              <div className="text-center">
+                <IonButton
+                  className="border-radius"
+                  fill="outline"
+                  onClick={() => {setTransition(true)}}
+                >
+                  Nueva alergia
+                </IonButton>
+              </div>
+            </IonCol>
+          </IonRow>}
         </IonGrid>
       </IonContent>
       <IonToast

@@ -16,40 +16,12 @@ import {
 } from "@ionic/react";
 import "./perfilTratamientos.css";
 import "../../style/tema.css";
-import { chevronBackOutline } from "ionicons/icons";
+import { HeaderPerfil } from "../../components";
 
 const PerfilTratamientos = () => {
   return (
     <IonPage className="fondo">
-      <IonHeader>
-        <div className="p-perfil bg-info-alt border-radius-bottom">
-          <IonToolbar>
-            <IonTitle
-              className="fs-16 font-w700"
-              style={{ paddingLeft: "12%" }}
-            >
-              Tratamientos activos
-            </IonTitle>
-            <IonButtons slot="start">
-              <IonBackButton
-                icon={chevronBackOutline}
-                text=""
-                className="custom-back text-white"
-              />
-            </IonButtons>
-          </IonToolbar>
-          <div className="mx-3 pb-4 text-white">
-            <IonThumbnail slot="start" class="float-left mr-3">
-              <IonImg src={"./images/perfil.JPG"} />
-            </IonThumbnail>
-
-            <span className="font-w500 fs-14 d-block">
-              Laura Cristina García
-            </span>
-            <span className="fs-12">Cabeza de familia</span>
-          </div>
-        </div>
-      </IonHeader>
+      <HeaderPerfil title='Tratamientos activos' />
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">

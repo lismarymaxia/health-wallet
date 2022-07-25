@@ -1,5 +1,5 @@
 import { Nav } from "./nav";
-import { Header, HeaderEstudios } from "./header";
+import { Header, HeaderEstudios, HeaderPerfil } from "./header";
 import { Boxfull, BoxAfiliado, BoxfullGeneral } from "./boxfull";
 import { Action } from "./button";
 import { CustomField, CustomFieldOnblur } from "./field";
@@ -8,6 +8,7 @@ export {
   Nav,
   Header,
   HeaderEstudios,
+  HeaderPerfil,
   Boxfull,
   BoxAfiliado,
   BoxfullGeneral,

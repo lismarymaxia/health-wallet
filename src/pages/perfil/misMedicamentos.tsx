@@ -26,7 +26,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import "./perfil.css";
 import "../../style/tema.css";
-import { chevronBackOutline } from "ionicons/icons";
+import { HeaderPerfil } from "../../components";
 
 const MisMedicamentos = () => { 
     const history = useHistory();
@@ -35,30 +35,7 @@ const MisMedicamentos = () => {
     };
   return (
     <IonPage className="fondo">
-      <IonHeader>
-        <div className="p-perfil-sub bg-info-alt border-radius-bottom">
-          <IonToolbar>
-            <IonTitle className="fs-16 font-w700" style={{paddingLeft:"12%"}} >
-                Mis medicamentos
-            </IonTitle>
-            <IonButtons slot="start">
-              <IonBackButton icon={chevronBackOutline} text="" className="custom-back text-white" />
-            </IonButtons>
-          </IonToolbar>
-          <div className="mx-3 pb-4 text-white">
-            <IonThumbnail slot="start" class="float-left mr-3">
-              <IonImg src={"./images/perfil.JPG"} />
-            </IonThumbnail>
-
-            <span className="font-w500 fs-14 d-block">
-              Laura Cristina García
-            </span>
-            <span className="fs-12">
-              Cabeza de familia
-            </span>
-          </div>
-        </div>
-      </IonHeader>      
+      <HeaderPerfil title='Mis medicamentos' />     
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
