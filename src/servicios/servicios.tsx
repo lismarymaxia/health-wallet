@@ -151,8 +151,25 @@ export const getEnfermedadPaciente = (id: any) =>
     },
     responseType: "json",
   });
+
 export const getEnfermedad = (valor: string) =>
   servicesWh.get("/controller/combosback.php", {
     params: { op: "enfermedadescombo", valor: valor },
+    responseType: "json",
+  });
+/*-TRATAMIENTO---------------------------------------*/
+export const getMedicamentos = (valor: string) =>
+  servicesWh.get("/controller/combosback.php", {
+    params: { op: "getMedicamentos", valor: valor },
+    responseType: "json",
+  });
+/*-DISCAPACIDAD--------------------------------------*/
+export const getDicapacidadPaciente = (id: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getDiscapacidad",
+      id: id,
+      imestamp: new Date().getTime(),
+    },
     responseType: "json",
   });

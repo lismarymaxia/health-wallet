@@ -10,6 +10,7 @@ import MisMedicos from "./misMedicos";
 import MisMedicamentos from "./misMedicamentos";
 import { PerfilAlergias } from "./alergias";
 import { PerfilEnfermedades } from "./enfermedades";
+import { PerfilTratamientos } from "./tratamientos";
 export {
   Perfiles,
   Perfil,
@@ -23,4 +24,5 @@ export {
   MisMedicamentos,
   PerfilAlergias,
   PerfilEnfermedades,
+  PerfilTratamientos,
 };

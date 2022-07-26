@@ -11,6 +11,8 @@ import {
   cadenaUpercase,
   tabActive,
   compartir,
+  totalDosisTratamiento,
+  fechaDiaAdd,
 } from "./helpers";
 import {
   tablaFrecuencia,
@@ -18,7 +20,13 @@ import {
   grupoSanguineos,
   grupodiscapacidad,
 } from "./tablasHash";
-import { INITIALPERFIL, SLIDEOPTS, INITIALCREARPERFIL, NOTAB } from "./const";
+import {
+  INITIALPERFIL,
+  SLIDEOPTS,
+  INITIALCREARPERFIL,
+  NOTAB,
+  FORMTRATAMIENTOS,
+} from "./const";
 import { valEnfermedad } from "./validacion";
 export {
   /*-HELPERS-----------------------*/
@@ -34,6 +42,8 @@ export {
   cadenaUpercase,
   tabActive,
   compartir,
+  totalDosisTratamiento,
+  fechaDiaAdd,
   /*-TABLA-HASH------------------*/
   meses,
   tablaFrecuencia,
@@ -44,6 +54,7 @@ export {
   SLIDEOPTS,
   INITIALCREARPERFIL,
   NOTAB,
+  FORMTRATAMIENTOS,
   /*-VALIDACIONES---------------*/
   valEnfermedad,
 };

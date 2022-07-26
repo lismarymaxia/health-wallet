@@ -65,6 +65,11 @@ export const fechaPerfil = (data: string) => {
   return formt;
 };
 
+export const fechaDiaAdd = (fecha: any, dias: any) => {
+  let formato = new Date(fecha);
+  formato.setDate(formato.getDate() + dias);
+  return formato;
+};
 /*-FUNCIONES-MATRIZ------------------------------*/
 export const orderId = (data: any) => {
   return data.sort((a: any, b: any) => b.id - a.id);
@@ -143,4 +148,18 @@ export const compartir = (url: string) => {
   } else {
     console.log("share not supported");
   }
+};
+/*-TRATAMIENTO------------------------------------*/
+export const totalDosisTratamiento = (
+  dosis: number,
+  cadaHora: number,
+  recetaDuracion: number
+) => {
+  let totalDosis: number = 0;
+  if (dosis !== 0 && cadaHora !== 0 && recetaDuracion !== 0) {
+    if (cadaHora !== 0) {
+      totalDosis = (dosis * (recetaDuracion * 24)) / cadaHora;
+    }
+  }
+  return totalDosis;
 };
