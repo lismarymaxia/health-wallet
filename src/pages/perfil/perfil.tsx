@@ -120,8 +120,7 @@ const Perfil = () => {
         <div className="p-perfil bg-info-alt border-radius-bottom">
           <IonToolbar>
             <IonTitle
-              className="fs-16 font-w700"
-              style={{ paddingLeft: "12%" }}
+              className="fs-16 font-w700 text-center"
             >
               Perfil
             </IonTitle>
@@ -134,10 +133,8 @@ const Perfil = () => {
             </IonButtons>
           </IonToolbar>
           <div className="mx-3 pb-2 text-white d-flex">
-            <div className="float-left">
-              <IonThumbnail slot="start" class="">
-                <img src={`./images/${perfil?.imagen}`} alt="imagen" />
-              </IonThumbnail>
+            <div className="">
+              <img src={`./images/${perfil?.imagen}`} alt="imagen" />
             </div>
 
             <div className="w-100 ml-3 float-right d-grid">
@@ -339,11 +336,14 @@ const Perfil = () => {
                           onClick={() => handleClicPerfil(item.nombre, item)}
                           style={{ cursor: "pointer" }}
                         >
-                          <img
-                            src={`./images/${item.imagen}`}
-                            className="mb-2"
-                            alt={item.imagen}
-                          />
+                          <div className="d-grid">
+                            <img
+                              src={`./images/${item.imagen}`}
+                              className="mb-0"
+                              alt={item.imagen}
+                            />
+                            {item.nombre !== 'nuevo-perfil' && <span className="fs-12 text-body font-w500">{item.nombre}</span>}
+                          </div>
                         </IonSlide>
                       ))
                       .concat()}
