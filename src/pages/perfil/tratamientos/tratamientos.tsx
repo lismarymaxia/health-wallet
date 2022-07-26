@@ -27,7 +27,7 @@ import { useListado } from "../../../hook";
 import { valEnfermedad } from "../../../helpers";
 import { HeaderPerfil } from "../../../components";
 
-const PerfilEnfermedades = () => {
+const PerfilTratamientos = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
   const [handleAddAll, handleAddItem, handleDeletItem, , listado] =
     useListado();
@@ -155,7 +155,6 @@ const PerfilEnfermedades = () => {
                     <div className="pr-3">
                       <span className="text-dark">Enfermedad *</span>
                       <AsyncSelect
-                        classNamePrefix="auto__complete"
                         cacheOptions
                         defaultOptions
                         value={select}
@@ -277,4 +276,4 @@ const PerfilEnfermedades = () => {
   );
 };
 
-export default PerfilEnfermedades;
+export default PerfilTratamientos;
