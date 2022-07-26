@@ -26,12 +26,6 @@ export const getPost = (page: any) =>
     responseType: "json",
   });
 
-export const getEnfermedad = (valor: string) =>
-  servicesWh.get("/controller/combosback.php", {
-    params: { op: "enfermedadescombo", valor: valor },
-    responseType: "json",
-  });
-
 export const registroUsuario = (form: any) =>
   servicesWh.post("/controller/usuarios.php", form, {
     responseType: "json",
@@ -145,5 +139,20 @@ export const getAlergias = (idgrupo: any) =>
       idgrupo: idgrupo,
       imestamp: new Date().getTime(),
     },
+    responseType: "json",
+  });
+/*-ENFERMEDAD----------------------------------------*/
+export const getEnfermedadPaciente = (id: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getEnfermedades",
+      id: id,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+export const getEnfermedad = (valor: string) =>
+  servicesWh.get("/controller/combosback.php", {
+    params: { op: "enfermedadescombo", valor: valor },
     responseType: "json",
   });

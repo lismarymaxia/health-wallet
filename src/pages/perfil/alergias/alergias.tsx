@@ -167,7 +167,6 @@ const PerfilAlergias = () => {
   };
 
   const handleToggle = (id: any, estado: string, item: any) => {
-    console.log({ id, estado, item });
     let std = estado === "activa" ? "inactiva" : "activa";
     let formDa = new FormData();
     formDa.append("op", "toggleAlergias");
