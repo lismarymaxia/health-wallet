@@ -33,16 +33,12 @@ import {
 } from "../../../servicios/servicios";
 import { useListado } from "../../../hook";
 import { valEnfermedad } from "../../../helpers";
+import { HeaderPerfil } from "../../../components";
 
 const PerfilEnfermedades = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
-  const [
-    handleAddAll,
-    handleAddItem,
-    handleDeletItem,
-    handleUpdateItem,
-    listado,
-  ] = useListado();
+  const [handleAddAll, handleAddItem, handleDeletItem, , listado] =
+    useListado();
   const [notificacion, setNotificacion] = useState({
     msg: "",
     estado: false,
@@ -149,33 +145,7 @@ const PerfilEnfermedades = () => {
 
   return (
     <IonPage className="fondo">
-      <IonHeader>
-        <div className="p-perfil bg-info-alt border-radius-bottom">
-          <IonToolbar>
-            <IonTitle
-              className="fs-16 font-w700"
-              style={{ paddingLeft: "12%" }}
-            >
-              Enfermedades activas
-            </IonTitle>
-            <IonButtons slot="start">
-              <IonBackButton
-                icon={chevronBackOutline}
-                text=""
-                className="custom-back text-white"
-              />
-            </IonButtons>
-          </IonToolbar>
-          <div className="mx-3 pb-4 text-white">
-            <IonThumbnail slot="start" class="float-left mr-3">
-              <IonImg src={`./images/${user?.imagen}`} />
-            </IonThumbnail>
-
-            <span className="font-w500 fs-14 d-block">{user.nombre}</span>
-            <span className="fs-12">Cabeza de familia</span>
-          </div>
-        </div>
-      </IonHeader>
+      <HeaderPerfil title="Enfermedades activas" />
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
@@ -198,6 +168,11 @@ const PerfilEnfermedades = () => {
                         value={select}
                         onChange={setSelect}
                         loadOptions={loadOptions}
+                        theme={(theme) => ({
+                          ...theme,
+                          borderRadius: 0,
+                          zIndex: 900,
+                        })}
                       />
                     </div>
                     <IonItem>

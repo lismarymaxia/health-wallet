@@ -137,3 +137,10 @@ ion-toggle .toggle-icon {
 ion-toggle .toggle-inner{
     margin-left: 2px !important;
 }
+.react-select-5-listbox{
+    background: #3B72A2;
+    z-index: 100;
+}
+.selects option{
+    background: #3B72A2;  
+}
