@@ -19,6 +19,7 @@ import {
   getGrupoAlergias,
   getAlergias,
   /*-ENFERMEDADES---*/
+  getEnfermedadPaciente,
   getEnfermedad,
   /*-LABORATORIO-----*/
   getLaboratorio,
@@ -46,6 +47,7 @@ export {
   getGrupoAlergias,
   getAlergias,
   /*-ENFERMEDADES---*/
+  getEnfermedadPaciente,
   getEnfermedad,
   /*-LABORATORIO-----*/
   getLaboratorio,

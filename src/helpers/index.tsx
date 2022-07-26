@@ -19,6 +19,7 @@ import {
   grupodiscapacidad,
 } from "./tablasHash";
 import { INITIALPERFIL, SLIDEOPTS, INITIALCREARPERFIL, NOTAB } from "./const";
+import { valEnfermedad } from "./validacion";
 export {
   /*-HELPERS-----------------------*/
   filterNombre,
@@ -43,4 +44,6 @@ export {
   SLIDEOPTS,
   INITIALCREARPERFIL,
   NOTAB,
+  /*-VALIDACIONES---------------*/
+  valEnfermedad,
 };
