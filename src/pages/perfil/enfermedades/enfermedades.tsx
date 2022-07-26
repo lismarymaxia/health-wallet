@@ -92,7 +92,7 @@ const PerfilEnfermedades = () => {
                       loadOptions={loadOptions}
                       placeholder={'Seleccionar'}
                       noOptionsMessage={() => "Escriba la enfermedad"}
-                      styles={customStyles}                      
+                      styles={customStyles}
                     />
                   </div>
                   <IonItem>
