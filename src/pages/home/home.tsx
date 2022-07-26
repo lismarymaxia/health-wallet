@@ -22,6 +22,8 @@ import {
   faMicroscope,
   faXRay,
   faHospital,
+  faCalendar,
+  faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -231,6 +233,10 @@ const Home: React.FC = () => {
     history.push(`/app/afiliado/${id}`);
   };
 
+  const handleNuevaCita = () => {
+    history.push("/app/crear-cita");
+  };
+
   return (
     <IonPage className="fondo">
       <IonContent fullscreen className="bg-light">
@@ -269,7 +275,7 @@ const Home: React.FC = () => {
                   />
                 </Link>
               </h5>
-              <IonSlides pager={false} options={slideOpts}>
+              <IonSlides pager={false} options={slideOpts} className="d-flex">
                 <IonSlide>
                   <IonCard className="m-0 card-slide slide-mini">
                     <IonCardContent className="card-content-slide">
@@ -286,7 +292,7 @@ const Home: React.FC = () => {
                         </p>
                       </div>
                     </IonCardContent>
-                  </IonCard>{" "}
+                  </IonCard>
                 </IonSlide>
                 <IonSlide>
                   <IonCard className="m-0 card-slide slide-mini">
@@ -304,7 +310,7 @@ const Home: React.FC = () => {
                         </p>
                       </div>
                     </IonCardContent>
-                  </IonCard>{" "}
+                  </IonCard>
                 </IonSlide>
                 <IonSlide>
                   <IonCard className="m-0 card-slide slide-mini">
@@ -322,7 +328,7 @@ const Home: React.FC = () => {
                         </p>
                       </div>
                     </IonCardContent>
-                  </IonCard>{" "}
+                  </IonCard>
                 </IonSlide>
                 <IonSlide>
                   <IonCard className="m-0 card-slide slide-mini">
@@ -340,7 +346,7 @@ const Home: React.FC = () => {
                         </p>
                       </div>
                     </IonCardContent>
-                  </IonCard>{" "}
+                  </IonCard>
                 </IonSlide>
                 <IonSlide>
                   <IonCard className="m-0 card-slide slide-mini">
@@ -358,7 +364,25 @@ const Home: React.FC = () => {
                         </p>
                       </div>
                     </IonCardContent>
-                  </IonCard>{" "}
+                  </IonCard>
+                </IonSlide>
+                <IonSlide onClick={handleNuevaCita}>
+                  <IonCard className="m-0 card-slide slide-mini button-deg cursor-pointer">
+                    <IonCardContent className="card-content-slide d-grid">
+                      <div>
+                        <FontAwesomeIcon 
+                          icon={faCalendarAlt}
+                          className="float-right" 
+                          style={{fontSize: "72px", marginTop: "-20px", marginRight: "-15px !important"}}
+                        />
+                      </div>
+                      <div>
+                        <p className="mb-0 fs-12 text-white">
+                          Crear nueva cita
+                        </p>
+                      </div>
+                    </IonCardContent>
+                  </IonCard>
                 </IonSlide>
               </IonSlides>
             </IonCol>

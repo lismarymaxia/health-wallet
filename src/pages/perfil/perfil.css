@@ -61,6 +61,7 @@ ion-item.item-interactive input.native-input.sc-ion-input-md {
 ion-select{
     padding: 0.5rem;
     margin-top: 0.8rem;
+    margin-bottom: 1px;
     border-radius: 0.4rem;
     border: 1px solid #ccc;
 }
