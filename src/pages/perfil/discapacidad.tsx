@@ -26,6 +26,7 @@ const Discapacidad = () => {
     fecha_nac: "",
     expedicion: "",
     expiracion: "",
+    iddiscapacidad: "",
     discapacidad: "",
   });
 
@@ -40,7 +41,7 @@ const Discapacidad = () => {
         console.error("Error en la peticion carnet" + error);
       });
   }, [user]);
-  console.log(carnet);
+
   return (
     <IonPage className="fondo">
       <HeaderPerfil title="Discapacidad" />
@@ -63,19 +64,14 @@ const Discapacidad = () => {
                         interface="action-sheet"
                         placeholder="Seleccionar"
                         className="w-100"
+                        value={carnet.iddiscapacidad}
                       >
-                        <IonSelectOption value="Auditiva">
-                          Auditiva
-                        </IonSelectOption>
-                        <IonSelectOption value="Intelectual">
-                          Intelectual
-                        </IonSelectOption>
-                        <IonSelectOption value="Física">Física</IonSelectOption>
-                        <IonSelectOption value="Mental">Mental</IonSelectOption>
-                        <IonSelectOption value="Visual">Visual</IonSelectOption>
-                        <IonSelectOption value="Visceral">
-                          Visceral
-                        </IonSelectOption>
+                        <IonSelectOption value="1">Física</IonSelectOption>
+                        <IonSelectOption value="2">Visual</IonSelectOption>
+                        <IonSelectOption value="3">Auditiva</IonSelectOption>
+                        <IonSelectOption value="4">Mental</IonSelectOption>
+                        <IonSelectOption value="5">Intelectual</IonSelectOption>
+                        <IonSelectOption value="6">Visceral</IonSelectOption>
                       </IonSelect>
                     </IonItem>
                   </IonList>
