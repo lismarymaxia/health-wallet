@@ -16,10 +16,10 @@ import "./perfil.css";
 import "../../style/tema.css";
 import { HeaderPerfil } from "../../components";
 
-const ContactoEmergencia = () => { 
+const Aseguradora = () => { 
   return (
     <IonPage className="fondo">
-      <HeaderPerfil title='Contacto de emergencia' />      
+      <HeaderPerfil title='Aseguradora' />
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
@@ -28,19 +28,14 @@ const ContactoEmergencia = () => {
               <IonRow>
                 <IonCol size="12">
                   <h5 className="font-w700 fs-15 text-info-dark mb-2">
-                    Contacto de emergencias
+                    Proveedor de seguro
                   </h5>
                 </IonCol>
               </IonRow>
 
               <IonCard className="m-0 card-slide shadow-full" style={{ height: "auto" }}>
                 <IonCardContent className="card-content-slide">
-                    <div className="w-100 pb-1">
-                        <div className="fs-12">
-                            <FontAwesomeIcon icon={faUserPlus} className="text-info-dark mr-2" /> 
-                            Seleccionar de mi lista de contactos
-                        </div>
-                    </div>
+                    DATOS DEL PROVEEDOR
                 </IonCardContent>
               </IonCard>
             </IonCol>
@@ -51,4 +46,4 @@ const ContactoEmergencia = () => {
   );
 };
 
-export default ContactoEmergencia;
+export default Aseguradora;

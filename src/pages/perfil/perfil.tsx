@@ -162,7 +162,7 @@ const Perfil = () => {
                   Ver ficha completa
                 </span>
                 <span
-                  className="fs-12 float-right text-underline"
+                  className="fs-12 float-right text-underline cursor-pointer"
                   onClick={handleEditar}
                 >
                   Editar

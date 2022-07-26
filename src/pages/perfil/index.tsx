@@ -4,6 +4,7 @@ import PerfilCrear from "./perfilCrear";
 import PerfilEditar from "./perfilEditar";
 import FichaCompleta from "./fichaCompleta";
 import Discapacidad from "./discapacidad";
+import Aseguradora from "./aseguradora";
 import ContactoEmergencia from "./contactoEmergencia";
 import MisMedicos from "./misMedicos";
 import MisMedicamentos from "./misMedicamentos";
@@ -16,6 +17,7 @@ export {
   PerfilEditar,
   FichaCompleta,
   Discapacidad,
+  Aseguradora,
   ContactoEmergencia,
   MisMedicos,
   MisMedicamentos,

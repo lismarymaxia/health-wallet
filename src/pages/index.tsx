@@ -19,6 +19,7 @@ import {
   MisMedicos,
   MisMedicamentos,
   PerfilAlergias,
+  Aseguradora,
   PerfilEnfermedades,
 } from "./perfil";
 import { PerfilTratamientos } from "./perfilTratamientos";
@@ -48,7 +49,7 @@ export {
   PerfilCrear,
   PerfilEditar,
   PerfilAlergias,
-  PerfilEnfermedades,
+  Aseguradora,
   FichaCompleta,
   ContactoEmergencia,
   MisMedicos,
@@ -60,4 +61,5 @@ export {
   DetalleCita,
   DetalleConsulta,
   Soporte,
+  PerfilEnfermedades,
 };

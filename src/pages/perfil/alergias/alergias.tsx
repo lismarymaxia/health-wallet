@@ -7,13 +7,6 @@ import {
   IonCardContent,
   IonContent,
   IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonButtons,
-  IonBackButton,
-  IonThumbnail,
-  IonImg,
   IonToast,
   IonList,
   IonItem,
@@ -25,23 +18,21 @@ import {
   IonIcon,
 } from "@ionic/react";
 import {
-  chevronBackOutline,
   trashSharp,
   notificationsOffCircleOutline,
   notificationsCircleOutline,
 } from "ionicons/icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
-  getPerfil,
   serviciosPaciente,
   getAlergiasPaciente,
   getGrupoAlergias,
   getAlergias,
 } from "../../../servicios/servicios";
 import { useListado } from "../../../hook";
-import { INITIALPERFIL, filterNombre } from "../../../helpers";
+import { filterNombre } from "../../../helpers";
+import { HeaderPerfil } from "../../../components";
 const PerfilAlergias = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
   const [
@@ -51,7 +42,6 @@ const PerfilAlergias = () => {
     handleUpdateItem,
     listado,
   ] = useListado();
-  const [perfil, setPerfil] = useState(INITIALPERFIL);
   const [listaGrupoAlerg, setListaGrupoAlerg] = useState([]);
   const [grupo, setGrupo] = useState("");
   const [listaAlerg, setListaAlerg] = useState([]);
@@ -61,17 +51,9 @@ const PerfilAlergias = () => {
     estado: false,
   });
   const [checked, setChecked] = useState(false);
+  const [transition, setTransition] = useState(false);
 
   useEffect(() => {
-    getPerfil(user.idpaciente)
-      .then((rsp: any) => {
-        const { data } = rsp;
-        setPerfil(data.data);
-      })
-      .catch((error) => {
-        console.error("Error en peticion perfil" + error);
-      });
-
     getGrupoAlergias()
       .then((rsp: any) => {
         const { data } = rsp;
@@ -137,6 +119,7 @@ const PerfilAlergias = () => {
                 estado: estado,
               };
               handleAddItem(state);
+              setTransition(false);
             } else {
               setNotificacion({
                 msg: data.msg,
@@ -215,157 +198,174 @@ const PerfilAlergias = () => {
   };
   return (
     <IonPage className="fondo">
-      <IonHeader>
-        <div className="p-perfil bg-info-alt border-radius-bottom">
-          <IonToolbar>
-            <IonTitle
-              className="fs-16 font-w700"
-              style={{ paddingLeft: "12%" }}
-            >
-              Alergias activas
-            </IonTitle>
-            <IonButtons slot="start">
-              <IonBackButton
-                icon={chevronBackOutline}
-                text=""
-                className="custom-back text-white"
-              />
-            </IonButtons>
-          </IonToolbar>
-          <div className="mx-3 pb-4 text-white">
-            <IonThumbnail slot="start" class="float-left mr-3">
-              <IonImg src={`./images/${perfil?.imagen}`} />
-            </IonThumbnail>
-
-            <span className="font-w500 fs-14 d-block">{perfil.nombre}</span>
-            <span className="fs-12">Cabeza de familia</span>
-          </div>
-        </div>
-      </IonHeader>
+      <HeaderPerfil title="Alergias" />
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
-          <IonRow>
-            <IonCol size="12" className="px-3">
-              <IonCard className="m-0 mb-2 pb-2 card-slide">
-                <IonCardContent>
-                  <div className="text-center subir-perfil">
-                    <FontAwesomeIcon
-                      icon={faUserPlus}
-                      className="cursor-pointer text-info fs-18"
-                    />
-                  </div>
-                  <IonList>
-                    <IonItem>
-                      <IonLabel position="stacked">
-                        Grupo sanguíneo <span className="text-danger">*</span>
-                      </IonLabel>
-                      <IonSelect
-                        interface="action-sheet"
-                        placeholder="Tipo"
-                        value={grupo}
-                        onIonChange={(e: any) => handleAlergia(e.detail.value!)}
-                      >
-                        {listaGrupoAlerg.map((item: any, index: any) => (
-                          <IonSelectOption value={item.value} key={index}>
-                            {item.label}
-                          </IonSelectOption>
-                        ))}
-                      </IonSelect>
-                    </IonItem>
-                  </IonList>
-                  <IonList>
-                    <IonItem>
-                      <IonLabel position="stacked">
-                        Grupo sanguíneo <span className="text-danger">*</span>
-                      </IonLabel>
-                      <IonSelect
-                        interface="action-sheet"
-                        placeholder="Tipo"
-                        value={alergia}
-                        onIonChange={(e: any) => setAlergia(e.detail.value!)}
-                      >
-                        {listaAlerg.map((item: any, index: any) => (
-                          <IonSelectOption value={item.value} key={index}>
-                            {item.label}
-                          </IonSelectOption>
-                        ))}
-                      </IonSelect>
-                    </IonItem>
-                  </IonList>
-                  <IonItem>
-                    <IonLabel>Activa: {checked ? "Si" : "No"}</IonLabel>
-                    <IonToggle
-                      checked={checked}
-                      onIonChange={(e) => setChecked(e.detail.checked)}
-                    />
-                  </IonItem>
+          {transition && (
+            <IonRow>
+              <IonCol size="12" className="px-3">
+                <IonCard className="m-0 mb-2 mt-4 pb-2 card-slide">
+                  <IonCardContent>
+                    <IonList>
+                      <IonItem>
+                        <IonLabel position="stacked">
+                          Grupo <span className="text-danger">*</span>
+                        </IonLabel>
+                        <IonSelect
+                          interface="action-sheet"
+                          placeholder="Tipo"
+                          value={grupo}
+                          onIonChange={(e: any) =>
+                            handleAlergia(e.detail.value!)
+                          }
+                        >
+                          {listaGrupoAlerg.map((item: any, index: any) => (
+                            <IonSelectOption value={item.value} key={index}>
+                              {item.label}
+                            </IonSelectOption>
+                          ))}
+                        </IonSelect>
+                      </IonItem>
+                    </IonList>
+                    <IonList>
+                      <IonItem>
+                        <IonLabel position="stacked">
+                          Alergia <span className="text-danger">*</span>
+                        </IonLabel>
+                        <IonSelect
+                          interface="action-sheet"
+                          placeholder="Tipo"
+                          value={alergia}
+                          onIonChange={(e: any) => setAlergia(e.detail.value!)}
+                        >
+                          {listaAlerg.map((item: any, index: any) => (
+                            <IonSelectOption value={item.value} key={index}>
+                              {item.label}
+                            </IonSelectOption>
+                          ))}
+                        </IonSelect>
+                      </IonItem>
+                    </IonList>
+                    <IonList>
+                      <IonItem className="border-none">
+                        <IonLabel>Activa: {checked ? "Si" : "No"}</IonLabel>
+                        <IonToggle
+                          checked={checked}
+                          onIonChange={(e) => setChecked(e.detail.checked)}
+                        />
+                      </IonItem>
+                    </IonList>
+                  </IonCardContent>
+                </IonCard>
+              </IonCol>
+              <IonCol>
+                <div className="pt-2 text-center">
+                  <IonButton
+                    className="border-radius"
+                    fill="outline"
+                    onClick={handleAddAlergia}
+                  >
+                    Guardar
+                  </IonButton>
+                </div>
+              </IonCol>
+            </IonRow>
+          )}
+          {!transition && (
+            <IonRow className="mt-4 px-3">
+              <IonCol size="12" className="pb-2">
+                <IonRow>
+                  <IonCol size="12">
+                    <h5 className="font-w700 fs-15 text-info-dark mb-2">
+                      Listado de alergias
+                    </h5>
+                  </IonCol>
+                </IonRow>
 
-                  <div className="pt-2 text-center">
-                    <IonButton
-                      className="border-radius"
-                      fill="outline"
-                      onClick={handleAddAlergia}
-                    >
-                      agregar
-                    </IonButton>
-                  </div>
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-          </IonRow>
-          <IonRow className="mt-4 px-3">
-            <IonCol size="12" className="pb-3">
-              <IonRow>
-                <IonCol size="12">
-                  <h5 className="font-w700 fs-15 text-info-dark mb-2">
-                    Listado de alergias
-                  </h5>
-                </IonCol>
-              </IonRow>
+                {listado.length === 0
+                  ? "No tiene alergias registradas"
+                  : listado.map((item: any, index: number) => (
+                      <IonCard
+                        className="m-0 mb-3 card-slide shadow-full"
+                        key={index}
+                      >
+                        <IonCardContent className="card-content-slide">
+                          <div>
+                            <div className="text-info fs-15 font-w600 mb-2">
+                              <span>{item.namealergia}</span>
+                              <div className="float-right">
+                                <IonToggle
+                                  checked={
+                                    item.estado === "activa" ? true : false
+                                  }
+                                  onIonChange={(e) => {
+                                    handleToggle(item.id, item.estado, item);
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <span>Grupo: {item.namegroup}</span>
+                              <Link
+                                to="#"
+                                className="text-danger d-block fs-12 text-underline"
+                                onClick={() => {
+                                  handleDeletAlergia(item.id);
+                                }}
+                              >
+                                Eliminar
+                              </Link>
+                              <span className="fs-12 mb-2 d-block">
+                                <IonButton
+                                  className="d-none"
+                                  color="light"
+                                  onClick={() => {
+                                    handleDeletAlergia(item.id);
+                                  }}
+                                >
+                                  <IonIcon icon={trashSharp} />
+                                </IonButton>
 
-              <IonCard
-                className="m-0 card-slide shadow-full"
-                style={{ height: "auto" }}
-              >
-                <IonCardContent className="card-content-slide">
-                  {listado.map((item: any, index: number) => (
-                    <div key={index}>
-                      <div className="text-info fs-15 font-w600 mb-2">
-                        <span>
-                          {item.namegroup}, {item.namealergia}
-                        </span>
-                      </div>
-                      <div>
-                        <span className="fs-12 mb-4 d-block">
-                          <IonButton
-                            color="light"
-                            onClick={() => {
-                              handleDeletAlergia(item.id);
-                            }}
-                          >
-                            <IonIcon icon={trashSharp} />
-                          </IonButton>
-                          <IonButton
-                            color="light"
-                            onClick={() => {
-                              handleToggle(item.id, item.estado, item);
-                            }}
-                          >
-                            {item.estado === "inactiva" ? (
-                              <IonIcon icon={notificationsOffCircleOutline} />
-                            ) : (
-                              <IonIcon icon={notificationsCircleOutline} />
-                            )}
-                          </IonButton>
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </IonCardContent>
-              </IonCard>
-            </IonCol>
-          </IonRow>
+                                <IonButton
+                                  className="d-none"
+                                  color="light"
+                                  onClick={() => {
+                                    handleToggle(item.id, item.estado, item);
+                                  }}
+                                >
+                                  {item.estado === "inactiva" ? (
+                                    <IonIcon
+                                      icon={notificationsOffCircleOutline}
+                                    />
+                                  ) : (
+                                    <IonIcon
+                                      icon={notificationsCircleOutline}
+                                    />
+                                  )}
+                                </IonButton>
+                              </span>
+                            </div>
+                          </div>
+                        </IonCardContent>
+                      </IonCard>
+                    ))}
+              </IonCol>
+              <IonCol>
+                <div className="text-center">
+                  <IonButton
+                    className="border-radius"
+                    fill="outline"
+                    onClick={() => {
+                      setTransition(true);
+                    }}
+                  >
+                    Nueva alergia
+                  </IonButton>
+                </div>
+              </IonCol>
+            </IonRow>
+          )}
         </IonGrid>
       </IonContent>
       <IonToast

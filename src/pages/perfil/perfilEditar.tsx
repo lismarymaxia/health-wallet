@@ -121,14 +121,8 @@ const PerfilEditar = () => {
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
-          <IonRow className="mt-3 px-3">
-            <IonCol size="12" className="pb-2">
-              <h5 className="font-w600 fs-16 text-blue-dark">Edicion</h5>
-            </IonCol>
-          </IonRow>
-
           <IonRow>
-            <IonCol size="12" className="px-3">
+            <IonCol size="12" className="px-3 mt-3">
               <IonCard className="m-0 mb-2 pb-2 card-slide">
                 <IonCardContent>
                   <div className="text-center subir-perfil">
@@ -209,25 +203,26 @@ const PerfilEditar = () => {
                       </IonSelect>
                     </IonItem>
                   </IonList>
-                  <IonItem>
+                  <IonItem className="border-none">
                     <IonLabel>Discapacidad: {checked ? "Si" : "No"}</IonLabel>
                     <IonToggle
                       checked={checked}
                       onIonChange={(e) => setChecked(e.detail.checked)}
                     />
                   </IonItem>
-
-                  <div className="pt-2 text-center">
-                    <IonButton
-                      className="border-radius"
-                      fill="outline"
-                      onClick={handleAdd}
-                    >
-                      Guardar
-                    </IonButton>
-                  </div>
                 </IonCardContent>
               </IonCard>
+            </IonCol>
+            <IonCol>
+              <div className="pt-2 text-center">
+                <IonButton
+                  className="border-radius"
+                  fill="outline"
+                  onClick={handleAdd}
+                >
+                  Guardar
+                </IonButton>
+              </div>
             </IonCol>
           </IonRow>
         </IonGrid>

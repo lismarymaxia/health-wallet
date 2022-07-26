@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   IonGrid,
   IonRow,
@@ -17,8 +17,8 @@ import {
   IonToast,
   IonItem,
   IonLabel,
-  IonToggle,
   IonButton,
+  IonInput,
 } from "@ionic/react";
 import { chevronBackOutline } from "ionicons/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,7 +27,7 @@ import { useSelector } from "react-redux";
 import AsyncSelect from "react-select/async";
 import { getEnfermedad } from "../../../servicios/servicios";
 import { useListado } from "../../../hook";
-import { INITIALPERFIL, filterNombre } from "../../../helpers";
+import { filterNombre } from "../../../helpers";
 
 const PerfilEnfermedades = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
@@ -38,36 +38,21 @@ const PerfilEnfermedades = () => {
     handleUpdateItem,
     listado,
   ] = useListado();
-  const [perfil, setPerfil] = useState(INITIALPERFIL);
   const [notificacion, setNotificacion] = useState({
     msg: "",
     estado: false,
   });
-  const [checked, setChecked] = useState(false);
+  const [select, setSelect] = useState(null);
 
-  const handleFilter = (valor: string) => {
-    getEnfermedad(valor)
+  const loadOptions = (input: string, callback: any) => {
+    getEnfermedad(input)
       .then((rsp: any) => {
         const { data } = rsp;
-        return data.data;
+        callback(data.data);
       })
       .catch((error) => {
-        console.error("Error en peticion perfil" + error);
+        console.error("Error en peticion enfermedades" + error);
       });
-  };
-
-  const loadOptions = (
-    inputValue: string,
-    callback: (options: any) => void
-  ) => {
-    setTimeout(() => {
-      callback(handleFilter(inputValue));
-    }, 1000);
-  };
-  const handleInputChange = (newValue: string) => {
-    const inputValue = newValue.replace(/\W/g, "");
-    console.log(inputValue);
-    return inputValue;
   };
 
   return (
@@ -94,7 +79,7 @@ const PerfilEnfermedades = () => {
               <IonImg src={`./images/${user?.imagen}`} />
             </IonThumbnail>
 
-            <span className="font-w500 fs-14 d-block">{perfil.nombre}</span>
+            <span className="font-w500 fs-14 d-block">{user.nombre}</span>
             <span className="fs-12">Cabeza de familia</span>
           </div>
         </div>
@@ -112,20 +97,28 @@ const PerfilEnfermedades = () => {
                       className="cursor-pointer text-info fs-18"
                     />
                   </div>
-                  <AsyncSelect
-                    cacheOptions
-                    defaultOptions
-                    loadOptions={loadOptions}
-                    onInputChange={handleInputChange}
-                  />
-                  <IonItem>
-                    <IonLabel>Activa: {checked ? "Si" : "No"}</IonLabel>
-                    <IonToggle
-                      checked={checked}
-                      onIonChange={(e) => setChecked(e.detail.checked)}
+                  <div className="pr-3">
+                    <span className="text-dark">Enfermedad *</span>
+                    <AsyncSelect
+                      cacheOptions
+                      defaultOptions
+                      value={select}
+                      onChange={setSelect}
+                      loadOptions={loadOptions}
                     />
+                  </div>
+                  <IonItem>
+                    <IonLabel position="stacked">
+                      Tratamiento <span className="text-danger">*</span>
+                    </IonLabel>
+                    <IonInput name="nombre"></IonInput>
                   </IonItem>
-
+                  <IonItem>
+                    <IonLabel position="stacked">
+                      Frecuencias <span className="text-danger">*</span>
+                    </IonLabel>
+                    <IonInput name="nombre"></IonInput>
+                  </IonItem>
                   <div className="pt-2 text-center">
                     <IonButton className="border-radius" fill="outline">
                       agregar
@@ -140,7 +133,7 @@ const PerfilEnfermedades = () => {
               <IonRow>
                 <IonCol size="12">
                   <h5 className="font-w700 fs-15 text-info-dark mb-2">
-                    Listado de alergias
+                    Listado de enfermedades
                   </h5>
                 </IonCol>
               </IonRow>

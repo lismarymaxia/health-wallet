@@ -98,9 +98,42 @@ ion-button{
     --background: none !important;
     --color: #ffffff;
 }
-.p-perfil-sub ion-img {
-    border-radius: 0.6rem;
+.p-perfil-sub ion-toolbar ion-title {
+    margin-left: -48px;
+}
+.p-perfil-sub img {
+    border-radius: 0.9rem;
     box-shadow: 3px 5px 8px 1px rgb(7 41 70);
     -webkit-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
     -moz-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+}
+.certificado{
+    width: 400px;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 0.6rem;
+    padding: 0.5rem;
+    margin: 0 auto;
+}
+.certificado img{
+    max-width: 80px;
+}
+.certificado img.perfil-certificado{
+    max-width: 100px;
+}
+.border-none{
+    --inner-border-width: 0px;
+}
+
+ion-toggle{
+    height: 24px;
+    width: 40px;
+}
+
+ion-toggle .toggle-icon {
+    --background: rgb(16 72 110) !important;
+    background: rgb(16 72 110) !important;
+}
+ion-toggle .toggle-inner{
+    margin-left: 2px !important;
 }
