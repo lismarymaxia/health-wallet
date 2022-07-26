@@ -21,8 +21,9 @@ import {
   PerfilAlergias,
   Aseguradora,
   PerfilEnfermedades,
+  PerfilTratamientos,
 } from "./perfil";
-import { PerfilTratamientos } from "./perfilTratamientos";
+//import { PerfilTratamientos } from "./perfilTratamientos";
 import { Notificaciones } from "./notificaciones";
 import { ProximasCitas } from "./proximasCitas";
 import { DetalleCita } from "./detalleCita";

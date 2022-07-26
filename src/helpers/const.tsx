@@ -20,7 +20,15 @@ export const INITIALCREARPERFIL = {
   edad: "",
   gruposangre: "",
 };
-
+export const FORMTRATAMIENTOS = {
+  dosis: 0,
+  cada: 0,
+  totaldosis: 0,
+  fechainicio: null,
+  duracion: 0,
+  fechafin: null,
+  notas: "",
+};
 /*-CONFIGURACION---------*/
 export const SLIDEOPTS = {
   initialSlide: 0,

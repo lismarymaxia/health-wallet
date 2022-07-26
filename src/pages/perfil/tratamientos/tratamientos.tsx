@@ -12,6 +12,7 @@ import {
   IonLabel,
   IonButton,
   IonInput,
+  IonItemDivider,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
@@ -20,15 +21,22 @@ import AsyncSelect from "react-select/async";
 import { Link } from "react-router-dom";
 import {
   getEnfermedadPaciente,
-  getEnfermedad,
   serviciosPaciente,
+  getMedicamentos,
 } from "../../../servicios/servicios";
-import { useListado } from "../../../hook";
-import { valEnfermedad } from "../../../helpers";
+import { useListado, useForm } from "../../../hook";
+import {
+  valEnfermedad,
+  FORMTRATAMIENTOS,
+  totalDosisTratamiento,
+  fechaDiaAdd,
+} from "../../../helpers";
 import { HeaderPerfil } from "../../../components";
 
 const PerfilTratamientos = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
+  const [formulario, handleInputChange, handleInputReset, setFormulario] =
+    useForm(FORMTRATAMIENTOS);
   const [handleAddAll, handleAddItem, handleDeletItem, , listado] =
     useListado();
   const [notificacion, setNotificacion] = useState({
@@ -39,6 +47,20 @@ const PerfilTratamientos = () => {
   const [tratamiento, setTratamiento] = useState("");
   const [frecuencia, setFrecuencia] = useState("");
   const [transition, setTransition] = useState(false);
+  const customStyles = {
+    option: (provided: any, state: any) => ({
+      ...provided,
+      color: state.isSelected ? "#3B72A2" : "gray",
+      fontWeight: "500",
+      padding: "8px",
+      backgroundColor: state.isFocused ? "#eaecf0" : "white",
+    }),
+    menu: () => ({
+      border: "1px solid #ccc",
+      borderRadius: "0 0 0.4rem 0.4rem",
+    }),
+  };
+
   useEffect(() => {
     getEnfermedadPaciente(user.idpaciente)
       .then((rsp: any) => {
@@ -50,8 +72,27 @@ const PerfilTratamientos = () => {
       });
   }, []);
 
+  const handleCalcular = () => {
+    if (
+      formulario.dosis !== 0 &&
+      formulario.cada !== 0 &&
+      formulario.duracion
+    ) {
+      const total = totalDosisTratamiento(
+        parseInt(formulario.dosis),
+        parseInt(formulario.cada),
+        parseInt(formulario.duracion)
+      );
+      setFormulario({ ...formulario, totaldosis: total });
+    }
+  };
+
+  const handleFecha = (fecha: any) => {
+    setFormulario({ ...formulario, fechainicio: fecha });
+    console.log(fechaDiaAdd(fecha, formulario.duracion));
+  };
   const loadOptions = (input: string, callback: any) => {
-    getEnfermedad(input)
+    getMedicamentos(input)
       .then((rsp: any) => {
         const { data } = rsp;
         callback(data.data);
@@ -137,7 +178,7 @@ const PerfilTratamientos = () => {
 
   return (
     <IonPage className="fondo">
-      <HeaderPerfil title="Enfermedades activas" />
+      <HeaderPerfil title="Tratamientos activos" />
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
@@ -153,39 +194,101 @@ const PerfilTratamientos = () => {
                       />
                     </div>
                     <div className="pr-3">
-                      <span className="text-dark">Enfermedad *</span>
+                      <span className="text-dark">Medicamento *</span>
                       <AsyncSelect
                         cacheOptions
                         defaultOptions
                         value={select}
                         onChange={setSelect}
                         loadOptions={loadOptions}
-                        theme={(theme) => ({
-                          ...theme,
-                          borderRadius: 0,
-                          zIndex: 900,
-                        })}
+                        placeholder={"Seleccionar"}
+                        noOptionsMessage={() => "Escriba el medicamento"}
+                        styles={customStyles}
                       />
                     </div>
                     <IonItem>
                       <IonLabel position="stacked">
-                        Tratamiento <span className="text-danger">*</span>
+                        dosis<span className="text-danger">*</span>
                       </IonLabel>
                       <IonInput
-                        name="tratamiento"
-                        value={tratamiento}
+                        name="dosis"
+                        value={formulario.dosis}
+                        type="number"
                         onIonChange={(e) => {
-                          setTratamiento(e.detail.value!);
+                          handleInputChange(e.detail.value!, "dosis");
                         }}
                       ></IonInput>
                     </IonItem>
                     <IonItem>
                       <IonLabel position="stacked">
-                        Frecuencias <span className="text-danger">*</span>
+                        Cada <span className="text-danger">*</span>
                       </IonLabel>
                       <IonInput
-                        name="frecuencia"
-                        value={frecuencia}
+                        name="cada"
+                        type="number"
+                        value={formulario.cada}
+                        onIonChange={(e) => {
+                          handleInputChange(e.detail.value!, "cada");
+                        }}
+                      ></IonInput>
+                    </IonItem>
+                    <IonItem>
+                      <IonLabel position="stacked">
+                        Total dosis <span className="text-danger">*</span>
+                      </IonLabel>
+                      <IonInput
+                        name="totaldosis"
+                        disabled
+                        value={formulario.totaldosis}
+                      ></IonInput>
+                    </IonItem>
+                    <IonItemDivider>
+                      <b>Duración</b>
+                    </IonItemDivider>
+                    <IonItem>
+                      <IonLabel position="stacked">
+                        Fecha Inicion <span className="text-danger">*</span>
+                      </IonLabel>
+                      <IonInput
+                        name="fechainicio"
+                        type="date"
+                        value={formulario.fechainicio}
+                        onIonChange={(e) => {
+                          handleFecha(e.detail.value!);
+                        }}
+                      ></IonInput>
+                    </IonItem>
+                    <IonItem>
+                      <IonLabel position="stacked">
+                        Duracion(dias) <span className="text-danger">*</span>
+                      </IonLabel>
+                      <IonInput
+                        name="duracion"
+                        type="number"
+                        value={formulario.duracion}
+                        onIonChange={(e) => {
+                          handleInputChange(e.detail.value!, "duracion");
+                        }}
+                        onIonBlur={handleCalcular}
+                      ></IonInput>
+                    </IonItem>
+                    <IonItem>
+                      <IonLabel position="stacked">
+                        Fecha fin<span className="text-danger">*</span>
+                      </IonLabel>
+                      <IonInput
+                        name="fechafin"
+                        disabled
+                        value={formulario.fechafin}
+                      ></IonInput>
+                    </IonItem>
+                    <IonItem>
+                      <IonLabel position="stacked">
+                        Notas <span className="text-danger">*</span>
+                      </IonLabel>
+                      <IonInput
+                        name="notas"
+                        value={formulario.notas}
                         onIonChange={(e) => {
                           setFrecuencia(e.detail.value!);
                         }}
@@ -258,7 +361,7 @@ const PerfilTratamientos = () => {
                       setTransition(true);
                     }}
                   >
-                    Nueva alergia
+                    Nueva tratamiento
                   </IonButton>
                 </div>
               </IonCol>

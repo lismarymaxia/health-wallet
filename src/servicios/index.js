@@ -25,6 +25,10 @@ import {
   getLaboratorio,
   /*-IMAGENOLOGIA---*/
   getImagenologia,
+  /*-TRATAMIENTOS----*/
+  getMedicamentos,
+  /*-DISCAPACIDAD----*/
+  getDicapacidadPaciente,
 } from "./servicios";
 export {
   servicesWh,
@@ -53,4 +57,8 @@ export {
   getLaboratorio,
   /*-IMAGENOLOGIA---*/
   getImagenologia,
+  /*-TRATAMIENTOS----*/
+  getMedicamentos,
+  /*-DISCAPACIDAD----*/
+  getDicapacidadPaciente,
 };

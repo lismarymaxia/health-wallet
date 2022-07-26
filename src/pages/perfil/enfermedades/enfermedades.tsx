@@ -13,8 +13,6 @@ import {
   IonButton,
   IonInput,
 } from "@ionic/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import AsyncSelect from "react-select/async";
 import { Link } from "react-router-dom";
@@ -64,16 +62,16 @@ const PerfilEnfermedades = () => {
   const customStyles = {
     option: (provided: any, state: any) => ({
       ...provided,
-      color: state.isSelected ? '#3B72A2' : 'gray',
-      fontWeight: '500',
-      padding: '8px',
-      backgroundColor: state.isFocused  ? '#eaecf0' : 'white',
+      color: state.isSelected ? "#3B72A2" : "gray",
+      fontWeight: "500",
+      padding: "8px",
+      backgroundColor: state.isFocused ? "#eaecf0" : "white",
     }),
-    menu: () => ({      
-      border: '1px solid #ccc',
-      borderRadius: '0 0 0.4rem 0.4rem'
+    menu: () => ({
+      border: "1px solid #ccc",
+      borderRadius: "0 0 0.4rem 0.4rem",
     }),
-  }
+  };
 
   const handleAdd = () => {
     const { estado, msg } = valEnfermedad(select, tratamiento, frecuencia);
@@ -168,7 +166,7 @@ const PerfilEnfermedades = () => {
                         value={select}
                         onChange={setSelect}
                         loadOptions={loadOptions}
-                        placeholder={'Seleccionar'}
+                        placeholder={"Seleccionar"}
                         noOptionsMessage={() => "Escriba la enfermedad"}
                         styles={customStyles}
                       />
@@ -225,7 +223,7 @@ const PerfilEnfermedades = () => {
                   ? "Sin enfermedades registradas"
                   : listado.map((item: any, index: number) => (
                       <IonCard
-                        className="m-0 card-slide shadow-full"
+                        className="mt-2 card-slide shadow-full"
                         style={{ height: "auto" }}
                         key={index}
                       >
