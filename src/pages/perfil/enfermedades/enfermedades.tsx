@@ -155,17 +155,11 @@ const PerfilEnfermedades = () => {
                     <div className="pr-3">
                       <span className="text-dark">Enfermedad *</span>
                       <AsyncSelect
-                        classNamePrefix="auto__complete"
                         cacheOptions
                         defaultOptions
                         value={select}
                         onChange={setSelect}
                         loadOptions={loadOptions}
-                        theme={(theme) => ({
-                          ...theme,
-                          borderRadius: 0,
-                          zIndex: 900,
-                        })}
                       />
                     </div>
                     <IonItem>
