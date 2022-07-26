@@ -353,7 +353,7 @@ const PerfilAlergias = () => {
               <IonCol>
                 <div className="text-center">
                   <IonButton
-                    className="border-radius"
+                    className="button-deg"
                     fill="outline"
                     onClick={() => {
                       setTransition(true);

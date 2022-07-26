@@ -13,8 +13,6 @@ import {
   IonButton,
   IonInput,
 } from "@ionic/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import AsyncSelect from "react-select/async";
 import { Link } from "react-router-dom";
@@ -59,6 +57,20 @@ const PerfilEnfermedades = () => {
       .catch((error) => {
         console.error("Error en peticion enfermedades" + error);
       });
+  };
+
+  const customStyles = {
+    option: (provided: any, state: any) => ({
+      ...provided,
+      color: state.isSelected ? "#3B72A2" : "gray",
+      fontWeight: "500",
+      padding: "8px",
+      backgroundColor: state.isFocused ? "#eaecf0" : "white",
+    }),
+    menu: () => ({
+      border: "1px solid #ccc",
+      borderRadius: "0 0 0.4rem 0.4rem",
+    }),
   };
 
   const handleAdd = () => {
@@ -144,14 +156,8 @@ const PerfilEnfermedades = () => {
           {transition && (
             <IonRow>
               <IonCol size="12" className="px-3">
-                <IonCard className="m-0 mb-2 pb-2 card-slide">
+                <IonCard className="m-0 mb-2 mt-4 pb-2 card-slide">
                   <IonCardContent>
-                    <div className="text-center subir-perfil">
-                      <FontAwesomeIcon
-                        icon={faUserPlus}
-                        className="cursor-pointer text-info fs-18"
-                      />
-                    </div>
                     <div className="pr-3">
                       <span className="text-dark">Enfermedad *</span>
                       <AsyncSelect
@@ -160,6 +166,9 @@ const PerfilEnfermedades = () => {
                         value={select}
                         onChange={setSelect}
                         loadOptions={loadOptions}
+                        placeholder={"Seleccionar"}
+                        noOptionsMessage={() => "Escriba la enfermedad"}
+                        styles={customStyles}
                       />
                     </div>
                     <IonItem>
@@ -192,7 +201,7 @@ const PerfilEnfermedades = () => {
                         fill="outline"
                         onClick={handleAdd}
                       >
-                        agregar
+                        Guardar
                       </IonButton>
                     </div>
                   </IonCardContent>
@@ -210,11 +219,11 @@ const PerfilEnfermedades = () => {
                     </h5>
                   </IonCol>
                 </IonRow>
-                {listado.length === ""
-                  ? "Sin enfermedades resgitradas"
+                {listado.length === 0
+                  ? "Sin enfermedades registradas"
                   : listado.map((item: any, index: number) => (
                       <IonCard
-                        className="m-0 card-slide shadow-full"
+                        className="mt-2 card-slide shadow-full"
                         style={{ height: "auto" }}
                         key={index}
                       >
@@ -247,13 +256,13 @@ const PerfilEnfermedades = () => {
               <IonCol>
                 <div className="text-center">
                   <IonButton
-                    className="border-radius"
+                    className="button-deg"
                     fill="outline"
                     onClick={() => {
                       setTransition(true);
                     }}
                   >
-                    Nueva alergia
+                    Nueva enfermedad
                   </IonButton>
                 </div>
               </IonCol>
