@@ -28,6 +28,7 @@ import AsyncSelect from "react-select/async";
 import { getEnfermedad } from "../../../servicios/servicios";
 import { useListado } from "../../../hook";
 import { filterNombre } from "../../../helpers";
+import { HeaderPerfil } from "../../../components";
 
 const PerfilEnfermedades = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
@@ -55,48 +56,32 @@ const PerfilEnfermedades = () => {
       });
   };
 
+  const customStyles = {
+    option: (provided: any, state: any) => ({
+      ...provided,
+      color: state.isSelected ? '#3B72A2' : 'gray',
+      fontWeight: '500',
+      padding: '8px',
+      backgroundColor: state.isFocused  ? '#eaecf0' : 'white',
+    }),
+    menu: () => ({      
+      border: '1px solid #ccc',
+      borderRadius: '0 0 0.4rem 0.4rem'
+    }),
+  }
+
+  const noOptionsMessage = 'No hay'
+
   return (
     <IonPage className="fondo">
-      <IonHeader>
-        <div className="p-perfil bg-info-alt border-radius-bottom">
-          <IonToolbar>
-            <IonTitle
-              className="fs-16 font-w700"
-              style={{ paddingLeft: "12%" }}
-            >
-              Alergias activas
-            </IonTitle>
-            <IonButtons slot="start">
-              <IonBackButton
-                icon={chevronBackOutline}
-                text=""
-                className="custom-back text-white"
-              />
-            </IonButtons>
-          </IonToolbar>
-          <div className="mx-3 pb-4 text-white">
-            <IonThumbnail slot="start" class="float-left mr-3">
-              <IonImg src={`./images/${user?.imagen}`} />
-            </IonThumbnail>
-
-            <span className="font-w500 fs-14 d-block">{user.nombre}</span>
-            <span className="fs-12">Cabeza de familia</span>
-          </div>
-        </div>
-      </IonHeader>
+      <HeaderPerfil title='Enfermedades' />
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
           <IonRow>
             <IonCol size="12" className="px-3">
-              <IonCard className="m-0 mb-2 pb-2 card-slide">
+              <IonCard className="m-0 mb-2 mt-4 pb-2 card-slide">
                 <IonCardContent>
-                  <div className="text-center subir-perfil">
-                    <FontAwesomeIcon
-                      icon={faUserPlus}
-                      className="cursor-pointer text-info fs-18"
-                    />
-                  </div>
                   <div className="pr-3">
                     <span className="text-dark">Enfermedad *</span>
                     <AsyncSelect
@@ -105,6 +90,9 @@ const PerfilEnfermedades = () => {
                       value={select}
                       onChange={setSelect}
                       loadOptions={loadOptions}
+                      placeholder={'Seleccionar'}
+                      noOptionsMessage={() => "Escriba la enfermedad"}
+                      styles={customStyles}                      
                     />
                   </div>
                   <IonItem>
@@ -159,3 +147,7 @@ const PerfilEnfermedades = () => {
 };
 
 export default PerfilEnfermedades;
+function chroma(color: any) {
+  throw new Error("Function not implemented.");
+}
+

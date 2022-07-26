@@ -78,7 +78,7 @@ const Cuentas = () => {
                       handleClic(item);
                     }}
                   >
-                    <div className="box-perfiles">
+                    <div className="box-perfiles cursor-pointer">
                       <img
                         src={`./images/${item.imagen}`}
                         className="mb-2"
@@ -90,7 +90,7 @@ const Cuentas = () => {
                 ))
               : null}
             <IonCol className="p-2 p-perfil">
-              <div className="box-perfiles" onClick={handelNuevoPerfil}>
+              <div className="box-perfiles cursor-pointer" onClick={handelNuevoPerfil}>
                 <img
                   src={`./images/nuevo-usuario.jpg`}
                   className="mb-2"
