@@ -5,6 +5,7 @@ import {
   getPerfil,
   getPerfiles,
   getPerfilEdicion,
+  getFichaCompleta,
   /*-USUARIOS----------*/
   registroUsuario,
   /*-PACIENTES---------*/
@@ -38,6 +39,7 @@ export {
   getPerfil,
   getPerfiles,
   getPerfilEdicion,
+  getFichaCompleta,
   /*-USUARIOS----------*/
   registroUsuario,
   /*-PACIENTES---------*/

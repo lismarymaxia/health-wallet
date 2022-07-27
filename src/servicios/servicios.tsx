@@ -112,6 +112,15 @@ export const serviciosPaciente = (form: any) =>
     responseType: "json",
   });
 
+export const getFichaCompleta = (idusuario: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getFichaCompleta",
+      id: idusuario,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
 /*-ALERGIAS----------------------------------------------*/
 export const getAlergiasPaciente = (id: any) =>
   servicesWh.get("/controller/pacienteback.php", {

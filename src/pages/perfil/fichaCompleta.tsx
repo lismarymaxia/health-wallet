@@ -16,23 +16,30 @@ import {
   IonImg,
   IonItem,
   useIonViewDidEnter,
+  IonBadge,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { chevronBackOutline } from "ionicons/icons";
 import { INITIALPERFIL, fechaPerfil } from "../../helpers";
-import { getPerfil } from "../../servicios/servicios";
+import { getFichaCompleta } from "../../servicios/servicios";
 import "./perfil.css";
 
 const FichaCompleta = () => {
   const [perfil, setPerfil] = useState(INITIALPERFIL);
+  const [alergias, setAlergias] = useState([]);
+  const [enfermedades, setEnfermedades] = useState([]);
+  const [discapacidades, setDiscapacidades] = useState([]);
   const user = useSelector((state: any) => state.reducerAuth.user);
   useIonViewDidEnter(() => {
-    getPerfil(user.idpaciente)
+    getFichaCompleta(user.idpaciente)
       .then((rsp: any) => {
         const { data } = rsp;
         setPerfil(data.data);
+        setDiscapacidades(data.discapacidades);
+        setAlergias(data.alergias);
+        setEnfermedades(data.enfermedades);
       })
       .catch((error) => {
         console.error("Error en get perfiles" + error);
@@ -123,16 +130,17 @@ const FichaCompleta = () => {
                         Discapacidad
                       </div>
                       <div className="fs-13 font-w500 pl-3">
-                        {perfil.discapacidad === "no" ? (
-                          "No"
-                        ) : (
-                          <span className="text-light">No</span>
-                        )}
-                        {perfil.discapacidad === "si" ? (
-                          "/Si"
-                        ) : (
-                          <span className="text-light">/ Si</span>
-                        )}
+                        <ul>
+                          {discapacidades.map((item: any, index: number) => (
+                            <div key={index}>
+                              <FontAwesomeIcon
+                                icon={faCircle}
+                                className="text-info-dark mr-2 fs-6"
+                              />
+                              <span>{item.nombre}</span>
+                            </div>
+                          ))}
+                        </ul>
                         <span className="text-light float-right">
                           Ver carnet de SENADIS
                         </span>
@@ -146,10 +154,20 @@ const FichaCompleta = () => {
                           icon={faCircle}
                           className="text-info-dark mr-2 fs-6"
                         />
-                        Enfermedades cr&oacute;nicas
+                        Enfermedades
                       </div>
                       <div className="fs-13 font-w500 pl-3">
-                        Gastrtitis cr&oacute;nica
+                        <ul>
+                          {enfermedades.map((item: any, index: number) => (
+                            <div key={index}>
+                              <FontAwesomeIcon
+                                icon={faCircle}
+                                className="text-info-dark mr-2 fs-6"
+                              />
+                              <span>{item.nombre}</span>
+                            </div>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                   </IonItem>
@@ -162,18 +180,16 @@ const FichaCompleta = () => {
                         />
                         Alergias
                       </div>
-
                       <div className="fs-13 font-w500 pl-3">
-                        {perfil.alergias === "no" ? (
-                          "No"
-                        ) : (
-                          <span className="text-light">No</span>
-                        )}
-                        {perfil.alergias === "si" ? (
-                          "/Si"
-                        ) : (
-                          <span className="text-light">/ Si</span>
-                        )}
+                        <ul>
+                          {alergias.map((item: any, index: number) => (
+                            <div key={index} className="mb-2">
+                              <p>Grupo:{item.grupo}</p>
+                              <p>Alergia:{item.alergia}</p>
+                              <p>Estado:{item.estado}</p>
+                            </div>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                   </IonItem>

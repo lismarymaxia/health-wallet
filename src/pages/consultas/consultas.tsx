@@ -360,3 +360,18 @@ const Consultas: React.FC = () => {
 };
 
 export default Consultas;
+/*
+- en tratamiento agregar recordatorio
+- si el medicamento es prolongado 
+- quitar icono de imagen
+- enfermedad o alergia
+
+- filtrado por enfermedad 
+
+- en el editar usar la misma funcion que al guardar paciente
+- en listar los medicamentos y enfermedades
+- mis medicamentos
+- mis medicos
+- tipo de diagnostico
+
+*/
