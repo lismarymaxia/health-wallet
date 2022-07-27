@@ -109,21 +109,28 @@ ion-button{
     -moz-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
 }
 .certificado{
-    width: 400px;
-    max-width: 400px;
+    width: 100%;
+    max-width: 320px;
     border: 1px solid #ccc;
     border-radius: 0.6rem;
     padding: 0.5rem;
     margin: 0 auto;
 }
 .certificado img{
-    max-width: 80px;
+    max-width: 62px;
+    margin-top: -4px;
 }
 .certificado img.perfil-certificado{
-    max-width: 100px;
+    max-width: 90px;
 }
 .border-none{
     --inner-border-width: 0px;
+}
+.enc-carnet{
+    font-size: 0.68rem;
+}
+.info-carnet{
+    font-size: 0.58rem;
 }
 
 ion-toggle{
