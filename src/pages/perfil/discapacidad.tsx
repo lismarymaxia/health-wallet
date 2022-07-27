@@ -76,7 +76,11 @@ const Discapacidad = () => {
                   </IonList>
                 </IonCardContent>
               </IonCard>
-              <IonCard className="mt-3 card-slide shadow-full">
+              <div className="mt-1 ml-1 fs-12 text-underline text-info cursor-pointer">
+                Cargar carnet de SENADIS
+              </div>
+
+              <IonCard className="mt-3 mx-0 card-slide shadow-full">
                 <IonCardContent>
                   <div className="certificado">
                     <IonRow className="">
@@ -117,7 +121,7 @@ const Discapacidad = () => {
                       </IonCol>
                       <IonCol size="4">
                         <img
-                          src="./images/sandra.jpg"
+                          src="./images/user-carnet.png"
                           className="mt-0 mb-3 d-inline border-radius perfil-certificado"
                           alt=""
                         />
@@ -156,10 +160,7 @@ const Discapacidad = () => {
                     </IonRow>
                   </div>
                 </IonCardContent>
-              </IonCard>
-              <div className="mt-2 ml-1 fs-12 text-underline text-info cursor-pointer">
-                Cargar carnet de SENADIS
-              </div>
+              </IonCard>              
             </IonCol>
           </IonRow>
         </IonGrid>
