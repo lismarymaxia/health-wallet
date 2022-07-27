@@ -36,7 +36,7 @@ const PerfilTratamientos = () => {
               </IonRow>
 
               <IonCard
-                className="m-0 card-slide shadow-full"
+                className="m-0 mb-3 card-slide shadow-full"
                 style={{ height: "auto" }}
               >
                 <IonCardContent className="card-content-slide">
@@ -63,7 +63,7 @@ const PerfilTratamientos = () => {
               </IonRow>
 
               <IonCard
-                className="m-0 pb-3 mt-2 card-slide shadow-full"
+                className="m-0 mb-3 pb-3 mt-2 card-slide shadow-full"
                 style={{ height: "auto" }}
               >
                 <IonCardContent className="card-content-slidex">

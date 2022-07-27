@@ -207,6 +207,10 @@ ion-tab-button {
   font-size: 6px !important;
   line-height: 1;
 }
+.fs-32 {
+  font-size: 32px !important;
+  line-height: 1.5;
+}
 .lh-normal {
   line-height: normal;
 }

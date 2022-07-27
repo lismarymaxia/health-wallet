@@ -397,7 +397,7 @@ const PerfilTratamientos = () => {
                   ? "Sin enfermedades resgitradas"
                   : listado.map((item: any, index: number) => (
                       <IonCard
-                        className="m-0 card-slide shadow-full"
+                        className="m-0 mb-3 card-slide shadow-full"
                         style={{ height: "auto" }}
                         key={index}
                       >
@@ -450,7 +450,7 @@ const PerfilTratamientos = () => {
               <IonCol>
                 <div className="text-center">
                   <IonButton
-                    className="border-radius"
+                    className="button-deg"
                     fill="outline"
                     onClick={() => {
                       setTransition(true);

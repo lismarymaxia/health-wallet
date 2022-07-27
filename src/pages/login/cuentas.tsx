@@ -62,8 +62,8 @@ const Cuentas = () => {
         <IonGrid className="pb-4 text-white">
           <IonRow className="mt-4 px-3">
             <IonCol size="12" className="pb-3">
-              <h3 className="font-w700 text-white mt-3 mb-0">Bienvenido</h3>
-              <p className="fs-16">¿A qué perfil deseas ingresar?</p>
+              <p className="font-w700 text-white mt-3 mb-0 fs-32">Bienvenido</p>
+              <p className="fs-20">¿A qué perfil deseas ingresar?</p>
             </IonCol>
           </IonRow>
           <IonRow className="ion-align-items-center">
