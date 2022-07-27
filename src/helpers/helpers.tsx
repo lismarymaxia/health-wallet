@@ -172,5 +172,5 @@ export const totalDosisTratamiento = (
       totalDosis = (dosis * (recetaDuracion * 24)) / cadaHora;
     }
   }
-  return totalDosis;
+  return Math.round(totalDosis);
 };

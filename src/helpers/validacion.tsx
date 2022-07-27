@@ -33,17 +33,17 @@ export const valTratamiento = (
   } else if (fechaInicio === "") {
     return {
       estado: false,
-      msg: "Por favor agregue las fecha en la que inicia el tratamiento",
+      msg: "Por favor agregue las fecha en la que se inicia el tratamiento",
     };
   } else if (duracion === 0) {
     return {
       estado: false,
-      msg: "Por favor agregue las fecha en la duracion del tratamiento",
+      msg: "Por favor agregue la duracion del tratamiento",
     };
   } else if (fechaFin === "") {
     return {
       estado: false,
-      msg: "Por favor agregue las fecha fin",
+      msg: "Por favor agregue las fecha fin del tratamiento",
     };
   }
   return { estado: true, msg: "" };

@@ -267,6 +267,16 @@ const PerfilAlergias = () => {
                   >
                     Guardar
                   </IonButton>
+                  <IonButton
+                    color="danger"
+                    className="border-radius"
+                    fill="outline"
+                    onClick={() => {
+                      setTransition(false);
+                    }}
+                  >
+                    Cancelar
+                  </IonButton>
                 </div>
               </IonCol>
             </IonRow>

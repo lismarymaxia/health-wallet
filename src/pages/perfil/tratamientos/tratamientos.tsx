@@ -90,6 +90,17 @@ const PerfilTratamientos = () => {
     }
   };
 
+  const handleCalcularDuracion = (valor: any) => {
+    if (formulario.dosis !== 0 && formulario.cada !== 0 && valor !== 0) {
+      const total = totalDosisTratamiento(
+        parseInt(formulario.dosis),
+        parseInt(formulario.cada),
+        parseInt(valor)
+      );
+      setFormulario({ ...formulario, totaldosis: total, duracion: valor });
+    }
+  };
+
   const handleFechaInicio = (fecha: any) => {
     if (fecha !== null && formulario.duracion !== 0) {
       const { frontend, backend } = fechaDiaAdd(fecha, formulario.duracion);
@@ -98,6 +109,11 @@ const PerfilTratamientos = () => {
         fechainicio: fecha,
         fechafin: frontend,
         fechafinBackend: backend,
+      });
+    } else {
+      setFormulario({
+        ...formulario,
+        fechainicio: fecha,
       });
     }
   };
@@ -266,7 +282,7 @@ const PerfilTratamientos = () => {
                     </IonItem>
                     <IonItem>
                       <IonLabel position="stacked">
-                        Cada <span className="text-danger">*</span>
+                        Cada (hora)<span className="text-danger">*</span>
                       </IonLabel>
                       <IonInput
                         name="cada"
@@ -313,10 +329,10 @@ const PerfilTratamientos = () => {
                         type="number"
                         value={formulario.duracion}
                         onIonChange={(e) => {
-                          handleInputChange(e.detail.value!, "duracion");
+                          /*handleInputChange(e.detail.value!, "duracion");*/
+                          handleCalcularDuracion(e.detail.value);
                         }}
                         onIonBlur={() => {
-                          handleCalcular();
                           handleFechaFin();
                         }}
                       ></IonInput>
@@ -350,6 +366,16 @@ const PerfilTratamientos = () => {
                         onClick={handleAdd}
                       >
                         agregar
+                      </IonButton>
+                      <IonButton
+                        color="danger"
+                        className="border-radius"
+                        fill="outline"
+                        onClick={() => {
+                          setTransition(false);
+                        }}
+                      >
+                        Cancelar
                       </IonButton>
                     </div>
                   </IonCardContent>
@@ -430,7 +456,7 @@ const PerfilTratamientos = () => {
                       setTransition(true);
                     }}
                   >
-                    Nueva tratamiento
+                    Nuevo tratamiento
                   </IonButton>
                 </div>
               </IonCol>

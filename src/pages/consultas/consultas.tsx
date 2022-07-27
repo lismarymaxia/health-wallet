@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   IonRow,
   IonCol,
@@ -19,12 +20,10 @@ import {
   IonSelectOption,
   IonGrid,
 } from "@ionic/react";
-import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
 import { HeaderEstudios } from "../../components";
 import { Card } from "./Card";
 import { servicesWh, serviciosConsultas } from "../../servicios/servicios";
@@ -105,10 +104,10 @@ const Consultas: React.FC = () => {
       });
   };
 
-  useIonViewDidEnter(() => {
+  useEffect(() => {
     fecth();
     getafiliados();
-  });
+  }, []);
 
   const handleSearch = (e: any) => {
     e.preventDefault();
