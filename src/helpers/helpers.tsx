@@ -1,5 +1,5 @@
 import { meses } from "./tablasHash";
-
+import { add, format } from "date-fns";
 /*-FECHA---------------------------------------------------*/
 export const formtFechaCorta = (fecha: any) => {
   if (fecha != null && fecha !== "") {
@@ -67,8 +67,19 @@ export const fechaPerfil = (data: string) => {
 
 export const fechaDiaAdd = (fecha: any, dias: any) => {
   let formato = new Date(fecha);
-  formato.setDate(formato.getDate() + dias);
-  return formato;
+  const result = add(formato, {
+    years: 0,
+    months: 0,
+    weeks: 0,
+    days: dias,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  let frontend = format(result, "dd/MM/yyyy");
+  let backend = format(result, "yyyy-MM-dd");
+
+  return { frontend, backend };
 };
 /*-FUNCIONES-MATRIZ------------------------------*/
 export const orderId = (data: any) => {

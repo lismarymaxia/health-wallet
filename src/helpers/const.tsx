@@ -27,6 +27,7 @@ export const FORMTRATAMIENTOS = {
   fechainicio: null,
   duracion: 0,
   fechafin: null,
+  fechafinBackend: null,
   notas: "",
 };
 /*-CONFIGURACION---------*/
