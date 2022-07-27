@@ -13,6 +13,7 @@ import {
   IonButton,
   IonInput,
   IonItemDivider,
+  IonToggle,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
@@ -245,14 +246,8 @@ const PerfilTratamientos = () => {
           {transition && (
             <IonRow>
               <IonCol size="12" className="px-3">
-                <IonCard className="m-0 mb-2 pb-2 card-slide">
+                <IonCard className="m-0 mb-2 mt-4 pb-2 card-slide">
                   <IonCardContent>
-                    <div className="text-center subir-perfil">
-                      <FontAwesomeIcon
-                        icon={faUserPlus}
-                        className="cursor-pointer text-info fs-18"
-                      />
-                    </div>
                     <div className="pr-3">
                       <span className="text-dark">Medicamento *</span>
                       <AsyncSelect
@@ -268,7 +263,7 @@ const PerfilTratamientos = () => {
                     </div>
                     <IonItem>
                       <IonLabel position="stacked">
-                        dosis<span className="text-danger">*</span>
+                        Dosis<span className="text-danger">*</span>
                       </IonLabel>
                       <IonInput
                         name="dosis"
@@ -282,7 +277,7 @@ const PerfilTratamientos = () => {
                     </IonItem>
                     <IonItem>
                       <IonLabel position="stacked">
-                        Cada (hora)<span className="text-danger">*</span>
+                        Cada hora(s)<span className="text-danger">*</span>
                       </IonLabel>
                       <IonInput
                         name="cada"
@@ -304,12 +299,9 @@ const PerfilTratamientos = () => {
                         value={formulario.totaldosis}
                       ></IonInput>
                     </IonItem>
-                    <IonItemDivider>
-                      <b>Duración</b>
-                    </IonItemDivider>
                     <IonItem>
                       <IonLabel position="stacked">
-                        Fecha Inicion <span className="text-danger">*</span>
+                        Fecha Inicio <span className="text-danger">*</span>
                       </IonLabel>
                       <IonInput
                         name="fechainicio"
@@ -322,7 +314,7 @@ const PerfilTratamientos = () => {
                     </IonItem>
                     <IonItem>
                       <IonLabel position="stacked">
-                        Duracion(dias) <span className="text-danger">*</span>
+                        Duración (días) <span className="text-danger">*</span>
                       </IonLabel>
                       <IonInput
                         name="duracion"
@@ -358,28 +350,29 @@ const PerfilTratamientos = () => {
                           handleInputChange(e.detail.value!, "notas");
                         }}
                       ></IonInput>
-                    </IonItem>
-                    <div className="pt-2 text-center">
-                      <IonButton
-                        className="border-radius"
-                        fill="outline"
-                        onClick={handleAdd}
-                      >
-                        agregar
-                      </IonButton>
-                      <IonButton
-                        color="danger"
-                        className="border-radius"
-                        fill="outline"
-                        onClick={() => {
-                          setTransition(false);
-                        }}
-                      >
-                        Cancelar
-                      </IonButton>
-                    </div>
+                    </IonItem>                    
                   </IonCardContent>
                 </IonCard>
+
+                <div className="pt-2 text-center">
+                  <IonButton
+                    className="border-radius"
+                    fill="outline"
+                    onClick={handleAdd}
+                  >
+                    Agregar
+                  </IonButton>
+                  <IonButton
+                    color="danger"
+                    className="border-radius"
+                    fill="outline"
+                    onClick={() => {
+                      setTransition(false);
+                    }}
+                  >
+                    Cancelar
+                  </IonButton>
+                </div>
               </IonCol>
             </IonRow>
           )}
@@ -389,12 +382,13 @@ const PerfilTratamientos = () => {
                 <IonRow>
                   <IonCol size="12">
                     <h5 className="font-w700 fs-15 text-info-dark mb-2">
-                      Listado de enfermedades
+                      Tratamiento transitorio
                     </h5>
                   </IonCol>
                 </IonRow>
+                <IonRow>
                 {listado.length === ""
-                  ? "Sin enfermedades resgitradas"
+                  ? "Sin tratamientos registrados"
                   : listado.map((item: any, index: number) => (
                       <IonCard
                         className="m-0 mb-3 card-slide shadow-full"
@@ -402,41 +396,47 @@ const PerfilTratamientos = () => {
                         key={index}
                       >
                         <IonCardContent className="card-content-slide">
-                          <p>
-                            <b>Medicamento:</b>
-                            {item.medicamento}
-                          </p>
-                          <p>
-                            <b>Dosis:</b>
-                            {item.dosis}
-                          </p>
-                          <p>
-                            <b>Cada (hora):</b>
-                            {item.cada}
-                          </p>
-                          <p>
-                            <b>Total dosis:</b>
-                            {item.totaldosis}
-                          </p>
-                          <p>
-                            <b>Fecha inicio:</b>
-                            {item.fechainicio}
-                          </p>
-                          <p>
-                            <b>Fecha fin:</b>
-                            {item.fechafin}
-                          </p>
-                          <p>
-                            <b>Duracion (dias):</b>
-                            {item.duracion}
-                          </p>
-                          <p>
-                            <b>Nota:</b>
+                          <IonRow>
+                              <IonCol size="9" sizeLg="10">
+                                <div className="fs-15 font-w500 text-info-dark line-height-1 mb-3">
+                                  Nombre de la enfermedad o alergia
+                                </div>
+
+                                <p className="fs-12 line-height-13 mb-2">
+                                  {item.medicamento}
+                                </p>
+                                <p className="fs-12 line-height-13 mb-2">
+                                  <span className="font-w600">{item.dosis} dosis </span>
+                                  cada 
+                                  <span className="font-w600"> {item.cada} hora(s) </span> 
+                                  durante 
+                                  <span className="font-w600"> {item.duracion} días</span>
+                                </p>
+                                <p className="fs-12">
+                                  {item.totaldosis} dosis en total
+                                </p>
+                                <div className="fs-12">Desde el {item.fechainicio} hasta el {item.fechafin}</div>
+                              </IonCol>
+                              <IonCol size="3" sizeLg="2" className="text-center">
+                                <IonToggle
+                                  checked={
+                                    item.estado === "activa" ? true : false
+                                  }
+                                  onIonChange={(e) => {
+                                    handleToggle(item.id, item.estado, item);
+                                  }}
+                                />
+                                <div className="fs-10">Recordatorio</div>
+                              </IonCol>
+                          </IonRow>
+                          
+                          <p className="fs-12 mt-3">
+                            <span className="font-w500 d-block">Nota </span>
                             {item.notas}
                           </p>
                           <Link
                             to="#"
-                            className="text-danger d-block fs-12 text-underline"
+                            className="text-danger d-block fs-12 text-underline mt-3"
                             onClick={() => {
                               handleDelet(item.id);
                             }}
@@ -446,6 +446,16 @@ const PerfilTratamientos = () => {
                         </IonCardContent>
                       </IonCard>
                     ))}
+                </IonRow>
+
+                <IonRow>
+                  <IonCol size="12">
+                    <h5 className="font-w700 fs-15 text-info-dark mb-2">
+                      Tratamiento permanente
+                    </h5>
+                  </IonCol>
+                </IonRow>
+
               </IonCol>
               <IonCol>
                 <div className="text-center">
@@ -475,3 +485,7 @@ const PerfilTratamientos = () => {
 };
 
 export default PerfilTratamientos;
+function handleToggle(id: any, estado: any, item: any) {
+  throw new Error("Function not implemented.");
+}
+
