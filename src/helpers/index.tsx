@@ -27,7 +27,7 @@ import {
   NOTAB,
   FORMTRATAMIENTOS,
 } from "./const";
-import { valEnfermedad } from "./validacion";
+import { valEnfermedad, valTratamiento } from "./validacion";
 export {
   /*-HELPERS-----------------------*/
   filterNombre,
@@ -57,4 +57,5 @@ export {
   FORMTRATAMIENTOS,
   /*-VALIDACIONES---------------*/
   valEnfermedad,
+  valTratamiento,
 };

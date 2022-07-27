@@ -20,13 +20,13 @@ import { useSelector } from "react-redux";
 import AsyncSelect from "react-select/async";
 import { Link } from "react-router-dom";
 import {
-  getEnfermedadPaciente,
+  getTratamientosPacientes,
   serviciosPaciente,
   getMedicamentos,
 } from "../../../servicios/servicios";
 import { useListado, useForm } from "../../../hook";
 import {
-  valEnfermedad,
+  valTratamiento,
   FORMTRATAMIENTOS,
   totalDosisTratamiento,
   fechaDiaAdd,
@@ -35,18 +35,21 @@ import { HeaderPerfil } from "../../../components";
 
 const PerfilTratamientos = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
+
   const [formulario, handleInputChange, handleInputReset, setFormulario] =
     useForm(FORMTRATAMIENTOS);
+
   const [handleAddAll, handleAddItem, handleDeletItem, , listado] =
     useListado();
+
   const [notificacion, setNotificacion] = useState({
     msg: "",
     estado: false,
   });
+
   const [select, setSelect] = useState<any>(null);
-  const [tratamiento, setTratamiento] = useState("");
-  const [frecuencia, setFrecuencia] = useState("");
   const [transition, setTransition] = useState(false);
+
   const customStyles = {
     option: (provided: any, state: any) => ({
       ...provided,
@@ -62,7 +65,7 @@ const PerfilTratamientos = () => {
   };
 
   useEffect(() => {
-    getEnfermedadPaciente(user.idpaciente)
+    getTratamientosPacientes(user.idpaciente)
       .then((rsp: any) => {
         const { data } = rsp;
         handleAddAll(data.data);
@@ -76,7 +79,7 @@ const PerfilTratamientos = () => {
     if (
       formulario.dosis !== 0 &&
       formulario.cada !== 0 &&
-      formulario.duracion
+      formulario.duracion !== 0
     ) {
       const total = totalDosisTratamiento(
         parseInt(formulario.dosis),
@@ -87,10 +90,32 @@ const PerfilTratamientos = () => {
     }
   };
 
-  const handleFecha = (fecha: any) => {
-    setFormulario({ ...formulario, fechainicio: fecha });
-    console.log(fechaDiaAdd(fecha, formulario.duracion));
+  const handleFechaInicio = (fecha: any) => {
+    if (fecha !== null && formulario.duracion !== 0) {
+      const { frontend, backend } = fechaDiaAdd(fecha, formulario.duracion);
+      setFormulario({
+        ...formulario,
+        fechainicio: fecha,
+        fechafin: frontend,
+        fechafinBackend: backend,
+      });
+    }
   };
+
+  const handleFechaFin = () => {
+    if (formulario.fechainicio !== null && formulario.duracion !== null) {
+      const { frontend, backend } = fechaDiaAdd(
+        formulario.fechainicio,
+        formulario.duracion
+      );
+      setFormulario({
+        ...formulario,
+        fechafin: frontend,
+        fechafinBackend: backend,
+      });
+    }
+  };
+
   const loadOptions = (input: string, callback: any) => {
     getMedicamentos(input)
       .then((rsp: any) => {
@@ -103,14 +128,28 @@ const PerfilTratamientos = () => {
   };
 
   const handleAdd = () => {
-    const { estado, msg } = valEnfermedad(select, tratamiento, frecuencia);
+    const { estado, msg } = valTratamiento(
+      select,
+      formulario.dosis,
+      formulario.cada,
+      formulario.totaldosis,
+      formulario.fechainicio,
+      formulario.duracion,
+      formulario.fechafin,
+      formulario.notas
+    );
     if (estado) {
       let formDa = new FormData();
-      formDa.append("op", "addEnfermedad");
+      formDa.append("op", "addTratamiento");
       formDa.append("id", user.idpaciente);
-      formDa.append("idenfermedad", select.value);
-      formDa.append("tratamiento", tratamiento);
-      formDa.append("frecuencia", frecuencia);
+      formDa.append("idmedicamento", select.value);
+      formDa.append("dosis", formulario.dosis);
+      formDa.append("cada", formulario.cada);
+      formDa.append("totaldosis", formulario.totaldosis);
+      formDa.append("fechainicio", formulario.fechainicio);
+      formDa.append("duracion", formulario.duracion);
+      formDa.append("fechafin", formulario.fechafinBackend);
+      formDa.append("notas", formulario.notas);
       serviciosPaciente(formDa)
         .then(function (response: any) {
           const { data, status } = response;
@@ -122,10 +161,15 @@ const PerfilTratamientos = () => {
               });
               const state: any = {
                 id: data.id,
-                idenfermedad: select.value,
-                enfermedad: select?.label,
-                tratamiento: tratamiento,
-                frecuencia: frecuencia,
+                idmedicamento: select.value,
+                medicamento: select.label,
+                dosis: formulario.dosis,
+                cada: formulario.cada,
+                totaldosis: formulario.totaldosis,
+                fechainicio: formulario.fechainicio,
+                duracion: formulario.duracion,
+                fechafin: formulario.fechafin,
+                notas: formulario.notas,
               };
 
               handleAddItem(state);
@@ -151,7 +195,7 @@ const PerfilTratamientos = () => {
 
   const handleDelet = (id: any) => {
     let formDa = new FormData();
-    formDa.append("op", "deletEnfermedad");
+    formDa.append("op", "deletTratamiento");
     formDa.append("id", id);
     serviciosPaciente(formDa)
       .then(function (response: any) {
@@ -217,6 +261,7 @@ const PerfilTratamientos = () => {
                         onIonChange={(e) => {
                           handleInputChange(e.detail.value!, "dosis");
                         }}
+                        onIonBlur={handleCalcular}
                       ></IonInput>
                     </IonItem>
                     <IonItem>
@@ -230,6 +275,7 @@ const PerfilTratamientos = () => {
                         onIonChange={(e) => {
                           handleInputChange(e.detail.value!, "cada");
                         }}
+                        onIonBlur={handleCalcular}
                       ></IonInput>
                     </IonItem>
                     <IonItem>
@@ -254,7 +300,7 @@ const PerfilTratamientos = () => {
                         type="date"
                         value={formulario.fechainicio}
                         onIonChange={(e) => {
-                          handleFecha(e.detail.value!);
+                          handleFechaInicio(e.detail.value!);
                         }}
                       ></IonInput>
                     </IonItem>
@@ -269,7 +315,10 @@ const PerfilTratamientos = () => {
                         onIonChange={(e) => {
                           handleInputChange(e.detail.value!, "duracion");
                         }}
-                        onIonBlur={handleCalcular}
+                        onIonBlur={() => {
+                          handleCalcular();
+                          handleFechaFin();
+                        }}
                       ></IonInput>
                     </IonItem>
                     <IonItem>
@@ -290,7 +339,7 @@ const PerfilTratamientos = () => {
                         name="notas"
                         value={formulario.notas}
                         onIonChange={(e) => {
-                          setFrecuencia(e.detail.value!);
+                          handleInputChange(e.detail.value!, "notas");
                         }}
                       ></IonInput>
                     </IonItem>
@@ -328,16 +377,36 @@ const PerfilTratamientos = () => {
                       >
                         <IonCardContent className="card-content-slide">
                           <p>
-                            <b>Enfermedad:</b>
-                            {item.enfermedad}
+                            <b>Medicamento:</b>
+                            {item.medicamento}
                           </p>
                           <p>
-                            <b>Tratamiento:</b>
-                            {item.tratamiento}
+                            <b>Dosis:</b>
+                            {item.dosis}
                           </p>
                           <p>
-                            <b>Frecuencia:</b>
-                            {item.frecuencia}
+                            <b>Cada (hora):</b>
+                            {item.cada}
+                          </p>
+                          <p>
+                            <b>Total dosis:</b>
+                            {item.totaldosis}
+                          </p>
+                          <p>
+                            <b>Fecha inicio:</b>
+                            {item.fechainicio}
+                          </p>
+                          <p>
+                            <b>Fecha fin:</b>
+                            {item.fechafin}
+                          </p>
+                          <p>
+                            <b>Duracion (dias):</b>
+                            {item.duracion}
+                          </p>
+                          <p>
+                            <b>Nota:</b>
+                            {item.notas}
                           </p>
                           <Link
                             to="#"

@@ -27,6 +27,7 @@ import {
   getImagenologia,
   /*-TRATAMIENTOS----*/
   getMedicamentos,
+  getTratamientosPacientes,
   /*-DISCAPACIDAD----*/
   getDicapacidadPaciente,
 } from "./servicios";
@@ -59,6 +60,7 @@ export {
   getImagenologia,
   /*-TRATAMIENTOS----*/
   getMedicamentos,
+  getTratamientosPacientes,
   /*-DISCAPACIDAD----*/
   getDicapacidadPaciente,
 };
