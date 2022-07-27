@@ -1,6 +1,6 @@
 import { Login, Cuentas } from "./login";
 import { Datos, EditDatos } from "./datos";
-import { Citas } from "./citas";
+import { Citas, CitaCrear } from "./citas";
 import { Consultas, Consulta } from "./consultas";
 import { Imagenologia } from "./imagenologia";
 import { Laboratorio, ExamenLab } from "./laboratorio";
@@ -35,6 +35,7 @@ export {
   Datos,
   EditDatos,
   Citas,
+  CitaCrear,
   Consultas,
   Consulta,
   Imagenologia,

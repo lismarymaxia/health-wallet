@@ -18,6 +18,7 @@ import { Nav } from "../components";
 import {
   Cuentas,
   Home,
+  CitaCrear,
   Datos,
   EditDatos,
   Consultas,
@@ -72,6 +73,9 @@ const RutasPrivadas: React.FC = () => {
           </Route>
           <Route exact path="/app/home">
             <Home />
+          </Route>
+          <Route exact path="/app/crear-cita">
+            <CitaCrear />
           </Route>
           <Route exact path="/app/datos">
             <Datos />

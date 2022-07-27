@@ -1,2 +1,3 @@
 import Citas from "./citas";
-export { Citas };
+import CitaCrear from "./citaCrear";
+export { Citas, CitaCrear };
