@@ -12,7 +12,6 @@ import {
   IonTitle,
   IonButtons,
   IonBackButton,
-  IonThumbnail,
   IonLabel,
   IonSlides,
   IonSlide,
@@ -36,7 +35,7 @@ import { chevronBackOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getPerfiles, getPerfil } from "../../servicios";
-import { INITIALPERFIL } from "../../helpers";
+import { INITIALPERFIL, imgPerfil } from "../../helpers";
 import { storeLocal } from "../../store/action/aut";
 import { logout } from "../../store";
 import "./perfil.css";
@@ -114,16 +113,14 @@ const Perfil = () => {
       dispatch(storeLocal(item));
     }
   };
+
+  const FOTO = imgPerfil(perfil.imagen, user.idpaciente);
   return (
     <IonPage className="fondo">
       <IonHeader>
         <div className="p-perfil bg-info-alt border-radius-bottom">
           <IonToolbar>
-            <IonTitle
-              className="fs-16 font-w700 text-center"
-            >
-              Perfil
-            </IonTitle>
+            <IonTitle className="fs-16 font-w700 text-center">Perfil</IonTitle>
             <IonButtons slot="start">
               <IonBackButton
                 icon={chevronBackOutline}
@@ -134,7 +131,7 @@ const Perfil = () => {
           </IonToolbar>
           <div className="mx-3 pb-2 text-white d-flex">
             <div className="">
-              <img src={`./images/${perfil?.imagen}`} alt="imagen" />
+              <img src={FOTO} alt="imagen" />
             </div>
 
             <div className="w-100 ml-3 float-right d-grid">
@@ -342,7 +339,11 @@ const Perfil = () => {
                               className="mb-0"
                               alt={item.imagen}
                             />
-                            {item.nombre !== 'nuevo-perfil' && <span className="fs-12 text-body font-w500">{item.nombre}</span>}
+                            {item.nombre !== "nuevo-perfil" && (
+                              <span className="fs-12 text-body font-w500">
+                                {item.nombre}
+                              </span>
+                            )}
                           </div>
                         </IonSlide>
                       ))

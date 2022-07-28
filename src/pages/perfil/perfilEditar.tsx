@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import {
   IonContent,
   IonPage,
@@ -16,16 +17,17 @@ import {
   IonList,
   IonToggle,
 } from "@ionic/react";
-import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Header } from "../../components";
 import { storeLocal } from "../../store/action/aut";
-import { serviciosPaciente, getPerfilEdicion } from "../../servicios/servicios";
-import { grupoSanguineos } from "../../helpers";
-
+import {
+  serviciosPaciente,
+  getPerfilEdicion,
+  servicesWh,
+} from "../../servicios/servicios";
+import { grupoSanguineos, imgPerfil } from "../../helpers";
+import "./perfil.css";
 const PerfilEditar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -41,7 +43,9 @@ const PerfilEditar = () => {
   const [edad, setEdad] = useState("");
   const [grupoSangre, setGrupoSangre] = useState("");
   const [checked, setChecked] = useState(false);
-
+  const [files, setFiles] = useState<any>([]);
+  const [porcentage, setPorcentage] = useState(0);
+  const [imagen, setImagen] = useState<string>("");
   useEffect(() => {
     getPerfilEdicion(user.idpaciente)
       .then((rsp: any) => {
@@ -54,14 +58,15 @@ const PerfilEditar = () => {
           edad,
           fechanacimiento,
           gruposangre,
+          imagen,
         } = data.data;
         setNombre(nombre);
-
         setApellido(apellido);
         setCedula(cedula);
         setFechaNacimiento(fechanacimiento);
         setEdad(edad);
         setGrupoSangre(gruposangre);
+        setImagen(imagen);
         let d = discapacidad === "si" ? true : false;
         setChecked(d);
       })
@@ -115,21 +120,105 @@ const PerfilEditar = () => {
       });
   };
 
+  const upLoadFile = () => {
+    if (files.length > 0) {
+      let cntA = 0;
+      let cntB = files.length;
+      files.forEach(async (file: any) => {
+        let formData = new FormData();
+        formData.append("op", "upLoadFile");
+        formData.append("id", user.idpaciente);
+        formData.append("correo", user.correo);
+        formData.append("file", file);
+        try {
+          const resp = await servicesWh.post(
+            "/controller/pacienteback.php",
+            formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+              onUploadProgress: function (progressEvent: any) {
+                setPorcentage(
+                  Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                );
+              },
+            }
+          );
+          if (resp.data) {
+            const { rsp, data } = resp.data;
+            if (rsp === 1) {
+              ++cntA;
+              if (cntA === cntB) {
+                setFiles([]);
+                setPorcentage(0);
+                setImagen(data);
+                let clone = {
+                  ...user,
+                  imagen: data,
+                };
+                let nueva = Object.assign({}, user, clone);
+                dispatch(storeLocal(nueva));
+              }
+            } else {
+              console.warn("Problema al cargar el archivo !");
+            }
+          } else {
+            console.warn(`modulo:file accion:add-file error:http`);
+          }
+        } catch (error) {
+          console.warn(`modulo:file accion:add-file error:${error}`);
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    upLoadFile();
+  }, [files, user]);
+
+  const cargar: any = useRef(null);
+
+  const handleClick = (e: any) => {
+    e.preventDefault();
+    cargar.current?.click();
+  };
+
+  const handleAddFile = (e: any) => {
+    const file = e.target.files[0];
+    setFiles((prev: any) => [...prev, file]);
+  };
+
+  const FOTO = imgPerfil(imagen, user.idpaciente);
   return (
     <IonPage className="fondo">
       <Header title="Perfil" isbotton={true} isBuger={false} />
-
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
           <IonRow>
             <IonCol size="12" className="px-3 mt-3">
               <IonCard className="m-0 mb-2 pb-2 card-slide">
                 <IonCardContent>
+                  <input
+                    type="file"
+                    ref={cargar}
+                    style={{
+                      display: "none",
+                    }}
+                    onChange={handleAddFile}
+                  />
                   <div className="text-center subir-perfil">
-                    <FontAwesomeIcon
-                      icon={faUserPlus}
-                      className="cursor-pointer text-info fs-18"
-                    />
+                    <button
+                      onClick={(e) => {
+                        handleClick(e);
+                      }}
+                      className="imagen__botton"
+                    >
+                      {porcentage > 0 && (
+                        <div className="imagen__porcentaje">{porcentage}%</div>
+                      )}
+                      <img src={FOTO} alt="imagen" className="imagen__perfil" />
+                    </button>
                   </div>
 
                   <IonItem>

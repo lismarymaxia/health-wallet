@@ -1,147 +1,172 @@
-.p-perfil ion-toolbar{
-    --background: none !important;
-    --color: #ffffff;
+.p-perfil ion-toolbar {
+  --background: none !important;
+  --color: #ffffff;
 }
 .p-perfil ion-toolbar ion-title {
-    margin-left: -48px;
+  margin-left: -48px;
 }
-.p-perfil img{
-    border-radius: 0.9rem;
-    box-shadow: 3px 5px 8px 1px rgb(7 41 70);
-    -webkit-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
-    -moz-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
-    width: 90px;
-    max-width: 100px;
-    margin: auto;
+.p-perfil img {
+  border-radius: 0.9rem;
+  box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+  -webkit-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+  -moz-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+  width: 90px;
+  max-width: 100px;
+  margin: auto;
 }
-.border-radius-bottom{
-    border-radius: 0 0 1.6rem 1.6rem;
+.border-radius-bottom {
+  border-radius: 0 0 1.6rem 1.6rem;
 }
 .fondo ion-item {
-    margin: 0;
-    padding: 0;
-    background: initial;
-    --background: initial;
-    color: initial;
-    font-size: initial;
-    color: #7e7e7e !important;
+  margin: 0;
+  padding: 0;
+  background: initial;
+  --background: initial;
+  color: initial;
+  font-size: initial;
+  color: #7e7e7e !important;
 }
 
-.cursor-pointer{
-    cursor: pointer;
+.cursor-pointer {
+  cursor: pointer;
 }
 ion-item.item-interactive {
-    border: 0px;
-    --padding-start: 0rem;
-    --padding-end: 0rem;
-    padding-inline-end: 0rem;
+  border: 0px;
+  --padding-start: 0rem;
+  --padding-end: 0rem;
+  padding-inline-end: 0rem;
 }
 .label-stacked.sc-ion-label-md-h {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 .sc-ion-input-md-h {
-    border: 1px solid #ccc;
-    border-radius: 0.4rem;
-    margin-top: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  margin-top: 0.8rem;
 }
 ion-item.item-interactive input.native-input.sc-ion-input-md {
-    padding: 0.5rem;
+  padding: 0.5rem;
 }
-:host(.item-interactive), .item-interactive {
-    --border-width: 0 0 0px 0 !important;
-    --background-hover: none;
+:host(.item-interactive),
+.item-interactive {
+  --border-width: 0 0 0px 0 !important;
+  --background-hover: none;
 }
 .item-inner {
-    --padding-inline-end: 0px !important;
+  --padding-inline-end: 0px !important;
 }
-.item-fill-none.item-interactive.ion-focus .item-highlight, .item-fill-none.item-interactive.item-has-focus .item-highlight, .item-fill-none.item-interactive.ion-touched.ion-invalid .item-highlight{
-    border-color: #ffffff !important;
+.item-fill-none.item-interactive.ion-focus .item-highlight,
+.item-fill-none.item-interactive.item-has-focus .item-highlight,
+.item-fill-none.item-interactive.ion-touched.ion-invalid .item-highlight {
+  border-color: #ffffff !important;
 }
-ion-select{
-    padding: 0.5rem;
-    margin-top: 0.8rem;
-    margin-bottom: 1px;
-    border-radius: 0.4rem;
-    border: 1px solid #ccc;
+ion-select {
+  padding: 0.5rem;
+  margin-top: 0.8rem;
+  margin-bottom: 1px;
+  border-radius: 0.4rem;
+  border: 1px solid #ccc;
 }
 .select-icon-inner {
-    margin-top: 6px !important;
+  margin-top: 6px !important;
 }
 .list-md {
-    padding-top: 0px;
-    padding-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
-ion-button{
-    --border-width: 1px;
-    --border-radius: 0.4rem !important;
-    text-transform: initial;
+ion-button {
+  --border-width: 1px;
+  --border-radius: 0.4rem !important;
+  text-transform: initial;
 }
-.subir-perfil svg{
-    border: 1px solid #3B72A2;
-    border-radius: 50%;
-    padding: 1.5rem;
+.subir-perfil svg {
+  border: 1px solid #3b72a2;
+  border-radius: 50%;
+  padding: 1.5rem;
 }
 .swiper-slide {
-    margin-right: 0.5rem !important;
+  margin-right: 0.5rem !important;
 }
-.slide-perfiles img{
-    border-radius: 0.9rem;
-    width: 60px;
-    height: 60px;
-    max-width: 90px;
-    margin-right: 0.5rem;
+.slide-perfiles img {
+  border-radius: 0.9rem;
+  width: 60px;
+  height: 60px;
+  max-width: 90px;
+  margin-right: 0.5rem;
 }
-.p-perfil-sub ion-thumbnail{
-    width: 50px;
-    height: auto;
+.p-perfil-sub ion-thumbnail {
+  width: 50px;
+  height: auto;
 }
 .p-perfil-sub ion-toolbar {
-    --background: none !important;
-    --color: #ffffff;
+  --background: none !important;
+  --color: #ffffff;
 }
 .p-perfil-sub ion-toolbar ion-title {
-    margin-left: -48px;
+  margin-left: -48px;
 }
 .p-perfil-sub img {
-    border-radius: 0.9rem;
-    box-shadow: 3px 5px 8px 1px rgb(7 41 70);
-    -webkit-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
-    -moz-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+  border-radius: 0.9rem;
+  box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+  -webkit-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
+  -moz-box-shadow: 3px 5px 8px 1px rgb(7 41 70);
 }
-.certificado{
-    width: 400px;
-    max-width: 400px;
-    border: 1px solid #ccc;
-    border-radius: 0.6rem;
-    padding: 0.5rem;
-    margin: 0 auto;
+.certificado {
+  width: 400px;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 0.6rem;
+  padding: 0.5rem;
+  margin: 0 auto;
 }
-.certificado img{
-    max-width: 80px;
+.certificado img {
+  max-width: 80px;
 }
-.certificado img.perfil-certificado{
-    max-width: 100px;
+.certificado img.perfil-certificado {
+  max-width: 100px;
 }
-.border-none{
-    --inner-border-width: 0px;
+.border-none {
+  --inner-border-width: 0px;
 }
 
-ion-toggle{
-    height: 24px;
-    width: 40px;
+ion-toggle {
+  height: 24px;
+  width: 40px;
 }
 
 ion-toggle .toggle-icon {
-    --background: rgb(16 72 110) !important;
-    background: rgb(16 72 110) !important;
+  --background: rgb(16 72 110) !important;
+  background: rgb(16 72 110) !important;
 }
-ion-toggle .toggle-inner{
-    margin-left: 2px !important;
+ion-toggle .toggle-inner {
+  margin-left: 2px !important;
 }
-.button-deg{
-    background: linear-gradient(0deg, rgba(7,57,113,1) 0%, rgba(9,101,138,1) 35%, rgba(25,165,174,1) 100%);
-    color: #ffffff;
-    border-radius: 0.5rem !important;
-    font-size: 0.8rem;
-    font-weight: 100;
+.button-deg {
+  background: linear-gradient(
+    0deg,
+    rgba(7, 57, 113, 1) 0%,
+    rgba(9, 101, 138, 1) 35%,
+    rgba(25, 165, 174, 1) 100%
+  );
+  color: #ffffff;
+  border-radius: 0.5rem !important;
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+/*-EDITAR-PERFIL------------------*/
+.imagen__perfil {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-size: cover;
+}
+.imagen__botton {
+  position: relative;
+}
+.imagen__porcentaje {
+  position: absolute;
+  left: 45px;
+  top: 40px;
+  color: #ffffff;
+  font-weight: 600;
 }

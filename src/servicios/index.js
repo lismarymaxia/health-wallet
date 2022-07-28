@@ -31,6 +31,8 @@ import {
   getTratamientosPacientes,
   /*-DISCAPACIDAD----*/
   getDicapacidadPaciente,
+  /*-URL-----------------*/
+  URLPERFIL,
 } from "./servicios";
 export {
   servicesWh,
@@ -65,4 +67,6 @@ export {
   getTratamientosPacientes,
   /*-DISCAPACIDAD----*/
   getDicapacidadPaciente,
+  /*-URL-----------------*/
+  URLPERFIL,
 };

@@ -1,5 +1,8 @@
 import axio from "axios";
 
+export const URLPERFIL =
+  "https://toolkit.maxialatam.com/wallethealth/asset/perfiles/";
+
 export const services = axio.create({
   baseURL: "https://toolkit.maxialatam.com/portalcss/api/",
 });

@@ -13,6 +13,7 @@ import {
   compartir,
   totalDosisTratamiento,
   fechaDiaAdd,
+  imgPerfil,
 } from "./helpers";
 import {
   tablaFrecuencia,
@@ -44,6 +45,7 @@ export {
   compartir,
   totalDosisTratamiento,
   fechaDiaAdd,
+  imgPerfil,
   /*-TABLA-HASH------------------*/
   meses,
   tablaFrecuencia,

@@ -1,5 +1,6 @@
 import { meses } from "./tablasHash";
 import { add, format } from "date-fns";
+import { URLPERFIL } from "../servicios";
 /*-FECHA---------------------------------------------------*/
 export const formtFechaCorta = (fecha: any) => {
   if (fecha != null && fecha !== "") {
@@ -173,4 +174,12 @@ export const totalDosisTratamiento = (
     }
   }
   return Math.round(totalDosis);
+};
+/*-UTIL-----------------------------------------------*/
+export const imgPerfil = (imagen: string, idpaciente: string) => {
+  const foto =
+    imagen === ""
+      ? "./images/avatar-default.png"
+      : `${URLPERFIL}${idpaciente}/${imagen}`;
+  return foto;
 };

@@ -12,11 +12,11 @@ import {
   IonLabel,
   IonButton,
   IonInput,
-  IonItemDivider,
   IonToggle,
+  IonList,
+  IonSelect,
+  IonSelectOption,
 } from "@ionic/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import AsyncSelect from "react-select/async";
 import { Link } from "react-router-dom";
@@ -50,6 +50,9 @@ const PerfilTratamientos = () => {
 
   const [select, setSelect] = useState<any>(null);
   const [transition, setTransition] = useState(false);
+  const [tipoDiagnostico, setTipoDiagnostico] = useState("");
+  const [diagnosticos, setDiagnosticos] = useState([]);
+  const [diagnostico, setDiagnostico] = useState("");
 
   const customStyles = {
     option: (provided: any, state: any) => ({
@@ -74,7 +77,7 @@ const PerfilTratamientos = () => {
       .catch((error) => {
         console.error("Error en peticion enfermedades" + error);
       });
-  }, []);
+  }, [user]);
 
   const handleCalcular = () => {
     if (
@@ -240,7 +243,6 @@ const PerfilTratamientos = () => {
   return (
     <IonPage className="fondo">
       <HeaderPerfil title="Tratamientos activos" />
-
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
           {transition && (
@@ -248,6 +250,48 @@ const PerfilTratamientos = () => {
               <IonCol size="12" className="px-3">
                 <IonCard className="m-0 mb-2 mt-4 pb-2 card-slide">
                   <IonCardContent>
+                    <IonList>
+                      <IonItem>
+                        <IonLabel position="stacked">
+                          Tipo de diagnóstico{" "}
+                          <span className="text-danger">*</span>
+                        </IonLabel>
+                        <IonSelect
+                          interface="action-sheet"
+                          placeholder="Tipo"
+                          value={tipoDiagnostico}
+                          onIonChange={(e) => {
+                            setTipoDiagnostico(e.detail.value!);
+                          }}
+                        >
+                          <IonSelectOption value="1">Alergias</IonSelectOption>
+                          <IonSelectOption value="2">
+                            Enfermedades
+                          </IonSelectOption>
+                        </IonSelect>
+                      </IonItem>
+                    </IonList>
+
+                    <IonList className="mb-2">
+                      <IonItem>
+                        <IonLabel position="stacked">
+                          Diagnóstico <span className="text-danger">*</span>
+                        </IonLabel>
+                        <IonSelect
+                          interface="action-sheet"
+                          placeholder="Tipo"
+                          value={diagnostico}
+                          onIonChange={(e) => {
+                            setDiagnostico(e.detail.value!);
+                          }}
+                        >
+                          {diagnosticos.map(() => (
+                            <IonSelectOption></IonSelectOption>
+                          ))}
+                        </IonSelect>
+                      </IonItem>
+                    </IonList>
+
                     <div className="pr-3">
                       <span className="text-dark">Medicamento *</span>
                       <AsyncSelect
@@ -350,7 +394,7 @@ const PerfilTratamientos = () => {
                           handleInputChange(e.detail.value!, "notas");
                         }}
                       ></IonInput>
-                    </IonItem>                    
+                    </IonItem>
                   </IonCardContent>
                 </IonCard>
 
@@ -387,16 +431,16 @@ const PerfilTratamientos = () => {
                   </IonCol>
                 </IonRow>
                 <IonRow>
-                {listado.length === ""
-                  ? "Sin tratamientos registrados"
-                  : listado.map((item: any, index: number) => (
-                      <IonCard
-                        className="m-0 mb-3 card-slide shadow-full"
-                        style={{ height: "auto" }}
-                        key={index}
-                      >
-                        <IonCardContent className="card-content-slide">
-                          <IonRow>
+                  {listado.length === ""
+                    ? "Sin tratamientos registrados"
+                    : listado.map((item: any, index: number) => (
+                        <IonCard
+                          className="m-0 mb-3 card-slide shadow-full"
+                          style={{ height: "auto" }}
+                          key={index}
+                        >
+                          <IonCardContent className="card-content-slide">
+                            <IonRow>
                               <IonCol size="9" sizeLg="10">
                                 <div className="fs-15 font-w500 text-info-dark line-height-1 mb-3">
                                   Nombre de la enfermedad o alergia
@@ -406,18 +450,33 @@ const PerfilTratamientos = () => {
                                   {item.medicamento}
                                 </p>
                                 <p className="fs-12 line-height-13 mb-2">
-                                  <span className="font-w600">{item.dosis} dosis </span>
-                                  cada 
-                                  <span className="font-w600"> {item.cada} hora(s) </span> 
-                                  durante 
-                                  <span className="font-w600"> {item.duracion} días</span>
+                                  <span className="font-w600">
+                                    {item.dosis} dosis{" "}
+                                  </span>
+                                  cada
+                                  <span className="font-w600">
+                                    {" "}
+                                    {item.cada} hora(s){" "}
+                                  </span>
+                                  durante
+                                  <span className="font-w600">
+                                    {" "}
+                                    {item.duracion} días
+                                  </span>
                                 </p>
                                 <p className="fs-12">
                                   {item.totaldosis} dosis en total
                                 </p>
-                                <div className="fs-12">Desde el {item.fechainicio} hasta el {item.fechafin}</div>
+                                <div className="fs-12">
+                                  Desde el {item.fechainicio} hasta el{" "}
+                                  {item.fechafin}
+                                </div>
                               </IonCol>
-                              <IonCol size="3" sizeLg="2" className="text-center">
+                              <IonCol
+                                size="3"
+                                sizeLg="2"
+                                className="text-center"
+                              >
                                 <IonToggle
                                   checked={
                                     item.estado === "activa" ? true : false
@@ -428,24 +487,24 @@ const PerfilTratamientos = () => {
                                 />
                                 <div className="fs-10">Recordatorio</div>
                               </IonCol>
-                          </IonRow>
-                          
-                          <p className="fs-12 mt-3">
-                            <span className="font-w500 d-block">Nota </span>
-                            {item.notas}
-                          </p>
-                          <Link
-                            to="#"
-                            className="text-danger d-block fs-12 text-underline mt-3"
-                            onClick={() => {
-                              handleDelet(item.id);
-                            }}
-                          >
-                            Eliminar
-                          </Link>
-                        </IonCardContent>
-                      </IonCard>
-                    ))}
+                            </IonRow>
+
+                            <p className="fs-12 mt-3">
+                              <span className="font-w500 d-block">Nota </span>
+                              {item.notas}
+                            </p>
+                            <Link
+                              to="#"
+                              className="text-danger d-block fs-12 text-underline mt-3"
+                              onClick={() => {
+                                handleDelet(item.id);
+                              }}
+                            >
+                              Eliminar
+                            </Link>
+                          </IonCardContent>
+                        </IonCard>
+                      ))}
                 </IonRow>
 
                 <IonRow>
@@ -455,7 +514,6 @@ const PerfilTratamientos = () => {
                     </h5>
                   </IonCol>
                 </IonRow>
-
               </IonCol>
               <IonCol>
                 <div className="text-center">
@@ -488,4 +546,3 @@ export default PerfilTratamientos;
 function handleToggle(id: any, estado: any, item: any) {
   throw new Error("Function not implemented.");
 }
-
