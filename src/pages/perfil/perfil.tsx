@@ -326,28 +326,35 @@ const Perfil = () => {
                     options={SLIDEOPTS}
                     className="slide-perfiles"
                   >
-                    {perfiles
-                      .map((item: any, index: number) => (
-                        <IonSlide
-                          key={index}
-                          onClick={() => handleClicPerfil(item.nombre, item)}
-                          style={{ cursor: "pointer" }}
-                        >
-                          <div className="d-grid">
+                    {perfiles.map((item: any, index: number) => (
+                      <IonSlide
+                        key={index}
+                        onClick={() => handleClicPerfil(item.nombre, item)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <div className="d-grid">
+                          {item.nombre === "nuevo-perfil" ? (
                             <img
-                              src={`./images/${item.imagen}`}
+                              src="./images/nuevo-usuario.jpg"
                               className="mb-0"
                               alt={item.imagen}
                             />
-                            {item.nombre !== "nuevo-perfil" && (
-                              <span className="fs-12 text-body font-w500">
-                                {item.nombre}
-                              </span>
-                            )}
-                          </div>
-                        </IonSlide>
-                      ))
-                      .concat()}
+                          ) : (
+                            <img
+                              src={imgPerfil(item.imagen, item.idpaciente)}
+                              className="mb-0"
+                              alt={item.imagen}
+                            />
+                          )}
+
+                          {item.nombre !== "nuevo-perfil" && (
+                            <span className="fs-12 text-body font-w500">
+                              {item.nombre}
+                            </span>
+                          )}
+                        </div>
+                      </IonSlide>
+                    ))}
                   </IonSlides>
                 </IonCol>
               </IonRow>

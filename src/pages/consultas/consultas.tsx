@@ -5,16 +5,13 @@ import {
   IonContent,
   IonPage,
   IonSearchbar,
-  useIonViewDidEnter,
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonButtons,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   IonButton,
   IonModal,
-  IonDatetime,
   IonItem,
   IonSelect,
   IonSelectOption,
@@ -24,12 +21,12 @@ import {
 } from "@ionic/react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faSliders, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faSliders, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { HeaderEstudios } from "../../components";
 import { Card } from "./Card";
 import { servicesWh, serviciosConsultas } from "../../servicios/servicios";
-import { formtFechaCorta, fechaFrontend } from "../../helpers";
+import { formtFechaCorta } from "../../helpers";
 
 const Consultas: React.FC = () => {
   const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
@@ -44,8 +41,6 @@ const Consultas: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [desde, setDesde] = useState("");
   const [hasta, setHasta] = useState("");
-  const [transitionU, setTransitionU] = useState(false);
-  const [transitionD, setTransitionD] = useState(false);
 
   const fecth = () => {
     let d = desde !== "" ? formtFechaCorta(desde) : "";
@@ -264,14 +259,12 @@ const Consultas: React.FC = () => {
         <IonModal isOpen={isOpen}>
           <IonHeader>
             <IonToolbar className="ion-padding">
-              <IonTitle className="text-center">
-                Filtrar                
-              </IonTitle>
-              <span onClick={() => setIsOpen(false)} className="p-2 mt-2 mr-2 float-right cursor-pointer position-absolute right-0 top-0">
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  className="fs-16"
-                />
+              <IonTitle className="text-center">Filtrar</IonTitle>
+              <span
+                onClick={() => setIsOpen(false)}
+                className="p-2 mt-2 mr-2 float-right cursor-pointer position-absolute right-0 top-0"
+              >
+                <FontAwesomeIcon icon={faXmark} className="fs-16" />
               </span>
             </IonToolbar>
           </IonHeader>
@@ -283,17 +276,13 @@ const Consultas: React.FC = () => {
                     <IonLabel position="stacked">
                       Desde <span className="text-danger">*</span>
                     </IonLabel>
-                    <IonInput
-                      type="date"
-                    ></IonInput>
+                    <IonInput type="date"></IonInput>
                   </IonItem>
                   <IonItem>
                     <IonLabel position="stacked">
                       Hasta <span className="text-danger">*</span>
                     </IonLabel>
-                    <IonInput
-                      type="date"
-                    ></IonInput>
+                    <IonInput type="date"></IonInput>
                   </IonItem>
 
                   <IonItem>
@@ -312,7 +301,7 @@ const Consultas: React.FC = () => {
                         </IonSelectOption>
                       ))}
                     </IonSelect>
-                  </IonItem>                  
+                  </IonItem>
                 </IonCol>
 
                 <IonCol size="12" className="text-center">
