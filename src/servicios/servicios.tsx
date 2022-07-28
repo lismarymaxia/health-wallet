@@ -206,3 +206,13 @@ export const getDicapacidadPaciente = (id: any) =>
     },
     responseType: "json",
   });
+/*-MIS-MEDICAMENTOS------------------------------*/
+export const getMisMedicamentos = (id: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getMisMedicamentos",
+      id: id,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });

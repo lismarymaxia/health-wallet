@@ -34,6 +34,8 @@ import {
   getDicapacidadPaciente,
   /*-URL-----------------*/
   URLPERFIL,
+  /*-MIS-MEDICAMENTOS-*/
+  getMisMedicamentos,
 } from "./servicios";
 export {
   servicesWh,
@@ -71,4 +73,6 @@ export {
   getDicapacidadPaciente,
   /*-URL-----------------*/
   URLPERFIL,
+  /*-MIS-MEDICAMENTOS-*/
+  getMisMedicamentos,
 };

@@ -346,7 +346,6 @@ const Perfil = () => {
                               alt={item.imagen}
                             />
                           )}
-
                           {item.nombre !== "nuevo-perfil" && (
                             <span className="fs-12 text-body font-w500">
                               {item.nombre}
