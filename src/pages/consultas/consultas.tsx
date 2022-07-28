@@ -19,10 +19,12 @@ import {
   IonSelect,
   IonSelectOption,
   IonGrid,
+  IonLabel,
+  IonInput,
 } from "@ionic/react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faSliders, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { HeaderEstudios } from "../../components";
 import { Card } from "./Card";
@@ -262,69 +264,42 @@ const Consultas: React.FC = () => {
         <IonModal isOpen={isOpen}>
           <IonHeader>
             <IonToolbar className="ion-padding">
-              <IonTitle>Filtrar</IonTitle>
-              <IonButtons slot="end">
-                <IonButton onClick={() => setIsOpen(false)}>Cerrar</IonButton>
-              </IonButtons>
+              <IonTitle className="text-center">
+                Filtrar                
+              </IonTitle>
+              <span onClick={() => setIsOpen(false)} className="p-2 mt-2 mr-2 float-right cursor-pointer position-absolute right-0 top-0">
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  className="fs-16"
+                />
+              </span>
             </IonToolbar>
           </IonHeader>
           <IonContent>
             <IonGrid>
               <IonRow>
-                <IonCol size="12">
+                <IonCol size="12" className="p-3">
                   <IonItem>
-                    <IonButton
-                      color="dark"
-                      fill="clear"
-                      onClick={() => setTransitionU(!transitionU)}
-                    >
-                      Desde
-                    </IonButton>
-                    {fechaFrontend(desde)}
+                    <IonLabel position="stacked">
+                      Desde <span className="text-danger">*</span>
+                    </IonLabel>
+                    <IonInput
+                      type="date"
+                    ></IonInput>
                   </IonItem>
-                </IonCol>
-                <IonCol size="12">
-                  {transitionU && (
-                    <IonDatetime
-                      presentation="date"
-                      doneText="ok"
-                      cancelText="Cancelar"
-                      value={desde}
-                      onIonChange={(e) => {
-                        setDesde(e.detail.value!);
-                        setTransitionU(false);
-                      }}
-                    ></IonDatetime>
-                  )}
-                </IonCol>
-                <IonCol size="12">
                   <IonItem>
-                    <IonButton
-                      color="dark"
-                      fill="clear"
-                      onClick={() => setTransitionD(!transitionD)}
-                    >
-                      Hasta
-                    </IonButton>
-                    {fechaFrontend(hasta)}
+                    <IonLabel position="stacked">
+                      Hasta <span className="text-danger">*</span>
+                    </IonLabel>
+                    <IonInput
+                      type="date"
+                    ></IonInput>
                   </IonItem>
-                </IonCol>
-                <IonCol size="12">
-                  {transitionD && (
-                    <IonDatetime
-                      presentation="date"
-                      doneText="ok"
-                      cancelText="Cancelar"
-                      value={hasta}
-                      onIonChange={(e) => {
-                        setHasta(e.detail.value!);
-                        setTransitionD(false);
-                      }}
-                    ></IonDatetime>
-                  )}
-                </IonCol>
-                <IonCol size="12">
+
                   <IonItem>
+                    <IonLabel position="stacked">
+                      Afiliado <span className="text-danger">*</span>
+                    </IonLabel>
                     <IonSelect
                       value={afiliado}
                       interface="popover"
@@ -337,19 +312,67 @@ const Consultas: React.FC = () => {
                         </IonSelectOption>
                       ))}
                     </IonSelect>
-                  </IonItem>
+                  </IonItem>                  
                 </IonCol>
-                <IonCol size="12">
+
+                <IonCol size="12" className="text-center">
                   <IonButton
-                    color="dark"
+                    className="border-radius"
                     onClick={(e) => {
                       handleSearch(e);
                     }}
-                    fill="clear"
+                    fill="outline"
                   >
-                    filtrar
+                    Filtrar
                   </IonButton>
                 </IonCol>
+
+                {/*<IonCol size="12">
+                  <IonItem>
+                    <IonButton
+                      color="dark"
+                      fill="clear"
+                      onClick={() => setTransitionU(!transitionU)}
+                    >
+                      Desde
+                    </IonButton>
+                    {fechaFrontend(desde)}
+                  </IonItem>
+                  {transitionU && (
+                    <IonDatetime
+                      presentation="date"
+                      doneText="ok"
+                      cancelText="Cancelar"
+                      value={desde}
+                      onIonChange={(e) => {
+                        setDesde(e.detail.value!);
+                        setTransitionU(false);
+                      }}
+                    ></IonDatetime>
+                  )}
+                  <IonItem>
+                    <IonButton
+                      color="dark"
+                      fill="clear"
+                      onClick={() => setTransitionD(!transitionD)}
+                    >
+                      Hasta
+                    </IonButton>
+                    {fechaFrontend(hasta)}
+                  </IonItem>
+                  {transitionD && (
+                    <IonDatetime
+                      presentation="date"
+                      doneText="ok"
+                      cancelText="Cancelar"
+                      value={hasta}
+                      onIonChange={(e) => {
+                        setHasta(e.detail.value!);
+                        setTransitionD(false);
+                      }}
+                    ></IonDatetime>
+                  )}
+                </IonCol>*/}
               </IonRow>
             </IonGrid>
           </IonContent>
