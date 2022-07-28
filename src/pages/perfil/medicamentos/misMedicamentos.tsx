@@ -11,7 +11,7 @@ import {
   IonButton,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faCapsules } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import { HeaderPerfil } from "../../../components";
@@ -66,39 +66,41 @@ const MisMedicamentos = () => {
                       key={index}
                     >
                       <IonCardContent className="card-content-slide">
-                        <div>
-                          <IonImg
-                            src="./images/juan.jpg"
-                            alt="AAAA"
-                            style={{ width: "50px", height: "50px" }}
-                            className="float-left mr-2"
-                          />
-                          <div className="d-flex justify-content-between">
-                            <div className="fs-15 font-w600 text-info mt-1 title">
-                              <span className="w-100">{item.medicamento}</span>
-                            </div>
+                        <div className="d-flex pt-2">
+                          <div className="pt-1">
+                            <FontAwesomeIcon
+                              icon={faCapsules}
+                              className="mr-3 fs-16 text-info float-left"
+                            />
                           </div>
-                        </div>
-                        <div>
-                          <p className="mb-0 ml-5 pl-2 pt-1 fs-12">
-                            <span className="float-left">
-                              {item.diagnostico}
-                            </span>
-                            <IonButton
-                              color="dark"
-                              className="float-right m-0"
-                              style={{ width: "28px", height: "20px" }}
-                              fill="clear"
-                              onClick={() => {
-                                handelDetail();
-                              }}
-                            >
-                              <FontAwesomeIcon
-                                icon={faAngleRight}
-                                className="mr-0"
-                              />
-                            </IonButton>
-                          </p>
+                          <div className="slide-full d-grid pt-0">
+                            <div className="w-100">                      
+                              <span className="fs-15 font-w600 text-info float-left" style={{width:"95%"}}>
+                                {item.medicamento}
+                              </span>
+                              <div className="position-absolute right-0">
+                                <IonButton
+                                  color="dark"
+                                  className="float-right m-0"
+                                  style={{ width: "28px", height: "20px" }}
+                                  fill="clear"
+                                  onClick={() => {
+                                    handelDetail();
+                                  }}
+                                >
+                                  <FontAwesomeIcon
+                                    icon={faAngleRight}
+                                    className="mr-3"
+                                  />
+                                </IonButton>
+                              </div>
+                            </div>
+                            <div className="w-100">
+                              <span className="d-block fs-13">
+                                {item.diagnostico}
+                              </span>
+                            </div>                    
+                          </div>
                         </div>
                       </IonCardContent>
                     </IonCard>

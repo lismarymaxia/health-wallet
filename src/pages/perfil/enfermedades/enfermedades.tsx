@@ -12,6 +12,7 @@ import {
   IonLabel,
   IonButton,
   IonInput,
+  IonList,
 } from "@ionic/react";
 import { useSelector } from "react-redux";
 import AsyncSelect from "react-select/async";
@@ -152,40 +153,46 @@ const PerfilEnfermedades = () => {
               <IonCol size="12" className="px-3">
                 <IonCard className="m-0 mb-2 mt-4 pb-2 card-slide">
                   <IonCardContent>
-                    <div className="pr-3">
-                      <span className="text-dark">Enfermedad *</span>
-                      <AsyncSelect
-                        cacheOptions
-                        defaultOptions
-                        value={select}
-                        onChange={setSelect}
-                        loadOptions={loadOptions}
-                        placeholder={"Seleccionar"}
-                        noOptionsMessage={() => "Escriba la enfermedad"}
-                        styles={customStyles}
-                      />
-                    </div>
-                    <div className="pt-2 text-center">
-                      <IonButton
-                        className="border-radius"
-                        fill="outline"
-                        onClick={handleAdd}
-                      >
-                        Guardar
-                      </IonButton>
-                      <IonButton
-                        color="danger"
-                        className="border-radius"
-                        fill="outline"
-                        onClick={() => {
-                          setTransition(false);
-                        }}
-                      >
-                        Cancelar
-                      </IonButton>
-                    </div>
+                    <IonList>
+                      <div className="pr-0">
+                        <div className="mb-2">
+                          Enfermedad <span className="text-danger"> *</span>
+                        </div>                      
+                        <AsyncSelect
+                          cacheOptions
+                          defaultOptions
+                          value={select}
+                          onChange={setSelect}
+                          loadOptions={loadOptions}
+                          placeholder={"Seleccionar"}
+                          noOptionsMessage={() => "Escriba la enfermedad"}
+                          styles={customStyles}
+                        />
+                      </div>
+                    </IonList>              
                   </IonCardContent>
                 </IonCard>
+              </IonCol>
+              <IonCol>
+                <div className="pt-2 text-center">
+                  <IonButton
+                    className="border-radius"
+                    fill="outline"
+                    onClick={handleAdd}
+                  >
+                    Guardar
+                  </IonButton>
+                  <IonButton
+                    color="danger"
+                    className="border-radius"
+                    fill="outline"
+                    onClick={() => {
+                      setTransition(false);
+                    }}
+                  >
+                    Cancelar
+                  </IonButton>
+                </div>
               </IonCol>
             </IonRow>
           )}
