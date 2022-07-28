@@ -11,8 +11,8 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { servicesWh } from "../../servicios/servicios";
 import { storeLocal } from "../../store/action/aut";
+import { imgPerfil } from "../../helpers";
 import "./cuentas.css";
-import "../../style/tema.css";
 const Cuentas = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
   const history = useHistory();
@@ -54,7 +54,7 @@ const Cuentas = () => {
     history.replace("/app/home");
   };
   const handelNuevoPerfil = () => {
-    history.replace("/app/perfil-crear");
+    history.push("/app/cuenta-crear");
   };
   return (
     <IonPage className="fondo__cuentas">
@@ -80,7 +80,7 @@ const Cuentas = () => {
                   >
                     <div className="box-perfiles cursor-pointer">
                       <img
-                        src={`./images/${item.imagen}`}
+                        src={imgPerfil(item.imagen, item.idpaciente)}
                         className="mb-2"
                         alt={item.imagen}
                       />
@@ -90,7 +90,10 @@ const Cuentas = () => {
                 ))
               : null}
             <IonCol className="p-2 p-perfil">
-              <div className="box-perfiles cursor-pointer" onClick={handelNuevoPerfil}>
+              <div
+                className="box-perfiles cursor-pointer"
+                onClick={handelNuevoPerfil}
+              >
                 <img
                   src={`./images/nuevo-usuario.jpg`}
                   className="mb-2"

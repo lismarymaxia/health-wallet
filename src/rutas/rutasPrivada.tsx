@@ -55,7 +55,6 @@ const RutasPrivadas: React.FC = () => {
   const location = useLocation();
   const { pathname } = location;
   const isAuth: any = useSelector<any>((state) => state.reducerAuth.stdAuth);
-
   const history = useHistory();
 
   useEffect(() => {
@@ -71,6 +70,9 @@ const RutasPrivadas: React.FC = () => {
         <IonRouterOutlet id="navApp">
           <Route exact path="/app/cuentas">
             <Cuentas />
+          </Route>
+          <Route exact path="/app/cuenta-crear">
+            <PerfilCrear />
           </Route>
           <Route exact path="/app/home">
             <Home />

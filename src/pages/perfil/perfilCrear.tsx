@@ -26,7 +26,6 @@ import { serviciosPaciente } from "../../servicios";
 import { Header } from "../../components";
 import { grupoSanguineos, INITIALCREARPERFIL } from "../../helpers";
 import { useForm } from "../../hook";
-import "../../style/tema.css";
 import "./perfil.css";
 
 const PerfilCrear = () => {

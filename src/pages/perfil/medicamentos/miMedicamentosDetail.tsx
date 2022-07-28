@@ -8,11 +8,9 @@ import {
   IonContent,
   IonPage,
   useIonViewDidEnter,
-  IonLabel,
 } from "@ionic/react";
-import { faHospital } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
-import { servicesWh, getDetailMedicamento } from "../../../servicios/servicios";
+import { getDetailMedicamento } from "../../../servicios/servicios";
 import { Header } from "../../../components";
 
 const MiMedicamentoDetail = () => {
@@ -39,20 +37,6 @@ const MiMedicamentoDetail = () => {
         console.warn(e);
       });
   });
-  /*
- diagnostico,
-    			    medicamento
-    			    dosis
-    			    cada
-    			    totaldosis,
-    			    fechainicio,
-    			    duracion,
-    			    fechafin,
-    			    notas,
-    			    prolongado,
-    			    recordatorio,
-
-*/
   return (
     <IonPage className="fondo">
       <Header title="Mis medicamentos" isbotton={true} isBuger={false} />
