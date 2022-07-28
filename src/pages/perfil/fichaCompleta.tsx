@@ -7,20 +7,12 @@ import {
   IonCardContent,
   IonContent,
   IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonButtons,
-  IonBackButton,
-  IonThumbnail,
-  IonImg,
   IonItem,
   useIonViewDidEnter,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { chevronBackOutline } from "ionicons/icons";
 import { INITIALPERFIL, fechaPerfil } from "../../helpers";
 import { getFichaCompleta } from "../../servicios/servicios";
 import "./perfil.css";
@@ -37,9 +29,15 @@ const FichaCompleta = () => {
       .then((rsp: any) => {
         const { data } = rsp;
         setPerfil(data.data);
-        setDiscapacidades(data.discapacidades);
-        setAlergias(data.alergias);
-        setEnfermedades(data.enfermedades);
+        if (data.discapacidades) {
+          setDiscapacidades(data.discapacidades);
+        }
+        if (data.alergias) {
+          setAlergias(data.alergias);
+        }
+        if (data.enfermedades) {
+          setEnfermedades(data.enfermedades);
+        }
       })
       .catch((error) => {
         console.error("Error en get perfiles" + error);
@@ -105,7 +103,7 @@ const FichaCompleta = () => {
                       </div>
                       <div className="fs-13 font-w500 pl-3">
                         {discapacidades.map((item: any, index: number) => (
-                          <div key={index}  className="float-left">
+                          <div key={index} className="float-left">
                             <span>{item.nombre}</span>
                           </div>
                         ))}
@@ -158,10 +156,12 @@ const FichaCompleta = () => {
                                   <FontAwesomeIcon
                                     icon={faCircle}
                                     className="mr-2 fs-12"
-                                    style={{color:"#a1a1a1"}}
+                                    style={{ color: "#a1a1a1" }}
                                   />
-                                )}                              
-                                <span className="fs-13">{item.alergia} ({item.grupo})</span>
+                                )}
+                                <span className="fs-13">
+                                  {item.alergia} ({item.grupo})
+                                </span>
                               </div>
                             </div>
                           ))}
