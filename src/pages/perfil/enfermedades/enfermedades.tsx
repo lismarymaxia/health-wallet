@@ -34,8 +34,6 @@ const PerfilEnfermedades = () => {
     estado: false,
   });
   const [select, setSelect] = useState<any>(null);
-  const [tratamiento, setTratamiento] = useState("");
-  const [frecuencia, setFrecuencia] = useState("");
   const [transition, setTransition] = useState(false);
   useEffect(() => {
     getEnfermedadPaciente(user.idpaciente)
@@ -74,14 +72,12 @@ const PerfilEnfermedades = () => {
   };
 
   const handleAdd = () => {
-    const { estado, msg } = valEnfermedad(select, tratamiento, frecuencia);
+    const { estado, msg } = valEnfermedad(select);
     if (estado) {
       let formDa = new FormData();
       formDa.append("op", "addEnfermedad");
       formDa.append("id", user.idpaciente);
       formDa.append("idenfermedad", select.value);
-      formDa.append("tratamiento", tratamiento);
-      formDa.append("frecuencia", frecuencia);
       serviciosPaciente(formDa)
         .then(function (response: any) {
           const { data, status } = response;
@@ -95,10 +91,8 @@ const PerfilEnfermedades = () => {
                 id: data.id,
                 idenfermedad: select.value,
                 enfermedad: select?.label,
-                tratamiento: tratamiento,
-                frecuencia: frecuencia,
               };
-
+              setSelect(null);
               handleAddItem(state);
               setTransition(false);
             } else {
@@ -171,30 +165,6 @@ const PerfilEnfermedades = () => {
                         styles={customStyles}
                       />
                     </div>
-                    <IonItem>
-                      <IonLabel position="stacked">
-                        Tratamiento <span className="text-danger">*</span>
-                      </IonLabel>
-                      <IonInput
-                        name="tratamiento"
-                        value={tratamiento}
-                        onIonChange={(e) => {
-                          setTratamiento(e.detail.value!);
-                        }}
-                      ></IonInput>
-                    </IonItem>
-                    <IonItem>
-                      <IonLabel position="stacked">
-                        Frecuencias <span className="text-danger">*</span>
-                      </IonLabel>
-                      <IonInput
-                        name="frecuencia"
-                        value={frecuencia}
-                        onIonChange={(e) => {
-                          setFrecuencia(e.detail.value!);
-                        }}
-                      ></IonInput>
-                    </IonItem>
                     <div className="pt-2 text-center">
                       <IonButton
                         className="border-radius"
@@ -241,11 +211,6 @@ const PerfilEnfermedades = () => {
                           <div className="fs-15 font-w500 text-info-dark line-height-1 mb-3">
                             {item.enfermedad}
                           </div>
-                          <p className="fs-12 mt-3">
-                            <span className="font-w500 d-block">Tratamiento</span>
-                            <span className="d-block">{item.tratamiento}</span>
-                            <span className="d-block">{item.frecuencia}</span>
-                          </p>
                           <Link
                             to="#"
                             className="text-danger d-block fs-12 text-underline mt-3"
