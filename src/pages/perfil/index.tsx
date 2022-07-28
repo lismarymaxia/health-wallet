@@ -7,7 +7,7 @@ import Discapacidad from "./discapacidad";
 import Aseguradora from "./aseguradora";
 import ContactoEmergencia from "./contactoEmergencia";
 import MisMedicos from "./misMedicos";
-import { MisMedicamentos } from "./medicamentos";
+import { MisMedicamentos, MiMedicamentoDetail } from "./medicamentos";
 import { PerfilAlergias } from "./alergias";
 import { PerfilEnfermedades } from "./enfermedades";
 import { PerfilTratamientos } from "./tratamientos";
@@ -22,6 +22,7 @@ export {
   ContactoEmergencia,
   MisMedicos,
   MisMedicamentos,
+  MiMedicamentoDetail,
   PerfilAlergias,
   PerfilEnfermedades,
   PerfilTratamientos,

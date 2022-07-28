@@ -18,6 +18,7 @@ import {
   ContactoEmergencia,
   MisMedicos,
   MisMedicamentos,
+  MiMedicamentoDetail,
   PerfilAlergias,
   Aseguradora,
   PerfilEnfermedades,
@@ -63,4 +64,5 @@ export {
   DetalleConsulta,
   Soporte,
   PerfilEnfermedades,
+  MiMedicamentoDetail,
 };

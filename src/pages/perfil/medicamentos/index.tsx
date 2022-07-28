@@ -1,2 +1,3 @@
 import MisMedicamentos from "./misMedicamentos";
-export { MisMedicamentos };
+import MiMedicamentoDetail from "./miMedicamentosDetail";
+export { MisMedicamentos, MiMedicamentoDetail };

@@ -216,3 +216,13 @@ export const getMisMedicamentos = (id: any) =>
     },
     responseType: "json",
   });
+
+export const getDetailMedicamento = (id: any) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getMiMedicamentoDetail",
+      id: id,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });

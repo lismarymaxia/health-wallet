@@ -36,6 +36,7 @@ import {
   URLPERFIL,
   /*-MIS-MEDICAMENTOS-*/
   getMisMedicamentos,
+  getDetailMedicamento,
 } from "./servicios";
 export {
   servicesWh,
@@ -75,4 +76,5 @@ export {
   URLPERFIL,
   /*-MIS-MEDICAMENTOS-*/
   getMisMedicamentos,
+  getDetailMedicamento,
 };

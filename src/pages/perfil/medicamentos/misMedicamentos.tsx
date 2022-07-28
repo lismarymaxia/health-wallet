@@ -7,7 +7,6 @@ import {
   IonCardContent,
   IonContent,
   IonPage,
-  IonImg,
   IonButton,
 } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -36,8 +35,8 @@ const MisMedicamentos = () => {
       });
   }, [user]);
 
-  const handelDetail = () => {
-    history.push("/app/detalle-medicamento");
+  const handleDetail = (id: any) => {
+    history.push(`/app/mis-medicamentos-detalle/${id}`);
   };
   return (
     <IonPage className="fondo">
@@ -74,8 +73,11 @@ const MisMedicamentos = () => {
                             />
                           </div>
                           <div className="slide-full d-grid pt-0">
-                            <div className="w-100">                      
-                              <span className="fs-15 font-w600 text-info float-left" style={{width:"95%"}}>
+                            <div className="w-100">
+                              <span
+                                className="fs-15 font-w600 text-info float-left"
+                                style={{ width: "95%" }}
+                              >
                                 {item.medicamento}
                               </span>
                               <div className="position-absolute right-0">
@@ -85,7 +87,7 @@ const MisMedicamentos = () => {
                                   style={{ width: "28px", height: "20px" }}
                                   fill="clear"
                                   onClick={() => {
-                                    handelDetail();
+                                    handleDetail(item.id);
                                   }}
                                 >
                                   <FontAwesomeIcon
@@ -99,7 +101,7 @@ const MisMedicamentos = () => {
                               <span className="d-block fs-13">
                                 {item.diagnostico}
                               </span>
-                            </div>                    
+                            </div>
                           </div>
                         </div>
                       </IonCardContent>
