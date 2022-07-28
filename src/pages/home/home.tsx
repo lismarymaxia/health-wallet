@@ -394,85 +394,95 @@ const Home: React.FC = () => {
                 Últimas actualizaciones
               </h5>
               <IonCard className="m-0 card-slide shadow-full">
-                <IonCardContent className="card-content-slide">
-                  <div className="slide-full d-grid">                      
-                    <div className="w-100">
+                <IonCardContent className="card-content-slide ">
+                <div className="d-flex pt-2">
+                    <div className="pt-1">
                       <FontAwesomeIcon
-                        icon={faMicroscope}
-                        className="mr-3 fs-16 text-info float-left"
-                      />
-                      <span className="fs-15 font-w600 text-info float-left">
-                        Resultados de laboratorio
-                      </span>
-                      <div className="float-right">
-                        <FontAwesomeIcon
-                          icon={faAngleRight}
-                          className="mr-0 float-right fs-18 text-info"
+                          icon={faMicroscope}
+                          className="mr-3 fs-16 text-info float-left"
                         />
+                    </div>
+                    <div className="slide-full d-grid pt-0">
+                      <div className="w-100">                        
+                        <span className="fs-15 font-w600 text-info float-left">
+                          Resultados de laboratorio
+                        </span>
+                        <div className="float-right">
+                          <FontAwesomeIcon
+                            icon={faAngleRight}
+                            className="mr-0 float-right fs-18 text-info"
+                          />
+                        </div>
+                      </div>
+                      <div className="w-100">
+                        <span className="d-block fs-13">
+                          {laboratorio.centro === "" ? (
+                            <IonSkeletonText
+                              animated
+                              style={{ width: "100%" }}
+                            />
+                          ) : (
+                            cadenaUpercase(laboratorio.centro)
+                          )}
+                        </span>
+                        <span className="d-block fs-13">
+                          {laboratorio.desde === "" ? (
+                            <IonSkeletonText
+                              animated
+                              style={{ width: "100%" }}
+                            />
+                          ) : (
+                            cadenaUpercase(laboratorio.desde)
+                          )}
+                        </span>
                       </div>
                     </div>
-                    <div className="w-100">
-                      <span className="d-inline-block fs-13">
-                        {laboratorio.centro === "" ? (
-                          <IonSkeletonText
-                            animated
-                            style={{ width: "100%" }}
-                          />
-                        ) : (
-                          cadenaUpercase(laboratorio.centro)
-                        )}
-                      </span>
-                      <span className="d-inline-block fs-13">
-                        {laboratorio.desde === "" ? (
-                          <IonSkeletonText
-                            animated
-                            style={{ width: "100%" }}
-                          />
-                        ) : (
-                          cadenaUpercase(laboratorio.desde)
-                        )}
-                      </span>
-                    </div>
                   </div>
-                  <div className="slide-full d-grid pt-2">
-                    <div className="w-100">
+
+                  <div className="d-flex pt-2">
+                    <div className="pt-1">
                       <FontAwesomeIcon
                         icon={faXRay}
                         className="mr-3 fs-16 text-info float-left"
                       />
-                      <span className="fs-15 font-w600 text-info float-left">
-                        Resultados de imágenes
-                      </span>
-                      <div className="float-right">
-                        <FontAwesomeIcon
-                          icon={faAngleRight}
-                          className="mr-0 float-right fs-18 text-info"
-                        />
-                      </div>
                     </div>
-                    <div className="w-100">
-                      <span className="d-inline-block fs-13">
-                        {imagenologia.unidad === "" ? (
-                          <IonSkeletonText
-                            animated
-                            style={{ width: "100%" }}
+                    <div className="slide-full d-grid pt-0">
+                      <div className="w-100">                      
+                        <span className="fs-15 font-w600 text-info float-left">
+                          Resultados de imágenes
+                        </span>
+                        <div className="float-right">
+                          <FontAwesomeIcon
+                            icon={faAngleRight}
+                            className="mr-0 float-right fs-18 text-info"
                           />
-                        ) : (
-                          imagenologia.unidad
-                        )}
-                      </span>
-                      <span className="d-inline-block fs-13">
-                        {imagenologia.estudio === "" ? (
-                          <IonSkeletonText
-                            animated
-                            style={{ width: "100%" }}
-                          />
-                        ) : (
-                          imagenologia.estudio
-                        )}
-                      </span>
-                    </div>                    
+                        </div>
+                      </div>
+                      <div className="w-100">
+                        <span className="d-block fs-13">
+                          {imagenologia.unidad === "" ? (
+                            <IonSkeletonText
+                              animated
+                              style={{ width: "100%" }}
+                            />
+                          ) : (
+                            imagenologia.unidad
+                          )}
+                        </span>
+                        <span className="d-block fs-13">
+                          {imagenologia.estudio === "" ? (
+                            <IonSkeletonText
+                              animated
+                              style={{ width: "100%" }}
+                            />
+                          ) : (
+                            imagenologia.estudio
+                          )}
+                        </span>
+                      </div>                    
+                    </div>
                   </div>
+                  
                 </IonCardContent>
               </IonCard>
             </IonCol>

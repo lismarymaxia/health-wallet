@@ -24,6 +24,7 @@ import { chevronBackOutline } from "ionicons/icons";
 import { INITIALPERFIL, fechaPerfil } from "../../helpers";
 import { getFichaCompleta } from "../../servicios/servicios";
 import "./perfil.css";
+import { HeaderPerfil } from "../../components";
 
 const FichaCompleta = () => {
   const [perfil, setPerfil] = useState(INITIALPERFIL);
@@ -46,33 +47,7 @@ const FichaCompleta = () => {
   });
   return (
     <IonPage className="fondo">
-      <IonHeader>
-        <div className="p-perfil-sub bg-info-alt border-radius-bottom">
-          <IonToolbar>
-            <IonTitle
-              className="fs-16 font-w700"
-              style={{ paddingLeft: "12%" }}
-            >
-              Perfil
-            </IonTitle>
-            <IonButtons slot="start">
-              <IonBackButton
-                icon={chevronBackOutline}
-                text=""
-                className="custom-back text-white"
-              />
-            </IonButtons>
-          </IonToolbar>
-          <div className="mx-3 pb-4 text-white">
-            <IonThumbnail slot="start" class="float-left mr-3">
-              <IonImg src={`./images/${perfil?.imagen}`} />
-            </IonThumbnail>
-
-            <span className="font-w500 fs-14 d-block">{perfil.nombre}</span>
-            <span className="fs-12">Cabeza de familia</span>
-          </div>
-        </div>
-      </IonHeader>
+      <HeaderPerfil title="Ficha completa" />
 
       <IonContent fullscreen className="bg-light">
         <IonGrid className="pb-4">
@@ -129,18 +104,12 @@ const FichaCompleta = () => {
                         Discapacidad
                       </div>
                       <div className="fs-13 font-w500 pl-3">
-                        <ul>
-                          {discapacidades.map((item: any, index: number) => (
-                            <div key={index}>
-                              <FontAwesomeIcon
-                                icon={faCircle}
-                                className="text-info-dark mr-2 fs-6"
-                              />
-                              <span>{item.nombre}</span>
-                            </div>
-                          ))}
-                        </ul>
-                        <span className="text-light float-right">
+                        {discapacidades.map((item: any, index: number) => (
+                          <div key={index}  className="float-left">
+                            <span>{item.nombre}</span>
+                          </div>
+                        ))}
+                        <span className="fs-12 text-info-light text-underline float-right cursor-pointer">
                           Ver carnet de SENADIS
                         </span>
                       </div>
@@ -159,10 +128,6 @@ const FichaCompleta = () => {
                         <ul>
                           {enfermedades.map((item: any, index: number) => (
                             <div key={index}>
-                              <FontAwesomeIcon
-                                icon={faCircle}
-                                className="text-info-dark mr-2 fs-6"
-                              />
                               <span>{item.nombre}</span>
                             </div>
                           ))}
@@ -182,10 +147,22 @@ const FichaCompleta = () => {
                       <div className="fs-13 font-w500 pl-3">
                         <ul>
                           {alergias.map((item: any, index: number) => (
-                            <div key={index} className="mb-2">
-                              <p>Grupo:{item.grupo}</p>
-                              <p>Alergia:{item.alergia}</p>
-                              <p>Estado:{item.estado}</p>
+                            <div key={index}>
+                              <div>
+                                {item.estado === "activa" ? (
+                                  <FontAwesomeIcon
+                                    icon={faCircle}
+                                    className="text-info mr-2 fs-12"
+                                  />
+                                ) : (
+                                  <FontAwesomeIcon
+                                    icon={faCircle}
+                                    className="mr-2 fs-12"
+                                    style={{color:"#a1a1a1"}}
+                                  />
+                                )}                              
+                                <span className="fs-13">{item.alergia} ({item.grupo})</span>
+                              </div>
                             </div>
                           ))}
                         </ul>

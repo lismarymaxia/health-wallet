@@ -352,7 +352,7 @@ const Perfil = () => {
                 </IonCol>
               </IonRow>
 
-              <IonRow className="mt-2">
+              <IonRow className="mt-4">
                 <IonCol size="12">
                   <h5 className="font-w700 fs-15 text-info-dark mb-2">
                     Configuración
@@ -422,7 +422,7 @@ const Perfil = () => {
                   </div>
                 </IonCardContent>
               </IonCard>
-              <div className="pt-2 text-center">
+              <div className="mt-4 text-center">
                 <IonButton
                   className="border-radius"
                   fill="outline"

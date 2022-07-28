@@ -52,7 +52,6 @@ const Discapacidad = () => {
             <IonCol size="12" className="pb-3">
               <IonCard
                 className="m-0 card-slide shadow-full"
-                style={{ height: "auto" }}
               >
                 <IonCardContent className="card-content-slide">
                   <span className="font-w600 fs-14 text-info-dark">
@@ -77,7 +76,11 @@ const Discapacidad = () => {
                   </IonList>
                 </IonCardContent>
               </IonCard>
-              <IonCard>
+              <div className="mt-1 ml-1 fs-12 text-underline text-info cursor-pointer">
+                Cargar carnet de SENADIS
+              </div>
+
+              <IonCard className="mt-3 mx-0 card-slide shadow-full">
                 <IonCardContent>
                   <div className="certificado">
                     <IonRow className="">
@@ -93,68 +96,71 @@ const Discapacidad = () => {
                         className="text-center"
                         style={{ lineHeight: "normal" }}
                       >
-                        <div className="font-w700 d-inline">
-                          REP&Uacute;BLICA DE PANAM&Aacute;{" "}
+                        <div className="font-w700 d-block enc-carnet">
+                          REP&Uacute;BLICA DE PANAM&Aacute;
                         </div>
-                        <div className="font-w700 text-info d-inline">
+                        <div className="font-w700 text-info d-inlblockine enc-carnet">
                           CERTIFICADO DE DISCAPACIDAD
                         </div>
                       </IonCol>
                       <IonCol size="12">
-                        <div className="font-w700 fs-8 ">
+                        <img
+                          src="./images/iconos-carnet.png"
+                          className="mt-0 mb-3 d-block iconos-certificado"
+                          alt=""
+                          style={{position: "absolute", right: "0px"}}
+                        />
+                        <div className="font-w700 fs-6 ">
                           Secretaria Nacional de Discapacidad
                         </div>
                       </IonCol>
                       <IonCol size="12">
-                        <div className="font-w700 fs-18 my-2 text-uppercase">
+                        <div className="font-w700 fs-12 my-2 text-uppercase">
                           {carnet.nombre}
                         </div>
                       </IonCol>
                       <IonCol size="4">
                         <img
-                          src="./images/sandra.jpg"
-                          className="mt-0 mb-3 d-inline perfil-certificado"
+                          src="./images/user-carnet.png"
+                          className="mt-0 mb-3 d-inline border-radius perfil-certificado"
                           alt=""
                         />
                       </IonCol>
-                      <IonCol size="5">
-                        <div className="font-w700 fs-12 d-block mb-2">
+                      <IonCol size="5" className="info-carnet">
+                        <div className="font-w700 d-block mb-2">
                           C.I.P. {user.cedula}
                         </div>
-                        <div className="font-w700 fs-12 d-block">
+                        <div className="font-w700 d-block">
                           NACIONALIDAD
                         </div>
-                        <div className="font-w700 fs-12 text-uppercase d-block mb-2">
+                        <div className="font-w700 text-uppercase d-block mb-2">
                           {carnet.nacionalidad}
                         </div>
-                        <div className="font-w700 fs-12 d-block">
+                        <div className="font-w700 d-block">
                           FECHA DE NACIMIENTO
                         </div>
-                        <div className="font-w700 fs-12 text-uppercase d-block">
+                        <div className="font-w700 text-uppercase d-block">
                           {carnet.fecha_nac}
                         </div>
                       </IonCol>
-                      <IonCol size="3" className="pl-2">
-                        <div className="font-w700 fs-12 d-block">
+                      <IonCol size="3" className="info-carnet pl-2" style={{marginTop:"1.3rem"}}>
+                        <div className="font-w700 d-block">
                           EXPEDICIÓN
                         </div>
-                        <div className="font-w700 fs-12 text-uppercase d-block mb-2">
+                        <div className="font-w700 text-uppercase d-block mb-2">
                           {carnet.expedicion}
                         </div>
-                        <div className="font-w700 fs-12 d-block text-danger">
+                        <div className="font-w700 d-block text-danger">
                           EXPIRACIÓN
                         </div>
-                        <div className="font-w700 fs-12 text-uppercase d-block">
+                        <div className="font-w700 text-uppercase d-block">
                           {carnet.expiracion}
                         </div>
                       </IonCol>
                     </IonRow>
                   </div>
                 </IonCardContent>
-              </IonCard>
-              <div className="mt-2 ml-1 fs-12 text-underline text-info cursor-pointer">
-                Cargar carnet de SENADIS
-              </div>
+              </IonCard>              
             </IonCol>
           </IonRow>
         </IonGrid>

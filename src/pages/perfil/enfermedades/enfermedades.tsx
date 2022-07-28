@@ -225,7 +225,7 @@ const PerfilEnfermedades = () => {
                 <IonRow>
                   <IonCol size="12">
                     <h5 className="font-w700 fs-15 text-info-dark mb-2">
-                      Listado de enfermedades
+                      Enfermedades
                     </h5>
                   </IonCol>
                 </IonRow>
@@ -238,21 +238,17 @@ const PerfilEnfermedades = () => {
                         key={index}
                       >
                         <IonCardContent className="card-content-slide">
-                          <p>
-                            <b>Enfermedad:</b>
+                          <div className="fs-15 font-w500 text-info-dark line-height-1 mb-3">
                             {item.enfermedad}
-                          </p>
-                          <p>
-                            <b>Tratamiento:</b>
-                            {item.tratamiento}
-                          </p>
-                          <p>
-                            <b>Frecuencia:</b>
-                            {item.frecuencia}
+                          </div>
+                          <p className="fs-12 mt-3">
+                            <span className="font-w500 d-block">Tratamiento</span>
+                            <span className="d-block">{item.tratamiento}</span>
+                            <span className="d-block">{item.frecuencia}</span>
                           </p>
                           <Link
                             to="#"
-                            className="text-danger d-block fs-12 text-underline"
+                            className="text-danger d-block fs-12 text-underline mt-3"
                             onClick={() => {
                               handleDelet(item.id);
                             }}
