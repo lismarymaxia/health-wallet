@@ -205,6 +205,12 @@ ion-tab-button {
 .line-height-1{
   line-height: 1 !important;
 }
+.right-0{
+  right: 0px;
+}
+.top-0{
+  top: 0px;
+}
 .fs-6 {
   font-size: 6px !important;
   line-height: 1;
