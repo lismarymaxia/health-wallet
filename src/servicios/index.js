@@ -29,6 +29,7 @@ import {
   /*-TRATAMIENTOS----*/
   getMedicamentos,
   getTratamientosPacientes,
+  getTipoDiagnosticosPacientes,
   /*-DISCAPACIDAD----*/
   getDicapacidadPaciente,
   /*-URL-----------------*/
@@ -65,6 +66,7 @@ export {
   /*-TRATAMIENTOS----*/
   getMedicamentos,
   getTratamientosPacientes,
+  getTipoDiagnosticosPacientes,
   /*-DISCAPACIDAD----*/
   getDicapacidadPaciente,
   /*-URL-----------------*/

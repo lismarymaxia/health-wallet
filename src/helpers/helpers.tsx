@@ -88,6 +88,7 @@ export const orderId = (data: any) => {
 };
 
 export const filterNombre = (id: any, data: any) => {
+  console.log({ id, data });
   let filter: any = data.filter((item: any) => item.value === id);
   if (filter.length > 0) {
     const [item] = filter;

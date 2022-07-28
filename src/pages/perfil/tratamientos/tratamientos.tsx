@@ -21,9 +21,10 @@ import { useSelector } from "react-redux";
 import AsyncSelect from "react-select/async";
 import { Link } from "react-router-dom";
 import {
-  getTratamientosPacientes,
   serviciosPaciente,
   getMedicamentos,
+  getTratamientosPacientes,
+  getTipoDiagnosticosPacientes,
 } from "../../../servicios/servicios";
 import { useListado, useForm } from "../../../hook";
 import {
@@ -31,6 +32,7 @@ import {
   FORMTRATAMIENTOS,
   totalDosisTratamiento,
   fechaDiaAdd,
+  filterNombre,
 } from "../../../helpers";
 import { HeaderPerfil } from "../../../components";
 
@@ -40,8 +42,13 @@ const PerfilTratamientos = () => {
   const [formulario, handleInputChange, handleInputReset, setFormulario] =
     useForm(FORMTRATAMIENTOS);
 
-  const [handleAddAll, handleAddItem, handleDeletItem, , listado] =
-    useListado();
+  const [
+    handleAddAll,
+    handleAddItem,
+    handleDeletItem,
+    handleUpdateItem,
+    listado,
+  ] = useListado();
 
   const [notificacion, setNotificacion] = useState({
     msg: "",
@@ -49,10 +56,12 @@ const PerfilTratamientos = () => {
   });
 
   const [select, setSelect] = useState<any>(null);
-  const [transition, setTransition] = useState(false);
   const [tipoDiagnostico, setTipoDiagnostico] = useState("");
   const [diagnosticos, setDiagnosticos] = useState([]);
   const [diagnostico, setDiagnostico] = useState("");
+  const [prolongado, setProlongado] = useState(false);
+  const [recordatorio, setRecordatorio] = useState(false);
+  const [transition, setTransition] = useState(false);
 
   const customStyles = {
     option: (provided: any, state: any) => ({
@@ -78,6 +87,19 @@ const PerfilTratamientos = () => {
         console.error("Error en peticion enfermedades" + error);
       });
   }, [user]);
+
+  useEffect(() => {
+    if (tipoDiagnostico !== "") {
+      getTipoDiagnosticosPacientes(user.idpaciente, tipoDiagnostico)
+        .then((rsp: any) => {
+          const { data } = rsp;
+          setDiagnosticos(data.data);
+        })
+        .catch((error) => {
+          console.error("Error en peticion enfermedades" + error);
+        });
+    }
+  }, [tipoDiagnostico, user]);
 
   const handleCalcular = () => {
     if (
@@ -159,6 +181,8 @@ const PerfilTratamientos = () => {
       formulario.notas
     );
     if (estado) {
+      let prolong = prolongado ? "si" : "no";
+      let recordat = recordatorio ? "activo" : "inactivo";
       let formDa = new FormData();
       formDa.append("op", "addTratamiento");
       formDa.append("id", user.idpaciente);
@@ -170,6 +194,15 @@ const PerfilTratamientos = () => {
       formDa.append("duracion", formulario.duracion);
       formDa.append("fechafin", formulario.fechafinBackend);
       formDa.append("notas", formulario.notas);
+      formDa.append("idtipo", tipoDiagnostico);
+      formDa.append("prolongado", prolong);
+      formDa.append("recordatorio", recordat);
+      if (tipoDiagnostico === "1") {
+        formDa.append("idalergia", diagnostico);
+      } else {
+        formDa.append("idenfermedad", diagnostico);
+      }
+      let resultado = filterNombre(diagnostico, diagnosticos);
       serviciosPaciente(formDa)
         .then(function (response: any) {
           const { data, status } = response;
@@ -179,8 +212,10 @@ const PerfilTratamientos = () => {
                 msg: data.msg,
                 estado: true,
               });
+
               const state: any = {
                 id: data.id,
+                diagnostico: resultado,
                 idmedicamento: select.value,
                 medicamento: select.label,
                 dosis: formulario.dosis,
@@ -190,10 +225,19 @@ const PerfilTratamientos = () => {
                 duracion: formulario.duracion,
                 fechafin: formulario.fechafin,
                 notas: formulario.notas,
+                recordatorio: recordat,
+                prolongado: prolong,
               };
-
+              console.log(state);
               handleAddItem(state);
               setTransition(false);
+              setSelect(null);
+              setTipoDiagnostico("");
+              setDiagnosticos([]);
+              setDiagnostico("");
+              setProlongado(false);
+              setRecordatorio(false);
+              handleInputReset();
             } else {
               setNotificacion({
                 msg: data.msg,
@@ -240,6 +284,37 @@ const PerfilTratamientos = () => {
       });
   };
 
+  function handleToggle(id: any, recordatorio: any, item: any) {
+    console.log({ id, recordatorio, item });
+    let std = recordatorio === "activo" ? "inactivo" : "activo";
+    let formDa = new FormData();
+    formDa.append("op", "toggleTratamiento");
+    formDa.append("id", id);
+    formDa.append("estado", std);
+    serviciosPaciente(formDa)
+      .then(function (response: any) {
+        const { data, status } = response;
+        if (status === 200) {
+          if (data.rsp === 1) {
+            setNotificacion({
+              msg: data.msg,
+              estado: true,
+            });
+            const nuevo = { ...item, recordatorio: std };
+            handleUpdateItem(nuevo);
+          } else {
+            setNotificacion({
+              msg: data.msg,
+              estado: true,
+            });
+          }
+        }
+      })
+      .catch(function (err) {
+        console.warn("Error:" + err);
+      });
+  }
+
   return (
     <IonPage className="fondo">
       <HeaderPerfil title="Tratamientos activos" />
@@ -271,7 +346,6 @@ const PerfilTratamientos = () => {
                         </IonSelect>
                       </IonItem>
                     </IonList>
-
                     <IonList className="mb-2">
                       <IonItem>
                         <IonLabel position="stacked">
@@ -285,13 +359,17 @@ const PerfilTratamientos = () => {
                             setDiagnostico(e.detail.value!);
                           }}
                         >
-                          {diagnosticos.map(() => (
-                            <IonSelectOption></IonSelectOption>
+                          {diagnosticos.map((item: any) => (
+                            <IonSelectOption
+                              key={item.value}
+                              value={item.value}
+                            >
+                              {item.label}
+                            </IonSelectOption>
                           ))}
                         </IonSelect>
                       </IonItem>
                     </IonList>
-
                     <div className="pr-3">
                       <span className="text-dark">Medicamento *</span>
                       <AsyncSelect
@@ -395,6 +473,20 @@ const PerfilTratamientos = () => {
                         }}
                       ></IonInput>
                     </IonItem>
+                    <IonItem>
+                      <IonLabel>Medicamento de uso prolongado</IonLabel>
+                      <IonToggle
+                        checked={prolongado}
+                        onIonChange={(e) => setProlongado(e.detail.checked)}
+                      />
+                    </IonItem>
+                    <IonItem>
+                      <IonLabel>Recordatorio</IonLabel>
+                      <IonToggle
+                        checked={recordatorio}
+                        onIonChange={(e) => setRecordatorio(e.detail.checked)}
+                      />
+                    </IonItem>
                   </IonCardContent>
                 </IonCard>
 
@@ -431,80 +523,88 @@ const PerfilTratamientos = () => {
                   </IonCol>
                 </IonRow>
                 <IonRow>
-                  {listado.length === ""
+                  {listado.length === 0
                     ? "Sin tratamientos registrados"
-                    : listado.map((item: any, index: number) => (
-                        <IonCard
-                          className="m-0 mb-3 card-slide shadow-full"
-                          style={{ height: "auto" }}
-                          key={index}
-                        >
-                          <IonCardContent className="card-content-slide">
-                            <IonRow>
-                              <IonCol size="9" sizeLg="10">
-                                <div className="fs-15 font-w500 text-info-dark line-height-1 mb-3">
-                                  Nombre de la enfermedad o alergia
-                                </div>
+                    : listado
+                        .filter((item: any) => item.prolongado === "no")
+                        .map((item: any, index: number) => (
+                          <IonCard
+                            className="m-0 mb-3 card-slide shadow-full"
+                            style={{ height: "auto" }}
+                            key={index}
+                          >
+                            <IonCardContent className="card-content-slide">
+                              <IonRow>
+                                <IonCol size="9" sizeLg="10">
+                                  <div className="fs-15 font-w500 text-info-dark line-height-1 mb-3">
+                                    {item.diagnostico}
+                                  </div>
 
-                                <p className="fs-12 line-height-13 mb-2">
-                                  {item.medicamento}
-                                </p>
-                                <p className="fs-12 line-height-13 mb-2">
-                                  <span className="font-w600">
-                                    {item.dosis} dosis{" "}
-                                  </span>
-                                  cada
-                                  <span className="font-w600">
-                                    {" "}
-                                    {item.cada} hora(s){" "}
-                                  </span>
-                                  durante
-                                  <span className="font-w600">
-                                    {" "}
-                                    {item.duracion} días
-                                  </span>
-                                </p>
-                                <p className="fs-12">
-                                  {item.totaldosis} dosis en total
-                                </p>
-                                <div className="fs-12">
-                                  Desde el {item.fechainicio} hasta el{" "}
-                                  {item.fechafin}
-                                </div>
-                              </IonCol>
-                              <IonCol
-                                size="3"
-                                sizeLg="2"
-                                className="text-center"
+                                  <p className="fs-12 line-height-13 mb-2">
+                                    {item.medicamento}
+                                  </p>
+                                  <p className="fs-12 line-height-13 mb-2">
+                                    <span className="font-w600">
+                                      {item.dosis} dosis{" "}
+                                    </span>
+                                    cada
+                                    <span className="font-w600">
+                                      {" "}
+                                      {item.cada} hora(s){" "}
+                                    </span>
+                                    durante
+                                    <span className="font-w600">
+                                      {" "}
+                                      {item.duracion} días
+                                    </span>
+                                  </p>
+                                  <p className="fs-12">
+                                    {item.totaldosis} dosis en total
+                                  </p>
+                                  <div className="fs-12">
+                                    Desde el {item.fechainicio} hasta el{" "}
+                                    {item.fechafin}
+                                  </div>
+                                </IonCol>
+                                <IonCol
+                                  size="3"
+                                  sizeLg="2"
+                                  className="text-center"
+                                >
+                                  <IonToggle
+                                    checked={
+                                      item.recordatorio === "activo"
+                                        ? true
+                                        : false
+                                    }
+                                    onIonChange={(e) => {
+                                      handleToggle(
+                                        item.id,
+                                        item.recordatorio,
+                                        item
+                                      );
+                                    }}
+                                  />
+                                  <div className="fs-10">Recordatorio</div>
+                                </IonCol>
+                              </IonRow>
+
+                              <p className="fs-12 mt-3">
+                                <span className="font-w500 d-block">Nota </span>
+                                {item.notas}
+                              </p>
+                              <Link
+                                to="#"
+                                className="text-danger d-block fs-12 text-underline mt-3"
+                                onClick={() => {
+                                  handleDelet(item.id);
+                                }}
                               >
-                                <IonToggle
-                                  checked={
-                                    item.estado === "activa" ? true : false
-                                  }
-                                  onIonChange={(e) => {
-                                    handleToggle(item.id, item.estado, item);
-                                  }}
-                                />
-                                <div className="fs-10">Recordatorio</div>
-                              </IonCol>
-                            </IonRow>
-
-                            <p className="fs-12 mt-3">
-                              <span className="font-w500 d-block">Nota </span>
-                              {item.notas}
-                            </p>
-                            <Link
-                              to="#"
-                              className="text-danger d-block fs-12 text-underline mt-3"
-                              onClick={() => {
-                                handleDelet(item.id);
-                              }}
-                            >
-                              Eliminar
-                            </Link>
-                          </IonCardContent>
-                        </IonCard>
-                      ))}
+                                Eliminar
+                              </Link>
+                            </IonCardContent>
+                          </IonCard>
+                        ))}
                 </IonRow>
 
                 <IonRow>
@@ -513,6 +613,90 @@ const PerfilTratamientos = () => {
                       Tratamiento permanente
                     </h5>
                   </IonCol>
+                </IonRow>
+                <IonRow>
+                  {listado.length === 0
+                    ? "Sin tratamientos registrados"
+                    : listado
+                        .filter((item: any) => item.prolongado === "si")
+                        .map((item: any, index: number) => (
+                          <IonCard
+                            className="m-0 mb-3 card-slide shadow-full"
+                            style={{ height: "auto" }}
+                            key={index}
+                          >
+                            <IonCardContent className="card-content-slide">
+                              <IonRow>
+                                <IonCol size="9" sizeLg="10">
+                                  <div className="fs-15 font-w500 text-info-dark line-height-1 mb-3">
+                                    {item.diagnostico}
+                                  </div>
+
+                                  <p className="fs-12 line-height-13 mb-2">
+                                    {item.medicamento}
+                                  </p>
+                                  <p className="fs-12 line-height-13 mb-2">
+                                    <span className="font-w600">
+                                      {item.dosis} dosis{" "}
+                                    </span>
+                                    cada
+                                    <span className="font-w600">
+                                      {" "}
+                                      {item.cada} hora(s){" "}
+                                    </span>
+                                    durante
+                                    <span className="font-w600">
+                                      {" "}
+                                      {item.duracion} días
+                                    </span>
+                                  </p>
+                                  <p className="fs-12">
+                                    {item.totaldosis} dosis en total
+                                  </p>
+                                  <div className="fs-12">
+                                    Desde el {item.fechainicio} hasta el{" "}
+                                    {item.fechafin}
+                                  </div>
+                                </IonCol>
+                                <IonCol
+                                  size="3"
+                                  sizeLg="2"
+                                  className="text-center"
+                                >
+                                  <IonToggle
+                                    checked={
+                                      item.recordatorio === "activo"
+                                        ? true
+                                        : false
+                                    }
+                                    onIonChange={(e) => {
+                                      handleToggle(
+                                        item.id,
+                                        item.recordatorio,
+                                        item
+                                      );
+                                    }}
+                                  />
+                                  <div className="fs-10">Recordatorio</div>
+                                </IonCol>
+                              </IonRow>
+
+                              <p className="fs-12 mt-3">
+                                <span className="font-w500 d-block">Nota </span>
+                                {item.notas}
+                              </p>
+                              <Link
+                                to="#"
+                                className="text-danger d-block fs-12 text-underline mt-3"
+                                onClick={() => {
+                                  handleDelet(item.id);
+                                }}
+                              >
+                                Eliminar
+                              </Link>
+                            </IonCardContent>
+                          </IonCard>
+                        ))}
                 </IonRow>
               </IonCol>
               <IonCol>
@@ -543,6 +727,3 @@ const PerfilTratamientos = () => {
 };
 
 export default PerfilTratamientos;
-function handleToggle(id: any, estado: any, item: any) {
-  throw new Error("Function not implemented.");
-}

@@ -185,6 +185,17 @@ export const getTratamientosPacientes = (id: any) =>
     },
     responseType: "json",
   });
+
+export const getTipoDiagnosticosPacientes = (id: any, tipo: string) =>
+  servicesWh.get("/controller/pacienteback.php", {
+    params: {
+      op: "getTipoDiagnostico",
+      id: id,
+      idtipo: tipo,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
 /*-DISCAPACIDAD--------------------------------------*/
 export const getDicapacidadPaciente = (id: any) =>
   servicesWh.get("/controller/pacienteback.php", {
