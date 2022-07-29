@@ -14,7 +14,7 @@ import {
   faClipboardList,
   faDiagramProject,
 } from "@fortawesome/free-solid-svg-icons";
-import { Nav } from "../components";
+//import { Nav } from "../components";
 import {
   Cuentas,
   Home,
@@ -65,7 +65,6 @@ const RutasPrivadas: React.FC = () => {
 
   return (
     <>
-      <Nav />
       <IonTabs>
         <IonRouterOutlet id="navApp">
           <Route exact path="/app/cuentas">

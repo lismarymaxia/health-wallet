@@ -75,7 +75,7 @@ const PerfilEditar = () => {
       });
   }, [user]);
 
-  const handleAdd = () => {
+  const handleEdit = () => {
     let discapacidad = checked ? "si" : "no";
     let formDa = new FormData();
     formDa.append("op", "editPaciente");
@@ -97,16 +97,18 @@ const PerfilEditar = () => {
               msg: data.msg,
               estado: true,
             });
-
             let clone = {
               ...user,
               nombre: nombre,
               apellido: apellido,
               cedula: cedula,
             };
+
             let nueva = Object.assign({}, user, clone);
             dispatch(storeLocal(nueva));
-            history.replace("/app/perfil");
+            setTimeout(function () {
+              history.replace("/app/perfil");
+            }, 2000);
           } else {
             setNotificacion({
               msg: data.msg,
@@ -307,7 +309,7 @@ const PerfilEditar = () => {
                 <IonButton
                   className="border-radius"
                   fill="outline"
-                  onClick={handleAdd}
+                  onClick={handleEdit}
                 >
                   Guardar
                 </IonButton>
@@ -320,7 +322,7 @@ const PerfilEditar = () => {
         isOpen={notificacion.estado}
         onDidDismiss={() => setNotificacion({ ...notificacion, estado: false })}
         message={notificacion.msg}
-        duration={500}
+        duration={1000}
       />
     </IonPage>
   );
