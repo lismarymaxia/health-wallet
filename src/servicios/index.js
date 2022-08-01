@@ -13,8 +13,9 @@ import {
   /*-AFILIADO----------*/
   serviciosAfiliados,
   /*-CONSULTAS--------*/
+  getConsultasSinTokenCancel,
   serviciosConsultas,
-  getConsulta,
+  getConsultas,
   /*-ALERGIAS----------*/
   getAlergiasPaciente,
   getGrupoAlergias,
@@ -23,9 +24,9 @@ import {
   getEnfermedadPaciente,
   getEnfermedad,
   /*-LABORATORIO-----*/
-  getLaboratorio,
+  getLaboratorios,
   /*-IMAGENOLOGIA---*/
-  getImagenologia,
+  getImagenologias,
   /*-TRATAMIENTOS----*/
   getMedicamentos,
   getTratamientosPacientes,
@@ -53,8 +54,9 @@ export {
   /*-AFILIADO----------*/
   serviciosAfiliados,
   /*-CONSULTAS--------*/
+  getConsultasSinTokenCancel,
   serviciosConsultas,
-  getConsulta,
+  getConsultas,
   /*-ALERGIAS----------*/
   getAlergiasPaciente,
   getGrupoAlergias,
@@ -63,9 +65,9 @@ export {
   getEnfermedadPaciente,
   getEnfermedad,
   /*-LABORATORIO-----*/
-  getLaboratorio,
+  getLaboratorios,
   /*-IMAGENOLOGIA---*/
-  getImagenologia,
+  getImagenologias,
   /*-TRATAMIENTOS----*/
   getMedicamentos,
   getTratamientosPacientes,

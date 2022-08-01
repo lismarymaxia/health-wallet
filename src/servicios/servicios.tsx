@@ -39,25 +39,16 @@ export const serviciosAfiliados = (form: any) =>
     responseType: "json",
   });
 
-export const serviciosConsultas = (form: any) =>
-  servicesWh.post("/api/listado-consultas.php", form, {
-    responseType: "json",
-  });
-
-export const getLaboratorio = (idafiliado: any, page: any, cedula: any) =>
-  servicesWh.get("/api/listado-laboratorio.php", {
-    params: {
-      op: "timeline_lab",
-      page: page,
-      cedula: cedula,
-      imestamp: new Date().getTime(),
-    },
-    responseType: "json",
-  });
-
-export const getImagenologia = (idafiliado: any, page: any, cedula: any) =>
+export const getImagenologias = (
+  idafiliado: any,
+  page: any,
+  cedula: any,
+  cancelToken: any
+) =>
   servicesWh.get("/api/listado-imagenologia", {
+    cancelToken: cancelToken.token,
     params: {
+      idafiliado: idafiliado,
       op: "imagenologia",
       page: page,
       id: cedula,
@@ -65,18 +56,56 @@ export const getImagenologia = (idafiliado: any, page: any, cedula: any) =>
     },
     responseType: "json",
   });
+/*-CONSULTAS---------------------------------------------*/
 
-export const getConsulta = (idafiliado: any, page: any, cedula: any) =>
+export const getConsultas = (
+  idafiliado: any,
+  cedula: any,
+  busqueda: any,
+  desde: any,
+  hasta: any,
+  page: any,
+  cancelToken: any
+) =>
   servicesWh.get("/api/listado-consultas.php", {
+    cancelToken: cancelToken.token,
     params: {
+      idafiliado: idafiliado,
       op: "consultas",
       cedula: cedula,
       page: page,
-      busqueda: "",
-      desde: "",
-      hasta: "",
+      busqueda: busqueda,
+      desde: desde,
+      hasta: hasta,
       imestamp: new Date().getTime(),
     },
+    responseType: "json",
+  });
+
+export const getConsultasSinTokenCancel = (
+  idafiliado: any,
+  cedula: any,
+  busqueda: any,
+  desde: any,
+  hasta: any,
+  page: any
+) =>
+  servicesWh.get("/api/listado-consultas.php", {
+    params: {
+      idafiliado: idafiliado,
+      op: "consultas",
+      cedula: cedula,
+      page: page,
+      busqueda: busqueda,
+      desde: desde,
+      hasta: hasta,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+
+export const serviciosConsultas = (form: any) =>
+  servicesWh.post("/api/listado-consultas.php", form, {
     responseType: "json",
   });
 /*-PACIENTES----------------------------------------------*/
@@ -222,6 +251,24 @@ export const getDetailMedicamento = (id: any) =>
     params: {
       op: "getMiMedicamentoDetail",
       id: id,
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+/*-LABORATORIO-------------------------------------*/
+export const getLaboratorios = (
+  idafiliado: any,
+  page: number,
+  cedula: string,
+  cancelToken: any
+) =>
+  servicesWh.get("/api/listado-laboratorio.php", {
+    cancelToken: cancelToken.token,
+    params: {
+      op: "timeline_lab",
+      idafiliado: idafiliado,
+      page: page,
+      cedula: cedula,
       imestamp: new Date().getTime(),
     },
     responseType: "json",

@@ -13,33 +13,24 @@ import {
   IonRow,
   IonSearchbar,
 } from "@ionic/react";
+import axios from "axios";
 import { HeaderEstudios } from "../../components";
 import { Card } from "./card";
-import { servicesWh, serviciosConsultas } from "../../servicios/servicios";
+import { getImagenologias } from "../../servicios/servicios";
 import "./imagenologia.css";
 
 const Imagenologia: React.FC = () => {
-  const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
+  const user = useSelector((state: any) => state.reducerAuth.user);
   const [load, setLoad] = useState<Boolean>(true);
   const [data, setData] = useState<any>([]);
+  const [totalResults, setTotalResults] = useState(0);
+  const page = 1;
   const [searchTerm, setSearchTerm] = useState("");
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
-  const [totalResults, setTotalResults] = useState(0);
-  const [page, setPage] = useState<any>(1);
-  const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    servicesWh
-      .get("/api/listado-imagenologia", {
-        params: {
-          op: "imagenologia",
-          id: cedula,
-          page: page,
-          imestamp: new Date().getTime(),
-        },
-        responseType: "json",
-      })
-      .then((rsp) => {
+  const fecth = (cancelToken: any = null) => {
+    getImagenologias("", page, user.cedula, cancelToken)
+      .then((rsp: any) => {
         const { data, status } = rsp;
         if (status === 200) {
           if (data) {
@@ -48,40 +39,29 @@ const Imagenologia: React.FC = () => {
               (item: any) => item.unidad === institucion
             );*/
             setData(data.data);
+            setTotalResults(data.data.length);
           } else {
             setLoad(false);
             setData({});
           }
         }
       })
-      .catch((e) => {
-        console.warn(e);
+      .catch((error) => {
+        console.error("Error en peticion laboratorio" + error);
       });
-  }, [cedula, page]);
+  };
+
+  useEffect(() => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+    fecth(source);
+    return () => {
+      source.cancel("Canceled");
+    };
+  }, [user, page]);
 
   const handleSearch = (e: any) => {
     e.preventDefault();
-    setLoad(true);
-    let formDa = new FormData();
-    formDa.append("op", "buscador");
-    formDa.append("busqueda", searchTerm);
-    formDa.append("cedula", cedula);
-    serviciosConsultas(formDa)
-      .then(function (response) {
-        const { data, status } = response;
-        if (status === 200) {
-          setData(data.data);
-          setLoad(false);
-          setPage(data.current_page + 1);
-          setTotalResults(data.totalResults);
-        } else {
-          setData([]);
-          setLoad(false);
-        }
-      })
-      .catch(function (err) {
-        console.warn("Error:" + err);
-      });
   };
 
   const loadData = (ev: any) => {
@@ -90,7 +70,7 @@ const Imagenologia: React.FC = () => {
       if (data.length === totalResults) {
         setInfiniteDisabled(true);
       } else {
-        //fecth();
+        fecth();
       }
     }, 500);
   };
@@ -123,7 +103,6 @@ const Imagenologia: React.FC = () => {
                 style={{ width: "14%" }}
               >
                 <Link
-                  onClick={() => setIsOpen(true)}
                   to="#"
                   className="bg-info-alt d-inline-block btn-filter fs-16 btn-shadow"
                 >

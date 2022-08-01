@@ -21,22 +21,24 @@ import {
   faHeart,
   faMicroscope,
   faXRay,
-  faHospital,
-  faCalendar,
   faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { servicesWh, serviciosAfiliados } from "../../servicios/servicios";
 import { BoxAfiliado } from "../../components";
-import { orderId, fechaActual, cadenaUpercase } from "../../helpers";
+import {
+  orderId,
+  fechaActual,
+  cadenaUpercase,
+  INITIALIMAGENOLOGIA,
+  INITIALLABORATORIO,
+} from "../../helpers";
 import "./home.css";
-import "../../style/tema.css";
 
 const Home: React.FC = () => {
   const history = useHistory();
   const user = useSelector((state: any) => state.reducerAuth.user);
-
   const handelNotificaciones = () => {
     history.push("/app/notificaciones");
   };
@@ -47,6 +49,7 @@ const Home: React.FC = () => {
     slidesPerView: 1.7,
     spaceBetween: 20,
   };
+
   const [load, setLoad] = useState<Boolean>(true);
   const [datos, setDatos] = useState<any>([]);
   const [notificacion, setNotificacion] = useState({
@@ -54,27 +57,9 @@ const Home: React.FC = () => {
     estado: false,
   });
 
-  const [laboratorio, setLaboratorio] = useState({
-    centro: "",
-    desde: "",
-    doctor: "",
-    fecha_solicitud: "",
-    id: "",
-    tipo_paciente: "",
-  });
-  const [imagenologia, setImagenologia] = useState({
-    cedula: "",
-    conimagen: "",
-    estado: "",
-    estudio: "",
-    fecha: "",
-    id: "",
-    nombre: "",
-    numeroacceso: "",
-    reporte: "",
-    unidad: "",
-    url: "",
-  });
+  const [laboratorio, setLaboratorio] = useState(INITIALLABORATORIO);
+
+  const [imagenologia, setImagenologia] = useState(INITIALIMAGENOLOGIA);
 
   const isFavorito = (datos: any) => {
     let nuevo = datos.map((item: any) => {
@@ -370,10 +355,14 @@ const Home: React.FC = () => {
                   <IonCard className="m-0 card-slide slide-mini button-deg cursor-pointer">
                     <IonCardContent className="card-content-slide d-grid">
                       <div>
-                        <FontAwesomeIcon 
+                        <FontAwesomeIcon
                           icon={faCalendarAlt}
-                          className="float-right" 
-                          style={{fontSize: "72px", marginTop: "-20px", marginRight: "-15px !important"}}
+                          className="float-right"
+                          style={{
+                            fontSize: "72px",
+                            marginTop: "-20px",
+                            marginRight: "-15px !important",
+                          }}
                         />
                       </div>
                       <div>
@@ -395,15 +384,15 @@ const Home: React.FC = () => {
               </h5>
               <IonCard className="m-0 card-slide shadow-full">
                 <IonCardContent className="card-content-slide ">
-                <div className="d-flex pt-2">
+                  <div className="d-flex pt-2">
                     <div className="pt-1">
                       <FontAwesomeIcon
-                          icon={faMicroscope}
-                          className="mr-3 fs-16 text-info float-left"
-                        />
+                        icon={faMicroscope}
+                        className="mr-3 fs-16 text-info float-left"
+                      />
                     </div>
                     <div className="slide-full d-grid pt-0">
-                      <div className="w-100">                        
+                      <div className="w-100">
                         <span className="fs-15 font-w600 text-info float-left">
                           Resultados de laboratorio
                         </span>
@@ -447,7 +436,7 @@ const Home: React.FC = () => {
                       />
                     </div>
                     <div className="slide-full d-grid pt-0">
-                      <div className="w-100">                      
+                      <div className="w-100">
                         <span className="fs-15 font-w600 text-info float-left">
                           Resultados de imágenes
                         </span>
@@ -479,10 +468,9 @@ const Home: React.FC = () => {
                             imagenologia.estudio
                           )}
                         </span>
-                      </div>                    
+                      </div>
                     </div>
                   </div>
-                  
                 </IonCardContent>
               </IonCard>
             </IonCol>
@@ -503,7 +491,10 @@ const Home: React.FC = () => {
                   {load
                     ? "Cargando"
                     : datos.map((item: any, index: any) => (
-                        <div key={index} className="w-100 d-inline-block item-afiliado">
+                        <div
+                          key={index}
+                          className="w-100 d-inline-block item-afiliado"
+                        >
                           <BoxAfiliado
                             item={item}
                             id={item.id}
@@ -532,183 +523,6 @@ const Home: React.FC = () => {
           message={notificacion.msg}
           duration={500}
         />
-        {/*<IonList
-          className="acordion__fondo"
-          inset={true}
-          style={{ borderRadius: "10px" }}
-        >
-          <IonAccordionGroup value="colors">
-            <IonAccordion value="colors">
-              <IonItem slot="header" lines="none">
-                <IonIcon
-                  icon={personSharp}
-                  className="ion-margin-end"
-                  size="small"
-                  style={{ color: "#ffff" }}
-                />
-                <IonLabel>Datos</IonLabel>
-              </IonItem>
-
-              <IonList slot="content" className="content__item_acordion">
-                <div className="acordion__item__content">
-                  <div className="acordion__item__label">Nombre:</div>
-                  <div
-                    className="acordion__item__note"
-                    slot="end"
-                    color="secondary"
-                  >
-                    {nombre}
-                  </div>
-                </div>
-                <div className="acordion__item__content">
-                  <div className="acordion__item__label">Cédula:</div>
-                  <div
-                    className="acordion__item__note"
-                    slot="end"
-                    color="secondary"
-                  >
-                    {cedula}
-                  </div>
-                </div>
-                <div className="acordion__item__content">
-                  <div className="acordion__item__label">Fecha nacimiento:</div>
-                  <div
-                    className="acordion__item__note"
-                    slot="end"
-                    color="secondary"
-                  >
-                    {fechanacimiento}
-                  </div>
-                </div>
-                <div className="acordion__item__content">
-                  <div className="acordion__item__label">Sexo:</div>
-                  <div
-                    className="acordion__item__note"
-                    slot="end"
-                    color="secondary"
-                  >
-                    {sexo}
-                  </div>
-                </div>
-                <div className="acordion__item__content">
-                  <div className="acordion__item__label">Edad:</div>
-                  <div
-                    className="acordion__item__note"
-                    slot="end"
-                    color="secondary"
-                  >
-                    {edad}
-                  </div>
-                </div>
-                <div className="acordion__item__content">
-                  <div className="acordion__item__label">Tipo de sangre:</div>
-                  <div
-                    className="acordion__item__note"
-                    slot="end"
-                    color="secondary"
-                  >
-                    {tiposangre}
-                  </div>
-                </div>
-
-                <section className="full-width d__flex justify__content__between">
-                  <IonButton
-                    fill="clear"
-                    color="dark"
-                    routerLink="/app/datos-editar"
-                    className="button__capitalize botton__link"
-                  >
-                    Ver más
-                  </IonButton>
-
-                  <IonButton
-                    fill="clear"
-                    color="dark"
-                    routerLink="/app/datos-editar"
-                    className="button__capitalize botton__link"
-                  >
-                    Editar
-                  </IonButton>
-                </section>
-              </IonList>
-            </IonAccordion>
-            <IonAccordion value="shapes">
-              <IonItem slot="header" lines="none">
-                <IonIcon
-                  icon={pulseSharp}
-                  className="ion-margin-end"
-                  size="small"
-                  style={{ color: "#ffff" }}
-                />
-                <IonLabel>Consultas</IonLabel>
-              </IonItem>
-
-              <IonList slot="content">
-                <section className="full-width">
-                  <IonButton
-                    expand="full"
-                    fill="clear"
-                    color="dark"
-                    routerLink="/app/consultas"
-                    className="button__capitalize botton__link"
-                  >
-                    Ver más
-                  </IonButton>
-                </section>
-              </IonList>
-            </IonAccordion>
-            <IonAccordion value="numbers">
-              <IonItem slot="header" lines="none">
-                <IonIcon
-                  icon={alertCircleSharp}
-                  className="ion-margin-end"
-                  size="small"
-                  style={{ color: "#ffff" }}
-                />
-                <IonLabel>Imagenología</IonLabel>
-              </IonItem>
-
-              <IonList slot="content">
-                <section className="full-width">
-                  <IonButton
-                    expand="full"
-                    fill="clear"
-                    color="dark"
-                    routerLink="/app/imagenologia"
-                    className="button__capitalize botton__link"
-                  >
-                    Ver más
-                  </IonButton>
-                </section>
-              </IonList>
-            </IonAccordion>
-            <IonAccordion value="number">
-              <IonItem slot="header" lines="none">
-                <IonIcon
-                  icon={archiveSharp}
-                  className="ion-margin-end"
-                  size="small"
-                  style={{ color: "#ffff" }}
-                />
-                <IonLabel>Laboratorio</IonLabel>
-              </IonItem>
-
-              <IonList slot="content">
-                <section className="full-width">
-                  <IonButton
-                    expand="full"
-                    fill="clear"
-                    color="dark"
-                    routerLink="/app/laboratorio"
-                    className="button__capitalize botton__link"
-                  >
-                    Ver más
-                  </IonButton>
-                </section>
-              </IonList>
-            </IonAccordion>
-          </IonAccordionGroup>
-        </IonList>*/}
       </IonContent>
     </IonPage>
   );

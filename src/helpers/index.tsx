@@ -27,6 +27,8 @@ import {
   INITIALCREARPERFIL,
   NOTAB,
   FORMTRATAMIENTOS,
+  INITIALIMAGENOLOGIA,
+  INITIALLABORATORIO,
 } from "./const";
 import { valEnfermedad, valTratamiento } from "./validacion";
 export {
@@ -57,6 +59,8 @@ export {
   INITIALCREARPERFIL,
   NOTAB,
   FORMTRATAMIENTOS,
+  INITIALIMAGENOLOGIA,
+  INITIALLABORATORIO,
   /*-VALIDACIONES---------------*/
   valEnfermedad,
   valTratamiento,

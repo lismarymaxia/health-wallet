@@ -23,13 +23,19 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSliders, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { HeaderEstudios } from "../../components";
 import { Card } from "./Card";
-import { servicesWh, serviciosConsultas } from "../../servicios/servicios";
+import {
+  servicesWh,
+  serviciosConsultas,
+  getConsultas,
+  getConsultasSinTokenCancel,
+} from "../../servicios/servicios";
 import { formtFechaCorta } from "../../helpers";
 
 const Consultas: React.FC = () => {
-  const cedula = useSelector((state: any) => state.reducerAuth.user.cedula);
+  const user = useSelector((state: any) => state.reducerAuth.user);
   const [load, setLoad] = useState<Boolean>(true);
   const [data, setData] = useState<any>([]);
   const [afiliados, setAfiliados] = useState<any>([]);
@@ -42,22 +48,31 @@ const Consultas: React.FC = () => {
   const [desde, setDesde] = useState("");
   const [hasta, setHasta] = useState("");
 
+  const refresh = (cancelToken: any = null) => {
+    getConsultas("", user.cedula, "", "", "", 1, cancelToken)
+      .then((rsp) => {
+        const { data, status } = rsp;
+        if (status === 200) {
+          if (data) {
+            setLoad(false);
+            setData(data.data);
+            setPage(2);
+            setTotalResults(data.totalResults);
+          } else {
+            setLoad(false);
+            setData([]);
+          }
+        }
+      })
+      .catch((e) => {
+        console.warn(e);
+      });
+  };
+
   const fecth = () => {
     let d = desde !== "" ? formtFechaCorta(desde) : "";
     let h = hasta !== "" ? formtFechaCorta(hasta) : "";
-    servicesWh
-      .get("/api/listado-consultas.php", {
-        params: {
-          op: "consultas",
-          cedula: cedula,
-          busqueda: searchTerm,
-          page: page,
-          desde: d,
-          hasta: h,
-          imestamp: new Date().getTime(),
-        },
-        responseType: "json",
-      })
+    getConsultasSinTokenCancel("", user.cedula, searchTerm, d, h, page)
       .then((rsp) => {
         const { data, status } = rsp;
         if (status === 200) {
@@ -102,9 +117,14 @@ const Consultas: React.FC = () => {
   };
 
   useEffect(() => {
-    fecth();
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+    refresh(source);
     getafiliados();
-  }, []);
+    return () => {
+      source.cancel("Canceled");
+    };
+  }, [user]);
 
   const handleSearch = (e: any) => {
     e.preventDefault();
@@ -112,7 +132,7 @@ const Consultas: React.FC = () => {
     let formDa = new FormData();
     formDa.append("op", "buscador");
     formDa.append("busqueda", searchTerm);
-    formDa.append("cedula", cedula);
+    formDa.append("cedula", user.cedula);
     if (desde !== "") {
       let d = formtFechaCorta(desde) || "";
       formDa.append("desde", d);
@@ -154,16 +174,7 @@ const Consultas: React.FC = () => {
     setSearchTerm("");
     setDesde("");
     setHasta("");
-    servicesWh
-      .get("/api/listado-consultas.php", {
-        params: {
-          op: "consultas",
-          cedula: cedula,
-          page: 1,
-          imestamp: new Date().getTime(),
-        },
-        responseType: "json",
-      })
+    getConsultasSinTokenCancel("", user.cedula, "", "", "", 1)
       .then((rsp) => {
         const { data, status } = rsp;
         if (status === 200) {
@@ -372,18 +383,3 @@ const Consultas: React.FC = () => {
 };
 
 export default Consultas;
-/*
-- en tratamiento agregar recordatorio
-- si el medicamento es prolongado 
-- quitar icono de imagen
-- enfermedad o alergia
-
-- filtrado por enfermedad 
-
-- en el editar usar la misma funcion que al guardar paciente
-- en listar los medicamentos y enfermedades
-- mis medicamentos
-- mis medicos
-- tipo de diagnostico
-
-*/

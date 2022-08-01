@@ -41,3 +41,26 @@ export const SLIDEOPTS = {
 };
 
 export const NOTAB = ["/app/soporte", "/app/cuentas", "/app/perfil-crear"];
+
+export const INITIALLABORATORIO = {
+  centro: "",
+  desde: "",
+  doctor: "",
+  fecha_solicitud: "",
+  id: "",
+  tipo_paciente: "",
+};
+
+export const INITIALIMAGENOLOGIA = {
+  id: "",
+  cedula: "",
+  conimagen: "",
+  estado: "",
+  estudio: "",
+  fecha: "",
+  nombre: "",
+  numeroacceso: "",
+  reporte: "",
+  unidad: "",
+  url: "",
+};

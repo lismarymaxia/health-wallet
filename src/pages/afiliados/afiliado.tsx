@@ -21,17 +21,17 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import { Header } from "../../components";
 import { ContentCard } from "./card";
 import {
   servicesWh,
   serviciosAfiliados,
-  getConsulta,
-  getLaboratorio,
-  getImagenologia,
+  getConsultas,
+  getLaboratorios,
+  getImagenologias,
 } from "../../servicios/servicios";
 import { removeDuplicado } from "../../helpers";
-import "../../style/tema.css";
 import "./afiliados.css";
 
 const Afiliado = () => {
@@ -61,11 +61,12 @@ const Afiliado = () => {
     setDatos(nuevo);
   };
 
-  const getRegistro = () => {
+  const getRegistro = (cancelToken: any = null) => {
+    /*getConsultas = (idafiliado,cedula,busqueda,desde,hasta,page,cancelToken)*/
     Promise.all([
-      getConsulta(id, page, user.cedula),
-      getLaboratorio(id, page, user.cedula),
-      getImagenologia(id, page, user.cedula),
+      getConsultas(id, user.cedula, "", "", "", page, cancelToken),
+      getLaboratorios(id, page, user.cedula, cancelToken),
+      getImagenologias(id, page, user.cedula, cancelToken),
     ])
       .then((rsp: any) => {
         const [cnst, lab, img] = rsp;
@@ -97,9 +98,12 @@ const Afiliado = () => {
   };
 
   useEffect(() => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
     setLoad(true);
     setLoadRg(true);
-    getRegistro();
+    getRegistro(source);
+
     servicesWh
       .get("/controller/afiliados.php", {
         params: {
@@ -163,6 +167,9 @@ const Afiliado = () => {
       .catch((e) => {
         console.warn(e);
       });
+    return () => {
+      source.cancel("Canceled");
+    };
   }, [user, id]);
 
   const handleFavorito = (id: any, item: any) => {

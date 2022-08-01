@@ -39,10 +39,10 @@ export const Card: React.FC<ContainerProps> = ({ item }) => {
           textLinkBottomLeft=""
           textLinkBottomRight=""
           ir={true}
-          linkIr={`/app/laboratorio-examen/${item.rid}`}
+          linkIr={`/app/laboratorio-examen/${item.id}`}
           tipo=""
           textoUrlExternaLeft="Ver informe"
-          urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=${user.cedula}&rid=${item.rid}`}
+          urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=${user.cedula}&rid=${item.id}`}
         />
       </IonCardContent>
     </IonCard>
