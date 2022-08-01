@@ -28,6 +28,7 @@ import { HeaderEstudios } from "../../components";
 import { Card } from "./Card";
 import {
   servicesWh,
+  getComboAfiliados,
   serviciosConsultas,
   getConsultas,
   getConsultasSinTokenCancel,
@@ -38,17 +39,17 @@ const Consultas: React.FC = () => {
   const user = useSelector((state: any) => state.reducerAuth.user);
   const [load, setLoad] = useState<Boolean>(true);
   const [data, setData] = useState<any>([]);
+  const [totalResults, setTotalResults] = useState(0);
+  const [page, setPage] = useState<any>(1);
   const [afiliados, setAfiliados] = useState<any>([]);
   const [afiliado, setAfiliado] = useState<any>("");
   const [searchTerm, setSearchTerm] = useState("");
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
-  const [totalResults, setTotalResults] = useState(0);
-  const [page, setPage] = useState<any>(1);
   const [isOpen, setIsOpen] = useState(false);
   const [desde, setDesde] = useState("");
   const [hasta, setHasta] = useState("");
 
-  const refresh = (cancelToken: any = null) => {
+  const fecthInitial = (cancelToken: any = null) => {
     getConsultas("", user.cedula, "", "", "", 1, cancelToken)
       .then((rsp) => {
         const { data, status } = rsp;
@@ -93,14 +94,7 @@ const Consultas: React.FC = () => {
   };
 
   const getafiliados = () => {
-    servicesWh
-      .get("/controller/afiliados.php", {
-        params: {
-          op: "getCombo",
-          imestamp: new Date().getTime(),
-        },
-        responseType: "json",
-      })
+    getComboAfiliados()
       .then((rsp) => {
         const { data, status } = rsp;
         if (status === 200) {
@@ -119,7 +113,7 @@ const Consultas: React.FC = () => {
   useEffect(() => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
-    refresh(source);
+    fecthInitial(source);
     getafiliados();
     return () => {
       source.cancel("Canceled");
@@ -287,13 +281,25 @@ const Consultas: React.FC = () => {
                     <IonLabel position="stacked">
                       Desde <span className="text-danger">*</span>
                     </IonLabel>
-                    <IonInput type="date"></IonInput>
+                    <IonInput
+                      type="date"
+                      value={desde}
+                      onIonChange={(e) => {
+                        setDesde(e.detail.value!);
+                      }}
+                    ></IonInput>
                   </IonItem>
                   <IonItem>
                     <IonLabel position="stacked">
                       Hasta <span className="text-danger">*</span>
                     </IonLabel>
-                    <IonInput type="date"></IonInput>
+                    <IonInput
+                      type="date"
+                      value={hasta}
+                      onIonChange={(e) => {
+                        setHasta(e.detail.value!);
+                      }}
+                    ></IonInput>
                   </IonItem>
 
                   <IonItem>
@@ -326,53 +332,6 @@ const Consultas: React.FC = () => {
                     Filtrar
                   </IonButton>
                 </IonCol>
-
-                {/*<IonCol size="12">
-                  <IonItem>
-                    <IonButton
-                      color="dark"
-                      fill="clear"
-                      onClick={() => setTransitionU(!transitionU)}
-                    >
-                      Desde
-                    </IonButton>
-                    {fechaFrontend(desde)}
-                  </IonItem>
-                  {transitionU && (
-                    <IonDatetime
-                      presentation="date"
-                      doneText="ok"
-                      cancelText="Cancelar"
-                      value={desde}
-                      onIonChange={(e) => {
-                        setDesde(e.detail.value!);
-                        setTransitionU(false);
-                      }}
-                    ></IonDatetime>
-                  )}
-                  <IonItem>
-                    <IonButton
-                      color="dark"
-                      fill="clear"
-                      onClick={() => setTransitionD(!transitionD)}
-                    >
-                      Hasta
-                    </IonButton>
-                    {fechaFrontend(hasta)}
-                  </IonItem>
-                  {transitionD && (
-                    <IonDatetime
-                      presentation="date"
-                      doneText="ok"
-                      cancelText="Cancelar"
-                      value={hasta}
-                      onIonChange={(e) => {
-                        setHasta(e.detail.value!);
-                        setTransitionD(false);
-                      }}
-                    ></IonDatetime>
-                  )}
-                </IonCol>*/}
               </IonRow>
             </IonGrid>
           </IonContent>

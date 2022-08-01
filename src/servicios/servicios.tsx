@@ -33,12 +33,20 @@ export const registroUsuario = (form: any) =>
   servicesWh.post("/controller/usuarios.php", form, {
     responseType: "json",
   });
-
+/*-AFILIADO------------------------------------------------*/
 export const serviciosAfiliados = (form: any) =>
   servicesWh.post("/controller/afiliados.php", form, {
     responseType: "json",
   });
-
+export const getComboAfiliados = () =>
+  servicesWh.get("/controller/afiliados.php", {
+    params: {
+      op: "getCombo",
+      imestamp: new Date().getTime(),
+    },
+    responseType: "json",
+  });
+/*-IMAGENOLOGIA----------------------------------------*/
 export const getImagenologias = (
   idafiliado: any,
   page: any,
@@ -57,7 +65,6 @@ export const getImagenologias = (
     responseType: "json",
   });
 /*-CONSULTAS---------------------------------------------*/
-
 export const getConsultas = (
   idafiliado: any,
   cedula: any,

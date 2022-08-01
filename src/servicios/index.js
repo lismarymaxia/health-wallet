@@ -10,6 +10,7 @@ import {
   registroUsuario,
   /*-PACIENTES---------*/
   serviciosPaciente,
+  getComboAfiliados,
   /*-AFILIADO----------*/
   serviciosAfiliados,
   /*-CONSULTAS--------*/
@@ -53,6 +54,7 @@ export {
   serviciosPaciente,
   /*-AFILIADO----------*/
   serviciosAfiliados,
+  getComboAfiliados,
   /*-CONSULTAS--------*/
   getConsultasSinTokenCancel,
   serviciosConsultas,
