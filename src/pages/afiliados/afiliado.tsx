@@ -230,12 +230,14 @@ const Afiliado = () => {
   };
 
   const loadData = (ev: any) => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
     setTimeout(() => {
       ev.target.complete();
       if (registros.length === totalResults) {
         setInfiniteDisabled(true);
       } else {
-        getRegistro();
+        getRegistro(source);
       }
     }, 500);
   };

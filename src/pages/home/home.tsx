@@ -92,6 +92,7 @@ const Home: React.FC = () => {
         if (status === 200) {
           if (data) {
             setLoad(false);
+            console.log(data.data);
             setDatos(isFavorito(data.data));
           } else {
             setLoad(false);
@@ -490,6 +491,8 @@ const Home: React.FC = () => {
                 <IonCardContent className="card-content-slide">
                   {load
                     ? "Cargando"
+                    : datos.length === 0
+                    ? "Actualmente no hay nuevo afiliados"
                     : datos.map((item: any, index: any) => (
                         <div
                           key={index}

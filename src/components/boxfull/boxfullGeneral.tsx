@@ -1,9 +1,8 @@
 import { IonImg } from "@ionic/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faArrowUpFromBracket, faShareNodes } from "@fortawesome/free-solid-svg-icons";
-import { useHistory } from "react-router";
+import { faAngleRight, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
+import { compartir } from "../../helpers";
 const BoxfullGeneral: React.FC<{
   title: string;
   imageTitle: string;
@@ -53,21 +52,15 @@ const BoxfullGeneral: React.FC<{
   textoUrlExternaLeft,
   urlExternaLeft,
 }) => {
-  const history = useHistory();
-  const handelClick = () => {
-    //history.push("/app/afiliados");
-  };
   const linkExterno = (url?: string) => {
     window.open(`${url}`, "_blank");
   };
+  const handleCompartir = (url: any) => {
+    compartir(url);
+  };
   return (
     <>
-      <div
-        className="slide-full bg-info-light p-2 border-radius"
-        onClick={() => {
-          handelClick();
-        }}
-      >
+      <div className="slide-full bg-info-light p-2 border-radius">
         {imageTitle !== "" && (
           <IonImg
             src={imageTitle}
@@ -165,53 +158,79 @@ const BoxfullGeneral: React.FC<{
           </div>
         )}
         <div className="w-100 d-inline-block">
-        {textLinkBottomLeft !== "" && (
-          <div>
-            <p className="mb-0 mt-2 fs-12 float-left">
-              <Link to={linkBottomLeft} className="text-info-light underline">                
-                {textLinkBottomLeft}                
-              </Link>
-            </p>
-          </div>
-        )}
+          {textLinkBottomLeft !== "" && (
+            <div>
+              <p className="mb-0 mt-2 fs-12 float-left">
+                <Link to={linkBottomLeft} className="text-info-light underline">
+                  {textLinkBottomLeft}
+                </Link>
+              </p>
+            </div>
+          )}
 
-        {textLinkBottomRight !== "" && (
-          <div>
-            <p className="mb-0 mt-2 fs-12 float-right">
-              <Link to={linkBottomRight} className="text-info-light underline">
-                {textLinkBottomRight}
-                {textLinkBottomRight === "Compartir" && (
-                  <FontAwesomeIcon icon={faShareNodes} className="ml-1 text-info" />
+          {textLinkBottomRight !== "" && (
+            <div>
+              <p className="mb-0 mt-2 fs-12 float-right">
+                {linkBottomRight === "" &&
+                textLinkBottomRight === "Compartir" ? (
+                  <Link
+                    to="#"
+                    className="text-info-light underline"
+                    onClick={() => handleCompartir(urlExternaLeft)}
+                  >
+                    {textLinkBottomRight}
+                    {textLinkBottomRight === "Compartir" && (
+                      <FontAwesomeIcon
+                        icon={faShareNodes}
+                        className="ml-1 text-info"
+                      />
+                    )}
+                  </Link>
+                ) : (
+                  <Link
+                    to={linkBottomRight}
+                    className="text-info-light underline"
+                  >
+                    {textLinkBottomRight}
+                    {textLinkBottomRight === "Compartir" && (
+                      <FontAwesomeIcon
+                        icon={faShareNodes}
+                        className="ml-1 text-info"
+                      />
+                    )}
+                  </Link>
                 )}
-              </Link>
-            </p>
-          </div>
-        )}
+              </p>
+            </div>
+          )}
 
-        {ir && (
-          <div className="mr-0 float-right" style={{ marginTop: "-12px" }}>
-            <Link to={linkIr}>
-              <FontAwesomeIcon icon={faAngleRight} className="text-info-dark" />
-            </Link>
-          </div>
-        )}
-
-        {textoUrlExternaLeft !== "" && (
-          <div>
-            <p className="mb-0 mt-2 fs-12 float-left">
-              <Link
-                to="#"
-                onClick={() => {
-                  linkExterno(urlExternaLeft);
-                }}
-                className="text-info-light"
-                style={{ textDecoration: "underline" }}
-              >
-                {textoUrlExternaLeft}
+          {ir && (
+            <div className="mr-0 float-right" style={{ marginTop: "-12px" }}>
+              <Link to={linkIr}>
+                <FontAwesomeIcon
+                  icon={faAngleRight}
+                  className="text-info-dark"
+                />
               </Link>
-            </p>
-          </div>
-        )}
+            </div>
+          )}
+
+          {textoUrlExternaLeft !== "" && (
+            <div>
+              <p className="mb-0 mt-2 fs-12 float-left">
+                <Link
+                  to="#"
+                  onClick={() => {
+                    linkExterno(urlExternaLeft);
+                  }}
+                  className="text-info-light"
+                  style={{ textDecoration: "underline" }}
+                >
+                  {textoUrlExternaLeft}
+                </Link>
+              </p>
+            </div>
+          )}
         </div>
 
         {tipo && (

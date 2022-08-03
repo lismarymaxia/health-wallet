@@ -10,6 +10,7 @@ import {
   fechaImagenologia,
   cadenaUpercase,
   fechaLaboratorio,
+  compartir,
 } from "../../../helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -56,7 +57,7 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
               textLinkBottomLeft=""
               textLinkBottomRight=""
               ir={true}
-              linkIr={`detalle-consulta/${item.id}`}
+              linkIr={`/app/detalle-consulta/${item.id}`}
               tipo=""
               textoUrlExternaLeft=""
               urlExternaLeft=""
@@ -93,7 +94,7 @@ const ContentCard: React.FC<ContainerProps> = ({ item, value }) => {
               textLinkBottomLeft=""
               textLinkBottomRight="Compartir"
               ir={false}
-              linkIr={`/app/laboratorio-examen/${item.rid}`}
+              linkIr=""
               tipo=""
               textoUrlExternaLeft="Ver informe"
               urlExternaLeft={`http://pid.maxialatam.com:5050/api/prrdd/v0/exam_lab?cip=${user.cedula}&rid=${item.rid}`}
